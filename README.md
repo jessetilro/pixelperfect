@@ -12,3 +12,5 @@ The deliverable documents for group PixelPerfect are included in the docs direct
 * [Game Concepts (22-04-2016)](https://github.com/jessetilro/pixelperfect/blob/master/docs/game-concepts.pdf)
 
 ## Scrum Documents
+
+* [Sprint Backlog #1 (22-04-2016)](https://github.com/jessetilro/pixelperfect/blob/master/docs/sprint-backlog-1.pdf)
