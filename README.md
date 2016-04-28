@@ -10,6 +10,8 @@ The deliverable documents for group PixelPerfect are included in the docs direct
 ## General Documents
 
 * [Game Concepts (22-04-2016)](https://github.com/jessetilro/pixelperfect/blob/master/docs/game-concepts.pdf)
+* [Product Vision (28-04-2016)](https://github.com/jessetilro/pixelperfect/blob/master/docs/product-vision-draft.pdf)
+* [Product Planning (28-04-2016)](https://github.com/jessetilro/pixelperfect/blob/master/docs/product-planning-draft.pdf)
 
 ## Scrum Documents
 
