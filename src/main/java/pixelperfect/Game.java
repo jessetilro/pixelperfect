@@ -3,13 +3,13 @@ package pixelperfect;
 import com.jme3.app.SimpleApplication;
 
 /**
- * Main class representing an active Game process.
+ * Main class representing an active Game process and creating the JMonkey
+ * Environment.
  * 
  * @author Jesse Tilro
  *
  */
 public class Game extends SimpleApplication {
-
 	/**
 	 * Main method bootstrapping the process by constructing this class and
 	 * initializing a jMonkeyEngine Game.
@@ -38,5 +38,4 @@ public class Game extends SimpleApplication {
 	public void simpleUpdate(float tpf) {
 		// Main game loop.
 	}
-
 }
