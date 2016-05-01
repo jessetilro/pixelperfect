@@ -3,6 +3,9 @@
 # PixelPerfect
 Software project for the Computer Games Contextproject 2015-2016 (TI2806) at Delft University of Technology by group PixelPerfect.
 
+# Client
+The client application for this software project, which is being developed for the Android platform, is hosted publicly on GitHub as well, and can be found here: [https://github.com/jessetilro/pixelperfect-client](https://github.com/jessetilro/pixelperfect-client).
+
 # Deliverables
 
 The deliverable documents for group PixelPerfect are included in the docs directory of this repository. For convenience an index of these deliverables is available below.
