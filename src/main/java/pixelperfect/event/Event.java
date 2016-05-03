@@ -1,7 +1,7 @@
 package pixelperfect.event;
 
 /**
- * A class for storing and defining events.
+ * A class for storing and defining events, called upon by the event scheduler.
  * 
  * @author David Alderliesten
  *
@@ -30,5 +30,59 @@ public class Event {
 		this.timestamp = timestamp;
 		this.duration = duration;
 		this.damage = damage;
+	}
+	
+	/**
+	 * Getter for the event type.
+	 * 
+	 * @return type of event
+	 */
+	public int getType() {
+		return this.type;
+	}
+	
+	/**
+	 * Getter for the event summary/name.
+	 * 
+	 * @return summary of event/name
+	 */
+	public String getSummary() {
+		return this.summary;
+	}
+	
+	/**
+	 * Get the description of the event.
+	 * 
+	 * @return description of event
+	 */
+	public String getDescription() {
+		return this.description;
+	}
+	
+	/**
+	 * Get the starting timestamp of the event.
+	 * 
+	 * @return starting timestamp of event
+	 */
+	public double getTimeStamp() {
+		return this.timestamp;
+	}
+	
+	/**
+	 * Get the duration of event that is remaining.
+	 * 
+	 * @return event duration
+	 */
+	public double getDuration() {
+		return this.duration;
+	}
+	
+	/**
+	 * Get the damage done to the ship in the case of event failure.
+	 * 
+	 * @return event damage done to ship
+	 */
+	public double getDamage() {
+		return this.damage;
 	}
 }
