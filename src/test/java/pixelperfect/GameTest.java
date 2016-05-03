@@ -1,7 +1,5 @@
 package pixelperfect;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 /**
@@ -11,9 +9,9 @@ import org.junit.Test;
  *
  */
 public class GameTest {
-	@Test
-	public void test() {
-		Game toTest = new Game();
-		toTest.destroy();
-	}
+  @Test
+  public void test() {
+    Game toTest = new Game();
+    toTest.destroy();
+  }
 }
