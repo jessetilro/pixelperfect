@@ -26,8 +26,6 @@ public class Event {
 	 *            a description of the event
 	 * @param timestamp
 	 *            the tiemstamp of start of the event
-	 * @param duration
-	 *            the duration of the event
 	 * @param damage
 	 *            the damage done to the ship on even failure
 	 */

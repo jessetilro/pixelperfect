@@ -20,7 +20,7 @@ public class EventTest {
    */
   @Before
   public void initialize() {
-    toTest = new Event(1, "TestEvent", "An Event to test the Class.", 424.24, 12.34, 99.42);
+    toTest = new Event(1, "TestEvent", "An Event to test the Class.", 424.24, 99.42);
   }
 
   /**
@@ -56,24 +56,10 @@ public class EventTest {
   }
 
   /**
-   * Testing the getDuration method.
-   */
-  @Test
-  public void testGetDuration() {
-    assertEquals(toTest.getDuration(), 12.34, 0);
-  }
-
-  /**
    * Testing the getDamage method.
    */
   @Test
   public void testGetDamage() {
     assertEquals(toTest.getDamage(), 99.42, 0);
-  }
-
-  @Test
-  public void testUpdateDuration() {
-    toTest.updateDuration(1);
-    assertEquals(toTest.getDuration(), 11.34, 0);
   }
 }
