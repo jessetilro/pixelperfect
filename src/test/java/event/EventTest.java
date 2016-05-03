@@ -69,4 +69,10 @@ public class EventTest {
 	public void testGetDamage() {
 		assertEquals(toTest.getDamage(), 99.42, 0);
 	}
+	
+	@Test
+	public void testUpdateDuration() {
+		toTest.updateDuration(1);
+		assertEquals(toTest.getDuration(), 11.34, 0);
+	}
 }
