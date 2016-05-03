@@ -31,7 +31,7 @@ public class Event {
 		this.duration = duration;
 		this.damage = damage;
 	}
-	
+
 	/**
 	 * Getter for the event type.
 	 * 
@@ -40,7 +40,7 @@ public class Event {
 	public int getType() {
 		return this.type;
 	}
-	
+
 	/**
 	 * Getter for the event summary/name.
 	 * 
@@ -49,7 +49,7 @@ public class Event {
 	public String getSummary() {
 		return this.summary;
 	}
-	
+
 	/**
 	 * Get the description of the event.
 	 * 
@@ -58,7 +58,7 @@ public class Event {
 	public String getDescription() {
 		return this.description;
 	}
-	
+
 	/**
 	 * Get the starting timestamp of the event.
 	 * 
@@ -67,7 +67,7 @@ public class Event {
 	public double getTimeStamp() {
 		return this.timestamp;
 	}
-	
+
 	/**
 	 * Get the duration of event that is remaining.
 	 * 
@@ -76,7 +76,7 @@ public class Event {
 	public double getDuration() {
 		return this.duration;
 	}
-	
+
 	/**
 	 * Get the damage done to the ship in the case of event failure.
 	 * 
@@ -84,5 +84,15 @@ public class Event {
 	 */
 	public double getDamage() {
 		return this.damage;
+	}
+
+	/**
+	 * Updates the duration by subtracting the given double from the current
+	 * time left.
+	 * 
+	 * @param timePassed
+	 */
+	public void updateDuration(double timePassed) {
+		this.duration = this.duration - timePassed;
 	}
 }
