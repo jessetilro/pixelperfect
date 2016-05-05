@@ -1,10 +1,9 @@
-package event;
+package pixelperfect.event;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import pixelperfect.event.Event;
 
 /**
  * Class for testing the Event class.
@@ -13,14 +12,14 @@ import pixelperfect.event.Event;
  *
  */
 public class EventTest {
-  Event toTest;
+  private Event toTest;
 
   /**
    * Setting up the Event class for the test.
    */
   @Before
   public void initialize() {
-    toTest = new Event(1, "TestEvent", "An Event to test the Class.", 424.24, 99.42);
+    toTest = new Event(1, "TestEvent", "An Event to test the Class.", 42, 42, 99.42);
   }
 
   /**
@@ -48,11 +47,19 @@ public class EventTest {
   }
 
   /**
+   * Testing the getDuration method.
+   */
+  @Test
+  public void testGetDuration() {
+    assertEquals(toTest.getDuration(), 42, 0);
+  }
+
+  /**
    * Testing the getTimeStamp method.
    */
   @Test
   public void testGetTimeStamp() {
-    assertEquals(toTest.getTimeStamp(), 424.24, 0);
+    assertEquals(toTest.getTimeStamp(), 42, 0);
   }
 
   /**
