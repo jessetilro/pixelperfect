@@ -1,5 +1,7 @@
 package pixelperfect.spaceship;
 
+
+
 import pixelperfect.event.EventListener;
 import pixelperfect.event.EventLog;
 
@@ -45,7 +47,23 @@ public class Spaceship {
       this.health = 0;
     }
   }
-
+  
+  /**
+   * A getter for the ship's health
+   * 
+   */
+  public double getHealth() {
+	  return this.health;
+  }
+  /**
+   * Checks if the ship has 0 health
+   * 
+   * @return a boolean that determines whether the ship is dead or not 
+   */
+  public boolean isDead() {
+	  return (this.health == 0);
+  }
+  
   /**
    * Update the Spaceship and related model classes for the step in the game loop.
    * 
