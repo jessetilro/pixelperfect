@@ -43,21 +43,14 @@ public class Game extends SimpleApplication {
   }
 
   /**
-   * Stops the game if the ship is dead.
-   * 
-   */
-  public void simpleUpdate() {
-    if (spaceship.isDead()) {
-      this.stop();
-    }
-  }
-
-  /**
    * Main update loop for the game.
    */
   @Override
   public void simpleUpdate(float tpf) {
     scheduler.update(tpf);
     spaceship.update(tpf);
+    if (spaceship.isDead()) {
+      this.stop();
+    }
   }
 }

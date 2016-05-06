@@ -1,6 +1,10 @@
 package pixelperfect.event;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.concurrent.Semaphore;
+
+import pixelperfect.Spaceship;
 
 /**
  * The captain's log of events, which should be subscribed to the event schedulers in the game.
@@ -11,12 +15,19 @@ import java.util.ArrayList;
 public class EventLog implements EventListener {
 
   private ArrayList<Event> events;
+  private Spaceship spaceship;
+
+  private final Semaphore listMutex = new Semaphore(1);
 
   /**
    * Construct a new EventLog instance.
+   * 
+   * @param spaceship
+   *          The spaceship this event log is installed on.
    */
-  public EventLog() {
+  public EventLog(Spaceship spaceship) {
     this.events = new ArrayList<Event>();
+    this.spaceship = spaceship;
   }
 
   /**
@@ -25,7 +36,7 @@ public class EventLog implements EventListener {
    * @param event
    *          The event that the scheduler introduces, to be listed in the log.
    */
-  public void notify(Event event) {
+  public synchronized void notify(Event event) {
     events.add(event);
     System.out.println("The ship received a new event: " + event.getDescription());
   }
@@ -36,8 +47,26 @@ public class EventLog implements EventListener {
    * @param event
    *          The event to be discarded from the log.
    */
-  public void discard(Event event) {
+  public synchronized void discard(Event event) {
     events.remove(event);
+  }
+
+  /**
+   * Evaluate the log to check whether events have expired since the last update.
+   */
+  public synchronized void update() {
+    ArrayList<Event> discardPile = new ArrayList<Event>();
+    for (Iterator<Event> it = events.iterator(); it.hasNext();) {
+      Event event = it.next();
+      long now = System.currentTimeMillis();
+      if (event.isExpired(now)) {
+        discardPile.add(event);
+      }
+    }
+    for (Event event : discardPile) {
+      event.applyDamage(spaceship);
+      discard(event);
+    }
   }
 
 }

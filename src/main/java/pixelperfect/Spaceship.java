@@ -28,7 +28,7 @@ public class Spaceship {
     this.health = STARTING_HEALTH;
     RouteGenerator rg = RouteGenerator.getInstance();
     this.route = rg.generateRoute();
-    this.log = new EventLog();
+    this.log = new EventLog(this);
     this.timer = 0;
   }
 
@@ -80,6 +80,7 @@ public class Spaceship {
    */
   public void update(float tpf) {
     this.timer += tpf;
+    log.update();
   }
 
 }
