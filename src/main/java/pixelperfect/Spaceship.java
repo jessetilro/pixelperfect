@@ -15,7 +15,6 @@ import pixelperfect.route.RouteGenerator;
  */
 public class Spaceship {
 
-  private RouteGenerator routeGenerator;
   private double health;
   private Route route;
   private EventListener log;
@@ -25,8 +24,7 @@ public class Spaceship {
    */
   public Spaceship() {
     this.health = 100;
-    this.routeGenerator = new RouteGenerator();
-    this.route = routeGenerator.getRoute();
+    this.route = RouteGenerator.generate();
     this.log = new EventLog();
   }
 
