@@ -33,7 +33,7 @@ public class Game extends SimpleApplication {
    */
   @Override
   public void simpleInitApp() {
-    spaceship = new Spaceship();
+		spaceship = Spaceship.getInstance();
     scheduler = new EventScheduler(42);
 
     scheduler.subscribe(spaceship.getLog());

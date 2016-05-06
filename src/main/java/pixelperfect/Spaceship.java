@@ -5,13 +5,16 @@ import pixelperfect.event.EventLog;
 import pixelperfect.route.Route;
 
 /**
- * The spaceship the players are controlling and guiding along a given route through space.
+ * The spaceship the players are controlling and guiding along a given route
+ * through space.
  * 
  * @author Jesse Tilro
+ * @author Floris Doolaard
  *
  */
 public class Spaceship {
 
+	private static final Spaceship ship = new Spaceship();
   private double health;
   private Route route;
   private EventListener log;
@@ -19,11 +22,20 @@ public class Spaceship {
   /**
    * Construct a new Spaceship instance.
    */
-  public Spaceship() {
+	private Spaceship() {
     this.health = 100;
     this.route = Route.generateRoute();
     this.log = new EventLog();
   }
+
+	/**
+	 * Returns the Singleton instance spaceship.
+	 * 
+	 * @return Singleton spaceship.
+	 */
+	public static Spaceship getInstance() {
+		return ship;
+	}
 
   /**
    * Get the spaceship's log of events.
