@@ -27,6 +27,7 @@ public class EventLog implements EventListener {
    */
   public void notify(Event event) {
     events.add(event);
+    System.out.println("The ship received a new event: " + event.getDescription());
   }
 
   /**
