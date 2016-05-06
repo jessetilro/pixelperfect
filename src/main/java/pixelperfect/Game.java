@@ -36,7 +36,7 @@ public class Game extends SimpleApplication {
    */
   @Override
   public void simpleInitApp() {
-    spaceship = Spaceship.getInstance();
+    spaceship = new Spaceship();
     scheduler = new EventScheduler(42);
 
     scheduler.subscribe(spaceship.getLog());

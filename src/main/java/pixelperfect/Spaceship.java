@@ -15,7 +15,6 @@ import pixelperfect.route.RouteGenerator;
  */
 public class Spaceship {
 
-  private static final Spaceship ship = new Spaceship();
   private RouteGenerator routeGenerator;
   private double health;
   private Route route;
@@ -24,20 +23,11 @@ public class Spaceship {
   /**
    * Construct a new Spaceship instance.
    */
-  private Spaceship() {
+  public Spaceship() {
     this.health = 100;
     this.routeGenerator = new RouteGenerator();
     this.route = routeGenerator.getRoute();
     this.log = new EventLog();
-  }
-
-  /**
-   * Returns the Singleton instance spaceship.
-   * 
-   * @return Singleton spaceship.
-   */
-  public static Spaceship getInstance() {
-    return ship;
   }
 
   /**
