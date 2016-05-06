@@ -5,8 +5,7 @@ import com.jme3.app.SimpleApplication;
 import pixelperfect.event.EventScheduler;
 
 /**
- * Main class representing an active Game process and creating the JMonkey
- * Environment.
+ * Main class representing an active Game process and creating the JMonkey Environment.
  * 
  * @author David Alderliesten
  * @author Jesse Tilro
@@ -19,8 +18,8 @@ public class Game extends SimpleApplication {
   private EventScheduler scheduler;
 
   /**
-   * Main method bootstrapping the process by constructing this class and
-   * initializing a jMonkeyEngine Game.
+   * Main method bootstrapping the process by constructing this class and initializing a
+   * jMonkeyEngine Game.
    * 
    * @param args
    *          The parameters passed to the process.
@@ -31,8 +30,7 @@ public class Game extends SimpleApplication {
   }
 
   /**
-   * Method initializing the game (e.g. setting up the scenegraph and/or the
-   * main menu).
+   * Method initializing the game (e.g. setting up the scenegraph and/or the main menu).
    */
   @Override
   public void simpleInitApp() {
@@ -42,6 +40,16 @@ public class Game extends SimpleApplication {
     scheduler.subscribe(spaceship.getLog());
 
     // Set up scenegraph.
+  }
+
+  /**
+   * Stops the game if the ship is dead.
+   * 
+   */
+  public void simpleUpdate() {
+    if (spaceship.isDead()) {
+      this.stop();
+    }
   }
 
   /**
