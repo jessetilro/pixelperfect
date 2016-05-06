@@ -6,8 +6,7 @@ import pixelperfect.route.Route;
 import pixelperfect.route.RouteGenerator;
 
 /**
- * The spaceship the players are controlling and guiding along a given route
- * through space.
+ * The spaceship the players are controlling and guiding along a given route through space.
  * 
  * @author Jesse Tilro
  * @author Floris Doolaard
@@ -49,24 +48,27 @@ public class Spaceship {
       this.health = 0;
     }
   }
+
   /**
+   * A getter for the ship's health.
    * 
    * @return the ship's health
    */
   public double getHealth() {
-	  return this.health;
+    return this.health;
   }
+
   /**
-   * Checks if the ship has 0 health
+   * Checks if the ship has 0 health.
    * 
-   * @return a boolean that determines whether the ship is dead or not 
+   * @return a boolean that determines whether the ship is dead or not
    */
   public boolean isDead() {
-	  return (this.health == 0);
+    return (this.health == 0);
   }
+
   /**
-   * Update the Spaceship and related model classes for the step in the game
-   * loop.
+   * Update the Spaceship and related model classes for the step in the game loop.
    * 
    * @param tpf
    *          Time per frame.
