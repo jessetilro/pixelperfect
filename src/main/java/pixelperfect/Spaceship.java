@@ -1,6 +1,5 @@
 package pixelperfect;
 
-import com.jme3.system.Timer;
 import pixelperfect.event.EventListener;
 import pixelperfect.event.EventLog;
 import pixelperfect.route.Route;
@@ -27,7 +26,8 @@ public class Spaceship {
    */
   public Spaceship() {
     this.health = STARTING_HEALTH;
-    this.route = RouteGenerator.generate();
+    RouteGenerator rg = RouteGenerator.getInstance();
+    this.route = rg.generateRoute();
     this.log = new EventLog();
     this.timer = 0;
   }

@@ -9,13 +9,30 @@ import java.util.ArrayList;
  * @author Floris Doolaard
  *
  */
-public class RouteGenerator {
+public final class RouteGenerator {
+
+  private static volatile RouteGenerator instance;
 
   /**
-   * Whenever the RouteGenerator is created a new Route will be created (in this
-   * factory).
+   * Whenever the RouteGenerator is created a new Route will be created (in this factory).
    */
-  public RouteGenerator() {
+  private RouteGenerator() {
+  }
+
+  /**
+   * Creates a new RouteGenerator instance if it has not yet been instantiated.
+   * 
+   * @return The single RouteGenerator instance.
+   */
+  public static RouteGenerator getInstance() {
+    if (instance == null) {
+      synchronized (RouteGenerator.class) {
+        if (instance == null) {
+          instance = new RouteGenerator();
+        }
+      }
+    }
+    return instance;
   }
 
   /**
@@ -23,7 +40,7 @@ public class RouteGenerator {
    * 
    * @return A new Route
    */
-  public static Route generate() {
+  public Route generateRoute() {
     return new Route(0, new ArrayList<RouteNode>());
   }
 }
