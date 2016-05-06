@@ -1,12 +1,16 @@
-package pixelperfect.spaceship;
+package pixelperfect;
 
 import pixelperfect.event.EventListener;
 import pixelperfect.event.EventLog;
+import pixelperfect.route.Route;
+import pixelperfect.route.RouteGenerator;
 
 /**
- * The spaceship the players are controlling and guiding along a given route through space.
+ * The spaceship the players are controlling and guiding along a given route
+ * through space.
  * 
  * @author Jesse Tilro
+ * @author Floris Doolaard
  *
  */
 public class Spaceship {
@@ -20,7 +24,7 @@ public class Spaceship {
    */
   public Spaceship() {
     this.health = 100;
-    this.route = Route.generateRoute();
+    this.route = RouteGenerator.generate();
     this.log = new EventLog();
   }
 
@@ -47,7 +51,8 @@ public class Spaceship {
   }
 
   /**
-   * Update the Spaceship and related model classes for the step in the game loop.
+   * Update the Spaceship and related model classes for the step in the game
+   * loop.
    * 
    * @param tpf
    *          Time per frame.
