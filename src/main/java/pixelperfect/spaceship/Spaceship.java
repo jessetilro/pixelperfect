@@ -1,5 +1,6 @@
 package pixelperfect.spaceship;
 
+import com.jme3.system.Timer;
 import pixelperfect.event.EventListener;
 import pixelperfect.event.EventLog;
 
@@ -11,17 +12,21 @@ import pixelperfect.event.EventLog;
  */
 public class Spaceship {
 
+  private static final int STARTING_HEALTH = 100;
+
   private double health;
   private Route route;
   private EventListener log;
+  private float timer;
 
   /**
    * Construct a new Spaceship instance.
    */
   public Spaceship() {
-    this.health = 100;
+    this.health = STARTING_HEALTH;
     this.route = Route.generateRoute();
     this.log = new EventLog();
+    this.timer = 0;
   }
 
   /**
@@ -53,7 +58,7 @@ public class Spaceship {
    *          Time per frame.
    */
   public void update(float tpf) {
-    // update
+    this.timer += tpf;
   }
 
 }
