@@ -1,6 +1,8 @@
 package pixelperfect.event;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,19 +49,21 @@ public class EventTest {
   }
 
   /**
-   * Testing the getDuration method.
+   * When the duration of an event has not yet passed since it's creation, it should not be
+   * recognized as expired.
    */
   @Test
-  public void testGetDuration() {
-    assertEquals(toTest.getDuration(), 42, 0);
+  public void testIsExpiredFalse() {
+    assertFalse(toTest.isExpired(83));
   }
 
   /**
-   * Testing the getTimeStamp method.
+   * When the duration of an event has passed since it's creation, it should be recognized as
+   * expired.
    */
   @Test
-  public void testGetTimeStamp() {
-    assertEquals(toTest.getTimeStamp(), 42, 0);
+  public void testIsExpiredTrue() {
+    assertTrue(toTest.isExpired(85));
   }
 
   /**

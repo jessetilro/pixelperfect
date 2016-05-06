@@ -1,5 +1,7 @@
 package pixelperfect.event;
 
+import pixelperfect.Spaceship;
+
 /**
  * A class for storing and defining events, called upon by the event scheduler.
  * 
@@ -70,21 +72,24 @@ public class Event {
   }
 
   /**
-   * Get the starting timestamp of the event.
+   * Check whether the event is expired at a given moment in time.
    * 
-   * @return starting timestamp of event
+   * @param time
+   *          The moment in time at which to check the expiration.
+   * @return Whether the event is expired.
    */
-  public long getTimeStamp() {
-    return this.timestamp;
+  public boolean isExpired(long time) {
+    return (time > (timestamp + duration));
   }
 
   /**
-   * Get the total duration of this event.
+   * Apply damage to a given Spaceship.
    * 
-   * @return The total duration.
+   * @param spaceship
+   *          The Spaceship to apply damage to.
    */
-  public long getDuration() {
-    return this.duration;
+  public void applyDamage(Spaceship spaceship) {
+    spaceship.updateHealth(-1 * damage);
   }
 
   /**

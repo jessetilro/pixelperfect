@@ -24,4 +24,9 @@ public interface EventListener {
    */
   void discard(Event event);
 
+  /**
+   * Update the event listener.
+   */
+  void update();
+
 }
