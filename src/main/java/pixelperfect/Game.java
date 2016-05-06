@@ -9,6 +9,7 @@ import pixelperfect.event.EventScheduler;
  * 
  * @author David Alderliesten
  * @author Jesse Tilro
+ * @author Floris Doolaard
  *
  */
 public class Game extends SimpleApplication {

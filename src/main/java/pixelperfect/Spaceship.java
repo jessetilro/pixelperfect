@@ -3,6 +3,7 @@ package pixelperfect;
 import pixelperfect.event.EventListener;
 import pixelperfect.event.EventLog;
 import pixelperfect.route.Route;
+import pixelperfect.route.RouteGenerator;
 
 /**
  * The spaceship the players are controlling and guiding along a given route
@@ -15,6 +16,7 @@ import pixelperfect.route.Route;
 public class Spaceship {
 
 	private static final Spaceship ship = new Spaceship();
+	private RouteGenerator routeGenerator;
   private double health;
   private Route route;
   private EventListener log;
@@ -24,7 +26,8 @@ public class Spaceship {
    */
 	private Spaceship() {
     this.health = 100;
-    this.route = Route.generateRoute();
+		this.routeGenerator = new RouteGenerator();
+		this.route = routeGenerator.getRoute();
     this.log = new EventLog();
   }
 
