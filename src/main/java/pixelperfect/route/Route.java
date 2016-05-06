@@ -20,10 +20,10 @@ public class Route {
    * @param duration
    *          The total duration of the route.
    */
-  public Route(long duration) {
+	public Route(long duration, ArrayList<RouteNode> route) {
     this.timestamp = System.currentTimeMillis();
     this.duration = duration;
-    this.nodes = new ArrayList<RouteNode>();
+		this.nodes = route;
   }
 
   /**
@@ -44,7 +44,7 @@ public class Route {
    * @return A randomly generated route.
    */
   public static Route generateRoute() {
-    return new Route(42);
+		return new Route(42, new ArrayList<RouteNode>());
   }
 
 }

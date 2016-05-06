@@ -1,5 +1,7 @@
 package pixelperfect.route;
 
+import java.util.ArrayList;
+
 /**
  * Random generator for routes through space.
  * 
@@ -25,7 +27,7 @@ public class RouteGenerator {
 	 * @return A new Route
 	 */
 	public static Route generate() {
-		return new Route(0);
+		return new Route(0, new ArrayList<RouteNode>());
 	}
 
 	/**
