@@ -19,6 +19,8 @@ public class Route {
    * 
    * @param duration
    *          The total duration of the route.
+   * @param route
+   *          The sequence of RouteNodes this route consist of.
    */
   public Route(long duration, ArrayList<RouteNode> route) {
     this.timestamp = System.currentTimeMillis();
@@ -38,8 +40,8 @@ public class Route {
   }
 
   /**
-   * Randomly generate a Route (which is an aggregation of RouteNodes) using the
-   * random RouteGenerator.
+   * Randomly generate a Route (which is an aggregation of RouteNodes) using the random
+   * RouteGenerator.
    * 
    * @return A randomly generated route.
    */
