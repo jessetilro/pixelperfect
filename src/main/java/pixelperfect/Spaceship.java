@@ -1,7 +1,8 @@
-package pixelperfect.spaceship;
+package pixelperfect;
 
 import pixelperfect.event.EventListener;
 import pixelperfect.event.EventLog;
+import pixelperfect.route.Route;
 
 /**
  * The spaceship the players are controlling and guiding along a given route through space.

@@ -1,4 +1,4 @@
-package pixelperfect.spaceship;
+package pixelperfect.route;
 
 /**
  * Node along a route through space.

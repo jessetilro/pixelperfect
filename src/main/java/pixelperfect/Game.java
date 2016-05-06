@@ -3,7 +3,6 @@ package pixelperfect;
 import com.jme3.app.SimpleApplication;
 
 import pixelperfect.event.EventScheduler;
-import pixelperfect.spaceship.Spaceship;
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
