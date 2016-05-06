@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>nl.tudelft.pixelperfect</groupId>
   <artifactId>pixelperfect</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
   <name>PixelPerfect</name>
   <description>Software project for the Computer Games Contextproject 2015-2016 (TI2806) at Delft University of Technology by group PixelPerfect.</description>
 
@@ -43,13 +43,13 @@
       <artifactId>jme3-lwjgl</artifactId>
       <version>3.1.0-alpha5</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.jmonkeyengine</groupId>
       <artifactId>jme3-plugins</artifactId>
       <version>3.1.0-alpha5</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.jmonkeyengine</groupId>
       <artifactId>jme3-blender</artifactId>

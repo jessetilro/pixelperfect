@@ -53,6 +53,8 @@ local.properties
 # Code Recommenders
 .recommenders/
 
+# Checkstyle configurations
+.checkstyle
 
 ### Java ###
 *.class
