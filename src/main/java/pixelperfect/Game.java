@@ -44,7 +44,10 @@ public class Game extends SimpleApplication {
     // Set up scenegraph.
   }
   
-  
+  /**
+   * Stops the game if the ship is dead
+   * 
+   */
   public void deadShip() {
 	if(spaceship.isDead()){
 	  this.stop();
