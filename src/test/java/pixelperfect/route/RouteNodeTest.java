@@ -1,4 +1,4 @@
-package pixelperfect.spaceship;
+package pixelperfect.route;
 
 /**
  * Test Suite for the RouteNode class.
