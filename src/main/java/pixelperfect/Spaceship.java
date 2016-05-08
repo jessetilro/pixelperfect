@@ -90,10 +90,10 @@ public class Spaceship {
    *          Time per frame.
    */
   public void update(float tpf) {
+    this.timer += tpf;
     if (route.isCompleted(timer)) {
       this.victorious = true;
     }
-    this.timer += tpf;
     log.update();
   }
 
