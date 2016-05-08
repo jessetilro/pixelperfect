@@ -95,7 +95,6 @@ public class Spaceship {
     }
     this.timer += tpf;
     log.update();
-
   }
 
 }
