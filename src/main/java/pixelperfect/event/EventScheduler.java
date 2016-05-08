@@ -12,9 +12,8 @@ import java.util.Random;
  */
 public class EventScheduler {
 
-  private float intensity;
+  private double intensity;
   private ArrayList<EventListener> listeners;
-  private boolean tried;
 
   /**
    * Construct a new EventScheduler instance.
@@ -22,7 +21,7 @@ public class EventScheduler {
    * @param intensity
    *          The average number of events introduced per second in the game.
    */
-  public EventScheduler(float intensity) {
+  public EventScheduler(double intensity) {
     this.intensity = intensity;
     this.listeners = new ArrayList<EventListener>();
   }
