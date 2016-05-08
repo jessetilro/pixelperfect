@@ -54,15 +54,27 @@ public class EventScheduler {
    * models a poisson process, with the specified intensity as lambda parameter.
    * 
    * @param tpf
-   *          The time per frame in seconds, i.e. how many times per second this draw is performed
-   *          and thus the time interval parameter for the poisson process.
+   *          The time per frame in seconds, i.e. the time interval parameter for the poisson
+   *          process.
    */
   public void update(float tpf) {
+    // The random generator should be more efficient and less biased than the Math.random function.
     Random rg = new Random();
-    float draw = rg.nextFloat();
+
     // The tpf is expressed in seconds, therefore intensity times tpf represents the expected value
     // of the probability distribution.
-    if (draw <= intensity * tpf) {
+    double mu = intensity * tpf;
+    double L = Math.exp(-mu);
+    int k = 0;
+    double p = 1.0;
+
+    do {
+      k++;
+      p *= rg.nextDouble();
+    } while (p > L);
+    k--;
+
+    for (int i = 0; i < k; i++) {
       long timestamp = System.currentTimeMillis();
       Event evt = new Event(0, "Dummy", "Hello world, I am a dummy event!", timestamp, 4000, 10);
       publish(evt);
