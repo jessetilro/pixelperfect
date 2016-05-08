@@ -49,7 +49,13 @@ public class Game extends SimpleApplication {
   public void simpleUpdate(float tpf) {
     scheduler.update(tpf);
     spaceship.update(tpf);
+    
     if (spaceship.isDead()) {
+      this.stop();
+    }
+    
+    if (spaceship.isVictorious()) {
+      System.out.println("Well played, you have completed the game!");
       this.stop();
     }
   }
