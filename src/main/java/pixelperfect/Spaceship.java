@@ -19,13 +19,15 @@ public class Spaceship {
   private double health;
   private Route route;
   private EventListener log;
-  private float timer;
+  private long timer;
+  private boolean victorious;
 
   /**
    * Construct a new Spaceship instance.
    */
   public Spaceship() {
     this.health = STARTING_HEALTH;
+    this.victorious = false;
     RouteGenerator rg = RouteGenerator.getInstance();
     this.route = rg.generateRoute();
     this.log = new EventLog(this);
@@ -73,12 +75,25 @@ public class Spaceship {
   }
 
   /**
+   * Checks if the ship has reached the end of the Route.
+   * 
+   * @return A Boolean pointing out Victory.
+   */
+  public boolean isVictorious() {
+    return victorious;
+  }
+
+  /**
    * Update the Spaceship and related model classes for the step in the game loop.
    * 
    * @param tpf
    *          Time per frame.
    */
   public void update(float tpf) {
+    if (route.isCompleted(timer)) {
+      victorious = true;
+    }
+
     this.timer += tpf;
     log.update();
   }
