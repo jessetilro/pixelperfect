@@ -25,7 +25,7 @@ public class Game extends SimpleApplication {
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private Server server;
-  //private int clientCounter;
+  // private int clientCounter;
 
   /**
    * Main method bootstrapping the process by constructing this class and initializing a
@@ -44,7 +44,7 @@ public class Game extends SimpleApplication {
    */
   @Override
   public void simpleInitApp() {
-    //clientCounter = 0;
+    // clientCounter = 0;
     try {
       server = Network.createServer(6143);
       Serializer.registerClass(HelloMessage.class);
@@ -80,23 +80,7 @@ public class Game extends SimpleApplication {
       this.stop();
     }
 
-   // debugNetworking();
+    // debugNetworking();
   }
 
-//  /**
-//   * Temporary function for debugging purposes only. Prints updates to the console, when clients
-//   * (dis)connect.
-//   */
-//  public void debugNetworking() {
-//    int clients = server.getConnections().size();
-//    if (clients > clientCounter) {
-//      System.out.println("Clients have connected to the game: "
-//          + Integer.toString(clients - clientCounter) + " new clients.");
-//      clientCounter = clients;
-//    } else if (clients < clientCounter) {
-//      System.out.println("Clients have disconnected from the game: "
-//          + Integer.toString(clientCounter - clients) + " clients have left.");
-//      clientCounter = clients;
-//    }
-//  }
 }
