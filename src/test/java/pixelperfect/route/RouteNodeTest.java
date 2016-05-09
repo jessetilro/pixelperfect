@@ -9,22 +9,32 @@ import org.junit.Test;
  * Test Suite for the RouteNode class.
  * 
  * @author Jesse Tilro
+ * @author Floris Doolaard
  *
  */
 public class RouteNodeTest {
 
   RouteNode node;
 
+  /**
+   * Initializing objects.
+   */
   @Before
   public void before() {
     node = new RouteNode("summary", "description");
   }
 
+  /**
+   * Testing the getSummary method.
+   */
   @Test
   public void testRouteSummary() {
     assertEquals("summary", node.getSummary());
   }
 
+  /**
+   * Testing the getDescription method.
+   */
   @Test
   public void testRouteDescription() {
     assertEquals("description", node.getDescription());
