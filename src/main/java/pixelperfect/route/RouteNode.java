@@ -24,4 +24,22 @@ public class RouteNode {
     this.summary = summary;
     this.description = description;
   }
+
+  /**
+   * Retrieves the summary of the Node.
+   * 
+   * @return a summary
+   */
+  public String getSummary() {
+    return this.summary;
+  }
+
+  /**
+   * Retrieves the description of the Node.
+   * 
+   * @return the description
+   */
+  public String getDescription() {
+    return this.description;
+  }
 }
