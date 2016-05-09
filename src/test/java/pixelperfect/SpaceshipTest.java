@@ -19,7 +19,7 @@ public class SpaceshipTest {
    * Test the udate health method.
    */
   @Test
-  public void updateTest() {
+  public void testUpdate() {
     Spaceship ship = new Spaceship();
     assertEquals(100.0, ship.getHealth(), 0.0);
   }
@@ -29,7 +29,7 @@ public class SpaceshipTest {
    * 
    */
   @Test
-  public void falseDeathTest() {
+  public void testFalseDeath() {
     Spaceship ship = new Spaceship();
     assertFalse(ship.isDead());
   }
@@ -39,7 +39,7 @@ public class SpaceshipTest {
    * 
    */
   @Test
-  public void trueDeathTest() {
+  public void testTrueDeath() {
     Spaceship ship = new Spaceship();
     ship.updateHealth(-100.0);
     assertTrue(ship.isDead());
