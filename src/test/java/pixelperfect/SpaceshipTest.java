@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -13,12 +14,22 @@ import org.junit.Test;
  *
  */
 public class SpaceshipTest {
+  
+  private Spaceship ship;
+  
+  /**
+   * Initialize objects.
+   */
+  @Before
+  public void before() {
+    ship = new Spaceship();
+  }
+  
   /**
    * Test the udate health method.
    */
   @Test
   public void testUpdate() {
-    Spaceship ship = new Spaceship();
     assertEquals(100.0, ship.getHealth(), 0.0);
   }
 
@@ -28,7 +39,6 @@ public class SpaceshipTest {
    */
   @Test
   public void testFalseDeath() {
-    Spaceship ship = new Spaceship();
     assertFalse(ship.isDead());
   }
 
@@ -38,7 +48,6 @@ public class SpaceshipTest {
    */
   @Test
   public void testTrueDeath() {
-    Spaceship ship = new Spaceship();
     ship.updateHealth(-100.0);
     assertTrue(ship.isDead());
   }
