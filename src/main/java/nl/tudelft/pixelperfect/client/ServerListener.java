@@ -15,6 +15,8 @@ public class ServerListener implements MessageListener<HostedConnection> {
 
   /**
    * What it should do if it received a message.
+   * @param source The client the sends the message.
+   * @param message The message itself.
    */
   public void messageReceived(HostedConnection source, Message message) {
     if (message instanceof HelloMessage) {

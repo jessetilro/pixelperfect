@@ -14,13 +14,25 @@ import com.jme3.network.serializing.Serializable;
 public class HelloMessage extends AbstractMessage {
   private String hello; // custom message data
 
+  /**
+   * The constructor of the hello message.
+   * 
+   */
   public HelloMessage() {
   }
 
+  /** Changes the hello message.
+   * 
+   * @param s the string that will be the new hello message.
+   */
   public HelloMessage(String s) {
     hello = s;
   }
-
+  
+  /** Returns the helo message.
+   * 
+   * @return the message
+   */
   public String getSomething() {
     return hello;
   }
