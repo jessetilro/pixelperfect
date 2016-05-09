@@ -1,8 +1,13 @@
 package pixelperfect;
 
+import java.io.IOException;
+
 import com.jme3.app.SimpleApplication;
+import com.jme3.network.Network;
+import com.jme3.network.Server;
 
 import pixelperfect.event.EventScheduler;
+import pixelperfect.net.ServerListener;
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
@@ -16,6 +21,7 @@ public class Game extends SimpleApplication {
 
   private Spaceship spaceship;
   private EventScheduler scheduler;
+  private Server server;
 
   /**
    * Main method bootstrapping the process by constructing this class and initializing a
@@ -34,6 +40,13 @@ public class Game extends SimpleApplication {
    */
   @Override
   public void simpleInitApp() {
+    try {
+      server = Network.createServer(6143);
+      server.start();
+      server.addMessageListener(new ServerListener());
+    } catch (IOException except) {
+      except.printStackTrace();
+    }
     spaceship = new Spaceship();
     scheduler = new EventScheduler(0.5);
 

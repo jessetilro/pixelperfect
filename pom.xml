@@ -55,6 +55,11 @@
       <artifactId>jme3-blender</artifactId>
       <version>3.1.0-alpha5</version>
     </dependency>
+    <dependency>
+    	<groupId>org.jmonkeyengine</groupId>
+    	<artifactId>jme3-networking</artifactId>
+    	<version>3.1.0-alpha5</version>
+    </dependency>
   </dependencies>
 
 
