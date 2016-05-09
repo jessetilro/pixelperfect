@@ -14,7 +14,7 @@ import org.junit.Test;
  */
 public class RouteNodeTest {
 
-  RouteNode node;
+  private RouteNode node;
 
   /**
    * Initializing objects.

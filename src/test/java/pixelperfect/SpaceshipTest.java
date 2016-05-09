@@ -6,8 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import pixelperfect.Spaceship;
-
 /**
  * Test Suite for the Spaceship class.
  * 
