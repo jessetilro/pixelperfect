@@ -1,8 +1,6 @@
 package pixelperfect.event;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.concurrent.Semaphore;
 
 import pixelperfect.Spaceship;
 
@@ -16,8 +14,6 @@ public class EventLog implements EventListener {
 
   private ArrayList<Event> events;
   private Spaceship spaceship;
-
-  private final Semaphore listMutex = new Semaphore(1);
 
   /**
    * Construct a new EventLog instance.
@@ -56,8 +52,7 @@ public class EventLog implements EventListener {
    */
   public synchronized void update() {
     ArrayList<Event> discardPile = new ArrayList<Event>();
-    for (Iterator<Event> it = events.iterator(); it.hasNext();) {
-      Event event = it.next();
+    for (Event event : events) {
       long now = System.currentTimeMillis();
       if (event.isExpired(now)) {
         discardPile.add(event);
