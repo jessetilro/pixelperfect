@@ -4,9 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
-
-import pixelperfect.Spaceship;
 
 /**
  * Test Suite for the Spaceship class.
@@ -15,12 +14,22 @@ import pixelperfect.Spaceship;
  *
  */
 public class SpaceshipTest {
+  
+  private Spaceship ship;
+  
+  /**
+   * Initialize objects.
+   */
+  @Before
+  public void before() {
+    ship = new Spaceship();
+  }
+  
   /**
    * Test the udate health method.
    */
   @Test
-  public void updateTest() {
-    Spaceship ship = new Spaceship();
+  public void testUpdate() {
     assertEquals(100.0, ship.getHealth(), 0.0);
   }
 
@@ -29,8 +38,7 @@ public class SpaceshipTest {
    * 
    */
   @Test
-  public void falseDeathTest() {
-    Spaceship ship = new Spaceship();
+  public void testFalseDeath() {
     assertFalse(ship.isDead());
   }
 
@@ -39,8 +47,7 @@ public class SpaceshipTest {
    * 
    */
   @Test
-  public void trueDeathTest() {
-    Spaceship ship = new Spaceship();
+  public void testTrueDeath() {
     ship.updateHealth(-100.0);
     assertTrue(ship.isDead());
   }
