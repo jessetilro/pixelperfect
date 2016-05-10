@@ -5,24 +5,19 @@ package nl.tudelft.pixelperfect.event;
  */
 public class Fire extends Event {
 
-    /**
-     * Constructor for Fire event.
-     * @param type
-     *          the desired type
-     * @param summary
-     *          summary/name of the event
-     * @param description
-     *          a description of the event
-     * @param timestamp
-     *          the timestamp of start of the event
-     * @param duration
-     *          The time to live milliseconds until the event expires.
-     * @param damage
-     *          the damage done to the ship on even failure
-     */
-    public Fire(int type, String summary, String description,
-                long timestamp, long duration, double damage) {
-        super(type, summary, description, timestamp, duration, damage);
-    }
+  /**
+   * Constructor for Fire event.
+   *
+   * @param id          The desired id.
+   * @param summary     Summary/name of the event.
+   * @param description A description of the event.
+   * @param timestamp   The timestamp of start of the event.
+   * @param duration    The time to live milliseconds until the event expires.
+   * @param damage      The damage done to the ship on even failure.
+   */
+  public Fire(int id, String summary, String description,
+              long timestamp, long duration, double damage) {
+    super(id, summary, description, timestamp, duration, damage);
+  }
 
 }

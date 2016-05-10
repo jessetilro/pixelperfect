@@ -5,24 +5,19 @@ package nl.tudelft.pixelperfect.event;
  */
 public class AsteroidField extends Event {
 
-    /**
-     * Constructor for AstroidField event.
-     * @param id
-     *          the desired id
-     * @param summary
-     *          summary/name of the event
-     * @param description
-     *          a description of the event
-     * @param timestamp
-     *          the timestamp of start of the event
-     * @param duration
-     *          The time to live milliseconds until the event expires.
-     * @param damage
-     *          the damage done to the ship on even failure
-     */
-    public AsteroidField(int id, String summary, String description,
-                        long timestamp, long duration, double damage) {
-        super(id, summary, description, timestamp, duration, damage);
-    }
+  /**
+   * Constructor for AstroidField event.
+   *
+   * @param id          The desired id.
+   * @param summary     Summary/name of the event.
+   * @param description A description of the event.
+   * @param timestamp   The timestamp of start of the event.
+   * @param duration    The time to live milliseconds until the event expires.
+   * @param damage      The damage done to the ship on even failure.
+   */
+  public AsteroidField(int id, String summary, String description,
+                       long timestamp, long duration, double damage) {
+    super(id, summary, description, timestamp, duration, damage);
+  }
 
 }
