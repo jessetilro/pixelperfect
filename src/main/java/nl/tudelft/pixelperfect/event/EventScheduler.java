@@ -76,7 +76,7 @@ public class EventScheduler {
     k--;
 
     for (int i = 0; i < k; i++) {
-      Event evt = factory.create();
+      Event evt = factory.randomEvent();
       publish(evt);
     }
   }

@@ -11,7 +11,6 @@ package nl.tudelft.pixelperfect.event;
  */
 public class EventFactory {
 
-
     private int id;
 
     /**
@@ -21,13 +20,25 @@ public class EventFactory {
         id = 0;
     }
 
-    /**
-     * Create a pseudo random event.
-     *
-     * @return Event
-     */
-    public Event create() {
+  /**
+   * Generate a random event.
+   *
+   * @return an Event.
+   */
+  public Event randomEvent() {
         int x = (int) Math.floor(Math.random()) % 4;
+        return create(x);
+    }
+
+  /**
+   * Create an event based on the parameter.
+   *
+   * @param x
+   *        Defines which event is to be created.
+   * @return
+   *        an Event.
+   */
+  public Event create(int x) {
         Event tbr = null;
         switch (x) {
             case 0: tbr = new AsteroidField(id, "Asteroid", "Hello world, I am a dummy Asteroid event!", System.currentTimeMillis(), 4000, 10);
