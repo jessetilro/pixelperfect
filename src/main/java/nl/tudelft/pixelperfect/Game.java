@@ -53,7 +53,6 @@ public class Game extends SimpleApplication {
     //increase movement speed
     flyCam.setMoveSpeed(50);
     createMap();
-    drawTimer();
 //    Spatial map = assetManager.loadModel("assets/Models/cockpit1/cockpit1.j3o");
     try {
       server = Network.createServer(6143);
@@ -75,6 +74,16 @@ public class Game extends SimpleApplication {
    * Method that contains all objects for the scene.
    */
   public void createMap() {
+    drawDashboard();
+    drawFloor();
+    drawWalls();
+    drawTimer();
+  }
+
+  /**
+   * Render the dashboard of the scene.
+   */
+  public void drawDashboard() {
     Box dashboard = new Box(4, 1f, 1);
     Geometry geom = new Geometry("Box", dashboard);
     Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -82,7 +91,12 @@ public class Game extends SimpleApplication {
     geom.setMaterial(mat);
     geom.setLocalTranslation(new Vector3f(0, 0, -3));
     rootNode.attachChild(geom);
+  }
 
+  /**
+   * Render the floor of the scene.
+   */
+  public void drawFloor() {
     //green floor
     Box floor = new Box(4, 0.01f, 4);
     Geometry g2 = new Geometry("Floor", floor);
@@ -128,7 +142,7 @@ public class Game extends SimpleApplication {
   }
 
   /**
-   * Placeholder for timer that will be displayed.
+   * Render placeholder for timer that will be displayed.
    */
   public void drawTimer() {
     guiNode.detachAllChildren();
