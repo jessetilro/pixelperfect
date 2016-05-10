@@ -25,6 +25,10 @@ public abstract class EventTest {
     toTest = createEvent();
   }
 
+  /**
+   * Factory method for testing.
+   * @return class to be tested.
+   */
   public abstract Event createEvent();
 
   /**
