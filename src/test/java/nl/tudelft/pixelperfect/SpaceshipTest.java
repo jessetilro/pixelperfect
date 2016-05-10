@@ -11,6 +11,7 @@ import org.junit.Test;
 /**
  * Test Suite for the Spaceship class.
  * 
+ * @author David Alderliesten
  * @author Jesse Tilro
  *
  */
@@ -27,7 +28,15 @@ public class SpaceshipTest {
   }
 
   /**
-   * Test the get health functionality by verifying full health.
+   * Test the getLog functionality by checking the existance of a log.
+   */
+  @Test
+  public void testGetLog() {
+
+  }
+
+  /**
+   * Test the getHealth functionality by verifying full health.
    */
   @Test
   public void testGetHealth() {
@@ -35,10 +44,10 @@ public class SpaceshipTest {
   }
 
   /**
-   * Test the update health method by dealing 25 damage.
+   * Test the updateHealth method by dealing 25 damage.
    */
   @Test
-  public void testUpdate() {
+  public void testUpdateHealth() {
     assertEquals(100.0, ship.getHealth(), 0.0);
     ship.updateHealth(-25.0);
     assertEquals(75.0, ship.getHealth(), 0.0);
@@ -46,20 +55,26 @@ public class SpaceshipTest {
 
   /**
    * Test the isDead method on a false case.
-   * 
    */
   @Test
-  public void testFalseDeath() {
+  public void testFalseIsDead() {
     assertFalse(ship.isDead());
   }
 
   /**
    * Test the isDead method on a true case.
-   * 
    */
   @Test
-  public void testTrueDeath() {
+  public void testTrueIsDead() {
     ship.updateHealth(-100.0);
     assertTrue(ship.isDead());
+  }
+
+  /**
+   * Test the isVictorious method on a false case.
+   */
+  @Test
+  public void testFalseVictory() {
+    assertFalse(ship.isVictorious());
   }
 }

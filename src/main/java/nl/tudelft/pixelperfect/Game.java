@@ -16,8 +16,10 @@ import java.io.IOException;
  * Main class representing an active Game process and creating the JMonkey Environment.
  * 
  * @author David Alderliesten
- * @author Jesse Tilro
  * @author Floris Doolaard
+ * @author Dmitry Malarev
+ * @author Jesse Tilro
+ * @author Wouter Zirkzee
  *
  */
 public class Game extends SimpleApplication {
