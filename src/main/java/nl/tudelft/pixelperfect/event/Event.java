@@ -1,5 +1,6 @@
 package nl.tudelft.pixelperfect.event;
 
+import com.jme3.scene.Geometry;
 import nl.tudelft.pixelperfect.Spaceship;
 
 /**
@@ -101,4 +102,8 @@ public abstract class Event {
     return this.damage;
   }
 
+  /**
+   * Allow events to render notifications to the players.
+   */
+  public abstract void notification(Geometry geo);
 }
