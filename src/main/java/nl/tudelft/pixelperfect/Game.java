@@ -3,8 +3,11 @@ package nl.tudelft.pixelperfect;
 import java.io.IOException;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.font.BitmapText;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.FastMath;
+import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.network.Network;
 import com.jme3.network.Server;
@@ -50,8 +53,9 @@ public class Game extends SimpleApplication {
   @Override
   public void simpleInitApp() {
     //increase movement speed
-    flyCam.setMoveSpeed(20);
+    flyCam.setMoveSpeed(50);
     createMap();
+    drawTimer();
 //    Spatial map = assetManager.loadModel("assets/Models/cockpit1/cockpit1.j3o");
     try {
       server = Network.createServer(6143);
@@ -69,9 +73,10 @@ public class Game extends SimpleApplication {
     scheduler.subscribe(spaceship.getLog());
   }
 
+  /**
+   * Method that contains all objects for the scene.
+   */
   public void createMap() {
-    flyCam.setMoveSpeed(20);
-
     Box dashboard = new Box(4, 1f, 1);
     Geometry geom = new Geometry("Box", dashboard);
     Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -117,6 +122,21 @@ public class Game extends SimpleApplication {
     l4.setMaterial(mat4);
     l4.setLocalTranslation(new Vector3f(0,3,4));
     rootNode.attachChild(l4);
+  }
+
+  /**
+   * Placeholder for timer that will be displayed.
+   */
+  public void drawTimer() {
+    guiNode.detachAllChildren();
+    guiFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
+    BitmapText timer = new BitmapText(guiFont, false);
+//    timer.setSize(1);
+    timer.setText("mm:ss");
+    timer.setLocalTranslation(2.5f, 5, 3.9f);
+    timer.setLocalScale(0.1f);
+    timer.setLocalRotation(new Quaternion().fromAngleAxis(180 * FastMath.DEG_TO_RAD, new Vector3f(0, 1, 0)));
+    rootNode.attachChild(timer);
   }
 
   /**
