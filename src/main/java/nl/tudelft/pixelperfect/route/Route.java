@@ -13,6 +13,7 @@ public class Route {
   private long timestamp;
   private long duration;
   private ArrayList<RouteNode> nodes;
+  private int idx;
 
   /**
    * Construct a new Route instance with a specified duration in milliseconds.
@@ -26,6 +27,21 @@ public class Route {
     this.timestamp = System.currentTimeMillis();
     this.duration = duration;
     this.nodes = route;
+    this.idx = 0;
+  }
+
+  /**
+   * Pop the next node from the queue of RouteNode's this route aggregates.
+   * 
+   * @return The next RouteNode.
+   */
+  public RouteNode popRouteNode() {
+    if (idx < nodes.size()) {
+      RouteNode node = nodes.get(idx);
+      idx++;
+      return node;
+    }
+    return null;
   }
 
   /**

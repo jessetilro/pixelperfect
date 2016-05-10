@@ -63,14 +63,14 @@ public class EventScheduler {
     // The tpf is expressed in seconds, therefore intensity times tpf represents the expected value
     // of the probability distribution.
     double mu = intensity * tpf;
-    double L = Math.exp(-mu);
+    double pZero = Math.exp(-mu);
     int k = 0;
     double p = 1.0;
 
     do {
       k++;
       p *= rg.nextDouble();
-    } while (p > L);
+    } while (p > pZero);
     k--;
 
     for (int i = 0; i < k; i++) {
