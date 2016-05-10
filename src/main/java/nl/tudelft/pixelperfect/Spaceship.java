@@ -96,5 +96,4 @@ public class Spaceship {
     }
     log.update();
   }
-
 }
