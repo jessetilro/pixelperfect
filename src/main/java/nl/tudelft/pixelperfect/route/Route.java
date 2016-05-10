@@ -3,7 +3,7 @@ package nl.tudelft.pixelperfect.route;
 import java.util.ArrayList;
 
 /**
- * A route through space that canbe traversed by the spaceship.
+ * A route through space that can be traversed by the spaceship.
  * 
  * @author Jesse Tilro
  *

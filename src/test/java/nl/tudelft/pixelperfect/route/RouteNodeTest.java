@@ -2,10 +2,10 @@ package nl.tudelft.pixelperfect.route;
 
 import static org.junit.Assert.assertEquals;
 
+import nl.tudelft.pixelperfect.route.RouteNode;
+
 import org.junit.Before;
 import org.junit.Test;
-
-import nl.tudelft.pixelperfect.route.RouteNode;
 
 /**
  * Test Suite for the RouteNode class.
