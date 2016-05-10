@@ -104,6 +104,9 @@ public abstract class Event {
 
   /**
    * Allow events to render notifications to the players.
+   *
+   * @param geo
+   *            Object to be mutated as notification.
    */
   public abstract void notification(Geometry geo);
 }

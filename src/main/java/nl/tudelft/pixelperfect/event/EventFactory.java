@@ -37,8 +37,11 @@ public class EventFactory {
    * @return an Event.
    */
   public Event create(int x) {
-    Event tbr = null;
+    Event tbr;
     switch (x) {
+      default:
+        tbr = null;
+        break;
       case 0:
         tbr = new AsteroidField(id, "Asteroid Field", "Watch out, you are approaching an asteroid field!", System.currentTimeMillis(), 4000, 10);
         break;
