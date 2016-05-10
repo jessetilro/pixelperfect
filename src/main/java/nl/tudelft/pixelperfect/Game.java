@@ -1,7 +1,10 @@
 package nl.tudelft.pixelperfect;
 
+import nl.tudelft.pixelperfect.client.ConnectListener;
+import nl.tudelft.pixelperfect.client.HelloMessage;
+import nl.tudelft.pixelperfect.client.ServerListener;
+import nl.tudelft.pixelperfect.event.EventScheduler;
 import java.io.IOException;
-
 import com.jme3.app.SimpleApplication;
 import com.jme3.font.BitmapText;
 import com.jme3.material.Material;
@@ -12,14 +15,9 @@ import com.jme3.math.Vector3f;
 import com.jme3.network.Network;
 import com.jme3.network.Server;
 import com.jme3.network.serializing.Serializer;
-
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
-import nl.tudelft.pixelperfect.client.ConnectListener;
-import nl.tudelft.pixelperfect.client.HelloMessage;
-import nl.tudelft.pixelperfect.client.ServerListener;
-import nl.tudelft.pixelperfect.event.EventScheduler;
+
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
@@ -82,7 +80,7 @@ public class Game extends SimpleApplication {
     Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
     mat.setColor("Color", ColorRGBA.Blue);
     geom.setMaterial(mat);
-    geom.setLocalTranslation(new Vector3f(0,0,-3));
+    geom.setLocalTranslation(new Vector3f(0, 0, -3));
     rootNode.attachChild(geom);
 
     //green floor
@@ -93,34 +91,39 @@ public class Game extends SimpleApplication {
     g2.setMaterial(mat2);
     g2.setLocalTranslation(0, -1, 0);
     rootNode.attachChild(g2);
+  }
 
+  /**
+   * Render the walls of the scene.
+   */
+  public void drawWalls() {
     //walls
-    Box wall_left = new Box(0.01f, 4, 4);
-    Geometry l1 = new Geometry("leftwall", wall_left);
+    Box wallLeft = new Box(0.01f, 4, 4);
+    Geometry l1 = new Geometry("leftwall", wallLeft);
     Material mat3 = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
     mat3.setColor("Color", ColorRGBA.Orange);
     l1.setMaterial(mat3);
-    l1.setLocalTranslation(new Vector3f(-4,3,0));
+    l1.setLocalTranslation(new Vector3f(-4, 3, 0));
     rootNode.attachChild(l1);
 
-    Box wall_right = new Box(0.01f, 4, 4);
-    Geometry l2 = new Geometry("rightwall", wall_right);
+    Box wallRight = new Box(0.01f, 4, 4);
+    Geometry l2 = new Geometry("rightwall", wallRight);
     l2.setMaterial(mat3);
-    l2.setLocalTranslation(new Vector3f(4,3,0));
+    l2.setLocalTranslation(new Vector3f(4, 3, 0));
     rootNode.attachChild(l2);
 
-    Box wall_front = new Box(4, 4, 0.01f);
-    Geometry l3 = new Geometry("frontwall", wall_front);
+    Box wallFront = new Box(4, 4, 0.01f);
+    Geometry l3 = new Geometry("frontwall", wallFront);
     Material mat4 = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
     mat4.setColor("Color", ColorRGBA.Yellow);
     l3.setMaterial(mat4);
-    l3.setLocalTranslation(new Vector3f(0,3,-4));
+    l3.setLocalTranslation(new Vector3f(0, 3, -4));
     rootNode.attachChild(l3);
 
-    Box wall_back = new Box(4, 4, 0.01f);
-    Geometry l4 = new Geometry("backwall", wall_back);
+    Box wallBack = new Box(4, 4, 0.01f);
+    Geometry l4 = new Geometry("backwall", wallBack);
     l4.setMaterial(mat4);
-    l4.setLocalTranslation(new Vector3f(0,3,4));
+    l4.setLocalTranslation(new Vector3f(0, 3, 4));
     rootNode.attachChild(l4);
   }
 
