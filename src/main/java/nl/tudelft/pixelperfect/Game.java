@@ -1,7 +1,5 @@
 package nl.tudelft.pixelperfect;
 
-import java.io.IOException;
-
 import com.jme3.app.SimpleApplication;
 import com.jme3.network.Network;
 import com.jme3.network.Server;
@@ -11,6 +9,8 @@ import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.HelloMessage;
 import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.event.EventScheduler;
+
+import java.io.IOException;
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
@@ -76,5 +76,4 @@ public class Game extends SimpleApplication {
       this.stop();
     }
   }
-
 }
