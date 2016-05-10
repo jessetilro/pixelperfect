@@ -25,7 +25,4 @@ public class Fire extends Event {
         super(type, summary, description, timestamp, duration, damage);
     }
 
-    public Fire create() {
-        return new Fire(1, "sum", "descr", System.currentTimeMillis(), 20, 5);
-    }
 }
