@@ -7,8 +7,8 @@ public class PlasmaLeak extends Event {
 
     /**
      * Constructor for the PlasmaLeak event.
-     * @param type
-     *          the desired type
+     * @param id
+     *          the desired id
      * @param summary
      *          summary/name of the event
      * @param description
@@ -20,8 +20,8 @@ public class PlasmaLeak extends Event {
      * @param damage
      *          the damage done to the ship on even failure
      */
-    public PlasmaLeak(int type, String summary, String description,
+    public PlasmaLeak(int id, String summary, String description,
                       long timestamp, long duration, double damage) {
-        super(type, summary, description, timestamp, duration, damage);
+        super(id, summary, description, timestamp, duration, damage);
     }
 }

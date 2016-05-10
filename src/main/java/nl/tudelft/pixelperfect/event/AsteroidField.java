@@ -3,12 +3,12 @@ package nl.tudelft.pixelperfect.event;
 /**
  * Created by woute on 5/10/2016.
  */
-public class AstroidField extends Event {
+public class AsteroidField extends Event {
 
     /**
      * Constructor for AstroidField event.
-     * @param type
-     *          the desired type
+     * @param id
+     *          the desired id
      * @param summary
      *          summary/name of the event
      * @param description
@@ -20,8 +20,9 @@ public class AstroidField extends Event {
      * @param damage
      *          the damage done to the ship on even failure
      */
-    public AstroidField(int type, String summary, String description,
+    public AsteroidField(int id, String summary, String description,
                         long timestamp, long duration, double damage) {
-        super(type, summary, description, timestamp, duration, damage);
+        super(id, summary, description, timestamp, duration, damage);
     }
+
 }

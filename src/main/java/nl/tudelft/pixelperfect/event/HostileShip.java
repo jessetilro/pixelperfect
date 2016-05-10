@@ -7,8 +7,8 @@ public class HostileShip extends Event {
 
     /**
      * Constructor for Hostile Spaceship event.
-     * @param type
-     *          the desired type
+     * @param id
+     *          the desired id
      * @param summary
      *          summary/name of the event
      * @param description
@@ -20,8 +20,8 @@ public class HostileShip extends Event {
      * @param damage
      *          the damage done to the ship on even failure
      */
-    public HostileShip(int type, String summary, String description,
+    public HostileShip(int id, String summary, String description,
                        long timestamp, long duration, double damage) {
-        super(type, summary, description, timestamp, duration, damage);
+        super(id, summary, description, timestamp, duration, damage);
     }
 }
