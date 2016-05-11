@@ -20,5 +20,13 @@ public class AsteroidNode extends RouteNode {
   public AsteroidNode(String summary, String description) {
     super(summary, description);
   }
+  
+  /**
+   * String representation of an AsteroidNode.
+   */
+  public String toString() {
+    String res = "AsteroidNode";
+    return res;
+  }
 
 }
