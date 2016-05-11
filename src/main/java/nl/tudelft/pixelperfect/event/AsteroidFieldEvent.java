@@ -5,10 +5,10 @@ import com.jme3.scene.Geometry;
 /**
  * Created by woute on 5/10/2016.
  */
-public class Fire extends Event {
+public class AsteroidFieldEvent extends Event {
 
   /**
-   * Constructor for Fire event.
+   * Constructor for AstroidField event.
    *
    * @param id
    *          The desired id.
@@ -23,8 +23,8 @@ public class Fire extends Event {
    * @param damage
    *                The damage done to the ship on even failure.
    */
-  public Fire(int id, String summary, String description,
-              long timestamp, long duration, double damage) {
+  public AsteroidFieldEvent(int id, String summary, String description,
+                            long timestamp, long duration, double damage) {
     super(id, summary, description, timestamp, duration, damage);
   }
 

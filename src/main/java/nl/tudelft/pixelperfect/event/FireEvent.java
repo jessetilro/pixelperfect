@@ -5,10 +5,10 @@ import com.jme3.scene.Geometry;
 /**
  * Created by woute on 5/10/2016.
  */
-public class HostileShip extends Event {
+public class FireEvent extends Event {
 
   /**
-   * Constructor for HostileShip event.
+   * Constructor for FireEvent event.
    *
    * @param id
    *          The desired id.
@@ -23,8 +23,8 @@ public class HostileShip extends Event {
    * @param damage
    *                The damage done to the ship on even failure.
    */
-  public HostileShip(int id, String summary, String description,
-                     long timestamp, long duration, double damage) {
+  public FireEvent(int id, String summary, String description,
+                   long timestamp, long duration, double damage) {
     super(id, summary, description, timestamp, duration, damage);
   }
 
