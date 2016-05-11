@@ -62,7 +62,9 @@ public class Game extends SimpleApplication {
       Serializer.registerClass(HelloMessage.class);
       server.start();
       server.addMessageListener(new ServerListener(), HelloMessage.class);
-      server.addConnectionListener(new ConnectListener());
+      ConnectListener connect = new ConnectListener();
+      connect.setGame(this);
+      server.addConnectionListener(connect);
 
     } catch (IOException except) {
       except.printStackTrace();
@@ -158,6 +160,15 @@ public class Game extends SimpleApplication {
     timer.setLocalRotation(
         new Quaternion().fromAngleAxis(180 * FastMath.DEG_TO_RAD, new Vector3f(0, 1, 0)));
     rootNode.attachChild(timer);
+  }
+  
+  /**
+   * Shows the spaceship for reference purposes.
+   * 
+   * @return the spaceship.
+   */
+  public Spaceship getSpaceship() {
+    return spaceship;
   }
 
   /**
