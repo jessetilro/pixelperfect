@@ -37,6 +37,15 @@ public class Game extends SimpleApplication {
     Game app = new Game();
     app.start();
   }
+  
+  /**
+   * Shows the spaceship for reference purposes.
+   * 
+   * @return the spaceship.
+   */
+  public Spaceship getSpaceship() {
+    return spaceship;
+  }
 
   /**
    * Method initializing the game (e.g. setting up the scenegraph and/or the main menu).
@@ -48,7 +57,9 @@ public class Game extends SimpleApplication {
       Serializer.registerClass(HelloMessage.class);
       server.start();
       server.addMessageListener(new ServerListener(), HelloMessage.class);
-      server.addConnectionListener(new ConnectListener());
+      ConnectListener connect = new ConnectListener();
+      connect.setGame(this);
+      server.addConnectionListener(connect);
 
     } catch (IOException except) {
       except.printStackTrace();
