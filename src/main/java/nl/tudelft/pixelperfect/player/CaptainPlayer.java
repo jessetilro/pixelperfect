@@ -19,4 +19,19 @@ public class CaptainPlayer extends Player {
     super(name);
   }
 
+  /**
+   * Compares two CaptainPlayers to see if they're the same.
+   * 
+   * @param that The object to compare.
+   * 
+   *@return whether it's the same or not.
+   */
+  @Override
+  public boolean equals(Object that) {
+    if (that instanceof CaptainPlayer) {
+      CaptainPlayer other = (CaptainPlayer) that;
+      return (other.getName() == this.getName());
+    }
+    return false;
+  }
 }
