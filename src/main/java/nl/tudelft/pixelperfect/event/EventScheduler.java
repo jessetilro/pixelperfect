@@ -15,6 +15,7 @@ public class EventScheduler {
 
   private double intensity;
   private ArrayList<EventListener> listeners;
+  private EventFactory factory;
 
   /**
    * Construct a new EventScheduler instance.
@@ -25,6 +26,7 @@ public class EventScheduler {
   public EventScheduler(double intensity) {
     this.intensity = intensity;
     this.listeners = new ArrayList<EventListener>();
+    this.factory = new EventFactory();
   }
 
   /**
@@ -75,8 +77,7 @@ public class EventScheduler {
     kvalue--;
 
     for (int i = 0; i < kvalue; i++) {
-      long timestamp = System.currentTimeMillis();
-      Event evt = new Event(0, "Dummy", "Hello world, I am a dummy event!", timestamp, 4000, 10);
+      Event evt = factory.randomEvent();
       publish(evt);
     }
   }

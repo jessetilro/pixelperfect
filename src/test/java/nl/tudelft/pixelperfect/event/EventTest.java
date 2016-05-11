@@ -15,7 +15,8 @@ import org.junit.Test;
  * @author David Alderliesten
  *
  */
-public class EventTest {
+public abstract class EventTest {
+
   private Event toTest;
 
   /**
@@ -23,15 +24,21 @@ public class EventTest {
    */
   @Before
   public void initialize() {
-    toTest = new Event(1, "TestEvent", "An Event to test the Class.", 42, 42, 99.42);
+    toTest = createEvent();
   }
 
   /**
-   * Testing the getType method.
+   * Factory method for testing.
+   * @return class to be tested.
+   */
+  public abstract Event createEvent();
+
+  /**
+   * Testing the getId method.
    */
   @Test
-  public void testGetType() {
-    assertEquals(toTest.getType(), 1);
+  public void testGetId() {
+    assertEquals(toTest.getId(), 1);
   }
 
   /**
