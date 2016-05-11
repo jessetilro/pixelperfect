@@ -1,14 +1,13 @@
 package nl.tudelft.pixelperfect.event;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.concurrent.Semaphore;
-
 import nl.tudelft.pixelperfect.Spaceship;
+
+import java.util.ArrayList;
 
 /**
  * The captain's log of events, which should be subscribed to the event schedulers in the game.
  * 
+ * @author David Alderliesten
  * @author Jesse Tilro
  *
  */
@@ -16,8 +15,6 @@ public class EventLog implements EventListener {
 
   private ArrayList<Event> events;
   private Spaceship spaceship;
-
-  private final Semaphore listMutex = new Semaphore(1);
 
   /**
    * Construct a new EventLog instance.
@@ -28,6 +25,24 @@ public class EventLog implements EventListener {
   public EventLog(Spaceship spaceship) {
     this.events = new ArrayList<Event>();
     this.spaceship = spaceship;
+  }
+
+  /**
+   * Get the current log of events.
+   * 
+   * @return the list of events.
+   */
+  public ArrayList<Event> getEvents() {
+    return this.events;
+  }
+
+  /**
+   * Get the spaceship the EvenLog relates to.
+   * 
+   * @return the log's spaceship.
+   */
+  public Spaceship getSpaceship() {
+    return this.spaceship;
   }
 
   /**
@@ -56,8 +71,7 @@ public class EventLog implements EventListener {
    */
   public synchronized void update() {
     ArrayList<Event> discardPile = new ArrayList<Event>();
-    for (Iterator<Event> it = events.iterator(); it.hasNext();) {
-      Event event = it.next();
+    for (Event event : events) {
       long now = System.currentTimeMillis();
       if (event.isExpired(now)) {
         discardPile.add(event);
@@ -68,5 +82,4 @@ public class EventLog implements EventListener {
       discard(event);
     }
   }
-
 }
