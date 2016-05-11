@@ -37,4 +37,12 @@ public class MarsNodeTest extends RouteNodeTest {
   public void testRouteDescription() {
     assertEquals("description", node.getDescription());
   }
+  
+  /**
+   * Testing toString.
+   */
+  @Test
+  public void testToString() {
+    assertEquals("MarsNode", node.toString());
+  }
 }

@@ -113,3 +113,5 @@ fabric.properties
 ### Intellij Patch ###
 *.iml
 
+OpenAL64.dll
+lwjgl64.dll

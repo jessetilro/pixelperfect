@@ -37,4 +37,12 @@ public class EnemyNodeTest extends RouteNodeTest {
   public void testRouteDescription() {
     assertEquals("description", node.getDescription());
   }
+  
+  /**
+   * Testing toString.
+   */
+  @Test
+  public void testToString() {
+    assertEquals("EnemyNode", node.toString());
+  }
 }

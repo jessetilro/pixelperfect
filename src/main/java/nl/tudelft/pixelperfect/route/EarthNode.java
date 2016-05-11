@@ -19,4 +19,13 @@ public class EarthNode extends RouteNode {
   public EarthNode(String summary, String description) {
     super(summary, description);
   }
+  
+  /**
+   * String representation of an EarthNode.
+   * @return A String.
+   */
+  public String toString() {
+    String res = "EarthNode";
+    return res;
+  }
 }

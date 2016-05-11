@@ -16,17 +16,16 @@ import java.util.ArrayList;
  */
 public class RouteTest {
   private Route toTest;
-  private RouteNode first = new RouteNode("First", "The first place to go.");
-  private RouteNode second = new RouteNode("Second", "The second and final place to go.");
+  private RouteNode first = new AllyNode("First", "The first place to go.");
+  private RouteNode second = new AsteroidNode("Second", "The second and final place to go.");
 
   /**
    * Setting up the route class for the test.
    */
   @Before
   public void initialise() {
-    ArrayList<RouteNode> toAdd = new ArrayList<RouteNode>();
-    toAdd.add(first);
-    toAdd.add(second);
+    ArrayList<Tuple> toAdd = new ArrayList<Tuple>();
+    toAdd.add(new Tuple(first, second));
 
     toTest = new Route((long) 42, toAdd);
   }
@@ -52,8 +51,9 @@ public class RouteTest {
    */
   @Test
   public void testRouteNodePopping() {
-    assertEquals(toTest.popRouteNode().getDescription(), first.getDescription());
-    assertEquals(toTest.popRouteNode().getDescription(), second.getDescription());
+    Tuple tp = toTest.popRouteNode();
+    assertEquals(tp.getLeft().getDescription(), first.getDescription());
+    assertEquals(tp.getRight().getDescription(), second.getDescription());
     assertEquals(toTest.popRouteNode(), null);
   }
 }

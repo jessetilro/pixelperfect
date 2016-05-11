@@ -19,4 +19,13 @@ public class MarsNode extends RouteNode {
   public MarsNode(String summary, String description) {
     super(summary, description);
   }
+  
+  /**
+   * String representation of a MarsNode.
+   * @return A String.
+   */
+  public String toString() {
+    String res = "MarsNode";
+    return res;
+  }
 }
