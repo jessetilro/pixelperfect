@@ -19,4 +19,12 @@ public class CaptainPlayer extends Player {
     super(name);
   }
 
+  @Override
+  public boolean equals(Object that) {
+    if (that instanceof CaptainPlayer) {
+      CaptainPlayer other = (CaptainPlayer) that;
+      return (other.getName() == this.getName());
+    }
+    return false;
+  }
 }

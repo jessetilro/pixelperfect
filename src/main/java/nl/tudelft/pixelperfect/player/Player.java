@@ -28,5 +28,13 @@ public abstract class Player {
   public String getName() {
     return this.name;
   }
-
+  
+  @Override
+  public boolean equals(Object that) {
+    if (that instanceof Player) {
+      Player other = (Player) that;
+      return (other.getName() == this.getName());
+    }
+    return false;
+  }
 }
