@@ -1,6 +1,7 @@
 package nl.tudelft.pixelperfect.route;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Random generator for routes through space.
@@ -62,8 +63,8 @@ public final class RouteGenerator {
     int it = 0;
     int nodes = 5;
     while (it < routeLength) {
-      int rand = (int) (Math.random() * nodes);
-      switch (rand) {
+      Random rd = new Random();
+      switch (rd.nextInt(nodes)) {
         case 0:
           route.add(new AllyNode("sum", "descr"));
           break;
@@ -95,7 +96,6 @@ public final class RouteGenerator {
    */
   public Route createTuples(int routeLength, ArrayList<RouteNode> route) {
     ArrayList<Tuple> res = new ArrayList<Tuple>();
-
     int first = 0;
     int second = routeLength / 2;
     while (first < routeLength / 2) {
@@ -103,7 +103,6 @@ public final class RouteGenerator {
       first++;
       second++;
     }
-
     return new Route(600000, res);
   }
 }
