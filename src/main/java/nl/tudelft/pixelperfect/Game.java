@@ -16,6 +16,7 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
 
 import nl.tudelft.pixelperfect.client.ConnectListener;
+import nl.tudelft.pixelperfect.client.EventsMessage;
 import nl.tudelft.pixelperfect.client.HelloMessage;
 import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.event.EventScheduler;
@@ -61,7 +62,10 @@ public class Game extends SimpleApplication {
       server = Network.createServer(6143);
       Serializer.registerClass(HelloMessage.class);
       server.start();
-      server.addMessageListener(new ServerListener(), HelloMessage.class);
+      ServerListener listen = new ServerListener();
+      listen.setGame(this);
+      server.addMessageListener(listen, HelloMessage.class);
+      server.addMessageListener(listen, EventsMessage.class);
       ConnectListener connect = new ConnectListener();
       connect.setGame(this);
       server.addConnectionListener(connect);
@@ -70,6 +74,7 @@ public class Game extends SimpleApplication {
       except.printStackTrace();
     }
     spaceship = new Spaceship();
+    spaceship.getLog().setServer(server);
     scheduler = new EventScheduler(0.5);
 
     scheduler.subscribe(spaceship.getLog());

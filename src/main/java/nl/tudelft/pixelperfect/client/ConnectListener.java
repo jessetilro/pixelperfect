@@ -15,7 +15,7 @@ import nl.tudelft.pixelperfect.Game;
  */
 public class ConnectListener implements ConnectionListener {
 
- private Game app;
+  private Game app;
   
   /**
    * Sets the game it references to.
