@@ -12,7 +12,7 @@ public class Route {
 
   private long timestamp;
   private long duration;
-  private ArrayList<RouteNode> nodes;
+  private ArrayList<Tuple> nodes;
   private int idx;
 
   /**
@@ -23,7 +23,7 @@ public class Route {
    * @param route
    *          The sequence of RouteNodes this route consist of.
    */
-  public Route(long duration, ArrayList<RouteNode> route) {
+  public Route(long duration, ArrayList<Tuple> route) {
     this.timestamp = System.currentTimeMillis();
     this.duration = duration;
     this.nodes = route;
@@ -31,13 +31,13 @@ public class Route {
   }
 
   /**
-   * Pop the next node from the queue of RouteNode's this route aggregates.
+   * Pop the next tuple from the queue of RouteNode's this route aggregates.
    * 
    * @return The next RouteNode.
    */
-  public RouteNode popRouteNode() {
+  public Tuple popRouteNode() {
     if (idx < nodes.size()) {
-      RouteNode node = nodes.get(idx);
+      Tuple node = nodes.get(idx);
       idx++;
       return node;
     }
@@ -62,7 +62,17 @@ public class Route {
    * @return A randomly generated route.
    */
   public static Route generateRoute() {
-    return new Route(42, new ArrayList<RouteNode>());
+    RouteGenerator rg = RouteGenerator.getInstance();
+    return rg.generateRoute();
+  }
+
+  /**
+   * The String representation of a Route.
+   */
+  public String toString() {
+    String res = "<Route (" + duration + " ms): ";
+    res = res + nodes.toString() + ">";
+    return res;
   }
 
 }

@@ -11,12 +11,22 @@ import java.util.ArrayList;
  */
 public final class RouteGenerator {
 
+  private Route mainRoute;
   private static volatile RouteGenerator instance;
 
   /**
    * Whenever the RouteGenerator is created a new Route will be created (in this factory).
    */
   private RouteGenerator() {
+    mainRoute = generateRoute();
+  }
+
+  /**
+   * Retrieve the created route from the RouteGenerator.
+   * @return a random Route.
+   */
+  public Route getRoute() {
+    return mainRoute;
   }
 
   /**
@@ -41,6 +51,46 @@ public final class RouteGenerator {
    * @return A new Route
    */
   public Route generateRoute() {
-    return new Route(0, new ArrayList<RouteNode>());
+    ArrayList<RouteNode> route = new ArrayList<RouteNode>();
+
+    int routeLength = 10;
+    int it = 0;
+    int nodes = 5;
+    while (it < routeLength) {
+      int rand = (int) (Math.random() * nodes);
+
+      switch (rand) {
+        case 0:
+          route.add(new AllyNode("sum", "descr"));
+          break;
+        case 1:
+          route.add(new AsteroidNode("sum", "descr"));
+          break;
+        case 2:
+          route.add(new EarthNode("sum", "descr"));
+          break;
+        case 3:
+          route.add(new EnemyNode("sum", "descr"));
+          break;
+        case 4:
+          route.add(new MarsNode("sum", "descr"));
+          break;
+        default:
+          break;
+      }
+      it++;
+    }
+    ArrayList<Tuple> res = new ArrayList<Tuple>();
+    
+    int first = 0;
+    int second = routeLength / 2;
+    while (first < routeLength / 2) {
+      res.add(new Tuple(route.get(first), route.get(second)));
+      first++;
+      second++;
+    }
+    System.out.println(new Route(1, res));
+
+    return new Route(600000, res);
   }
 }
