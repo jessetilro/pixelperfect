@@ -37,4 +37,12 @@ public class AllyNodeTest extends RouteNodeTest {
   public void testRouteDescription() {
     assertEquals("description", node.getDescription());
   }
+  
+  /**
+   * Testing toString.
+   */
+  @Test
+  public void testToString() {
+    assertEquals("AllyNode", node.toString());
+  }
 }

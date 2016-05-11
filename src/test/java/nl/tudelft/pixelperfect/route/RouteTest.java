@@ -16,8 +16,8 @@ import java.util.ArrayList;
  */
 public class RouteTest {
   private Route toTest;
-  private RouteNode first = new RouteNode("First", "The first place to go.");
-  private RouteNode second = new RouteNode("Second", "The second and final place to go.");
+  private RouteNode first = new AllyNode("First", "The first place to go.");
+  private RouteNode second = new AsteroidNode("Second", "The second and final place to go.");
 
   /**
    * Setting up the route class for the test.
