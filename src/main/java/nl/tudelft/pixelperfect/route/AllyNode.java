@@ -23,6 +23,7 @@ public class AllyNode extends RouteNode {
   
   /**
    * String representation of an AllyNode.
+   * @return A String.
    */
   public String toString() {
     String res = "AllyNode";

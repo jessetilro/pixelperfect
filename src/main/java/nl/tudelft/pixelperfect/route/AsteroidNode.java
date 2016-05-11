@@ -23,6 +23,7 @@ public class AsteroidNode extends RouteNode {
   
   /**
    * String representation of an AsteroidNode.
+   * @return A String.
    */
   public String toString() {
     String res = "AsteroidNode";

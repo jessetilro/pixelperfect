@@ -68,6 +68,7 @@ public class Route {
 
   /**
    * The String representation of a Route.
+   * @return A String.
    */
   public String toString() {
     String res = "<Route (" + duration + " ms): ";

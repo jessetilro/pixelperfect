@@ -23,6 +23,7 @@ public class EnemyNode extends RouteNode {
   
   /**
    * String representation of an EnemyNode.
+   * @return A String.
    */
   public String toString() {
     String res = "EnemyNode";

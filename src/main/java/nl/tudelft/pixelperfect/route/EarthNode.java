@@ -22,6 +22,7 @@ public class EarthNode extends RouteNode {
   
   /**
    * String representation of an EarthNode.
+   * @return A String.
    */
   public String toString() {
     String res = "EarthNode";

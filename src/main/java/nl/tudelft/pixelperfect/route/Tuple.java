@@ -45,6 +45,7 @@ public class Tuple {
   
   /**
    * The String representation of the Tuple.
+   * @return A String.
    */
   public String toString() {
     String res = "(";

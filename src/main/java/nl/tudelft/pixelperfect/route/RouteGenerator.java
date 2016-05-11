@@ -23,6 +23,7 @@ public final class RouteGenerator {
 
   /**
    * Retrieve the created route from the RouteGenerator.
+   * 
    * @return a random Route.
    */
   public Route getRoute() {
@@ -46,25 +47,22 @@ public final class RouteGenerator {
   }
 
   /**
-   * The algorithm for creating a route out of RouteNodes.
-   * First the algorithm created a random number based of the number of nodes wanted.
-   * This number will represent which node to be selected from the available nodes.
+   * The algorithm for creating a route out of RouteNodes. First the algorithm created a random
+   * number based of the number of nodes wanted. This number will represent which node to be
+   * selected from the available nodes.
    * 
-   * <p>After creating a list of nodes (which must be divisible by 2) another iteration 
-   * will run on making a list of Tuples.
-   * This is to make the two-choice of the captain in the game easier.
+   * <p>After creating a list of nodes (which must be divisible by 2) another iteration will run on
+   * making a list of Tuples. This is to make the two-choice of the captain in the game easier.
    * 
    * @return A new Route
    */
   public Route generateRoute() {
     ArrayList<RouteNode> route = new ArrayList<RouteNode>();
-
     int routeLength = 10;
     int it = 0;
     int nodes = 5;
     while (it < routeLength) {
       int rand = (int) (Math.random() * nodes);
-
       switch (rand) {
         case 0:
           route.add(new AllyNode("sum", "descr"));
@@ -86,8 +84,18 @@ public final class RouteGenerator {
       }
       it++;
     }
+    return createTuples(routeLength, route);
+  }
+
+  /**
+   * Creating a list of Tuples out of the list with RouteNodes.
+   * @param routeLength , the length of the input list.
+   * @param route , the input list.
+   * @return A new Route.
+   */
+  public Route createTuples(int routeLength, ArrayList<RouteNode> route) {
     ArrayList<Tuple> res = new ArrayList<Tuple>();
-    
+
     int first = 0;
     int second = routeLength / 2;
     while (first < routeLength / 2) {
@@ -95,7 +103,6 @@ public final class RouteGenerator {
       first++;
       second++;
     }
-    System.out.println(new Route(1, res));
 
     return new Route(600000, res);
   }
