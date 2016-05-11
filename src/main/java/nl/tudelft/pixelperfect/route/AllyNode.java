@@ -20,4 +20,13 @@ public class AllyNode extends RouteNode {
   public AllyNode(String summary, String description) {
     super(summary, description);
   }
+  
+  /**
+   * String representation of an AllyNode.
+   * @return A String.
+   */
+  public String toString() {
+    String res = "AllyNode";
+    return res;
+  }
 }

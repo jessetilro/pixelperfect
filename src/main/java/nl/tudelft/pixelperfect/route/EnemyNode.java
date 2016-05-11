@@ -20,4 +20,13 @@ public class EnemyNode extends RouteNode {
   public EnemyNode(String summary, String description) {
     super(summary, description);
   }
+  
+  /**
+   * String representation of an EnemyNode.
+   * @return A String.
+   */
+  public String toString() {
+    String res = "EnemyNode";
+    return res;
+  }
 }
