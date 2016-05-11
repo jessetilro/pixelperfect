@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.tudelft.pixelperfect.Spaceship;
+
 
 /**
  * Test Suite for the Spaceship class.

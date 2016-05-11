@@ -106,6 +106,12 @@ public class Spaceship {
     log.update();
   }
 
+  /**
+   * Update the crew in the spaceship based on the people connected.
+   * 
+   * @param clients
+   *          The clients connected to the server.
+   */
   public void updateCrew(Collection<HostedConnection> clients) {
     ArrayList<Player> temp = new ArrayList<Player>();
     for (HostedConnection hc : clients) {
