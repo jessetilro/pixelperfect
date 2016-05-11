@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.tudelft.pixelperfect.event.Event;
+
 
 /**
  * Class for testing the Event class.
