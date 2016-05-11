@@ -16,9 +16,9 @@ public class RouteNode {
    * A constructor for the RouteNode.
    * 
    * @param summary
-   *          , a summary about the RouteNode.
+   *          a summary about the RouteNode.
    * @param description
-   *          , a description about the RouteNode.
+   *          a description about the RouteNode.
    */
   public RouteNode(String summary, String description) {
     this.summary = summary;

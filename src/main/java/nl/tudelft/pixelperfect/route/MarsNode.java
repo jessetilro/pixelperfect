@@ -12,12 +12,11 @@ public class MarsNode extends RouteNode {
    * The constructor for the MarsNode.
    * 
    * @param summary
-   *          , a summary of the MarsNode.
+   *          a summary of the MarsNode.
    * @param description
-   *          , a description of the MarsNode.
+   *          a description of the MarsNode.
    */
   public MarsNode(String summary, String description) {
     super(summary, description);
   }
-
 }

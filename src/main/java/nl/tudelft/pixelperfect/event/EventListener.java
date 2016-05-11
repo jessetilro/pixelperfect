@@ -28,5 +28,4 @@ public interface EventListener {
    * Update the event listener.
    */
   void update();
-
 }
