@@ -38,7 +38,7 @@ public class EventFactoryTest {
   @Test
   public void testCreateAsteroidEvent() {
     Event e1 = factory.create(0);
-    assertTrue(e1 instanceof AsteroidFieldEvent);
+    assertEquals(e1.getSummary(), "Asteroid Field");
   }
 
   /**
@@ -47,7 +47,7 @@ public class EventFactoryTest {
   @Test
   public void testCreateFireEvent() {
     Event e1 = factory.create(1);
-    assertTrue(e1 instanceof FireEvent);
+    assertEquals(e1.getSummary(), "Fire");
   }
 
   /**
@@ -56,7 +56,7 @@ public class EventFactoryTest {
   @Test
   public void testCreateHostileShipEvent() {
     Event e1 = factory.create(2);
-    assertTrue(e1 instanceof HostileShipEvent);
+    assertEquals(e1.getSummary(), "Hostile Ship");
   }
 
   /**
@@ -65,7 +65,7 @@ public class EventFactoryTest {
   @Test
   public void testCreatePlasmaLeakEvent() {
     Event e1 = factory.create(3);
-    assertTrue(e1 instanceof PlasmaLeakEvent);
+    assertEquals(e1.getSummary(), "Plasma Leak");
   }
 
 }

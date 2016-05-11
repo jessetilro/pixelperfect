@@ -50,7 +50,7 @@ public class EventFactory {
         tbr = new AsteroidFieldEvent(id, "Asteroid Field", "Watch out, you are approaching an asteroid field!", System.currentTimeMillis(), 4000, 10);
         break;
       case 1:
-        tbr = new FireEvent(id, "FireEvent", "Alert! Faulty wiring caused a fire!", System.currentTimeMillis(), 4000, 10);
+        tbr = new FireEvent(id, "Fire", "Alert! Faulty wiring caused a fire!", System.currentTimeMillis(), 4000, 10);
         break;
       case 2:
         tbr = new HostileShipEvent(id, "Hostile Ship", "A hostile spaceship is near, prepare to defend yourself!", System.currentTimeMillis(), 4000, 10);
