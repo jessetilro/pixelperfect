@@ -47,6 +47,12 @@ public final class RouteGenerator {
 
   /**
    * The algorithm for creating a route out of RouteNodes.
+   * First the algorithm created a random number based of the number of nodes wanted.
+   * This number will represent which node to be selected from the available nodes.
+   * 
+   * <p>After creating a list of nodes (which must be divisible by 2) another iteration 
+   * will run on making a list of Tuples.
+   * This is to make the two-choice of the captain in the game easier.
    * 
    * @return A new Route
    */
