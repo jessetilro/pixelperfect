@@ -13,9 +13,9 @@ public class EnemyNode extends RouteNode {
    * The constructor for the EnemyNode.
    * 
    * @param summary
-   *          , a summary of the EnemyNode.
+   *          a summary of the EnemyNode.
    * @param description
-   *          , a description of the EnemyNode.
+   *          a description of the EnemyNode.
    */
   public EnemyNode(String summary, String description) {
     super(summary, description);
@@ -29,5 +29,4 @@ public class EnemyNode extends RouteNode {
     String res = "EnemyNode";
     return res;
   }
-
 }

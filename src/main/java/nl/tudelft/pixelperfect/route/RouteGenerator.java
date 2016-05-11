@@ -16,7 +16,7 @@ public final class RouteGenerator {
   private static volatile RouteGenerator instance;
 
   /**
-   * Whenever the RouteGenerator is created a new Route will be created (in this factory).
+   * Whenever the RouteGenerator is created a new Route will be created in this factory.
    */
   private RouteGenerator() {
     mainRoute = generateRoute();

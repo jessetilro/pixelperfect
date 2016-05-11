@@ -12,9 +12,9 @@ public class EarthNode extends RouteNode {
    * The constructor for the EarthNode.
    * 
    * @param summary
-   *          , a summary of the EarthNode.
+   *          a summary of the EarthNode.
    * @param description
-   *          , a description of the EarthNode.
+   *          a description of the EarthNode.
    */
   public EarthNode(String summary, String description) {
     super(summary, description);
@@ -28,5 +28,4 @@ public class EarthNode extends RouteNode {
     String res = "EarthNode";
     return res;
   }
-
 }

@@ -1,11 +1,11 @@
 package nl.tudelft.pixelperfect.player;
 
 /**
- * Test Suite for the Player class.
+ * Class for the automated testing of the Player class.
  * 
- * @author Jesse Tilro
+ * @author David Alderliesten
  *
  */
-public abstract class PlayerTest {
+public class PlayerTest {
 
 }

@@ -13,9 +13,9 @@ public class AllyNode extends RouteNode {
    * The constructor for the AllyNode.
    * 
    * @param summary
-   *          , a summary of the AllyNode.
+   *          a summary of the AllyNode.
    * @param description
-   *          , a description of the AllyNode.
+   *          a description of the AllyNode.
    */
   public AllyNode(String summary, String description) {
     super(summary, description);
@@ -29,5 +29,4 @@ public class AllyNode extends RouteNode {
     String res = "AllyNode";
     return res;
   }
-
 }

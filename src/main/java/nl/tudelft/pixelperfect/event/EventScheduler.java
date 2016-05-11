@@ -7,6 +7,7 @@ import java.util.Random;
  * Random generator for events, simulating space. The random distribution is modelled as a poisson
  * process.
  * 
+ * @author David Alderliesten
  * @author Jesse Tilro
  *
  */
@@ -63,21 +64,20 @@ public class EventScheduler {
     // The tpf is expressed in seconds, therefore intensity times tpf represents the expected value
     // of the probability distribution.
     double mu = intensity * tpf;
-    double pZero = Math.exp(-mu);
-    int k = 0;
-    double p = 1.0;
+    double pzero = Math.exp(-mu);
+    int kvalue = 0;
+    double pvalue = 1.0;
 
     do {
-      k++;
-      p *= rg.nextDouble();
-    } while (p > pZero);
-    k--;
+      kvalue++;
+      pvalue *= rg.nextDouble();
+    } while (pvalue > pzero);
+    kvalue--;
 
-    for (int i = 0; i < k; i++) {
+    for (int i = 0; i < kvalue; i++) {
       long timestamp = System.currentTimeMillis();
       Event evt = new Event(0, "Dummy", "Hello world, I am a dummy event!", timestamp, 4000, 10);
       publish(evt);
     }
   }
-
 }
