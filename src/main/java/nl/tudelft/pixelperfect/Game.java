@@ -3,18 +3,9 @@ package nl.tudelft.pixelperfect;
 import java.io.IOException;
 
 import com.jme3.app.SimpleApplication;
-import com.jme3.font.BitmapText;
-import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
-import com.jme3.math.FastMath;
-import com.jme3.math.Quaternion;
-import com.jme3.math.Vector3f;
 import com.jme3.network.Network;
 import com.jme3.network.Server;
 import com.jme3.network.serializing.Serializer;
-import com.jme3.scene.Geometry;
-import com.jme3.scene.shape.Box;
-import nl.tudelft.pixelperfect.Scene;
 
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.HelloMessage;

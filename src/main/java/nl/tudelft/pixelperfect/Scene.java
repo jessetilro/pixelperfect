@@ -12,10 +12,12 @@ import com.jme3.scene.shape.Box;
 
 /**
  * Created by woute on 5/12/2016.
+ *
+ * Class for drawing objects in the game.
  */
 public class Scene {
 
-  Game app;
+  private Game app;
 
   /**
    * Constructor for Scene.
