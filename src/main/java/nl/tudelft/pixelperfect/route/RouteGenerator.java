@@ -90,8 +90,11 @@ public final class RouteGenerator {
 
   /**
    * Creating a list of Tuples out of the list with RouteNodes.
-   * @param routeLength , the length of the input list.
-   * @param route , the input list.
+   * 
+   * @param routeLength
+   *          The length of the input list.
+   * @param route
+   *          The input list.
    * @return A new Route.
    */
   public Route createTuples(int routeLength, ArrayList<RouteNode> route) {

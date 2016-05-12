@@ -28,22 +28,17 @@ public abstract class Player {
   public String getName() {
     return this.name;
   }
-  
+
   /**
    * Compares two Players to see if they're the same.
    * 
-   * @param that The object to compare.
+   * @param that
+   *          The object to compare.
    * 
-   *@return whether it's the same or not.
+   * @return whether it's the same or not.
    */
   @Override
-  public boolean equals(Object that) {
-    if (that instanceof Player) {
-      Player other = (Player) that;
-      return (other.getName().equals(this.getName()));
-    }
-    return false;
-  }
+  public abstract boolean equals(Object that);
   
   /**
    * Class not likely to be used in a hashMap/Table.
@@ -51,8 +46,6 @@ public abstract class Player {
    * @return An unused number.
    */
   @Override
-  public int hashCode() {
-    assert false : "hashCode not designed";
-    return 42;
-  }
+  public abstract int hashCode();
+  
 }

@@ -11,19 +11,22 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
 
 /**
- * Created by woute on 5/12/2016.
- *
- * <p>Class for drawing objects in the game.
+ * Class for drawing objects in the game.
+ * 
+ * @author Wouter Zirkzee
+ * 
  */
 public class Scene {
 
   private Game app;
   private String basicMat;
+  private String color = "Color";
 
   /**
    * Constructor for Scene.
+   * 
    * @param game
-   *            game which scene is to be build
+   *          The game for which a Scene is built.
    */
   public Scene(Game game) {
     app = game;
@@ -47,7 +50,7 @@ public class Scene {
     Box dashboard = new Box(4, 1f, 1);
     Geometry geom = new Geometry("Box", dashboard);
     Material mat = new Material(app.getAssetManager(), basicMat);
-    mat.setColor("Blue", ColorRGBA.Blue);
+    mat.setColor(color, ColorRGBA.Blue);
     geom.setMaterial(mat);
     geom.setLocalTranslation(new Vector3f(0, 0, -3));
     app.getRootNode().attachChild(geom);
@@ -61,7 +64,7 @@ public class Scene {
     Box floor = new Box(4, 0.01f, 4);
     Geometry g2 = new Geometry("Floor", floor);
     Material mat2 = new Material(app.getAssetManager(), basicMat);
-    mat2.setColor("Green", ColorRGBA.Green);
+    mat2.setColor(color, ColorRGBA.Green);
     g2.setMaterial(mat2);
     g2.setLocalTranslation(0, -1, 0);
     app.getRootNode().attachChild(g2);
@@ -75,7 +78,7 @@ public class Scene {
     Box wallLeft = new Box(0.01f, 4, 4);
     Geometry l1 = new Geometry("leftwall", wallLeft);
     Material mat3 = new Material(app.getAssetManager(), basicMat);
-    mat3.setColor("Orange", ColorRGBA.Orange);
+    mat3.setColor(color, ColorRGBA.Orange);
     l1.setMaterial(mat3);
     l1.setLocalTranslation(new Vector3f(-4, 3, 0));
     app.getRootNode().attachChild(l1);
@@ -89,7 +92,7 @@ public class Scene {
     Box wallFront = new Box(4, 4, 0.01f);
     Geometry l3 = new Geometry("frontwall", wallFront);
     Material mat4 = new Material(app.getAssetManager(), basicMat);
-    mat4.setColor("Yellow", ColorRGBA.Yellow);
+    mat4.setColor(color, ColorRGBA.Yellow);
     l3.setMaterial(mat4);
     l3.setLocalTranslation(new Vector3f(0, 3, -4));
     app.getRootNode().attachChild(l3);
@@ -102,7 +105,7 @@ public class Scene {
   }
 
   /**
-   * Render placeholder for timer that will be displayed.
+   * Render placeholder for the timer that will be displayed.
    */
   private void drawTimer() {
     app.getGuiNode().detachAllChildren();

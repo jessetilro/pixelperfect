@@ -11,7 +11,7 @@ import nl.tudelft.pixelperfect.event.EventLog;
 import java.util.ArrayList;
 
 /**
- * Listener for the Game's server, which handle incoming messages.
+ * Listener for the Game's server, which handles incoming messages.
  * 
  * @author David Alderliesten
  * @author Dmitry Malarev
@@ -19,32 +19,33 @@ import java.util.ArrayList;
  *
  */
 public class ServerListener implements MessageListener<HostedConnection> {
-  
+
   private Game app;
-  
+
   /**
-   * Sets the game it references to.
+   * Sets the game whose server to listen for.
    * 
-   * @param game the game.
+   * @param game
+   *          The game.
    */
   public void setGame(Game game) {
     app = game;
   }
-  
+
   /**
    * Returns the game for reference purposes.
    * 
-   * @return the game.
+   * @return The game.
    */
   public Game getGame() {
     return app;
   }
-  
+
   /**
-   * Functionality for server behavior upon recieving a message.
+   * Functionality for server behavior upon receiving a message.
    * 
    * @param source
-   *          The client the sends the message.
+   *          The client that sent the message.
    * @param message
    *          The message sent.
    * 
@@ -60,7 +61,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
       ArrayList<Event> log = eve.getLog();
       EventLog curr = (EventLog) app.getSpaceship().getLog();
       curr.replace(log);
-      
+
     }
   }
 }

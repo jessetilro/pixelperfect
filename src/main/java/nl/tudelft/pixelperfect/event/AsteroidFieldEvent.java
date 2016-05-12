@@ -3,7 +3,10 @@ package nl.tudelft.pixelperfect.event;
 import com.jme3.scene.Geometry;
 
 /**
- * Created by woute on 5/10/2016.
+ * A type of Event, imposing a dangerous Asteroid Field.
+ * 
+ * @author Wouter Zirkzee
+ * 
  */
 public class AsteroidFieldEvent extends Event {
 
@@ -13,27 +16,28 @@ public class AsteroidFieldEvent extends Event {
    * @param id
    *          The desired id.
    * @param summary
-   *               Summary/name of the event.
+   *          Summary/name of the event.
    * @param description
-   *                  A description of the event.
+   *          A description of the event.
    * @param timestamp
-   *                  The timestamp of start of the event.
+   *          The timestamp of start of the event.
    * @param duration
-   *                 The time to live milliseconds until the event expires.
+   *          The time to live milliseconds until the event expires.
    * @param damage
-   *                The damage done to the ship on even failure.
+   *          The damage done to the ship on even failure.
    */
-  public AsteroidFieldEvent(int id, String summary, String description,
-                            long timestamp, long duration, double damage) {
+  public AsteroidFieldEvent(int id, String summary, String description, long timestamp,
+      long duration, double damage) {
     super(id, summary, description, timestamp, duration, damage);
   }
 
   /**
    * Show a specific notification for this event.
+   * 
    * @param geo
-   *           Object to be mutated.
+   *          Object to be mutated.
    */
   public void notification(Geometry geo) {
-    //TODO
+    // TODO
   }
 }
