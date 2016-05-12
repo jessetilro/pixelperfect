@@ -66,19 +66,19 @@ public final class RouteGenerator {
       Random rd = new Random();
       switch (rd.nextInt(nodes)) {
         case 0:
-          route.add(new AllyNode("sum", "descr"));
+          route.add(new AllyNode("sum0", "descr0"));
           break;
         case 1:
-          route.add(new AsteroidNode("sum", "descr"));
+          route.add(new AsteroidNode("sum1", "descr1"));
           break;
         case 2:
-          route.add(new EarthNode("sum", "descr"));
+          route.add(new EarthNode("sum2", "descr2"));
           break;
         case 3:
-          route.add(new EnemyNode("sum", "descr"));
+          route.add(new EnemyNode("sum3", "descr3"));
           break;
         case 4:
-          route.add(new MarsNode("sum", "descr"));
+          route.add(new MarsNode("sum4", "descr4"));
           break;
         default:
           break;

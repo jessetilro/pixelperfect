@@ -27,14 +27,6 @@ public class SpaceshipTest {
   }
 
   /**
-   * Test the getLog functionality by checking the existance of a log.
-   */
-  @Test
-  public void testGetLog() {
-
-  }
-
-  /**
    * Test the getHealth functionality by verifying full health.
    */
   @Test
