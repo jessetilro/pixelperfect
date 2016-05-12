@@ -8,8 +8,22 @@
 
   <repositories>
     <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>bintray-jmonkeyengine-org.jmonkeyengine</id>
+      <name>bintray</name>
+      <url>http://dl.bintray.com/jmonkeyengine/org.jmonkeyengine</url>
+    </repository>
+  
+    <repository>
         <id>jmonkeyengine-repository</id>
         <url>http://updates.jmonkeyengine.org/maven/</url>
+    </repository>
+    
+    <repository>
+        <id>jessetilro-repository</id>
+        <url>http://maven.jessetilro.nl/</url>
     </repository>
   </repositories>
 
@@ -59,6 +73,12 @@
     	<groupId>org.jmonkeyengine</groupId>
     	<artifactId>jme3-networking</artifactId>
     	<version>3.1.0-alpha5</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>nl.tudelft.pixelperfect</groupId>
+        <artifactId>jmonkeyvr</artifactId>
+        <version>1.0.0</version>
     </dependency>
   </dependencies>
 
