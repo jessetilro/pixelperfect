@@ -1,8 +1,14 @@
 package nl.tudelft.pixelperfect.client;
 
+import java.util.ArrayList;
+
 import com.jme3.network.HostedConnection;
 import com.jme3.network.Message;
 import com.jme3.network.MessageListener;
+
+import nl.tudelft.pixelperfect.Game;
+import nl.tudelft.pixelperfect.event.Event;
+import nl.tudelft.pixelperfect.event.EventLog;
 
 /**
  * Listener for the Game's server, which handle incoming messages.
@@ -13,7 +19,27 @@ import com.jme3.network.MessageListener;
  *
  */
 public class ServerListener implements MessageListener<HostedConnection> {
-
+  
+  private Game app;
+  
+  /**
+   * Sets the game it references to.
+   * 
+   * @param game the game.
+   */
+  public void setGame(Game game) {
+    app = game;
+  }
+  
+  /**
+   * Returns the game for reference purposes.
+   * 
+   * @return the game.
+   */
+  public Game getGame() {
+    return app;
+  }
+  
   /**
    * Functionality for server behavior upon recieving a message.
    * 
@@ -29,6 +55,12 @@ public class ServerListener implements MessageListener<HostedConnection> {
       HelloMessage helloMessage = (HelloMessage) message;
       System.out.println(
           "Server received '" + helloMessage.getSomething() + "' from client #" + source.getId());
+    } else if (message instanceof EventsMessage) {
+      EventsMessage eve = (EventsMessage) message;
+      ArrayList<Event> log = eve.getLog();
+      EventLog curr = (EventLog) app.getSpaceship().getLog();
+      curr.replace(log);
+      
     }
   }
 }

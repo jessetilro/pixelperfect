@@ -1,8 +1,11 @@
 package nl.tudelft.pixelperfect.event;
 
 import nl.tudelft.pixelperfect.Spaceship;
+import nl.tudelft.pixelperfect.client.EventsMessage;
 
 import java.util.ArrayList;
+
+import com.jme3.network.Server;
 
 /**
  * The captain's log of events, which should be subscribed to the event schedulers in the game.
@@ -13,6 +16,7 @@ import java.util.ArrayList;
  */
 public class EventLog implements EventListener {
 
+  private Server serve;
   private ArrayList<Event> events;
   private Spaceship spaceship;
 
@@ -65,6 +69,16 @@ public class EventLog implements EventListener {
   public synchronized void discard(Event event) {
     events.remove(event);
   }
+  
+  /**
+   * Replaces the Event Log.
+   * 
+   * @param log The log that will replace the old one.
+   */
+  public synchronized void replace(ArrayList<Event> log) {
+    events = log;
+    update();
+  }
 
   /**
    * Evaluate the log to check whether events have expired since the last update.
@@ -81,5 +95,17 @@ public class EventLog implements EventListener {
       event.applyDamage(spaceship);
       discard(event);
     }
+    serve.broadcast(new EventsMessage(events));
+  }
+
+  /**
+   * Sets the server for reference.
+   * 
+   * @param server The server to refer to.
+   * 
+   */
+  public void setServer(Server server) {
+    serve = server;
+    
   }
 }

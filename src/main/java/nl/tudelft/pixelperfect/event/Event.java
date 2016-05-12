@@ -1,5 +1,6 @@
 package nl.tudelft.pixelperfect.event;
 
+import com.jme3.scene.Geometry;
 import nl.tudelft.pixelperfect.Spaceship;
 
 /**
@@ -8,10 +9,10 @@ import nl.tudelft.pixelperfect.Spaceship;
  * @author David Alderliesten
  *
  */
-public class Event {
+public abstract class Event {
   private String summary;
   private String description;
-  private int type;
+  private int id;
   private long timestamp;
   private long duration;
   private double damage;
@@ -21,8 +22,8 @@ public class Event {
    * event/name, a description of the event, a timestamp to start, a duration, and a damage if the
    * event is failed.
    * 
-   * @param type
-   *          the desired type
+   * @param id
+   *          the unique id of the event
    * @param summary
    *          summary/name of the event
    * @param description
@@ -34,9 +35,9 @@ public class Event {
    * @param damage
    *          the damage done to the ship on even failure
    */
-  public Event(int type, String summary, String description, long timestamp, long duration,
+  public Event(int id, String summary, String description, long timestamp, long duration,
       double damage) {
-    this.type = type;
+    this.id = id;
     this.summary = summary;
     this.description = description;
     this.timestamp = timestamp;
@@ -45,12 +46,12 @@ public class Event {
   }
 
   /**
-   * Getter for the event type.
+   * Getter for the event id.
    * 
-   * @return type of event
+   * @return id of event
    */
-  public int getType() {
-    return this.type;
+  public int getId() {
+    return this.id;
   }
 
   /**
@@ -100,4 +101,12 @@ public class Event {
   public double getDamage() {
     return this.damage;
   }
+
+  /**
+   * Allow events to render notifications to the players.
+   *
+   * @param geo
+   *            Object to be mutated as notification.
+   */
+  public abstract void notification(Geometry geo);
 }
