@@ -154,19 +154,19 @@ public class Game extends VRApplication {
             moveBackwards = false;
           }
         } else if( name.equals("dumpImages") ) {
-          OpenVR.getCompositor().CompositorDumpImages.apply();
-        }else if(name.equals("left")){
-          if(keyPressed){
-            rotateLeft = true;
-          } else {
-            rotateLeft = false;
-          }
+            OpenVR.getCompositor().CompositorDumpImages.apply();
+        } else if(name.equals("left")){
+            if(keyPressed){
+              rotateLeft = true;
+            } else {
+              rotateLeft = false;
+            }
         } else if(name.equals("right")){
-          if(keyPressed){
-            rotateRight = true;
-          } else {
-            rotateRight = false;
-          }
+            if(keyPressed){
+              rotateRight = true;
+            } else {
+              rotateRight = false;
+            }
         }
       }
 
