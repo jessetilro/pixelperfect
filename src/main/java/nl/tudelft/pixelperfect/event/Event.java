@@ -1,6 +1,7 @@
 package nl.tudelft.pixelperfect.event;
 
 import com.jme3.scene.Geometry;
+
 import nl.tudelft.pixelperfect.Spaceship;
 
 /**
@@ -23,17 +24,17 @@ public abstract class Event {
    * event is failed.
    * 
    * @param id
-   *          the unique id of the event
+   *          The unique id of the event.
    * @param summary
-   *          summary/name of the event
+   *          Summary/name of the event.
    * @param description
-   *          a description of the event
+   *          A description of the event.
    * @param timestamp
-   *          the timestamp of start of the event
+   *          The timestamp of start of the event.
    * @param duration
    *          The time to live milliseconds until the event expires.
    * @param damage
-   *          the damage done to the ship on even failure
+   *          The damage done to the ship on even failure.
    */
   public Event(int id, String summary, String description, long timestamp, long duration,
       double damage) {
@@ -48,7 +49,7 @@ public abstract class Event {
   /**
    * Getter for the event id.
    * 
-   * @return id of event
+   * @return The id of event.
    */
   public int getId() {
     return this.id;
@@ -57,7 +58,7 @@ public abstract class Event {
   /**
    * Getter for the event summary/name.
    * 
-   * @return summary of event/name
+   * @return Summary/name of the event.
    */
   public String getSummary() {
     return this.summary;
@@ -66,7 +67,7 @@ public abstract class Event {
   /**
    * Get the description of the event.
    * 
-   * @return description of event
+   * @return Description of event.
    */
   public String getDescription() {
     return this.description;
@@ -94,9 +95,9 @@ public abstract class Event {
   }
 
   /**
-   * Get the damage done to the ship in the case of event failure.
+   * Get the damage that will be done to the ship in the case of event failure.
    * 
-   * @return event damage done to ship
+   * @return The event's damage value.
    */
   public double getDamage() {
     return this.damage;
@@ -106,7 +107,7 @@ public abstract class Event {
    * Allow events to render notifications to the players.
    *
    * @param geo
-   *            Object to be mutated as notification.
+   *          Object to be mutated as notification.
    */
   public abstract void notification(Geometry geo);
 }
