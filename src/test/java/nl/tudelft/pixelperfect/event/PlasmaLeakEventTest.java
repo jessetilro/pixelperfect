@@ -3,6 +3,7 @@ package nl.tudelft.pixelperfect.event;
 /**
  * Created by woute on 5/10/2016.
  */
+@SuppressWarnings("PMD")
 public class PlasmaLeakEventTest extends EventTest {
 
   /**
