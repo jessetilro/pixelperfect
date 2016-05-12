@@ -19,6 +19,7 @@ import com.jme3.network.Server;
 import com.jme3.network.serializing.Serializer;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 import jmevr.input.OpenVR;
@@ -80,9 +81,10 @@ public class Game extends VRApplication {
     initInputs();
     createMap();
 
-//    observer.setLocalTranslation(new Vector3f(0.0f, 0.0f, 0.0f));
-//    VRApplication.setObserver(observer);
-//    rootNode.attachChild(observer);
+    observer = new Node("observer");
+    observer.setLocalTranslation(new Vector3f(0.0f, 0.0f, 0.0f));
+    VRApplication.setObserver(observer);
+    rootNode.attachChild(observer);
 
     // Spatial map = assetManager.loadModel("assets/Models/cockpit1/cockpit1.j3o");
     try {
@@ -167,7 +169,7 @@ public class Game extends VRApplication {
           }
         }
       }
-      
+
     };
     inputManager.addListener(acl, "forward");
     inputManager.addListener(acl, "back");
@@ -281,6 +283,19 @@ public class Game extends VRApplication {
    */
   @Override
   public void simpleUpdate(float tpf) {
+    if(moveForward){
+      observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(tpf*8f));
+    }
+    if(moveBackwards){
+      observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(-tpf*8f));
+    }
+    if(rotateLeft){
+      observer.rotate(0, 0.75f*tpf, 0);
+    }
+    if(rotateRight){
+      observer.rotate(0, -0.75f*tpf, 0);
+    }
+
     scheduler.update(tpf);
     spaceship.update(tpf);
 
