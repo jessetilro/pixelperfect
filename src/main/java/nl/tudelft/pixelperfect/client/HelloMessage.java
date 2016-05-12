@@ -16,7 +16,7 @@ public class HelloMessage extends AbstractMessage {
   private String hello;
 
   /**
-   * The constructor of the hello message.
+   * Constructs a new HelloMessage instance.
    * 
    */
   public HelloMessage() {
@@ -26,16 +26,16 @@ public class HelloMessage extends AbstractMessage {
    * Changes the hello message.
    * 
    * @param passedValue
-   *          the string that will be the new hello message.
+   *          The string that will be the new hello message.
    */
   public HelloMessage(String passedValue) {
     hello = passedValue;
   }
 
   /**
-   * Returns the helo message.
+   * Returns the hello message.
    * 
-   * @return the message
+   * @return The message.
    */
   public String getSomething() {
     return hello;

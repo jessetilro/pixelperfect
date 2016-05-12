@@ -13,16 +13,17 @@ public class AsteroidNode extends RouteNode {
    * The constructor for the AsteroidNode.
    * 
    * @param summary
-   *          a summary of the AsteroidNode.
+   *          A summary of the AsteroidNode.
    * @param description
-   *          a description of the AsteroidNode.
+   *          A description of the AsteroidNode.
    */
   public AsteroidNode(String summary, String description) {
     super(summary, description);
   }
-  
+
   /**
    * String representation of an AsteroidNode.
+   * 
    * @return A String.
    */
   public String toString() {

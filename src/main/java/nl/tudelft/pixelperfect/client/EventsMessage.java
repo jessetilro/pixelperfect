@@ -8,18 +8,18 @@ import nl.tudelft.pixelperfect.event.Event;
 import java.util.ArrayList;
 
 /**
- * Massage type that sends the event log.
+ * Message type that sends the event log.
  * 
- * @author Dmitry
+ * @author Dmitry Malarev
  *
  */
 @Serializable
 public class EventsMessage extends AbstractMessage {
-  
+
   private ArrayList<Event> eve;
 
   /**
-   * The constructor of the events message.
+   * Constructs a new EventsMessage instance.
    * 
    */
   public EventsMessage() {
@@ -29,7 +29,7 @@ public class EventsMessage extends AbstractMessage {
    * Changes the log.
    * 
    * @param passedLog
-   *          the event list that will be the new log message.
+   *          The list of events that will be the new log message.
    */
   public EventsMessage(ArrayList<Event> passedLog) {
     eve = passedLog;
@@ -38,7 +38,7 @@ public class EventsMessage extends AbstractMessage {
   /**
    * Returns the log.
    * 
-   * @return the log.
+   * @return The log.
    */
   public ArrayList<Event> getLog() {
     return eve;

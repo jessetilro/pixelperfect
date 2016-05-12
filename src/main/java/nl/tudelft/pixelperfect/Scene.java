@@ -11,19 +11,22 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
 
 /**
- * Created by woute on 5/12/2016.
- *
- * <p>Class for drawing objects in the game.
+ * Class for drawing objects in the game.
+ * 
+ * @author Wouter Zirkzee
+ * 
  */
 public class Scene {
 
   private Game app;
   private String basicMat;
   private String color = "Color";
+
   /**
    * Constructor for Scene.
+   * 
    * @param game
-   *            game which scene is to be build
+   *          The game for which a Scene is built.
    */
   public Scene(Game game) {
     app = game;
@@ -102,7 +105,7 @@ public class Scene {
   }
 
   /**
-   * Render placeholder for timer that will be displayed.
+   * Render placeholder for the timer that will be displayed.
    */
   private void drawTimer() {
     app.getGuiNode().detachAllChildren();

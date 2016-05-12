@@ -13,16 +13,17 @@ public class EnemyNode extends RouteNode {
    * The constructor for the EnemyNode.
    * 
    * @param summary
-   *          a summary of the EnemyNode.
+   *          A summary of the EnemyNode.
    * @param description
-   *          a description of the EnemyNode.
+   *          A description of the EnemyNode.
    */
   public EnemyNode(String summary, String description) {
     super(summary, description);
   }
-  
+
   /**
    * String representation of an EnemyNode.
+   * 
    * @return A String.
    */
   public String toString() {
