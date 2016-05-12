@@ -7,6 +7,7 @@ package nl.tudelft.pixelperfect.player;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD")
 public class CrewPlayerTest extends PlayerTest {
 
   /**

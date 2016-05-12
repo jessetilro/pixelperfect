@@ -2,7 +2,6 @@ package nl.tudelft.pixelperfect.player;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -29,6 +28,7 @@ public abstract class PlayerTest {
   /**
    * Factory method for testing.
    * 
+   * @param name , the name of the Player.
    * @return The object to be tested.
    */
   public abstract Player createPlayer(String name);
@@ -47,7 +47,7 @@ public abstract class PlayerTest {
   @Test
   public void testEqualsTrue() {
     Player otherTest = createPlayer("Lorem Ipsum");
-    assertTrue(testObject.equals(otherTest));
+    assertEquals(testObject, otherTest);
   }
 
   /**

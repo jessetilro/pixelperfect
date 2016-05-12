@@ -52,8 +52,7 @@ public final class RouteGenerator {
    * number based of the number of nodes wanted. This number will represent which node to be
    * selected from the available nodes.
    * 
-   * <p>
-   * After creating a list of nodes (which must be divisible by 2) another iteration will run on
+   * <p>After creating a list of nodes (which must be divisible by 2) another iteration will run on
    * making a list of Tuples. This is to make the two-choice of the captain in the game easier.
    * 
    * @return A new Route
@@ -66,23 +65,23 @@ public final class RouteGenerator {
     while (it < routeLength) {
       Random rd = new Random();
       switch (rd.nextInt(nodes)) {
-      case 0:
-        route.add(new AllyNode("sum", "descr"));
-        break;
-      case 1:
-        route.add(new AsteroidNode("sum", "descr"));
-        break;
-      case 2:
-        route.add(new EarthNode("sum", "descr"));
-        break;
-      case 3:
-        route.add(new EnemyNode("sum", "descr"));
-        break;
-      case 4:
-        route.add(new MarsNode("sum", "descr"));
-        break;
-      default:
-        break;
+        case 0:
+          route.add(new AllyNode("sum0", "descr0"));
+          break;
+        case 1:
+          route.add(new AsteroidNode("sum1", "descr1"));
+          break;
+        case 2:
+          route.add(new EarthNode("sum2", "descr2"));
+          break;
+        case 3:
+          route.add(new EnemyNode("sum3", "descr3"));
+          break;
+        case 4:
+          route.add(new MarsNode("sum4", "descr4"));
+          break;
+        default:
+          break;
       }
       it++;
     }
