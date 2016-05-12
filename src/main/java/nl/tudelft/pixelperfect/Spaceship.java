@@ -66,9 +66,9 @@ public class Spaceship {
   }
 
   /**
-   * A getter for the ship's health.
+   * Get the ship's health.
    * 
-   * @return the ship's health
+   * @return The ship's current health value.
    */
   public double getHealth() {
     return this.health;
@@ -77,7 +77,7 @@ public class Spaceship {
   /**
    * Checks if the ship has 0 health.
    * 
-   * @return a boolean that determines whether the ship is dead or not
+   * @return A boolean stating whether the ship is dead or not.
    */
   public boolean isDead() {
     return (this.health == 0);
@@ -105,7 +105,7 @@ public class Spaceship {
     }
     log.update();
   }
-  
+
   /**
    * Update the crew in the spaceship based on the people connected.
    * 

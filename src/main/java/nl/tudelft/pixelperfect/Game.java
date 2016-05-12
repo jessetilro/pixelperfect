@@ -73,11 +73,11 @@ public class Game extends SimpleApplication {
 
     scheduler.subscribe(spaceship.getLog());
   }
-  
+
   /**
-   * Shows the spaceship for reference purposes.
+   * Get the spaceship for reference purposes.
    * 
-   * @return the spaceship.
+   * @return The spaceship.
    */
   public Spaceship getSpaceship() {
     return spaceship;
