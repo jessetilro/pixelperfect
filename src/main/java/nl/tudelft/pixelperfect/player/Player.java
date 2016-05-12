@@ -28,13 +28,14 @@ public abstract class Player {
   public String getName() {
     return this.name;
   }
-  
+
   /**
    * Compares two Players to see if they're the same.
    * 
-   * @param that The object to compare.
+   * @param that
+   *          The object to compare.
    * 
-   *@return whether it's the same or not.
+   * @return whether it's the same or not.
    */
   @Override
   public boolean equals(Object that) {
