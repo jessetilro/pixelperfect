@@ -28,8 +28,8 @@ public class EventFactory {
    * @return an Event.
    */
   public Event randomEvent() {
-    int x = random.nextInt(4);
-    return create(x);
+    int rand = random.nextInt(4);
+    return create(rand);
   }
 
   /**
@@ -37,11 +37,12 @@ public class EventFactory {
    *
    * @param x
    *          Defines which event is to be created.
+   * 
    * @return an Event.
    */
-  public Event create(int x) {
+  public Event create(int ind) {
     Event tbr;
-    switch (x) {
+    switch (ind) {
     default:
       tbr = null;
       break;

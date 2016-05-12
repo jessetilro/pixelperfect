@@ -16,8 +16,8 @@ import org.junit.Test;
  *
  */
 public class EventLogTest extends EventListenerTest {
-  EventLog eventLogToTest;
-  Spaceship spaceshipToTest;
+  private EventLog eventLogToTest;
+  private Spaceship spaceshipToTest;
 
   /**
    * Setting up the class for the EventLogTest.
@@ -33,7 +33,7 @@ public class EventLogTest extends EventListenerTest {
    */
   @Test
   public void testGetEventsEmpty() {
-    assertTrue(eventLogToTest.getEvents().isEmpty() == true);
+    assertTrue(eventLogToTest.getEvents().isEmpty());
   }
 
   /**

@@ -1,11 +1,11 @@
 package nl.tudelft.pixelperfect.client;
 
-import java.util.ArrayList;
-
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
 
 import nl.tudelft.pixelperfect.event.Event;
+
+import java.util.ArrayList;
 
 /**
  * Message type that sends the event log.

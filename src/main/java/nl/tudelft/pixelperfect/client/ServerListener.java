@@ -1,7 +1,5 @@
 package nl.tudelft.pixelperfect.client;
 
-import java.util.ArrayList;
-
 import com.jme3.network.HostedConnection;
 import com.jme3.network.Message;
 import com.jme3.network.MessageListener;
@@ -9,6 +7,8 @@ import com.jme3.network.MessageListener;
 import nl.tudelft.pixelperfect.Game;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventLog;
+
+import java.util.ArrayList;
 
 /**
  * Listener for the Game's server, which handles incoming messages.
