@@ -67,7 +67,6 @@ public class Game extends SimpleApplication {
       except.printStackTrace();
     }
     spaceship = new Spaceship();
-    spaceship.getLog().setServer(server);
     scheduler = new EventScheduler(0.5);
 
     scheduler.subscribe(spaceship.getLog());

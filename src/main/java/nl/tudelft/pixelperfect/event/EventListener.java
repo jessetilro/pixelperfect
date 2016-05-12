@@ -1,7 +1,5 @@
 package nl.tudelft.pixelperfect.event;
 
-import com.jme3.network.Server;
-
 /**
  * Interface for classes that can subscribe themselves to an EventScheduler.
  * 
@@ -30,12 +28,4 @@ public interface EventListener {
    * Update the event listener.
    */
   void update();
-  
-  /**
-   * Sets the server for reference.
-   * 
-   * @param server The server to refer to.
-   * 
-   */
-  void setServer(Server server);
 }
