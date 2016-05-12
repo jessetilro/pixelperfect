@@ -16,25 +16,26 @@ import nl.tudelft.pixelperfect.Game;
 public class ConnectListener implements ConnectionListener {
 
   private Game app;
-  
+
   /**
-   * Sets the game it references to.
+   * Sets the game whose server to listen for.
    * 
-   * @param game the game.
+   * @param game
+   *          The game.
    */
   public void setGame(Game game) {
     app = game;
   }
-  
+
   /**
    * Returns the game for reference purposes.
    * 
-   * @return the game.
+   * @return The game.
    */
   public Game getGame() {
     return app;
   }
-  
+
   /**
    * Functionality that occurs when a client is added to the server.
    * 
