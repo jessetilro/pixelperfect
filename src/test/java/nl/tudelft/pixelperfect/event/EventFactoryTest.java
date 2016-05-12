@@ -1,9 +1,9 @@
 package nl.tudelft.pixelperfect.event;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by woute on 5/10/2016.
