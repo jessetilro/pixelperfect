@@ -1,6 +1,5 @@
 package nl.tudelft.pixelperfect.event;
 
-
 import nl.tudelft.pixelperfect.Spaceship;
 
 import java.util.ArrayList;
@@ -66,11 +65,12 @@ public class EventLog implements EventListener {
   public synchronized void discard(Event event) {
     events.remove(event);
   }
-  
+
   /**
    * Replaces the Event Log.
    * 
-   * @param log The log that will replace the old one.
+   * @param log
+   *          The log that will replace the old one.
    */
   public synchronized void replace(ArrayList<Event> log) {
     events = log;
