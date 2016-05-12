@@ -1,7 +1,10 @@
 package nl.tudelft.pixelperfect.event;
 
 /**
- * Created by woute on 5/10/2016.
+ * Tesing the FireEvent class.
+ * 
+ * @author Wouter Zirkzee
+ * @author Floris Doolaard
  */
 @SuppressWarnings("PMD")
 public class FireEventTest extends EventTest {

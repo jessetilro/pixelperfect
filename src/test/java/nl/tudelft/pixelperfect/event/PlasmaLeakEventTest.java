@@ -1,7 +1,10 @@
 package nl.tudelft.pixelperfect.event;
 
 /**
- * Created by woute on 5/10/2016.
+ * Tesing the PlasmaLeakEvent class.
+ * 
+ * @author Wouter Zirkzee
+ * @author Floris Doolaard
  */
 @SuppressWarnings("PMD")
 public class PlasmaLeakEventTest extends EventTest {
