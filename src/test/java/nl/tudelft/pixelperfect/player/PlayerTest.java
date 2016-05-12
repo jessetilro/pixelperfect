@@ -11,6 +11,7 @@ import org.junit.Test;
  * Class for the automated testing of the Player class.
  * 
  * @author David Alderliesten
+ * @author Jesse Tilro
  *
  */
 public abstract class PlayerTest {
@@ -33,7 +34,7 @@ public abstract class PlayerTest {
   public abstract Player createPlayer(String name);
 
   /**
-   * Verify the behavior of the getName method, which is inherited from the player class..
+   * When calling getName the correct player name must be returned.
    */
   @Test
   public void testGetName() {
