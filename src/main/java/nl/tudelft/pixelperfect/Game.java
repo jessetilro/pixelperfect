@@ -3,7 +3,12 @@ package nl.tudelft.pixelperfect;
 import java.io.IOException;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
+import com.jme3.input.InputManager;
+import com.jme3.input.KeyInput;
+import com.jme3.input.controls.ActionListener;
+import com.jme3.input.controls.KeyTrigger;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
@@ -12,10 +17,14 @@ import com.jme3.math.Vector3f;
 import com.jme3.network.Network;
 import com.jme3.network.Server;
 import com.jme3.network.serializing.Serializer;
+import com.jme3.post.FilterPostProcessor;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
-
+import jmevr.input.OpenVR;
 import jmevr.app.VRApplication;
+import jmevr.post.CartoonSSAO;
+import jmevr.util.VRGuiManager;
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.EventsMessage;
 import nl.tudelft.pixelperfect.client.HelloMessage;
@@ -37,6 +46,8 @@ public class Game extends VRApplication {
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private Server server;
+  Spatial observer;
+  boolean moveForward, moveBackwards, rotateLeft, rotateRight;
 
   /**
    * Main method bootstrapping the process by constructing this class and initializing a
@@ -47,6 +58,17 @@ public class Game extends VRApplication {
    */
   public static void main(String[] args) {
     Game app = new Game();
+    //VR SETTINGS
+    app.preconfigureVRApp(PRECONFIG_PARAMETER.USE_CUSTOM_DISTORTION, false); // use full screen distortion, maximum FOV, possibly quicker (not compatible with instancing)
+    app.preconfigureVRApp(PRECONFIG_PARAMETER.ENABLE_MIRROR_WINDOW, true); // runs faster when set to false, but will allow mirroring
+    app.preconfigureVRApp(PRECONFIG_PARAMETER.FORCE_VR_MODE, false); // render two eyes, regardless of SteamVR
+    app.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_CURVED_SURFACE, true);
+    app.preconfigureVRApp(PRECONFIG_PARAMETER.FLIP_EYES, false);
+    app.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_OVERDRAW, true); // show gui even if it is behind things
+    app.preconfigureVRApp(PRECONFIG_PARAMETER.INSTANCE_VR_RENDERING, true); // faster VR rendering, requires some vertex shader changes (see jmevr/shaders/Unshaded.j3md)
+    app.preconfigureVRApp(PRECONFIG_PARAMETER.NO_GUI, false);
+    app.preconfigureFrustrumNearFar(0.1f, 512f); // set frustum distances here before app starts
+    //app.preconfigureResolutionMultiplier(0.666f); // you can downsample for performance reasons
     app.start();
   }
 
@@ -55,9 +77,13 @@ public class Game extends VRApplication {
    */
   @Override
   public void simpleInitApp() {
-    // increase movement speed
-    //flyCam.setMoveSpeed(50);
+    initInputs();
     createMap();
+
+//    observer.setLocalTranslation(new Vector3f(0.0f, 0.0f, 0.0f));
+//    VRApplication.setObserver(observer);
+//    rootNode.attachChild(observer);
+
     // Spatial map = assetManager.loadModel("assets/Models/cockpit1/cockpit1.j3o");
     try {
       server = Network.createServer(6143);
@@ -79,6 +105,79 @@ public class Game extends VRApplication {
     scheduler = new EventScheduler(0.5);
 
     scheduler.subscribe(spaceship.getLog());
+  }
+
+  private void initInputs() {
+    InputManager inputManager = getInputManager();
+    inputManager.addMapping("toggle", new KeyTrigger(KeyInput.KEY_SPACE));
+    inputManager.addMapping("incShift", new KeyTrigger(KeyInput.KEY_Q));
+    inputManager.addMapping("decShift", new KeyTrigger(KeyInput.KEY_E));
+    inputManager.addMapping("forward", new KeyTrigger(KeyInput.KEY_W));
+    inputManager.addMapping("back", new KeyTrigger(KeyInput.KEY_S));
+    inputManager.addMapping("left", new KeyTrigger(KeyInput.KEY_A));
+    inputManager.addMapping("right", new KeyTrigger(KeyInput.KEY_D));
+    inputManager.addMapping("filter", new KeyTrigger(KeyInput.KEY_F));
+    inputManager.addMapping("dumpImages", new KeyTrigger(KeyInput.KEY_I));
+    ActionListener acl = new ActionListener() {
+
+      public void onAction(String name, boolean keyPressed, float tpf) {
+        if(name.equals("incShift") && keyPressed){
+          VRGuiManager.adjustGuiDistance(-0.1f);
+        }else if(name.equals("decShift") && keyPressed){
+          VRGuiManager.adjustGuiDistance(0.1f);
+        }else if(name.equals("filter") && keyPressed){
+          // adding filters in realtime
+          CartoonSSAO cartfilt = new CartoonSSAO();
+          FilterPostProcessor fpp = new FilterPostProcessor(getAssetManager());
+          fpp.addFilter(cartfilt);
+          getViewPort().addProcessor(fpp);
+          // filters added to main viewport during runtime,
+          // move them into VR processing
+          // (won't do anything if not in VR mode)
+          VRApplication.moveScreenProcessingToVR();
+        }
+        if( name.equals("toggle") ) {
+          VRGuiManager.positionGui();
+        }
+        if(name.equals("forward")){
+          if(keyPressed){
+            moveForward = true;
+          } else {
+            moveForward = false;
+          }
+        } else if(name.equals("back")){
+          if(keyPressed){
+            moveBackwards = true;
+          } else {
+            moveBackwards = false;
+          }
+        } else if( name.equals("dumpImages") ) {
+          OpenVR.getCompositor().CompositorDumpImages.apply();
+        }else if(name.equals("left")){
+          if(keyPressed){
+            rotateLeft = true;
+          } else {
+            rotateLeft = false;
+          }
+        } else if(name.equals("right")){
+          if(keyPressed){
+            rotateRight = true;
+          } else {
+            rotateRight = false;
+          }
+        }
+      }
+      
+    };
+    inputManager.addListener(acl, "forward");
+    inputManager.addListener(acl, "back");
+    inputManager.addListener(acl, "left");
+    inputManager.addListener(acl, "right");
+    inputManager.addListener(acl, "toggle");
+    inputManager.addListener(acl, "incShift");
+    inputManager.addListener(acl, "decShift");
+    inputManager.addListener(acl, "filter");
+    inputManager.addListener(acl, "dumpImages");
   }
 
   /**
@@ -156,16 +255,16 @@ public class Game extends VRApplication {
    * Render placeholder for timer that will be displayed.
    */
   public void drawTimer() {
-//    guiNode.detachAllChildren();
-//    guiFont = getAssetManager().loadFont("Interface/Fonts/Default.fnt");
-//    BitmapText timer = new BitmapText(guiFont, false);
-//    // timer.setSize(1);
-//    timer.setText("mm:ss");
-//    timer.setLocalTranslation(2.5f, 5, 3.9f);
-//    timer.setLocalScale(0.1f);
-//    timer.setLocalRotation(
-//        new Quaternion().fromAngleAxis(180 * FastMath.DEG_TO_RAD, new Vector3f(0, 1, 0)));
-//    rootNode.attachChild(timer);
+    guiNode.detachAllChildren();
+    BitmapFont guiFont = getAssetManager().loadFont("Interface/Fonts/Default.fnt");
+    BitmapText timer = new BitmapText(guiFont, false);
+    // timer.setSize(1);
+    timer.setText("mm:ss");
+    timer.setLocalTranslation(2.5f, 5, 3.9f);
+    timer.setLocalScale(0.1f);
+    timer.setLocalRotation(
+        new Quaternion().fromAngleAxis(180 * FastMath.DEG_TO_RAD, new Vector3f(0, 1, 0)));
+    rootNode.attachChild(timer);
   }
   
   /**
