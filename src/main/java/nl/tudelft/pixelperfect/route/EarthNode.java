@@ -12,16 +12,17 @@ public class EarthNode extends RouteNode {
    * The constructor for the EarthNode.
    * 
    * @param summary
-   *          a summary of the EarthNode.
+   *          A summary of the EarthNode.
    * @param description
-   *          a description of the EarthNode.
+   *          A description of the EarthNode.
    */
   public EarthNode(String summary, String description) {
     super(summary, description);
   }
-  
+
   /**
    * String representation of an EarthNode.
+   * 
    * @return A String.
    */
   public String toString() {

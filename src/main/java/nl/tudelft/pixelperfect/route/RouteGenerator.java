@@ -52,7 +52,8 @@ public final class RouteGenerator {
    * number based of the number of nodes wanted. This number will represent which node to be
    * selected from the available nodes.
    * 
-   * <p>After creating a list of nodes (which must be divisible by 2) another iteration will run on
+   * <p>
+   * After creating a list of nodes (which must be divisible by 2) another iteration will run on
    * making a list of Tuples. This is to make the two-choice of the captain in the game easier.
    * 
    * @return A new Route
@@ -65,23 +66,23 @@ public final class RouteGenerator {
     while (it < routeLength) {
       Random rd = new Random();
       switch (rd.nextInt(nodes)) {
-        case 0:
-          route.add(new AllyNode("sum", "descr"));
-          break;
-        case 1:
-          route.add(new AsteroidNode("sum", "descr"));
-          break;
-        case 2:
-          route.add(new EarthNode("sum", "descr"));
-          break;
-        case 3:
-          route.add(new EnemyNode("sum", "descr"));
-          break;
-        case 4:
-          route.add(new MarsNode("sum", "descr"));
-          break;
-        default:
-          break;
+      case 0:
+        route.add(new AllyNode("sum", "descr"));
+        break;
+      case 1:
+        route.add(new AsteroidNode("sum", "descr"));
+        break;
+      case 2:
+        route.add(new EarthNode("sum", "descr"));
+        break;
+      case 3:
+        route.add(new EnemyNode("sum", "descr"));
+        break;
+      case 4:
+        route.add(new MarsNode("sum", "descr"));
+        break;
+      default:
+        break;
       }
       it++;
     }
@@ -90,8 +91,11 @@ public final class RouteGenerator {
 
   /**
    * Creating a list of Tuples out of the list with RouteNodes.
-   * @param routeLength , the length of the input list.
-   * @param route , the input list.
+   * 
+   * @param routeLength
+   *          The length of the input list.
+   * @param route
+   *          The input list.
    * @return A new Route.
    */
   public Route createTuples(int routeLength, ArrayList<RouteNode> route) {
