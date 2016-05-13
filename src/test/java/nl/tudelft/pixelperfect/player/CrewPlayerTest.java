@@ -1,10 +1,5 @@
 package nl.tudelft.pixelperfect.player;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Before;
-import org.junit.Test;
-
 /**
  * Test Suite for the CrewPlayer class.
  * 
@@ -12,22 +7,15 @@ import org.junit.Test;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD")
 public class CrewPlayerTest extends PlayerTest {
-  private CrewPlayer toTest;
 
   /**
-   * Setting up the Event class for the test.
+   * Create a CrewPlayer instance as test object.
    */
-  @Before
-  public void initalise() {
-    toTest = new CrewPlayer("Lorem Ipsum");
+  @Override
+  public CrewPlayer createPlayer(String name) {
+    return new CrewPlayer(name);
   }
 
-  /**
-   * Verify the behavior of the getName method, which is inherited from the player class..
-   */
-  @Test
-  public void testGetName() {
-    assertEquals(toTest.getName(), "Lorem Ipsum");
-  }
 }

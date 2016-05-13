@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import nl.tudelft.pixelperfect.Spaceship;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,14 +24,6 @@ public class SpaceshipTest {
   @Before
   public void before() {
     ship = new Spaceship();
-  }
-
-  /**
-   * Test the getLog functionality by checking the existance of a log.
-   */
-  @Test
-  public void testGetLog() {
-
   }
 
   /**

@@ -22,16 +22,28 @@ public class CrewPlayer extends Player {
   /**
    * Compares two CrewPlayers to see if they're the same.
    * 
-   * @param that The object to compare.
+   * @param that
+   *          The object to compare.
    * 
-   *@return whether it's the same or not.
+   * @return whether it's the same or not.
    */
   @Override
   public boolean equals(Object that) {
     if (that instanceof CrewPlayer) {
       CrewPlayer other = (CrewPlayer) that;
-      return (other.getName() == this.getName());
+      return (other.getName().equals(this.getName()));
     }
     return false;
+  }
+  
+  /**
+   * Class not likely to be used in a hashMap/Table.
+   * 
+   * @return An unused number.
+   */
+  @Override
+  public int hashCode() {
+    assert false : "hashCode not designed";
+    return 42;
   }
 }

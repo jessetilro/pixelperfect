@@ -1,10 +1,5 @@
 package nl.tudelft.pixelperfect.player;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Before;
-import org.junit.Test;
-
 /**
  * Test Suite for the CaptainPlayer class.
  * 
@@ -12,22 +7,15 @@ import org.junit.Test;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD")
 public class CaptainPlayerTest extends PlayerTest {
-  private CaptainPlayer toTest;
 
   /**
-   * Setting up the Event class for the test.
+   * Create a CaptainPlayer instance as test object.
    */
-  @Before
-  public void initalise() {
-    toTest = new CaptainPlayer("Lorem Ipsum");
+  @Override
+  public CaptainPlayer createPlayer(String name) {
+    return new CaptainPlayer(name);
   }
 
-  /**
-   * Verify the behavior of the getName method, which is inherited from the player class..
-   */
-  @Test
-  public void testGetName() {
-    assertEquals(toTest.getName(), "Lorem Ipsum");
-  }
 }

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import nl.tudelft.pixelperfect.Spaceship;
-import nl.tudelft.pixelperfect.event.Event;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -75,13 +75,16 @@ public abstract class EventTest {
     assertTrue(toTest.isExpired(85));
   }
   
+  /**
+   * Testing damage done to the spaceship.
+   */
   @Test
   public void testApplyDamage() {
     Spaceship toUse = new Spaceship();
-    assertTrue(toUse.getHealth() == 100);
+    assertEquals(100.0, toUse.getHealth(), 0.0);
     
     toTest.applyDamage(toUse);
-    assertTrue(toUse.getHealth() == (100 - toTest.getDamage()));
+    assertEquals(100 - toTest.getDamage(), toUse.getHealth(), 0.0);
   }
 
   /**
@@ -89,6 +92,6 @@ public abstract class EventTest {
    */
   @Test
   public void testGetDamage() {
-    assertEquals(toTest.getDamage(), 99.42, 0);
+    assertEquals(99.42, toTest.getDamage(), 0.0);
   }
 }

@@ -42,9 +42,10 @@ public class Tuple {
   public RouteNode getRight() {
     return right;
   }
-  
+
   /**
    * The String representation of the Tuple.
+   * 
    * @return A String.
    */
   public String toString() {
