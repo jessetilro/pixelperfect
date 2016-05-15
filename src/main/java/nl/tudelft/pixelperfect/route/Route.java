@@ -51,7 +51,7 @@ public class Route {
    *          Current timestamp in milliseconds.
    * @return Boolean.
    */
-  public boolean isCompleted(long now) {
+  public boolean isCompleted(float now) {
     return (now >= timestamp + duration);
   }
 

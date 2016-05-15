@@ -1,5 +1,8 @@
 package nl.tudelft.pixelperfect;
 
+import java.awt.Color;
+import java.util.ArrayList;
+
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
 import com.jme3.material.Material;
@@ -43,7 +46,8 @@ public class Scene {
     drawDashboard();
     drawFloor();
     drawWalls();
-//    drawTimer();
+    drawTimer();
+    addButton(new Vector3f(0, 1, 7), 2, 2);
   }
 
   /**
@@ -111,16 +115,35 @@ public class Scene {
   /**
    * Render placeholder for the timer that will be displayed.
    */
-//  private void drawTimer() {
-//    app.getGuiNode().detachAllChildren();
-//    BitmapFont guiFont = app.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
-//    BitmapText timer = new BitmapText(guiFont, false);
-//    // timer.setSize(1);
-//    timer.setText("mm:ss");
-//    timer.setLocalTranslation(2.5f, 5, 3.9f);
-//    timer.setLocalScale(0.1f);
-//    timer.setLocalRotation(
-//        new Quaternion().fromAngleAxis(180 * FastMath.DEG_TO_RAD, new Vector3f(0, 1, 0)));
-//    app.getRootNode().attachChild(timer);
-//  }
+  private void drawTimer() {
+    app.getGuiNode().detachAllChildren();
+    BitmapFont guiFont = app.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
+    BitmapText timer = new BitmapText(guiFont, false);
+    // timer.setSize(1);
+    timer.setText("mm:ss");
+    timer.setLocalTranslation(2.5f, 5, 3.9f);
+    timer.setLocalScale(0.1f);
+    timer.setLocalRotation(
+        new Quaternion().fromAngleAxis(180 * FastMath.DEG_TO_RAD, new Vector3f(0, 1, 0)));
+    app.getRootNode().attachChild(timer);
+  }
+  
+  public ArrayList<Geometry> buttons = new ArrayList<Geometry>();
+  private void addButton(Vector3f location, int row, int col) {
+  	float dist = 1f;
+  	for (int x = 0; x < row; x++) {
+  		for (int z = 0; z < col; z++) {
+  			Box box = new Box(1f, 1f, 1f);
+  	    Geometry but = new Geometry("Box", box);
+  	    but.setLocalScale(0.2f);
+  	  	Material buttonMat = new Material(app.getAssetManager(), basicMat);
+  	  	buttonMat.setColor("Color", ColorRGBA.Red);
+  	    but.setMaterial(buttonMat);
+  	    but.setLocalTranslation(
+  	    		new Vector3f(location.getX() + x * dist, location.getY(), location.getZ() + z * dist));
+  	    app.getRootNode().attachChild(but);
+  	    buttons.add(but);
+  		}
+  	}
+  }
 }

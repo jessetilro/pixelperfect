@@ -6,6 +6,7 @@ import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.material.Material;
+import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.network.Network;
@@ -195,12 +196,25 @@ public class Game extends VRApplication {
   public Spaceship getSpaceship() {
     return spaceship;
   }
+  
+  public void blinkingObject() {
+  	if (((int) spaceship.getTimer() % 2) == 0) {
+  		Material buttonMat2 = new Material(getAssetManager(), "jmevr/shaders/Unshaded.j3md");
+    	buttonMat2.setColor("Color", ColorRGBA.Black);
+    	scene.buttons.get(2).setMaterial(buttonMat2);
+  	} else {
+  		Material buttonMat2 = new Material(getAssetManager(), "jmevr/shaders/Unshaded.j3md");
+    	buttonMat2.setColor("Color", ColorRGBA.Red);
+    	scene.buttons.get(2).setMaterial(buttonMat2);
+  	}
+  }
 
   /**
    * Main update loop for the game.
    */
   @Override
   public void simpleUpdate(float tpf) {
+  	blinkingObject();
     if (moveForward) {
       observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(tpf * 8f));
     }
