@@ -101,7 +101,6 @@ public class Game extends VRApplication {
     rootNode.attachChild(observer);
 
     spaceship = new Spaceship();
-    // TODO cant find set server?
 //    spaceship.getLog().setServer(server);
     scheduler = new EventScheduler(0.5);
     scheduler.subscribe(spaceship.getLog());
