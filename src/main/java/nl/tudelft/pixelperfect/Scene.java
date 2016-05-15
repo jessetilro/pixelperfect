@@ -6,9 +6,12 @@ import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
+
+import jmevr.input.VRBounds;
 
 /**
  * Class for drawing objects in the game.
@@ -30,7 +33,7 @@ public class Scene {
    */
   public Scene(Game game) {
     app = game;
-    basicMat = "Common/MatDefs/Misc/Unshaded.j3md";
+    basicMat = "jmevr/shaders/Unshaded.j3md";
   }
 
   /**
@@ -40,19 +43,19 @@ public class Scene {
     drawDashboard();
     drawFloor();
     drawWalls();
-    drawTimer();
+//    drawTimer();
   }
 
   /**
    * Render the dashboard of the scene.
    */
   private void drawDashboard() {
-    Box dashboard = new Box(4, 1f, 1);
+    Box dashboard = new Box(8, 1f, 1);
     Geometry geom = new Geometry("Box", dashboard);
     Material mat = new Material(app.getAssetManager(), basicMat);
     mat.setColor(color, ColorRGBA.Blue);
     geom.setMaterial(mat);
-    geom.setLocalTranslation(new Vector3f(0, 0, -3));
+    geom.setLocalTranslation(new Vector3f(0, 0, 7));
     app.getRootNode().attachChild(geom);
   }
 
@@ -61,13 +64,14 @@ public class Scene {
    */
   private void drawFloor() {
     // green floor
-    Box floor = new Box(4, 0.01f, 4);
+    Box floor = new Box(8, 0.01f, 8);
     Geometry g2 = new Geometry("Floor", floor);
     Material mat2 = new Material(app.getAssetManager(), basicMat);
     mat2.setColor(color, ColorRGBA.Green);
     g2.setMaterial(mat2);
     g2.setLocalTranslation(0, -1, 0);
     app.getRootNode().attachChild(g2);
+    
   }
 
   /**
@@ -75,48 +79,48 @@ public class Scene {
    */
   private void drawWalls() {
     // walls
-    Box wallLeft = new Box(0.01f, 4, 4);
+    Box wallLeft = new Box(0.01f, 8, 8);
     Geometry l1 = new Geometry("leftwall", wallLeft);
     Material mat3 = new Material(app.getAssetManager(), basicMat);
     mat3.setColor(color, ColorRGBA.Orange);
     l1.setMaterial(mat3);
-    l1.setLocalTranslation(new Vector3f(-4, 3, 0));
+    l1.setLocalTranslation(new Vector3f(-8, 7, 0));
     app.getRootNode().attachChild(l1);
 
-    Box wallRight = new Box(0.01f, 4, 4);
+    Box wallRight = new Box(0.01f, 8, 8);
     Geometry l2 = new Geometry("rightwall", wallRight);
     l2.setMaterial(mat3);
-    l2.setLocalTranslation(new Vector3f(4, 3, 0));
+    l2.setLocalTranslation(new Vector3f(8, 7, 0));
     app.getRootNode().attachChild(l2);
 
-    Box wallFront = new Box(4, 4, 0.01f);
+    Box wallFront = new Box(8, 8, 0.01f);
     Geometry l3 = new Geometry("frontwall", wallFront);
     Material mat4 = new Material(app.getAssetManager(), basicMat);
     mat4.setColor(color, ColorRGBA.Yellow);
     l3.setMaterial(mat4);
-    l3.setLocalTranslation(new Vector3f(0, 3, -4));
+    l3.setLocalTranslation(new Vector3f(0, 7, -8));
     app.getRootNode().attachChild(l3);
 
-    Box wallBack = new Box(4, 4, 0.01f);
+    Box wallBack = new Box(8, 8, 0.01f);
     Geometry l4 = new Geometry("backwall", wallBack);
     l4.setMaterial(mat4);
-    l4.setLocalTranslation(new Vector3f(0, 3, 4));
+    l4.setLocalTranslation(new Vector3f(0, 7, 8));
     app.getRootNode().attachChild(l4);
   }
 
   /**
    * Render placeholder for the timer that will be displayed.
    */
-  private void drawTimer() {
-    app.getGuiNode().detachAllChildren();
-    BitmapFont guiFont = app.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
-    BitmapText timer = new BitmapText(guiFont, false);
-    // timer.setSize(1);
-    timer.setText("mm:ss");
-    timer.setLocalTranslation(2.5f, 5, 3.9f);
-    timer.setLocalScale(0.1f);
-    timer.setLocalRotation(
-        new Quaternion().fromAngleAxis(180 * FastMath.DEG_TO_RAD, new Vector3f(0, 1, 0)));
-    app.getRootNode().attachChild(timer);
-  }
+//  private void drawTimer() {
+//    app.getGuiNode().detachAllChildren();
+//    BitmapFont guiFont = app.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
+//    BitmapText timer = new BitmapText(guiFont, false);
+//    // timer.setSize(1);
+//    timer.setText("mm:ss");
+//    timer.setLocalTranslation(2.5f, 5, 3.9f);
+//    timer.setLocalScale(0.1f);
+//    timer.setLocalRotation(
+//        new Quaternion().fromAngleAxis(180 * FastMath.DEG_TO_RAD, new Vector3f(0, 1, 0)));
+//    app.getRootNode().attachChild(timer);
+//  }
 }

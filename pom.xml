@@ -29,65 +29,78 @@
       <version>4.12</version>
     </dependency>
 
-    <!--<dependency>-->
-      <!--<groupId>org.mockito</groupId>-->
-      <!--<artifactId>mockito-core</artifactId>-->
-      <!--<version>2.0.47-beta</version>-->
-    <!--</dependency>-->
-
-    <!--<dependency>-->
-      <!--<groupId>org.jmonkeyengine</groupId>-->
-      <!--<artifactId>jme3-core</artifactId>-->
-      <!--<version>3.1.0-alpha5</version>-->
-    <!--</dependency>-->
-
-    <!--<dependency>-->
-      <!--<groupId>org.jmonkeyengine</groupId>-->
-      <!--<artifactId>jme3-desktop</artifactId>-->
-      <!--<version>3.1.0-alpha5</version>-->
-    <!--</dependency>-->
-
-    <!--<dependency>-->
-      <!--<groupId>org.jmonkeyengine</groupId>-->
-      <!--<artifactId>jme3-jogg</artifactId>-->
-      <!--<version>3.1.0-alpha5</version>-->
-    <!--</dependency>-->
-
-    <!--<dependency>-->
-      <!--<groupId>org.jmonkeyengine</groupId>-->
-      <!--<artifactId>jme3-lwjgl3</artifactId>-->
-      <!--<version>3.1.0-beta1</version>-->
-    <!--</dependency>-->
-
-    <!--<dependency>-->
-      <!--<groupId>org.jmonkeyengine</groupId>-->
-      <!--<artifactId>jme3-plugins</artifactId>-->
-      <!--<version>3.1.0-alpha5</version>-->
-    <!--</dependency>-->
-
-    <!--<dependency>-->
-      <!--<groupId>org.jmonkeyengine</groupId>-->
-      <!--<artifactId>jme3-blender</artifactId>-->
-      <!--<version>3.1.0-alpha5</version>-->
-    <!--</dependency>-->
-
     <dependency>
-    	<groupId>org.jmonkeyengine</groupId>
-    	<artifactId>jme3-networking</artifactId>
-    	<version>3.1.0-alpha5</version>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>2.0.47-beta</version>
     </dependency>
 
-    <!--<dependency>-->
-      <!--<groupId>net.java.dev.jna</groupId>-->
-      <!--<artifactId>jna</artifactId>-->
-      <!--<version>4.2.2</version>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>org.jmonkeyengine</groupId>
+      <artifactId>jme3-blender</artifactId>
+      <version>3.1.0-beta1</version>
+    </dependency>
 
-    <!--<dependency>-->
-      <!--<groupId>nl.tudelft.pixelperfect</groupId>-->
-      <!--<artifactId>jmonkeyvr</artifactId>-->
-      <!--<version>1.0.0</version>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>org.jmonkeyengine</groupId>
+      <artifactId>jme3-core</artifactId>
+      <version>3.1.0-beta1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jmonkeyengine</groupId>
+      <artifactId>jme3-desktop</artifactId>
+      <version>3.1.0-beta1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jmonkeyengine</groupId>
+      <artifactId>jme3-effects</artifactId>
+      <version>3.1.0-beta1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jmonkeyengine</groupId>
+      <artifactId>jme3-jogg</artifactId>
+      <version>3.1.0-beta1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jmonkeyengine</groupId>
+      <artifactId>jme3-lwjgl3</artifactId>
+      <version>3.1.0-beta1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jmonkeyengine</groupId>
+      <artifactId>jme3-plugins</artifactId>
+      <version>3.1.0-beta1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>nl.tudelft.pixelperfect</groupId>
+      <artifactId>jmonkeyvr</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna</artifactId>
+      <version>4.2.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>de.jarnbjo</groupId>
+      <artifactId>j-ogg-all</artifactId>
+      <version>1.0.0</version>
+      <type>pom</type>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jmonkeyengine</groupId>
+      <artifactId>jme3-networking</artifactId>
+      <version>3.1.0-beta1</version>
+    </dependency>
 
   </dependencies>
 

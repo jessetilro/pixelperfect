@@ -1,16 +1,12 @@
 package nl.tudelft.pixelperfect;
 
 import java.io.IOException;
-import com.jme3.font.BitmapFont;
-import com.jme3.font.BitmapText;
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
-import com.jme3.math.FastMath;
-import com.jme3.math.Quaternion;
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.network.Network;
 import com.jme3.network.Server;
@@ -20,21 +16,16 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
+
 import jmevr.input.OpenVR;
+import jmevr.input.VRBounds;
 import jmevr.app.VRApplication;
 import jmevr.post.CartoonSSAO;
 import jmevr.util.VRGuiManager;
-import com.jme3.app.SimpleApplication;
-import com.jme3.network.Network;
-import com.jme3.network.Server;
-import com.jme3.network.serializing.Serializer;
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.HelloMessage;
 import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.event.EventScheduler;
-
-import java.io.IOException;
-
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
  * 
@@ -88,17 +79,17 @@ public class Game extends VRApplication {
    */
   @Override
   public void simpleInitApp() {
-    initInputs();
+	  observer = new Node("observer");
+	  observer.setLocalTranslation(new Vector3f(0.0f, 2.0f, 0.0f));
+	  VRApplication.setObserver(observer);
+	  rootNode.attachChild(observer);
 
+    initInputs();
+    
     scene = new Scene(this);
     scene.createMap();
 
     initNetwork();
-
-    observer = new Node("observer");
-    observer.setLocalTranslation(new Vector3f(0.0f, 0.0f, 0.0f));
-    VRApplication.setObserver(observer);
-    rootNode.attachChild(observer);
 
     spaceship = new Spaceship();
 //    spaceship.getLog().setServer(server);
@@ -107,9 +98,6 @@ public class Game extends VRApplication {
   }
 
   private void initNetwork() {
-
-    // increase movement speed
-    //flyCam.setMoveSpeed(50);
     try {
       server = Network.createServer(6143);
       Serializer.registerClass(HelloMessage.class);
@@ -125,7 +113,6 @@ public class Game extends VRApplication {
       except.printStackTrace();
     }
   }
-
 
   private void initInputs() {
     InputManager inputManager = getInputManager();
