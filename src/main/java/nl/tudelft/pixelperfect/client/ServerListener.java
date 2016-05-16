@@ -58,7 +58,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
           "Server received '" + helloMessage.getSomething() + "' from client #" + source.getId());
     } else if (message instanceof EventCompletedMessage) {
       EventCompletedMessage eve = (EventCompletedMessage) message;
-      System.out.println("Received a completed event: " + eve.getCompletedEvent().getSummary());
+      System.out.println("Received a completed event: " + eve.getCompletedEvent());
     }
   }
 }
