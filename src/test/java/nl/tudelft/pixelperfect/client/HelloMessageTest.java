@@ -17,6 +17,9 @@ public class HelloMessageTest {
 
   private HelloMessage object;
 
+  /**
+   * Set up a test object.
+   */
   @Before
   public void init() {
     object = new HelloMessage("Hello World!");
