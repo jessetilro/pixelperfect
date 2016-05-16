@@ -1,6 +1,5 @@
 package nl.tudelft.pixelperfect.event;
 
-import com.jme3.scene.Geometry;
 
 import nl.tudelft.pixelperfect.Scene;
 import nl.tudelft.pixelperfect.Spaceship;

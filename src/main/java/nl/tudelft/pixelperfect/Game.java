@@ -5,21 +5,14 @@ import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
-import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
-import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.network.Network;
 import com.jme3.network.Server;
 import com.jme3.network.serializing.Serializer;
 import com.jme3.post.FilterPostProcessor;
-import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import com.jme3.scene.shape.Box;
-
 import jmevr.input.OpenVR;
-import jmevr.input.VRBounds;
 import jmevr.app.VRApplication;
 import jmevr.post.CartoonSSAO;
 import jmevr.util.VRGuiManager;
@@ -116,6 +109,9 @@ public class Game extends VRApplication {
     }
   }
 
+  /**
+   * Initiate input for the game.
+   */
   private void initInputs() {
     InputManager inputManager = getInputManager();
     inputManager.addMapping("toggle", new KeyTrigger(KeyInput.KEY_SPACE));
@@ -141,51 +137,29 @@ public class Game extends VRApplication {
           fpp.addFilter(cartfilt);
           getViewPort().addProcessor(fpp);
           // filters added to main viewport during runtime,
-          // move them into VR processing
-          // (won't do anything if not in VR mode)
+          // move them into VR processing (won't do anything if not in VR mode)
           VRApplication.moveScreenProcessingToVR();
         }
         if (name.equals("toggle")) {
           VRGuiManager.positionGui();
         }
         if (name.equals("forward")) {
-          if (keyPressed) {
-            moveForward = true;
-          } else {
-            moveForward = false;
-          }
+          moveForward = keyPressed;
         } else if (name.equals("back")) {
-          if (keyPressed) {
-            moveBackwards = true;
-          } else {
-            moveBackwards = false;
-          }
+          moveBackwards = keyPressed;
         } else if (name.equals("dumpImages")) {
             OpenVR.getCompositor().CompositorDumpImages.apply();
         } else if (name.equals("left")) {
-            if (keyPressed) {
-              rotateLeft = true;
-            } else {
-              rotateLeft = false;
-            }
+            rotateLeft = keyPressed;
         } else if (name.equals("right")) {
-            if (keyPressed) {
-              rotateRight = true;
-            } else {
-              rotateRight = false;
-            }
+            rotateRight = keyPressed;
         }
       }
-
     };
-    inputManager.addListener(acl, "forward");
-    inputManager.addListener(acl, "back");
-    inputManager.addListener(acl, "left");
-    inputManager.addListener(acl, "right");
-    inputManager.addListener(acl, "toggle");
-    inputManager.addListener(acl, "incShift");
-    inputManager.addListener(acl, "decShift");
-    inputManager.addListener(acl, "filter");
+    inputManager.addListener(acl, "forward"); inputManager.addListener(acl, "back");
+    inputManager.addListener(acl, "left"); inputManager.addListener(acl, "right");
+    inputManager.addListener(acl, "toggle"); inputManager.addListener(acl, "incShift");
+    inputManager.addListener(acl, "decShift"); inputManager.addListener(acl, "filter");
     inputManager.addListener(acl, "dumpImages");
   }
 
@@ -227,7 +201,6 @@ public class Game extends VRApplication {
     	event.notification(scene);
     }
     
-
     if (spaceship.isVictorious()) {
       System.out.println("Well played, you have completed the game!");
       this.stop();
