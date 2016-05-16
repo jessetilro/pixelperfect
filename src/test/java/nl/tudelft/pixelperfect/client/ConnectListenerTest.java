@@ -1,5 +1,6 @@
 package nl.tudelft.pixelperfect.client;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -44,6 +45,14 @@ public class ConnectListenerTest {
     // Set up test object.
     object = new ConnectListener();
     object.setGame(mockedGame);
+  }
+
+  /**
+   * When calling getGame we expect the Game that we have set earlier using setGame.
+   */
+  @Test
+  public void testGetGame() {
+    assertEquals(mockedGame, object.getGame());
   }
 
   /**
