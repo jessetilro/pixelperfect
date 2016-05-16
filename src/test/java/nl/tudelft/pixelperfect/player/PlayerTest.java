@@ -29,6 +29,8 @@ public abstract class PlayerTest {
   /**
    * Factory method for testing.
    * 
+   * @param name The name of the player.
+   * 
    * @return The object to be tested.
    */
   public abstract Player createPlayer(String name);

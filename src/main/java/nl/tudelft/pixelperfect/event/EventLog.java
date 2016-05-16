@@ -1,12 +1,8 @@
 package nl.tudelft.pixelperfect.event;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import com.jme3.network.Server;
-import com.jme3.network.serializing.serializers.CollectionSerializer;
-import com.jme3.network.serializing.serializers.FieldSerializer;
 
 import nl.tudelft.pixelperfect.Spaceship;
 import nl.tudelft.pixelperfect.client.EventsMessage;
@@ -23,8 +19,7 @@ public class EventLog implements EventListener {
   private Server serve;
   private ArrayList<Event> events;
   private Spaceship spaceship;
-  private ByteBuffer bite = ByteBuffer.allocate(1500);
-  private FieldSerializer colli;
+
 
   /**
    * Construct a new EventLog instance.
@@ -35,12 +30,7 @@ public class EventLog implements EventListener {
   public EventLog(Spaceship spaceship) {
     this.events = new ArrayList<Event>();
     this.spaceship = spaceship;
-    this.colli = new FieldSerializer();
-    FieldSerializer.setReadOnly(false);
-    FieldSerializer.registerClass(nl.tudelft.pixelperfect.event.AsteroidFieldEvent.class);
-    FieldSerializer.registerClass(nl.tudelft.pixelperfect.event.FireEvent.class);
-    FieldSerializer.registerClass(nl.tudelft.pixelperfect.event.HostileShipEvent.class);
-    FieldSerializer.registerClass(nl.tudelft.pixelperfect.event.PlasmaLeakEvent.class);
+
   }
 
   /**
@@ -74,7 +64,7 @@ public class EventLog implements EventListener {
     String type = event.getClass().getSimpleName();
     String time = Long.toString(event.getTimestamp());
     String dur = Long.toString(event.getDuration());
-    EventsMessage eve =new EventsMessage(id + " " + type + " " + time + " " + dur);
+    EventsMessage eve = new EventsMessage(id + " " + type + " " + time + " " + dur);
   }
 
   /**
@@ -96,6 +86,21 @@ public class EventLog implements EventListener {
   public synchronized void replace(ArrayList<Event> log) {
     events = log;
     update();
+  }
+  
+  /**
+   * Removes a completed event from the list before it is expired.
+   *  
+   * @param identity 
+   *           The id used to find the event in the log.
+   */
+  public synchronized void complete(String identity) {
+    for (int t = 0; t < events.size(); t++) {
+      if (events.get(t).getId() == Integer.parseInt(identity)) {
+        events.remove(t);
+        return;
+      }
+    }
   }
 
   /**

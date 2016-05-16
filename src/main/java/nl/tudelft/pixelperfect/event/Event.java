@@ -1,6 +1,5 @@
 package nl.tudelft.pixelperfect.event;
 
-import com.jme3.network.serializing.Serializable;
 import com.jme3.scene.Geometry;
 
 import nl.tudelft.pixelperfect.Spaceship;
@@ -11,7 +10,6 @@ import nl.tudelft.pixelperfect.Spaceship;
  * @author David Alderliesten
  *
  */
-@Serializable
 public abstract class Event {
   private String summary;
   private String description;
@@ -48,30 +46,57 @@ public abstract class Event {
     this.damage = damage;
   }
   
-  public Event() {
-    
-  }
   
-  public void setID(int identity) {
+  /**
+   * Changes the id of the event.
+   * 
+   * @param identity The new ID.
+   */
+  public void setId(int identity) {
     this.id = identity;
   }
   
+  /**
+   * Changes the summary of the event.
+   * 
+   * @param sum The new summary.
+   */
   public void setSummary(String sum) {
     this.summary = sum;
   }
   
+  /**
+   * Changes the description of the event.
+   * 
+   * @param desc The new description.
+   */
   public void setDescription(String desc) {
     this.description = desc;
   }
   
+  /**
+   * Changes the timestamp of the event.
+   * 
+   * @param time The new timestamp.
+   */
   public void setTimestamp(long time) {
     this.timestamp = time;
   }
   
+  /**
+   * Changes the duration of the event.
+   * 
+   * @param limit The new duration.
+   */
   public void setDuration(long limit) {
     this.duration = limit;
   }
   
+  /**
+   * Changes the damage value of the event.
+   * 
+   * @param dmg The new damage value.
+   */
   public void setDamage(double dmg) {
     this.damage = dmg;
   }
@@ -103,10 +128,20 @@ public abstract class Event {
     return this.description;
   }
   
+  /**
+   * Get the timestamp of the event.
+   * 
+   * @return Timestamp of event.
+   */
   public Long getTimestamp() {
     return this.timestamp;
   }
   
+  /**
+   * Get the duration of the event.
+   * 
+   * @return Duration of event.
+   */
   public Long getDuration() {
     return this.duration;
   }

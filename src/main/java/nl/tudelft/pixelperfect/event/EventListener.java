@@ -38,4 +38,12 @@ public interface EventListener {
    * 
    */
   void setServer(Server server);
+
+  /**
+   * Removes a completed event from the list before it is expired.
+   *  
+   * @param id
+   *           The id used to find the event in the log.
+   */
+  void complete(String id);
 }

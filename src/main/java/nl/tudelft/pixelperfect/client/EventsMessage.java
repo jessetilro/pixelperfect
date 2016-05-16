@@ -3,12 +3,9 @@ package nl.tudelft.pixelperfect.client;
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
 
-import nl.tudelft.pixelperfect.event.Event;
-
-import java.util.ArrayList;
 
 /**
- * Message type that sends the event log.
+ * Message type that sends the event to the client.
  * 
  * @author Dmitry Malarev
  *
@@ -26,19 +23,19 @@ public class EventsMessage extends AbstractMessage {
   }
 
   /**
-   * Changes the log.
+   * Changes the content of the message.
    * 
-   * @param passedLog
-   *          The list of events that will be the new log message.
+   * @param event
+   *          The event that will be the new message.
    */
-  public EventsMessage(String passedLog) {
-    eve = passedLog;
+  public EventsMessage(String event) {
+    eve = event;
   }
 
   /**
-   * Returns the log.
+   * Returns the event to send to the client.
    * 
-   * @return The log.
+   * @return The event.
    */
   public String getLog() {
     return eve;

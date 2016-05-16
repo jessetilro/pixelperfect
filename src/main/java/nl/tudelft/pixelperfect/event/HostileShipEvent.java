@@ -1,6 +1,5 @@
 package nl.tudelft.pixelperfect.event;
 
-import com.jme3.network.serializing.Serializable;
 import com.jme3.scene.Geometry;
 
 /**
@@ -9,7 +8,7 @@ import com.jme3.scene.Geometry;
  * @author Wouter Zirkzee
  * 
  */
-@Serializable
+
 public class HostileShipEvent extends Event {
 
   /**
@@ -32,9 +31,7 @@ public class HostileShipEvent extends Event {
       double damage) {
     super(id, summary, description, timestamp, duration, damage);
   }
-  
-  public HostileShipEvent() {
-  }
+
 
   /**
    * Show a specific notification for this event.

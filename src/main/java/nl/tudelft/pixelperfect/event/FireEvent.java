@@ -1,6 +1,5 @@
 package nl.tudelft.pixelperfect.event;
 
-import com.jme3.network.serializing.Serializable;
 import com.jme3.scene.Geometry;
 
 /**
@@ -9,7 +8,6 @@ import com.jme3.scene.Geometry;
  * @author Wouter Zirkzee
  * 
  */
-@Serializable
 public class FireEvent extends Event {
 
   /**
@@ -33,8 +31,6 @@ public class FireEvent extends Event {
     super(id, summary, description, timestamp, duration, damage);
   }
 
-  public FireEvent() {
-  }
   
   /**
    * Show a specific notification for this event.
