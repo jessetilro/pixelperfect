@@ -112,6 +112,7 @@ public class Game extends VRApplication {
   /**
    * Initiate input for the game.
    */
+  @SuppressWarnings({"checkstyle:methodlength", "PMD"})
   private void initInputs() {
     InputManager inputManager = getInputManager();
     inputManager.addMapping("toggle", new KeyTrigger(KeyInput.KEY_SPACE));
