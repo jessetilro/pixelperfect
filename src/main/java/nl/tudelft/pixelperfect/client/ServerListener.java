@@ -61,7 +61,6 @@ public class ServerListener implements MessageListener<HostedConnection> {
       ArrayList<Event> log = eve.getLog();
       EventLog curr = (EventLog) app.getSpaceship().getLog();
       curr.replace(log);
-
     }
   }
 }

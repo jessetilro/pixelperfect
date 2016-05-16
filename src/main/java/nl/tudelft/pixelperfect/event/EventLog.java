@@ -1,8 +1,12 @@
 package nl.tudelft.pixelperfect.event;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import com.jme3.network.Server;
+import com.jme3.network.serializing.serializers.CollectionSerializer;
+import com.jme3.network.serializing.serializers.FieldSerializer;
 
 import nl.tudelft.pixelperfect.Spaceship;
 
@@ -18,6 +22,8 @@ public class EventLog implements EventListener {
   private Server serve;
   private ArrayList<Event> events;
   private Spaceship spaceship;
+  private ByteBuffer bite = ByteBuffer.allocate(1500);
+  private FieldSerializer colli;
 
   /**
    * Construct a new EventLog instance.
@@ -28,6 +34,12 @@ public class EventLog implements EventListener {
   public EventLog(Spaceship spaceship) {
     this.events = new ArrayList<Event>();
     this.spaceship = spaceship;
+    this.colli = new FieldSerializer();
+    FieldSerializer.setReadOnly(false);
+    FieldSerializer.registerClass(nl.tudelft.pixelperfect.event.AsteroidFieldEvent.class);
+    FieldSerializer.registerClass(nl.tudelft.pixelperfect.event.FireEvent.class);
+    FieldSerializer.registerClass(nl.tudelft.pixelperfect.event.HostileShipEvent.class);
+    FieldSerializer.registerClass(nl.tudelft.pixelperfect.event.PlasmaLeakEvent.class);
   }
 
   /**
@@ -57,6 +69,14 @@ public class EventLog implements EventListener {
   public synchronized void notify(Event event) {
     events.add(event);
     System.out.println("The ship received a new event: " + event.getDescription());
+
+//    try {
+//      colli.writeClassAndObject(bite, event);
+//      System.out.println(colli.readObject(bite, Event.class));
+//    } catch (IOException e) {
+//      // TODO Auto-generated catch block
+//      e.printStackTrace();
+//    }
   }
 
   /**

@@ -1,5 +1,6 @@
 package nl.tudelft.pixelperfect.event;
 
+import com.jme3.network.serializing.Serializable;
 import com.jme3.scene.Geometry;
 
 /**
@@ -8,6 +9,7 @@ import com.jme3.scene.Geometry;
  * @author Wouter Zirkzee
  * 
  */
+@Serializable
 public class AsteroidFieldEvent extends Event {
 
   /**
@@ -29,6 +31,9 @@ public class AsteroidFieldEvent extends Event {
   public AsteroidFieldEvent(int id, String summary, String description, long timestamp,
       long duration, double damage) {
     super(id, summary, description, timestamp, duration, damage);
+  }
+  
+  public AsteroidFieldEvent() { 
   }
 
   /**

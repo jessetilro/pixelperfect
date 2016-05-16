@@ -1,5 +1,6 @@
 package nl.tudelft.pixelperfect.event;
 
+import com.jme3.network.serializing.Serializable;
 import com.jme3.scene.Geometry;
 
 import nl.tudelft.pixelperfect.Spaceship;
@@ -10,6 +11,7 @@ import nl.tudelft.pixelperfect.Spaceship;
  * @author David Alderliesten
  *
  */
+@Serializable
 public abstract class Event {
   private String summary;
   private String description;
@@ -44,6 +46,34 @@ public abstract class Event {
     this.timestamp = timestamp;
     this.duration = duration;
     this.damage = damage;
+  }
+  
+  public Event() {
+    
+  }
+  
+  public void setID(int identity) {
+    this.id = identity;
+  }
+  
+  public void setSummary(String sum) {
+    this.summary = sum;
+  }
+  
+  public void setDescription(String desc) {
+    this.description = desc;
+  }
+  
+  public void setTimestamp(long time) {
+    this.timestamp = time;
+  }
+  
+  public void setDuration(long limit) {
+    this.duration = limit;
+  }
+  
+  public void setDamage(double dmg) {
+    this.damage = dmg;
   }
 
   /**
