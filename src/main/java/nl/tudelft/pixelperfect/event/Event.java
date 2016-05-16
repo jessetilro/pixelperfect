@@ -102,6 +102,14 @@ public abstract class Event {
   public String getDescription() {
     return this.description;
   }
+  
+  public Long getTimestamp() {
+    return this.timestamp;
+  }
+  
+  public Long getDuration() {
+    return this.duration;
+  }
 
   /**
    * Check whether the event is expired at a given moment in time.

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 @Serializable
 public class EventsMessage extends AbstractMessage {
 
-  private ArrayList<Event> eve;
+  private String eve;
 
   /**
    * Constructs a new EventsMessage instance.
@@ -31,7 +31,7 @@ public class EventsMessage extends AbstractMessage {
    * @param passedLog
    *          The list of events that will be the new log message.
    */
-  public EventsMessage(ArrayList<Event> passedLog) {
+  public EventsMessage(String passedLog) {
     eve = passedLog;
   }
 
@@ -40,7 +40,7 @@ public class EventsMessage extends AbstractMessage {
    * 
    * @return The log.
    */
-  public ArrayList<Event> getLog() {
+  public String getLog() {
     return eve;
   }
 

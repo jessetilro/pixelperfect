@@ -9,6 +9,7 @@ import com.jme3.network.serializing.serializers.CollectionSerializer;
 import com.jme3.network.serializing.serializers.FieldSerializer;
 
 import nl.tudelft.pixelperfect.Spaceship;
+import nl.tudelft.pixelperfect.client.EventsMessage;
 
 /**
  * The captain's log of events, which should be subscribed to the event schedulers in the game.
@@ -69,14 +70,11 @@ public class EventLog implements EventListener {
   public synchronized void notify(Event event) {
     events.add(event);
     System.out.println("The ship received a new event: " + event.getDescription());
-
-//    try {
-//      colli.writeClassAndObject(bite, event);
-//      System.out.println(colli.readObject(bite, Event.class));
-//    } catch (IOException e) {
-//      // TODO Auto-generated catch block
-//      e.printStackTrace();
-//    }
+    String id = Integer.toString(event.getId());
+    String type = event.getClass().getSimpleName();
+    String time = Long.toString(event.getTimestamp());
+    String dur = Long.toString(event.getDuration());
+    EventsMessage eve =new EventsMessage(id + " " + type + " " + time + " " + dur);
   }
 
   /**
