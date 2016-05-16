@@ -1,333 +1,294 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>nl.tudelft.pixelperfect</groupId>
-  <artifactId>pixelperfect</artifactId>
-  <version>0.4.0</version>
-  <name>PixelPerfect</name>
-  <description>Software project for the Computer Games Contextproject 2015-2016 (TI2806) at Delft University of Technology by group PixelPerfect.</description>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>nl.tudelft.pixelperfect</groupId>
+	<artifactId>pixelperfect</artifactId>
+	<version>0.4.0</version>
+	<name>PixelPerfect</name>
+	<description>Software project for the Computer Games Contextproject 2015-2016 (TI2806) at Delft University of Technology by group PixelPerfect.</description>
 
-  <repositories>
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>bintray-jmonkeyengine-org.jmonkeyengine</id>
-      <name>bintray</name>
-      <url>http://dl.bintray.com/jmonkeyengine/org.jmonkeyengine</url>
-    </repository>
+	<properties>
+		<jme3.version>3.1.0-alpha5</jme3.version>
+	</properties>
 
-    <repository>
-      <id>jessetilro-repo</id>
-      <url>http://maven.jessetilro.nl/</url>
-    </repository>
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>bintray-jmonkeyengine-org.jmonkeyengine</id>
+			<name>bintray</name>
+			<url>https://devhub.ewi.tudelft.nl/nexus/content/repositories/jmonkeyengine/</url>
+		</repository>
 
-    <repository>
-      <id>local</id>
-      <name>LocalRepo</name>
-      <url>${basedir}/library</url>
-    </repository>
-  </repositories>
+		<repository>
+			<id>local-repo</id>
+			<name>Local Repository2</name>
+			<url>file://${basedir}/library/libs</url>
+		</repository>
 
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-    </dependency>
+		<repository>
+			<id>local</id>
+			<name>Local Repository</name>
+			<url>file://${basedir}/library</url>
+		</repository>
+	</repositories>
 
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>2.0.47-beta</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.jmonkeyengine</groupId>
-      <artifactId>jme3-blender</artifactId>
-      <version>3.1.0-beta1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.jmonkeyengine</groupId>
-      <artifactId>jme3-core</artifactId>
-      <version>3.1.0-beta1</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>nl.tudelft.pixelperfect</groupId>
-      <artifactId>jme3-core</artifactId>
-      <version>3.1.0-alpha5</version>
-    </dependency>
-    <dependency>
-      <groupId>nl.tudelft.pixelperfect</groupId>
-      <artifactId>lwjgl-natives</artifactId>
-      <version>3.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>nl.tudelft.pixelperfect</groupId>
-      <artifactId>lwjgl</artifactId>
-      <version>3.0.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.jmonkeyengine</groupId>
-      <artifactId>jme3-desktop</artifactId>
-      <version>3.1.0-beta1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.jmonkeyengine</groupId>
-      <artifactId>jme3-effects</artifactId>
-      <version>3.1.0-beta1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.jmonkeyengine</groupId>
-      <artifactId>jme3-jogg</artifactId>
-      <version>3.1.0-beta1</version>
-    </dependency>
-
-     <dependency>
-       <groupId>org.jmonkeyengine</groupId>
-       <artifactId>jme3-lwjgl3</artifactId>
-       <version>3.1.0-beta1</version>
-     </dependency>
-    
-    <dependency>
-      <groupId>nl.tudelft.pixelperfect</groupId>
-      <artifactId>jme3-lwjgl3</artifactId>
-      <version>3.1.0-alpha5</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.jmonkeyengine</groupId>
-      <artifactId>jme3-plugins</artifactId>
-      <version>3.1.0-beta1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>nl.tudelft.pixelperfect</groupId>
-      <artifactId>jmonkeyvr</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>net.java.dev.jna</groupId>
-      <artifactId>jna</artifactId>
-      <version>4.2.1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>de.jarnbjo</groupId>
-      <artifactId>j-ogg-all</artifactId>
-      <version>1.0.0</version>
-      <type>pom</type>
-    </dependency>
-
-    <dependency>
-      <groupId>org.jmonkeyengine</groupId>
-      <artifactId>jme3-networking</artifactId>
-      <version>3.1.0-beta1</version>
-    </dependency>
-
-    <!--Local dependencies as everything else fails-->
-    <!--local import after maven install-->
-    <dependency>
-      <groupId>local</groupId>
-      <artifactId>jme3-core</artifactId>
-      <version>1.0.1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>local</groupId>
-      <artifactId>jme3-lwjgl3</artifactId>
-      <version>1.0.1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>local</groupId>
-      <artifactId>JMonkeyVR</artifactId>
-      <version>1.0.1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>local</groupId>
-      <artifactId>lwjgl-3.0.0</artifactId>
-      <version>1.0.1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>local</groupId>
-      <artifactId>lwjgl-3.0.0-natives</artifactId>
-      <version>1.0.1</version>
-    </dependency>
-
-    <!--local import without mvn install so just on files-->
-    <dependency>
-      <groupId>local2</groupId>
-      <artifactId>jme3-core</artifactId>
-      <version>1.0.1</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/library/jme3-core.jar</systemPath>
-    </dependency>
-
-    <dependency>
-      <groupId>local2</groupId>
-      <artifactId>jme3-lwgjl3</artifactId>
-      <version>1.0.1</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/library/jme3-lwjgl3.jar</systemPath>
-    </dependency>
-
-    <dependency>
-      <groupId>local2</groupId>
-      <artifactId>JMonkeyVR</artifactId>
-      <version>1.0.1</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/library/JMonkeyVR.jar</systemPath>
-    </dependency>
-
-    <dependency>
-      <groupId>local2</groupId>
-      <artifactId>JMonkeyVR</artifactId>
-      <version>1.0.1</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/library/JMonkeyVR.jar</systemPath>
-    </dependency>
-
-    <dependency>
-      <groupId>local2</groupId>
-      <artifactId>lwjgl-3.0.0</artifactId>
-      <version>1.0.1</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/library/lwjgl-3.0.0.jar</systemPath>
-    </dependency>
-
-    <dependency>
-      <groupId>local2</groupId>
-      <artifactId>lwjgl-3.0.0-natives</artifactId>
-      <version>1.0.1</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/library/lwjgl-3.0.0-natives.jar</systemPath>
-    </dependency>
-  </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>2.0.47-beta</version>
+		</dependency>
 
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>2.17</version>
 
-        <configuration>
-          <failOnViolation>false</failOnViolation>
-          <configLocation>checkstyle.xml</configLocation>
-        </configuration>
-      </plugin>
+		<!-- <dependency> -->
+		<!-- <groupId>org.jmonkeyengine</groupId> -->
+		<!-- <artifactId>jme3-blender</artifactId> -->
+		<!-- <version>${jme3.version}</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.jmonkeyengine</groupId> -->
+		<!-- <artifactId>jme3-core</artifactId> -->
+		<!-- <version>${jme3.version}</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.jmonkeyengine</groupId> -->
+		<!-- <artifactId>jme3-desktop</artifactId> -->
+		<!-- <version>${jme3.version}</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.jmonkeyengine</groupId> -->
+		<!-- <artifactId>jme3-effects</artifactId> -->
+		<!-- <version>${jme3.version}</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.jmonkeyengine</groupId> -->
+		<!-- <artifactId>jme3-jogg</artifactId> -->
+		<!-- <version>${jme3.version}</version> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.jogg</groupId>
+			<artifactId>j-ogg-all</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.jmonkeyengine</groupId> -->
+		<!-- <artifactId>jme3-lwjgl3</artifactId> -->
+		<!-- <version>${jme3.version}</version> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.lwjgl</groupId>
+			<artifactId>lwjgl3</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.lwjgl</groupId>
+			<artifactId>lwjgl3-natives</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.jmonkeyengine</groupId> -->
+<!-- 			<artifactId>jme3-plugins</artifactId> -->
+<!-- 			<version>${jme3.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>phr00t</groupId> -->
+<!-- 			<artifactId>JMonkey</artifactId> -->
+<!-- 			<version>1.0.0</version> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>net.java.dev.jna</groupId>
+			<artifactId>jna</artifactId>
+			<version>4.2.1</version>
+		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.jmonkeyengine</groupId> -->
+		<!-- <artifactId>jme3-networking</artifactId> -->
+		<!-- <version>${jme3.version}</version> -->
+		<!-- </dependency> -->
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.6</version>
-
-        <configuration>
-            <format>xml</format>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>3.0.3</version>
-
-        <configuration>
-          <failOnError>false</failOnError>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
 
 
-    <reporting>
-      <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-project-info-reports-plugin</artifactId>
-            <version>2.9</version>
-        </plugin>
+		<dependency>
+		<groupId>com.jme3.vr</groupId>
+		<artifactId>jme3-blender</artifactId>
+		<version>3.1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+		<groupId>com.jme3.vr</groupId>
+		<artifactId>jme3-core</artifactId>
+		<version>3.1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+		<groupId>com.jme3.vr</groupId>
+		<artifactId>jme3-desktop</artifactId>
+		<version>3.1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+		<groupId>com.jme3.vr</groupId>
+		<artifactId>jme3-effects</artifactId>
+		<version>3.1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jme3.vr</groupId>
+			<artifactId>jme3-jogg</artifactId>
+			<version>3.1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jme3.vr</groupId>
+			<artifactId>jme3-lwjgl3</artifactId>
+			<version>3.1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jme3.vr</groupId>
+			<artifactId>jme3-plugins</artifactId>
+			<version>3.1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jme3.vr</groupId>
+			<artifactId>JMonkeyVR</artifactId>
+			<version>3.1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jmonkeyengine</groupId>
+			<artifactId>jme3-networking</artifactId>
+			<version>3.1.0-alpha5</version>
+		</dependency>
 
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <version>2.10.3</version>
-          <configuration>
-              <failOnError>false</failOnError>
-          </configuration>
-          <reportSets>
-              <reportSet>
-                  <id>default</id>
-                  <reports>
-                      <report>javadoc</report>
-                  </reports>
-              </reportSet>
-          </reportSets>
-        </plugin>
 
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jxr-plugin</artifactId>
-          <configuration>
-              <linkJavadoc>true</linkJavadoc>
-          </configuration>
-          <version>2.5</version>
-        </plugin>
 
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>2.17</version>
-          <configuration>
-              <configLocation>${basedir}/checkstyle.xml</configLocation>
-              <includeTestSourceDirectory>true</includeTestSourceDirectory>
-          </configuration>
-        </plugin>
 
-        <plugin> <!-- JUnit report -->
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-report-plugin</artifactId>
-          <version>2.19.1</version>
-        </plugin>
 
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>cobertura-maven-plugin</artifactId>
-          <version>2.7</version>
-        </plugin>
 
-        <!-- PMD configuration for JUnit tests -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-pmd-plugin</artifactId>
-          <version>3.6</version>
-          <configuration>
-              <skipEmptyReport>false</skipEmptyReport>
-              <includeTests>true</includeTests>
-              <rulesets>
-                  <ruleset>pmd-rules.xml</ruleset>
-              </rulesets>
-          </configuration>
-        </plugin>
 
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>findbugs-maven-plugin</artifactId>
-          <version>3.0.3</version>
-          <configuration>
-            <xmlOutput>true</xmlOutput>
-            <includeTests>true</includeTests>
-          </configuration>
-        </plugin>
-      </plugins>
-    </reporting>
+
+	</dependencies>
+
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.17</version>
+
+				<configuration>
+					<failOnViolation>false</failOnViolation>
+					<configLocation>checkstyle.xml</configLocation>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.6</version>
+
+				<configuration>
+					<format>xml</format>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>3.0.3</version>
+
+				<configuration>
+					<failOnError>false</failOnError>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.9</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<configuration>
+					<failOnError>false</failOnError>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<id>default</id>
+						<reports>
+							<report>javadoc</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<configuration>
+					<linkJavadoc>true</linkJavadoc>
+				</configuration>
+				<version>2.5</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<configLocation>${basedir}/checkstyle.xml</configLocation>
+					<includeTestSourceDirectory>true</includeTestSourceDirectory>
+				</configuration>
+			</plugin>
+
+			<plugin> <!-- JUnit report -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.19.1</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
+
+			<!-- PMD configuration for JUnit tests -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.6</version>
+				<configuration>
+					<skipEmptyReport>false</skipEmptyReport>
+					<includeTests>true</includeTests>
+					<rulesets>
+						<ruleset>pmd-rules.xml</ruleset>
+					</rulesets>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>3.0.3</version>
+				<configuration>
+					<xmlOutput>true</xmlOutput>
+					<includeTests>true</includeTests>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>
+

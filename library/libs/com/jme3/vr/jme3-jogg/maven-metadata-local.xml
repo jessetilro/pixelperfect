@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.jme3.vr</groupId>
+  <artifactId>jme3-jogg</artifactId>
+  <versioning>
+    <versions>
+      <version>3.1.0-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20160510121134</lastUpdated>
+  </versioning>
+</metadata>
