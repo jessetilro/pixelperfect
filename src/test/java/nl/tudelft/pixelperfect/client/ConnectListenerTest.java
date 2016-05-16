@@ -22,12 +22,16 @@ import nl.tudelft.pixelperfect.Spaceship;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD")
 public class ConnectListenerTest {
 
   private Game mockedGame;
   private Spaceship mockedSpaceship;
   private ConnectListener object;
 
+  /**
+   * Set up mocked dependencies, stubs and the test object.
+   */
   @Before
   public void init() {
     // Mock dependencies
@@ -42,6 +46,9 @@ public class ConnectListenerTest {
     object.setGame(mockedGame);
   }
 
+  /**
+   * When a connection with a game's server is made, its spaceship's crew should be updated.
+   */
   @Test
   public void testConnectionAdded() {
     // Fixtures
@@ -61,6 +68,9 @@ public class ConnectListenerTest {
     verify(mockedServer).getConnections();
   }
 
+  /**
+   * When a connection with a game's server is aborted, its spaceship's crew should be updated.
+   */
   @Test
   public void testConnectionRemoved() {
     // Fixtures
