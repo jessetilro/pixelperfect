@@ -21,6 +21,7 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD")
 @RunWith(Parameterized.class)
 public class EventSchedulerTest {
 
@@ -37,7 +38,7 @@ public class EventSchedulerTest {
    * 
    * @param intensity
    *          The average number of events generated per second by the Poisson process.
-   * @param allowedDeviation
+   * @param percentage
    *          The percentage of events the sample mean can deviate from the expected value (after
    *          multiplication with the sample size).
    */
@@ -46,6 +47,9 @@ public class EventSchedulerTest {
     this.percentage = percentage;
   }
 
+  /**
+   * Set up test object with mocked dependencies.
+   */
   @Before
   public void init() {
     object = new EventScheduler(intensity);
@@ -71,6 +75,11 @@ public class EventSchedulerTest {
     verify(mockedListener, atMost(expectedEvents + allowedDeviation)).notify(any(Event.class));
   }
 
+  /**
+   * Create the parameters to run the test suite with.
+   * 
+   * @return A list of parameters.
+   */
   @Parameters
   public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][] { { 0, 0 }, { 0.2, 0.2 }, { 0.25, 0.2 }, { 0.5, 0.2 },

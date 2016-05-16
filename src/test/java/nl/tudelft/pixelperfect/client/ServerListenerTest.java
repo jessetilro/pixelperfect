@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.jme3.network.HostedConnection;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import nl.tudelft.pixelperfect.Game;
 
 /**
@@ -39,6 +40,7 @@ public class ServerListenerTest {
   /**
    * When the ServerListener retrieves a HelloMessage, it should do something with its contents.
    */
+  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
   @Test
   public void testMessageReceived() {
     // Fixtures
