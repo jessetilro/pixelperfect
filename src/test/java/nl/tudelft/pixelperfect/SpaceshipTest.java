@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import com.jme3.network.HostedConnection;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import nl.tudelft.pixelperfect.event.EventListener;
 import nl.tudelft.pixelperfect.event.EventLog;
 import nl.tudelft.pixelperfect.player.Player;
@@ -39,15 +40,6 @@ public class SpaceshipTest {
   @Before
   public void before() {
     ship = new Spaceship();
-  }
-
-  /**
-   * The spaceship should return its EventLog when getLog is called. This log should initially be
-   * empty.
-   */
-  @Test
-  public void testGetLog() {
-    EventListener log = ship.getLog();
   }
 
   /**
@@ -106,6 +98,7 @@ public class SpaceshipTest {
   /**
    * When not enough time has passed, ship is not yet victorious after an update.
    */
+  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
   @Test
   public void testUpdateVictoryFalse() {
     // Mock and stub route dependency to force victory and inject it in test object.
@@ -123,6 +116,7 @@ public class SpaceshipTest {
   /**
    * When enough time has passed, the route is traversed and the ship is victorious.
    */
+  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
   @Test
   public void testUpdateVictoryTrue() {
     // Mock and stub route dependency to force victory and inject it in test object.
