@@ -1,5 +1,7 @@
 package nl.tudelft.pixelperfect.event;
 
+import java.util.ArrayList;
+
 /**
  * Interface for classes that can subscribe themselves to an EventScheduler.
  * 
@@ -28,4 +30,12 @@ public interface EventListener {
    * Update the event listener.
    */
   void update();
+  
+  /**
+   * Get all the events that are in the log.
+   * 
+   * @return
+   * 				All events in the log.
+   */
+  ArrayList<Event> getEvents();
 }

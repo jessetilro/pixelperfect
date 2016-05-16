@@ -26,6 +26,7 @@ import jmevr.util.VRGuiManager;
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.HelloMessage;
 import nl.tudelft.pixelperfect.client.ServerListener;
+import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
@@ -196,25 +197,12 @@ public class Game extends VRApplication {
   public Spaceship getSpaceship() {
     return spaceship;
   }
-  
-  public void blinkingObject() {
-  	if (((int) spaceship.getTimer() % 2) == 0) {
-  		Material buttonMat2 = new Material(getAssetManager(), "jmevr/shaders/Unshaded.j3md");
-    	buttonMat2.setColor("Color", ColorRGBA.Black);
-    	scene.buttons.get(2).setMaterial(buttonMat2);
-  	} else {
-  		Material buttonMat2 = new Material(getAssetManager(), "jmevr/shaders/Unshaded.j3md");
-    	buttonMat2.setColor("Color", ColorRGBA.Red);
-    	scene.buttons.get(2).setMaterial(buttonMat2);
-  	}
-  }
 
   /**
    * Main update loop for the game.
    */
   @Override
   public void simpleUpdate(float tpf) {
-  	blinkingObject();
     if (moveForward) {
       observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(tpf * 8f));
     }
@@ -234,6 +222,11 @@ public class Game extends VRApplication {
     if (spaceship.isDead()) {
       this.stop();
     }
+    
+    for (Event event : spaceship.getLog().getEvents()) {
+    	event.notification(scene);
+    }
+    
 
     if (spaceship.isVictorious()) {
       System.out.println("Well played, you have completed the game!");
