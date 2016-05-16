@@ -22,6 +22,7 @@ import nl.tudelft.pixelperfect.Spaceship;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD")
 public class EventLogTest extends EventListenerTest {
   private EventLog object;
   private Spaceship mockedSpaceship;
@@ -56,7 +57,7 @@ public class EventLogTest extends EventListenerTest {
    */
   @Test
   public void testNotify() {
-    Event evt1 = new FireEvent(0, "Test 1", "Test Event.", 0, 0, 50);
+    Event evt1 = new FireEvent(0, "Lorem", "Ipsum", 0, 0, 50);
     object.notify(evt1);
     assertTrue(object.getEvents().contains(evt1));
   }
@@ -67,7 +68,7 @@ public class EventLogTest extends EventListenerTest {
    */
   @Test
   public void testDiscard() {
-    Event evt1 = new FireEvent(0, "Test 1", "Test Event.", 0, 0, 50);
+    Event evt1 = new FireEvent(0, "Apple", "Banana", 0, 0, 50);
     object.notify(evt1);
     object.discard(evt1);
     assertFalse(object.getEvents().contains(evt1));
@@ -80,9 +81,8 @@ public class EventLogTest extends EventListenerTest {
    */
   @Test
   public void testUpdate() {
-    Event evt1 = new FireEvent(0, "Test 1", "Test Event.", 0, 0, 50);
-    Event evt2 = new AsteroidFieldEvent(1, "Test 2", "Test Event.", System.currentTimeMillis(),
-        99999999, 50);
+    Event evt1 = new FireEvent(0, "Whale", "Shark", 0, 0, 50);
+    Event evt2 = new AsteroidFieldEvent(1, "Pie", "Cake", System.currentTimeMillis(), 99999999, 50);
     object.notify(evt1);
     object.notify(evt2);
 
@@ -100,8 +100,8 @@ public class EventLogTest extends EventListenerTest {
    */
   @Test
   public void testReplace() {
-    Event evt1 = new FireEvent(0, "Test 1", "Test Event.", 0, 0, 50);
-    Event evt2 = new AsteroidFieldEvent(1, "Test 2", "Test Event.", System.currentTimeMillis(),
+    Event evt1 = new FireEvent(0, "Mango", "Pineapple", 0, 0, 50);
+    Event evt2 = new AsteroidFieldEvent(1, "Pear", "Kiwi Fruit", System.currentTimeMillis(),
         99999999, 50);
     ArrayList<Event> events = new ArrayList<Event>();
     events.add(evt1);
