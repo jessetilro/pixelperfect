@@ -20,6 +20,12 @@
       <id>jessetilro-repo</id>
       <url>http://maven.jessetilro.nl/</url>
     </repository>
+
+    <repository>
+      <id>local</id>
+      <name>LocalRepo</name>
+      <url>${basedir}/library</url>
+    </repository>
   </repositories>
 
   <dependencies>
@@ -46,6 +52,22 @@
       <artifactId>jme3-core</artifactId>
       <version>3.1.0-beta1</version>
     </dependency>
+    
+    <dependency>
+      <groupId>nl.tudelft.pixelperfect</groupId>
+      <artifactId>jme3-core</artifactId>
+      <version>3.1.0-alpha5</version>
+    </dependency>
+    <dependency>
+      <groupId>nl.tudelft.pixelperfect</groupId>
+      <artifactId>lwjgl-natives</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>nl.tudelft.pixelperfect</groupId>
+      <artifactId>lwjgl</artifactId>
+      <version>3.0.0</version>
+    </dependency>
 
     <dependency>
       <groupId>org.jmonkeyengine</groupId>
@@ -65,11 +87,17 @@
       <version>3.1.0-beta1</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.jmonkeyengine</groupId>
-      <artifactId>jme3-lwjgl3</artifactId>
-      <version>3.1.0-beta1</version>
-    </dependency>
+<!--      <dependency> -->
+<!--        <groupId>org.jmonkeyengine</groupId> -->
+<!--        <artifactId>jme3-lwjgl3</artifactId> -->
+<!--        <version>3.1.0-beta1</version> -->
+<!--      </dependency> -->
+    
+<!--     <dependency> -->
+<!--       <groupId>nl.tudelft.pixelperfect</groupId> -->
+<!--       <artifactId>jme3-lwjgl3</artifactId> -->
+<!--       <version>3.1.0-alpha5</version> -->
+<!--     </dependency> -->
 
     <dependency>
       <groupId>org.jmonkeyengine</groupId>
@@ -77,11 +105,11 @@
       <version>3.1.0-beta1</version>
     </dependency>
 
-    <dependency>
-      <groupId>nl.tudelft.pixelperfect</groupId>
-      <artifactId>jmonkeyvr</artifactId>
-      <version>1.0.0</version>
-    </dependency>
+<!--     <dependency> -->
+<!--       <groupId>nl.tudelft.pixelperfect</groupId> -->
+<!--       <artifactId>jmonkeyvr</artifactId> -->
+<!--       <version>1.0.0</version> -->
+<!--     </dependency> -->
 
     <dependency>
       <groupId>net.java.dev.jna</groupId>
@@ -102,6 +130,86 @@
       <version>3.1.0-beta1</version>
     </dependency>
 
+    <!--Local dependencies as everything else fails-->
+    <!--local import after maven install-->
+    <dependency>
+      <groupId>local</groupId>
+      <artifactId>jme3-core</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>local</groupId>
+      <artifactId>jme3-lwjgl3</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>local</groupId>
+      <artifactId>JMonkeyVR</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>local</groupId>
+      <artifactId>lwjgl-3.0.0</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>local</groupId>
+      <artifactId>lwjgl-3.0.0-natives</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+
+    <!--local import without mvn install so just on files-->
+    <dependency>
+      <groupId>local2</groupId>
+      <artifactId>jme3-core</artifactId>
+      <version>1.0.1</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/library/jme3-core.jar</systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>local2</groupId>
+      <artifactId>jme3-lwgjl3</artifactId>
+      <version>1.0.1</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/library/jme3-lwjgl3.jar</systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>local2</groupId>
+      <artifactId>JMonkeyVR</artifactId>
+      <version>1.0.1</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/library/JMonkeyVR.jar</systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>local2</groupId>
+      <artifactId>JMonkeyVR</artifactId>
+      <version>1.0.1</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/library/JMonkeyVR.jar</systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>local2</groupId>
+      <artifactId>lwjgl-3.0.0</artifactId>
+      <version>1.0.1</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/library/lwjgl-3.0.0.jar</systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>local2</groupId>
+      <artifactId>lwjgl-3.0.0-natives</artifactId>
+      <version>1.0.1</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/library/lwjgl-3.0.0-natives.jar</systemPath>
+    </dependency>
   </dependencies>
 
 
