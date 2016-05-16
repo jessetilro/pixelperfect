@@ -4,7 +4,9 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.network.Network;
 import com.jme3.network.Server;
 import com.jme3.network.serializing.Serializer;
+
 import nl.tudelft.pixelperfect.client.ConnectListener;
+import nl.tudelft.pixelperfect.client.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.HelloMessage;
 import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.event.EventScheduler;
@@ -53,14 +55,15 @@ public class Game extends SimpleApplication {
     try {
       server = Network.createServer(6143);
       Serializer.registerClass(HelloMessage.class);
+      Serializer.registerClass(EventCompletedMessage.class);
       server.start();
       ServerListener listen = new ServerListener();
       listen.setGame(this);
       server.addMessageListener(listen, HelloMessage.class);
+      server.addMessageListener(listen, EventCompletedMessage.class);
       ConnectListener connect = new ConnectListener();
       connect.setGame(this);
       server.addConnectionListener(connect);
-
     } catch (IOException except) {
       except.printStackTrace();
     }
