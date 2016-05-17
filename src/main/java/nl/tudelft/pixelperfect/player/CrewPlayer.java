@@ -35,7 +35,7 @@ public class CrewPlayer extends Player {
     }
     return false;
   }
-  
+
   /**
    * Class not likely to be used in a hashMap/Table.
    * 
@@ -43,7 +43,6 @@ public class CrewPlayer extends Player {
    */
   @Override
   public int hashCode() {
-    assert false : "hashCode not designed";
     return 42;
   }
 }

@@ -48,7 +48,6 @@ public class ServerListener implements MessageListener<HostedConnection> {
    * 
    */
   public void messageReceived(HostedConnection source, Message message) {
-    // TODO add else clause and correctly parse message.
     if (message instanceof HelloMessage) {
       HelloMessage helloMessage = (HelloMessage) message;
       System.out.println(
@@ -57,7 +56,6 @@ public class ServerListener implements MessageListener<HostedConnection> {
       CompleteMessage eve = (CompleteMessage) message;
       String id = eve.getEvent();
       app.getSpaceship().getLog().complete(id);
-      // add EventCompletedMessage here
     }
   }
 }
