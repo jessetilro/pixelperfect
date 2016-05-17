@@ -1,5 +1,8 @@
 package nl.tudelft.pixelperfect;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import com.jme3.network.HostedConnection;
 
 import nl.tudelft.pixelperfect.event.EventListener;
@@ -8,9 +11,6 @@ import nl.tudelft.pixelperfect.player.CrewPlayer;
 import nl.tudelft.pixelperfect.player.Player;
 import nl.tudelft.pixelperfect.route.Route;
 import nl.tudelft.pixelperfect.route.RouteGenerator;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * The spaceship the players are controlling and guiding along a given route through space.
@@ -44,12 +44,41 @@ public class Spaceship {
   }
 
   /**
+   * Use the given EventListener as the captain's log.
+   * 
+   * @param log
+   *          The EventListener to use.
+   */
+  public void useLog(EventListener log) {
+    this.log = log;
+  }
+
+  /**
    * Get the spaceship's log of events.
    * 
    * @return An EventListener.
    */
   public EventListener getLog() {
     return log;
+  }
+
+  /**
+   * Get the spaceship's list of crew members.
+   * 
+   * @return A list of Players.
+   */
+  public ArrayList<Player> getCrew() {
+    return crew;
+  }
+
+  /**
+   * Let the ship pursue a given Route.
+   * 
+   * @param route
+   *          The route the ship must follow.
+   */
+  public void followRoute(Route route) {
+    this.route = route;
   }
 
   /**
@@ -109,7 +138,8 @@ public class Spaceship {
    */
   public void update(float tpf) {
     this.timer += tpf;
-    if (route.isCompleted(timer)) {
+    long now = System.currentTimeMillis();
+    if (route.isCompleted(now)) {
       this.victorious = true;
     }
     log.update();

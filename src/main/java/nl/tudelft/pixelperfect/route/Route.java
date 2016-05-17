@@ -31,6 +31,16 @@ public class Route {
   }
 
   /**
+   * Set the Route's timestamp to a specified one.
+   * 
+   * @param timestamp
+   *          The Route's new timestamp.
+   */
+  public void setTimestamp(long timestamp) {
+    this.timestamp = timestamp;
+  }
+
+  /**
    * Pop the next tuple from the queue of RouteNode's this route aggregates.
    * 
    * @return The next RouteNode.
