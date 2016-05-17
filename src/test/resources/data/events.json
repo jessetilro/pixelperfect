@@ -1,6 +1,12 @@
 [
     {
-      "id": 1,
-      "description": "Test Event with id 1."
-    }
+      "type": 1,
+      "summary": "Banana",
+      "description": "Grows on a tree."
+    },
+    {
+      "type": 2,
+      "summary": "Whale",
+      "description": "Swims in the ocean."
+    },
 ]

@@ -16,11 +16,11 @@ import org.json.JSONTokener;
  * @author Jesse Tilro
  *
  */
-public class EventReader {
+public final class EventReader {
 
   private static volatile EventReader instance;
 
-  private JSONArray types;
+  private JSONArray data;
 
   /**
    * Creates a new EventReader instance if it has not yet been instantiated.
@@ -42,6 +42,14 @@ public class EventReader {
   }
 
   /**
+   * Clear the cache of data. Since this class is a Singleton, this method proves useful for example
+   * when testing, where the object's state must not be maintained throughout the test cases.
+   */
+  public void clear() {
+    data = null;
+  }
+
+  /**
    * Read and parse the JSON from the file with the specified path to use as the Event type
    * register.
    * 
@@ -49,12 +57,12 @@ public class EventReader {
    *          The path to the file to read from.
    * @return Whether the process of reading and parsing succeeded.
    */
-  public boolean readTypesFromFile(String path) {
+  public boolean readFromFile(String path) {
     File file = new File(path);
     try {
       InputStream stream = new FileInputStream(file);
       JSONTokener tokener = new JSONTokener(stream);
-      types = new JSONArray(tokener);
+      data = new JSONArray(tokener);
       return true;
     } catch (FileNotFoundException e) {
       return false;
@@ -67,23 +75,23 @@ public class EventReader {
    * @param json
    *          The JSON encoded string representing the array of Event types.
    */
-  public void readTypesFromString(String json) {
-    types = new JSONArray(json);
+  public void readFromString(String json) {
+    data = new JSONArray(json);
   }
 
   /**
-   * Get a JSONObject representing the Event type with the specified id.
+   * Get a JSONObject representing the Event type with the specified type identifier.
    * 
-   * @param id
-   *          The id of the Event type.
+   * @param type
+   *          The type identifier of the Event type.
    * @return A JSONObject representing the Event type.
    */
-  private JSONObject getTypeById(int id) {
-    if (types != null) {
-      for (int i = 0; i < types.length(); i++) {
-        JSONObject obj = types.getJSONObject(i);
-        int thisId = obj.getInt("id");
-        if (thisId == id) {
+  private JSONObject getByType(int type) {
+    if (data != null) {
+      for (int i = 0; i < data.length(); i++) {
+        JSONObject obj = data.getJSONObject(i);
+        int id = obj.getInt("type");
+        if (id == type) {
           return obj;
         }
       }
@@ -92,13 +100,24 @@ public class EventReader {
   }
 
   /**
-   * Get the specified String attribute from the type with the specified id.
+   * Check whether the Reader has read about an Event type with the specified type identifier.
    * 
-   * @param id
-   *          The type id.
+   * @param type
+   *          The type identifier.
+   * @return Whether an Event type with the specified identifier exists.
    */
-  private String getString(int id, String name) {
-    JSONObject obj = getTypeById(id);
+  public boolean has(int type) {
+    return (getByType(type) != null);
+  }
+
+  /**
+   * Get the specified String attribute from the type with the specified type identifier.
+   * 
+   * @param type
+   *          The type identifier.
+   */
+  private String getString(int type, String name) {
+    JSONObject obj = getByType(type);
     if (obj != null) {
       return obj.getString(name);
     }
@@ -106,13 +125,25 @@ public class EventReader {
   }
 
   /**
-   * Get the description attribute of the Event type with the specified id.
+   * Get the summary attribute of the Event type with the specified type identifier.
    * 
-   * @param id
-   * @return
+   * @param type
+   *          The type identifier
+   * @return The Event type's summary.
    */
-  public String getDescription(int id) {
-    return getString(id, "description");
+  public String getSummary(int type) {
+    return getString(type, "summary");
+  }
+
+  /**
+   * Get the description attribute of the Event type with the specified type identifier.
+   * 
+   * @param type
+   *          The type identifier
+   * @return The Event type's description.
+   */
+  public String getDescription(int type) {
+    return getString(type, "description");
   }
 
 }
