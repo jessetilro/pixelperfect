@@ -115,4 +115,42 @@ public class EventReaderTest {
     assertThat(object.getSummary(-1), is(nullValue()));
   }
 
+  /**
+   * When calling the getDamage, it should return the correct summary of the Event type with the
+   * specified type identifier.
+   */
+  @Test
+  public void testGetDamage() {
+    object.readFromFile(fileGood);
+    assertEquals(42.0, object.getDamage(1), 0.0);
+  }
+
+  /**
+   * When calling the getDamage method with an invalid type identifier, it should yield 0.
+   */
+  @Test
+  public void testGetDamageInvalid() {
+    object.readFromFile(fileGood);
+    assertEquals(0.0, object.getDamage(-1), 0.0);
+  }
+
+  /**
+   * When calling the getDuration, it should return the correct summary of the Event type with the
+   * specified type identifier.
+   */
+  @Test
+  public void testGetDuration() {
+    object.readFromFile(fileGood);
+    assertEquals(1337, object.getDuration(2));
+  }
+
+  /**
+   * When calling the getDuration method with an invalid type identifier, it should yield 0.
+   */
+  @Test
+  public void testGetDurationInvalid() {
+    object.readFromFile(fileGood);
+    assertEquals(0, object.getDuration(-1));
+  }
+
 }

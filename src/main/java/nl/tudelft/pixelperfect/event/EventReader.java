@@ -146,4 +146,34 @@ public final class EventReader {
     return getString(type, "description");
   }
 
+  /**
+   * Get the duration attribute of the Event type with the specified type identifier.
+   * 
+   * @param type
+   *          The type identifier
+   * @return The Event type's duration.
+   */
+  public long getDuration(int type) {
+    JSONObject obj = getByType(type);
+    if (obj != null) {
+      return obj.getLong("duration");
+    }
+    return 0;
+  }
+
+  /**
+   * Get the damage attribute of the Event type with the specified type identifier.
+   * 
+   * @param type
+   *          The type identifier
+   * @return The Event type's damage.
+   */
+  public double getDamage(int type) {
+    JSONObject obj = getByType(type);
+    if (obj != null) {
+      return obj.getDouble("damage");
+    }
+    return 0;
+  }
+
 }
