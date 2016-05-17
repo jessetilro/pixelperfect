@@ -46,60 +46,6 @@ public abstract class Event {
     this.damage = damage;
   }
   
-  
-  /**
-   * Changes the id of the event.
-   * 
-   * @param identity The new ID.
-   */
-  public void setId(int identity) {
-    this.id = identity;
-  }
-  
-  /**
-   * Changes the summary of the event.
-   * 
-   * @param sum The new summary.
-   */
-  public void setSummary(String sum) {
-    this.summary = sum;
-  }
-  
-  /**
-   * Changes the description of the event.
-   * 
-   * @param desc The new description.
-   */
-  public void setDescription(String desc) {
-    this.description = desc;
-  }
-  
-  /**
-   * Changes the timestamp of the event.
-   * 
-   * @param time The new timestamp.
-   */
-  public void setTimestamp(long time) {
-    this.timestamp = time;
-  }
-  
-  /**
-   * Changes the duration of the event.
-   * 
-   * @param limit The new duration.
-   */
-  public void setDuration(long limit) {
-    this.duration = limit;
-  }
-  
-  /**
-   * Changes the damage value of the event.
-   * 
-   * @param dmg The new damage value.
-   */
-  public void setDamage(double dmg) {
-    this.damage = dmg;
-  }
 
   /**
    * Getter for the event id.
