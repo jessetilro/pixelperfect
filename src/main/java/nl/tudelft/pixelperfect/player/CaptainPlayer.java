@@ -31,8 +31,19 @@ public class CaptainPlayer extends Player {
   public boolean equals(Object that) {
     if (that instanceof CaptainPlayer) {
       CaptainPlayer other = (CaptainPlayer) that;
-      return (other.getName() == this.getName());
+      return (other.getName().equals(this.getName()));
     }
     return false;
+  }
+
+  /**
+   * Class not likely to be used in a hashMap/Table.
+   * 
+   * @return An unused number.
+   */
+  @Override
+  public int hashCode() {
+    assert false : "hashCode not designed";
+    return 42;
   }
 }

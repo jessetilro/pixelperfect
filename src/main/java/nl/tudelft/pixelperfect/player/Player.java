@@ -39,4 +39,13 @@ public abstract class Player {
    */
   @Override
   public abstract boolean equals(Object that);
+  
+  /**
+   * Class not likely to be used in a hashMap/Table.
+   * 
+   * @return An unused number.
+   */
+  @Override
+  public abstract int hashCode();
+  
 }

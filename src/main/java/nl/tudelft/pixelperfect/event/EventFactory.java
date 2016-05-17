@@ -48,22 +48,22 @@ public class EventFactory {
         break;
       case 0:
         tbr = new AsteroidFieldEvent(id, "Asteroid Field",
-          "Watch out, you are approaching an asteroid field!", System.currentTimeMillis(), 4000,
-          10);
+            "Watch out, you are approaching an asteroid field!", System.currentTimeMillis(), 4000,
+            10);
         break;
       case 1:
         tbr = new FireEvent(id, "Fire", "Alert! Faulty wiring caused a fire!",
-          System.currentTimeMillis(), 4000, 10);
+            System.currentTimeMillis(), 4000, 10);
         break;
       case 2:
         tbr = new HostileShipEvent(id, "Hostile Ship",
-          "A hostile spaceship is near, prepare to defend yourself!", System.currentTimeMillis(),
-          4000, 10);
+            "A hostile spaceship is near, prepare to defend yourself!", System.currentTimeMillis(),
+            4000, 10);
         break;
       case 3:
         tbr = new PlasmaLeakEvent(id, "Plasma Leak",
-          "Plasma pressure is dropping, there must be a leak!", System.currentTimeMillis(), 4000,
-          10);
+            "Plasma pressure is dropping, there must be a leak!", System.currentTimeMillis(), 4000,
+            10);
         break;
     }
     id++;
