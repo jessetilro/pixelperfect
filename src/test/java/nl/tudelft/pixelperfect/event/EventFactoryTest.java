@@ -1,12 +1,19 @@
 package nl.tudelft.pixelperfect.event;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Created by woute on 5/10/2016.
+ * Test Suite for the EventFactory class.
+ * 
+ * @author Wouter Zirkzee
+ * @author Jesse Tilro
+ * 
  */
 public class EventFactoryTest {
 
@@ -32,7 +39,7 @@ public class EventFactoryTest {
   }
 
   /**
-   * Test if an Astroid Field event is created.
+   * When creating an event with index 0, it should yield an event of type Asteroid Field.
    */
   @Test
   public void testCreateAsteroidEvent() {
@@ -41,7 +48,7 @@ public class EventFactoryTest {
   }
 
   /**
-   * Test if an FireEvent event is created.
+   * When creating an event with index 1, it should yield an event of type Fire.
    */
   @Test
   public void testCreateFireEvent() {
@@ -50,7 +57,7 @@ public class EventFactoryTest {
   }
 
   /**
-   * Test if an Hostile Ship event is created.
+   * When creating an event with index 2, it should yield an event of type Hostile Ship.
    */
   @Test
   public void testCreateHostileShipEvent() {
@@ -59,12 +66,21 @@ public class EventFactoryTest {
   }
 
   /**
-   * Test if an Plasma Leak event is created.
+   * When creating an event with index 3, it should yield an event of type Plasma Leak.
    */
   @Test
   public void testCreatePlasmaLeakEvent() {
     Event e1 = factory.create(3);
     assertEquals(e1.getSummary(), "Plasma Leak");
+  }
+
+  /**
+   * When creating an event with an invalid index, it should yield a null reference.
+   */
+  @Test
+  public void testCreateInvalidIndex() {
+    Event e1 = factory.create(-1);
+    assertThat(e1, is(nullValue()));
   }
 
 }

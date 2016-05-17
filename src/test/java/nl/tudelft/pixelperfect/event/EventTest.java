@@ -3,16 +3,20 @@ package nl.tudelft.pixelperfect.event;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import nl.tudelft.pixelperfect.Spaceship;
+import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.jme3.scene.Geometry;
+
+import nl.tudelft.pixelperfect.Spaceship;
 
 /**
  * Class for testing the Event class.
  * 
  * @author David Alderliesten
+ * @author Jesse Tilro
  *
  */
 public abstract class EventTest {
@@ -25,10 +29,15 @@ public abstract class EventTest {
   @Before
   public void initialize() {
     toTest = createEvent();
+
+    // For line coverage.
+    Geometry geo = mock(Geometry.class);
+    toTest.notification(geo);
   }
 
   /**
    * Factory method for testing.
+   * 
    * @return class to be tested.
    */
   public abstract Event createEvent();
@@ -74,7 +83,7 @@ public abstract class EventTest {
   public void testIsExpiredTrue() {
     assertTrue(toTest.isExpired(85));
   }
-  
+
   /**
    * Testing damage done to the spaceship.
    */
@@ -82,7 +91,7 @@ public abstract class EventTest {
   public void testApplyDamage() {
     Spaceship toUse = new Spaceship();
     assertEquals(100.0, toUse.getHealth(), 0.0);
-    
+
     toTest.applyDamage(toUse);
     assertEquals(100 - toTest.getDamage(), toUse.getHealth(), 0.0);
   }

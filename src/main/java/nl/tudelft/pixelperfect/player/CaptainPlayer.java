@@ -43,7 +43,6 @@ public class CaptainPlayer extends Player {
    */
   @Override
   public int hashCode() {
-    assert false : "hashCode not designed";
     return 42;
   }
 }
