@@ -12,18 +12,6 @@
 	</properties>
 
 	<repositories>
-		<!-- <repository> -->
-		<!-- <id>bintray</id> -->
-		<!-- <name>bin</name> -->
-		<!-- <url>http://dl.bintray.com/jmonkeyengine/org.jmonkeyengine/</url> -->
-		<!-- </repository> -->
-
-		<repository>
-			<id>local-repo</id>
-			<name>Local Repository2</name>
-			<url>file://${basedir}/library/libs</url>
-		</repository>
-
 		<repository>
 			<id>local</id>
 			<name>Local Repository</name>
@@ -43,23 +31,21 @@
 			<version>2.0.47-beta</version>
 		</dependency>
 
-
-
 		<dependency>
 			<groupId>org.jmonkeyengine</groupId>
 			<artifactId>jme3-blender</artifactId>
 			<version>${jme3.version}</version>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.jmonkeyengine</groupId> -->
-<!-- 			<artifactId>jme3-core</artifactId> -->
-<!-- 			<version>${jme3.version}</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.jmonkeyengine</groupId> -->
-<!-- 			<artifactId>jme3-desktop</artifactId> -->
-<!-- 			<version>${jme3.version}</version> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.jmonkeyengine</groupId>
+			<artifactId>jme3-core</artifactId>
+			<version>${jme3.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jmonkeyengine</groupId>
+			<artifactId>jme3-desktop</artifactId>
+			<version>${jme3.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.jmonkeyengine</groupId>
 			<artifactId>jme3-effects</artifactId>
@@ -70,11 +56,11 @@
 			<artifactId>jme3-jogg</artifactId>
 			<version>${jme3.version}</version>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.jmonkeyengine</groupId> -->
-<!-- 			<artifactId>jme3-lwjgl3</artifactId> -->
-<!-- 			<version>${jme3.version}</version> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.jmonkeyengine</groupId>
+			<artifactId>jme3-lwjgl3</artifactId>
+			<version>${jme3.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.jmonkeyengine</groupId>
 			<artifactId>jme3-plugins</artifactId>
@@ -90,14 +76,11 @@
 			<artifactId>jme3-networking</artifactId>
 			<version>${jme3.version}</version>
 		</dependency>
-
-
 		<dependency>
 			<groupId>org.jogg</groupId>
 			<artifactId>j-ogg-all</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.lwjgl</groupId>
 			<artifactId>lwjgl3</artifactId>
@@ -113,67 +96,7 @@
 			<artifactId>jna</artifactId>
 			<version>4.2.2</version>
 		</dependency>
-
-
-
-
-
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.jme3.vr</groupId> -->
-<!-- 			<artifactId>jme3-blender</artifactId> -->
-<!-- 			<version>3.1.0-SNAPSHOT</version> -->
-<!-- 		</dependency> -->
-		<dependency>
-			<groupId>com.jme3.vr</groupId>
-			<artifactId>jme3-core</artifactId>
-			<version>3.1.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jme3.vr</groupId>
-			<artifactId>jme3-desktop</artifactId>
-			<version>3.1.0-SNAPSHOT</version>
-		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.jme3.vr</groupId> -->
-<!-- 			<artifactId>jme3-effects</artifactId> -->
-<!-- 			<version>3.1.0-SNAPSHOT</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.jme3.vr</groupId> -->
-<!-- 			<artifactId>jme3-jogg</artifactId> -->
-<!-- 			<version>3.1.0-SNAPSHOT</version> -->
-<!-- 		</dependency> -->
-		<dependency>
-			<groupId>com.jme3.vr</groupId>
-			<artifactId>jme3-lwjgl3</artifactId>
-			<version>3.1.0-SNAPSHOT</version>
-		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.jme3.vr</groupId> -->
-<!-- 			<artifactId>jme3-plugins</artifactId> -->
-<!-- 			<version>3.1.0-SNAPSHOT</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.jme3.vr</groupId> -->
-<!-- 			<artifactId>JMonkeyVR</artifactId> -->
-<!-- 			<version>3.1.0-SNAPSHOT</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.jmonkeyengine</groupId> -->
-<!-- 			<artifactId>jme3-networking</artifactId> -->
-<!-- 			<version>3.1.0-beta1</version> -->
-<!-- 		</dependency> -->
-
-
-
-
-
-
-
-
 	</dependencies>
-
-
 
 	<build>
 		<plugins>
