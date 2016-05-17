@@ -17,6 +17,7 @@ import org.junit.Test;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD")
 public class EventReaderTest {
 
   private static String fileGood = "src/test/resources/data/events.json";
