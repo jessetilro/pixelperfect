@@ -32,7 +32,7 @@ public class EventCompletedMessageTest {
    * When calling the temporary getSomething method we expect to retrieve the original message.
    */
   @Test
-  public void testGetSomething() {
+  public void testGetCompletedEvent() {
     assertThat(object.getCompletedEvent(), is("Hello World!"));
   }
 }
