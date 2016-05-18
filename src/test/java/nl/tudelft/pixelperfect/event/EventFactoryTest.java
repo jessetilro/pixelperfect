@@ -32,10 +32,10 @@ public class EventFactoryTest {
    */
   @Test
   public void testUniqueId() {
-    Event e1 = factory.create(1);
-    assertEquals(e1.getId(), 1);
-    Event e2 = factory.create(1);
-    assertEquals(e2.getId(), 2);
+    Event e1 = factory.create(0);
+    assertEquals(e1.getId(), 0);
+    Event e2 = factory.create(0);
+    assertEquals(e2.getId(), 1);
   }
 
   /**
@@ -43,7 +43,7 @@ public class EventFactoryTest {
    */
   @Test
   public void testCreateAsteroidEvent() {
-    Event e1 = factory.create(1);
+    Event e1 = factory.create(0);
     assertEquals(e1.getSummary(), "Asteroid Field");
   }
 
@@ -52,8 +52,8 @@ public class EventFactoryTest {
    */
   @Test
   public void testCreateFireEvent() {
-    Event e1 = factory.create(2);
-    assertEquals(e1.getSummary(), "Fire Outbreak");
+    Event e1 = factory.create(1);
+    assertEquals(e1.getSummary(), "Fire");
   }
 
   /**
@@ -61,7 +61,7 @@ public class EventFactoryTest {
    */
   @Test
   public void testCreateHostileShipEvent() {
-    Event e1 = factory.create(3);
+    Event e1 = factory.create(2);
     assertEquals(e1.getSummary(), "Hostile Ship");
   }
 
@@ -70,7 +70,7 @@ public class EventFactoryTest {
    */
   @Test
   public void testCreatePlasmaLeakEvent() {
-    Event e1 = factory.create(4);
+    Event e1 = factory.create(3);
     assertEquals(e1.getSummary(), "Plasma Leak");
   }
 
