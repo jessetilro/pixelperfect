@@ -3,8 +3,6 @@ package nl.tudelft.pixelperfect.client;
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
 
-import nl.tudelft.pixelperfect.event.Event;
-
 /**
  * The EventCompletedMessage sends a message to the Server to tell that an event was completed.
  *
@@ -24,12 +22,13 @@ public class EventCompletedMessage extends AbstractMessage {
   /**
    * The constructor with a specific Event completed.
    * 
-   * @param completed , a completed Event.
+   * @param completed
+   *          , a completed Event.
    */
   public EventCompletedMessage(String completed) {
     this.completed = completed;
   }
-  
+
   /**
    * Gets the Event that was completed.
    * 
