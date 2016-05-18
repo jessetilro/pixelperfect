@@ -7,6 +7,12 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test case for the EventCompletedMessage class.
+ * 
+ * @author Dmitry
+ *
+ */
 public class EventCompletedMessageTest {
 
   private EventCompletedMessage object;
@@ -29,7 +35,7 @@ public class EventCompletedMessageTest {
   }
 
   /**
-   * When calling the temporary getSomething method we expect to retrieve the original message.
+   * When calling the temporary getCompletedEvent method we expect to retrieve the original message.
    */
   @Test
   public void testGetCompletedEvent() {

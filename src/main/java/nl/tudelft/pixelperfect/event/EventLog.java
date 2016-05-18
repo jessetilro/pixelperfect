@@ -71,8 +71,8 @@ public class EventLog implements EventListener {
     System.out.println("The ship received a new event: " + event.getDescription());
     String type = event.getClass().getSimpleName();
     EventsMessage eve = 
-        new EventsMessage(event.getId(),type,event.getTimestamp(),event.getDuration());
-    server.broadcast(Filters.in(server.getConnection(0)), eve);;
+        new EventsMessage(event.getId(), type, event.getTimestamp(), event.getDuration());
+    server.broadcast(Filters.in(server.getConnection(0)), eve);
   }
 
   /**
