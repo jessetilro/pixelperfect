@@ -6,6 +6,7 @@ import com.jme3.network.MessageListener;
 
 import nl.tudelft.pixelperfect.Game;
 
+
 /**
  * Listener for the Game's server, which handles incoming messages.
  * 
@@ -50,6 +51,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
     if (message instanceof EventCompletedMessage) {
       EventCompletedMessage eve = (EventCompletedMessage) message;
       System.out.println("Received a completed event: " + eve.getCompletedEvent());
+      app.getSpaceship().getLog().complete(eve.getCompletedEvent());
     }
   }
 }

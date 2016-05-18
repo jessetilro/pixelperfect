@@ -1,8 +1,12 @@
 package nl.tudelft.pixelperfect.event;
 
 import nl.tudelft.pixelperfect.Spaceship;
+import nl.tudelft.pixelperfect.client.EventsMessage;
 
 import java.util.ArrayList;
+
+import com.jme3.network.Filters;
+import com.jme3.network.Server;
 
 /**
  * The captain's log of events, which should be subscribed to the event schedulers in the game.
@@ -15,6 +19,7 @@ public class EventLog implements EventListener {
 
   private ArrayList<Event> events;
   private Spaceship spaceship;
+  private Server server;
 
   /**
    * Construct a new EventLog instance.
@@ -25,6 +30,16 @@ public class EventLog implements EventListener {
   public EventLog(Spaceship spaceship) {
     this.events = new ArrayList<Event>();
     this.spaceship = spaceship;
+
+  }
+  
+  /**
+   * Sets the server for reference purposes.
+   * 
+   * @param server The server.
+   */
+  public void setServer(Server server) {
+    this.server = server;
   }
   
   /**
@@ -54,6 +69,10 @@ public class EventLog implements EventListener {
   public synchronized void notify(Event event) {
     events.add(event);
     System.out.println("The ship received a new event: " + event.getDescription());
+    String type = event.getClass().getSimpleName();
+    EventsMessage eve = 
+        new EventsMessage(event.getId(), type, event.getTimestamp(), event.getDuration());
+    server.broadcast(Filters.in(server.getConnection(0)), eve);
   }
 
   /**
@@ -75,6 +94,21 @@ public class EventLog implements EventListener {
   public synchronized void replace(ArrayList<Event> log) {
     events = log;
     update();
+  }
+  
+  /**
+   * Removes a completed event from the list before it is expired.
+   *  
+   * @param identity 
+   *           The id used to find the event in the log.
+   */
+  public synchronized void complete(String identity) {
+    for (int t = 0; t < events.size(); t++) {
+      if (events.get(t).getId() == Integer.parseInt(identity)) {
+        events.remove(t);
+        return;
+      }
+    }
   }
 
   /**

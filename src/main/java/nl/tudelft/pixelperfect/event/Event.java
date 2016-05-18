@@ -45,6 +45,7 @@ public abstract class Event {
     this.duration = duration;
     this.damage = damage;
   }
+  
 
   /**
    * Getter for the event id.
@@ -71,6 +72,24 @@ public abstract class Event {
    */
   public String getDescription() {
     return this.description;
+  }
+  
+  /**
+   * Get the timestamp of the event.
+   * 
+   * @return Timestamp of event.
+   */
+  public Long getTimestamp() {
+    return this.timestamp;
+  }
+  
+  /**
+   * Get the duration of the event.
+   * 
+   * @return Duration of event.
+   */
+  public Long getDuration() {
+    return this.duration;
   }
 
   /**

@@ -9,6 +9,7 @@ import nl.tudelft.pixelperfect.Scene;
  * @author Wouter Zirkzee
  * 
  */
+
 public class AsteroidFieldEvent extends Event {
 
   /**
@@ -31,6 +32,7 @@ public class AsteroidFieldEvent extends Event {
       long duration, double damage) {
     super(id, summary, description, timestamp, duration, damage);
   }
+
 
   /**
    * Show a specific notification for this event.
