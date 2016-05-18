@@ -73,7 +73,7 @@ public class EventLog implements EventListener {
     String time = Long.toString(event.getTimestamp());
     String dur = Long.toString(event.getDuration());
     EventsMessage eve = new EventsMessage(id + " " + type + " " + time + " " + dur);
-    serve.broadcast(eve);
+    //serve.broadcast(eve);
   }
 
   /**
