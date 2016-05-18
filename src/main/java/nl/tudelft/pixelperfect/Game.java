@@ -1,6 +1,7 @@
 package nl.tudelft.pixelperfect;
 
 import java.io.IOException;
+
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
@@ -12,15 +13,18 @@ import com.jme3.network.serializing.Serializer;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import jmevr.input.OpenVR;
-import jmevr.app.VRApplication;
-import jmevr.post.CartoonSSAO;
-import jmevr.util.VRGuiManager;
+
 import nl.tudelft.pixelperfect.client.ConnectListener;
+import nl.tudelft.pixelperfect.client.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.HelloMessage;
 import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventScheduler;
+
+import jmevr.input.OpenVR;
+import jmevr.app.VRApplication;
+import jmevr.post.CartoonSSAO;
+import jmevr.util.VRGuiManager;
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
  * 
@@ -96,14 +100,15 @@ public class Game extends VRApplication {
     try {
       server = Network.createServer(6143);
       Serializer.registerClass(HelloMessage.class);
+      Serializer.registerClass(EventCompletedMessage.class);
       server.start();
       ServerListener listen = new ServerListener();
       listen.setGame(this);
       server.addMessageListener(listen, HelloMessage.class);
+      server.addMessageListener(listen, EventCompletedMessage.class);
       ConnectListener connect = new ConnectListener();
       connect.setGame(this);
       server.addConnectionListener(connect);
-
     } catch (IOException except) {
       except.printStackTrace();
     }
