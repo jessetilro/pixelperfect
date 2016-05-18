@@ -32,6 +32,7 @@ public class FireEvent extends Event {
     super(id, summary, description, timestamp, duration, damage);
   }
 
+  
   /**
    * Show a specific notification for this event.
    * 

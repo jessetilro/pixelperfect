@@ -9,6 +9,7 @@ import nl.tudelft.pixelperfect.Scene;
  * @author Wouter Zirkzee
  * 
  */
+
 public class PlasmaLeakEvent extends Event {
 
   /**
@@ -31,6 +32,7 @@ public class PlasmaLeakEvent extends Event {
       double damage) {
     super(id, summary, description, timestamp, duration, damage);
   }
+
 
   /**
    * Show a specific notification for this event.
