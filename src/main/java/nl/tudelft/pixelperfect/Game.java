@@ -16,6 +16,7 @@ import com.jme3.scene.Spatial;
 
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.EventCompletedMessage;
+import nl.tudelft.pixelperfect.client.EventsMessage;
 import nl.tudelft.pixelperfect.client.HelloMessage;
 import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.event.Event;
@@ -101,11 +102,13 @@ public class Game extends VRApplication {
       server = Network.createServer(6143);
       Serializer.registerClass(HelloMessage.class);
       Serializer.registerClass(EventCompletedMessage.class);
+      Serializer.registerClass(EventsMessage.class);
       server.start();
       ServerListener listen = new ServerListener();
       listen.setGame(this);
       server.addMessageListener(listen, HelloMessage.class);
       server.addMessageListener(listen, EventCompletedMessage.class);
+      server.addMessageListener(listen, EventsMessage.class);
       ConnectListener connect = new ConnectListener();
       connect.setGame(this);
       server.addConnectionListener(connect);
