@@ -2,6 +2,8 @@ package nl.tudelft.pixelperfect.event;
 
 import java.util.ArrayList;
 
+import com.jme3.network.Server;
+
 /**
  * Interface for classes that can subscribe themselves to an EventScheduler.
  * 
@@ -46,4 +48,11 @@ public interface EventListener {
    * 				All events in the log.
    */
   ArrayList<Event> getEvents();
+
+  /**
+   * Sets the server for reference purposes.
+   * 
+   * @param server The server.
+   */
+  void setServer(Server server);
 }

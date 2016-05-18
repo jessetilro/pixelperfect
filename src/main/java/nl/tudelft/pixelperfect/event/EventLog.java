@@ -5,6 +5,8 @@ import nl.tudelft.pixelperfect.client.EventsMessage;
 
 import java.util.ArrayList;
 
+import com.jme3.network.Server;
+
 /**
  * The captain's log of events, which should be subscribed to the event schedulers in the game.
  * 
@@ -16,7 +18,7 @@ public class EventLog implements EventListener {
 
   private ArrayList<Event> events;
   private Spaceship spaceship;
-
+  private Server serve;
 
   /**
    * Construct a new EventLog instance.
@@ -28,6 +30,15 @@ public class EventLog implements EventListener {
     this.events = new ArrayList<Event>();
     this.spaceship = spaceship;
 
+  }
+  
+  /**
+   * Sets the server for reference purposes.
+   * 
+   * @param server The server.
+   */
+  public void setServer(Server server) {
+    serve = server;
   }
   
   /**
@@ -62,6 +73,7 @@ public class EventLog implements EventListener {
     String time = Long.toString(event.getTimestamp());
     String dur = Long.toString(event.getDuration());
     EventsMessage eve = new EventsMessage(id + " " + type + " " + time + " " + dur);
+    serve.broadcast(eve);
   }
 
   /**

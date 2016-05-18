@@ -91,7 +91,7 @@ public class Game extends VRApplication {
     initNetwork();
 
     spaceship = new Spaceship();
-//    spaceship.getLog().setServer(server);
+    spaceship.getLog().setServer(server);
     scheduler = new EventScheduler(0.5);
     scheduler.subscribe(spaceship.getLog());
   }
