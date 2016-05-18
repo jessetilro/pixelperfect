@@ -59,10 +59,9 @@ public class EventSchedulerTest {
   }
 
   /**
-   * According to the law of large numbers, as the sample size of a random sample approaches
+   * According to the central limit theorem, as the sample size of a random sample approaches
    * infinity, the deviation of the sample mean from the distribution's expected value will approach
-   * 0. That's what we will use to test the Poisson process, while testing it with different
-   * parameters.
+   * 0. That's what we will use to test the Poisson process, with different parameters.
    */
   @Test
   public void testUpdate() {
