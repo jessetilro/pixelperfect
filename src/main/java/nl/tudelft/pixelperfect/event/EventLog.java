@@ -26,7 +26,7 @@ public class EventLog implements EventListener {
     this.events = new ArrayList<Event>();
     this.spaceship = spaceship;
   }
-
+  
   /**
    * Get the current log of events.
    * 

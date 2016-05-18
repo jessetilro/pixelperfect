@@ -3,9 +3,24 @@ package nl.tudelft.pixelperfect;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.jme3.network.HostedConnection;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import nl.tudelft.pixelperfect.event.EventListener;
+import nl.tudelft.pixelperfect.event.EventLog;
+import nl.tudelft.pixelperfect.player.Player;
+import nl.tudelft.pixelperfect.route.Route;
 
 /**
  * Test Suite for the Spaceship class.
@@ -14,6 +29,7 @@ import org.junit.Test;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD")
 public class SpaceshipTest {
 
   private Spaceship ship;
@@ -27,7 +43,7 @@ public class SpaceshipTest {
   }
 
   /**
-   * Test the getHealth functionality by verifying full health.
+   * Initiallly the ship's health value should be set to 100.
    */
   @Test
   public void testGetHealth() {
@@ -35,13 +51,23 @@ public class SpaceshipTest {
   }
 
   /**
-   * Test the updateHealth method by dealing 25 damage.
+   * When the ship is dealt damage less than its current health value, its health value must be
+   * decremented with the given damage.
    */
   @Test
-  public void testUpdateHealth() {
-    assertEquals(100.0, ship.getHealth(), 0.0);
+  public void testUpdateHealthLessDamage() {
     ship.updateHealth(-25.0);
     assertEquals(75.0, ship.getHealth(), 0.0);
+  }
+
+  /**
+   * When the ship is dealt damage equal to or greater than its current health value, its health
+   * value must be set to zero.
+   */
+  @Test
+  public void testUpdateHealthGreaterDamage() {
+    ship.updateHealth(-101.0);
+    assertEquals(0.0, ship.getHealth(), 0.0);
   }
 
   /**
@@ -62,10 +88,102 @@ public class SpaceshipTest {
   }
 
   /**
-   * Test the isVictorious method on a false case.
+   * Initially the ship has not traversed its Route, so it is not yet victorious.
    */
   @Test
-  public void testFalseVictory() {
+  public void testInitialVictoryFalse() {
     assertFalse(ship.isVictorious());
+  }
+
+  /**
+   * When not enough time has passed, ship is not yet victorious after an update.
+   */
+  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
+  @Test
+  public void testUpdateVictoryFalse() {
+    // Mock and stub route dependency to force victory and inject it in test object.
+    Route mockedRoute = mock(Route.class);
+    when(mockedRoute.isCompleted(anyLong())).thenReturn(false);
+    ship.followRoute(mockedRoute);
+
+    // Execute
+    ship.update(1);
+
+    verify(mockedRoute).isCompleted(anyLong());
+    assertFalse(ship.isVictorious());
+  }
+
+  /**
+   * When enough time has passed, the route is traversed and the ship is victorious.
+   */
+  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
+  @Test
+  public void testUpdateVictoryTrue() {
+    // Mock and stub route dependency to force victory and inject it in test object.
+    Route mockedRoute = mock(Route.class);
+    when(mockedRoute.isCompleted(anyLong())).thenReturn(true);
+    ship.followRoute(mockedRoute);
+
+    // Execute
+    ship.update(1);
+
+    verify(mockedRoute).isCompleted(anyLong());
+    assertTrue(ship.isVictorious());
+  }
+
+  /**
+   * When updating the ship, the captain's log is updated as well.
+   */
+  @Test
+  public void testUpdateLog() {
+    // Mock and stub log dependency.
+    EventListener mockedLog = mock(EventLog.class);
+
+    ship.useLog(mockedLog);
+    assertEquals(mockedLog, ship.getLog());
+
+    ship.update(1);
+    verify(mockedLog).update();
+  }
+
+  /**
+   * When the crew is updated, the identifiers of the HostedConnections should be used for the
+   * players' names.
+   */
+  @Test
+  public void testUpdateCrewNewConnection() {
+    // Mock connections.
+    HostedConnection mockedHC = mock(HostedConnection.class);
+    when(mockedHC.getId()).thenReturn(42);
+    ArrayList<HostedConnection> clients = new ArrayList<HostedConnection>();
+    clients.add(mockedHC);
+
+    // Execute
+    ship.updateCrew(clients);
+
+    verify(mockedHC).getId();
+  }
+
+  /**
+   * When the crew is already up-to-date with the connections, it is not altered.
+   */
+  @Test
+  public void testUpdateCrewNoChanges() {
+    // Mock connections.
+    HostedConnection mockedHC = mock(HostedConnection.class);
+    when(mockedHC.getId()).thenReturn(42);
+    ArrayList<HostedConnection> clients = new ArrayList<HostedConnection>();
+    clients.add(mockedHC);
+
+    // Execute first time
+    ship.updateCrew(clients);
+    ArrayList<Player> crewFirst = ship.getCrew();
+
+    // Execute second time
+    ship.updateCrew(clients);
+    ArrayList<Player> crewSecond = ship.getCrew();
+
+    verify(mockedHC, times(2)).getId();
+    assertEquals(crewFirst, crewSecond);
   }
 }
