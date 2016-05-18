@@ -63,7 +63,7 @@ local.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
+### *.jar ###
 *.war
 *.ear
 
@@ -115,3 +115,7 @@ fabric.properties
 
 OpenAL64.dll
 lwjgl64.dll
+OpenAL.dll
+glfw.dll
+jemalloc.dll
+lwjgl.dll

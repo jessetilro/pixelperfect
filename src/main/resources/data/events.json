@@ -1,0 +1,30 @@
+[
+  {
+    "type": 1,
+    "summary": "Asteroid Field",
+    "description": "Watch out, you are approaching an asteroid field!",
+    "duration": 8000,
+    "damage": 10
+  },
+  {
+    "type": 2,
+    "summary": "Fire Outbreak",
+    "description": "Alert! Faulty wiring caused a fire!",
+    "duration": 8000,
+    "damage": 10
+  },
+  {
+    "type": 3,
+    "summary": "Hostile Ship",
+    "description": "A hostile spaceship is near, prepare to defend yourself!",
+    "duration": 8000,
+    "damage": 10
+  },
+  {
+    "type": 4,
+    "summary": "Plasma Leak",
+    "description": "Plasma pressure is dropping, there must be a leak!",
+    "duration": 8000,
+    "damage": 10
+  }
+]

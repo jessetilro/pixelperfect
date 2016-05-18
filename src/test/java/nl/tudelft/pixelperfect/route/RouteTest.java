@@ -2,20 +2,22 @@ package nl.tudelft.pixelperfect.route;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 /**
  * Test Suite for the Route class.
  * 
  * @author David Alderliesten
+ * @author Jesse Tilro
  *
  */
 public class RouteTest {
-  private Route toTest;
+  private Route object;
   private RouteNode first = new AllyNode("First", "The first place to go.");
   private RouteNode second = new AsteroidNode("Second", "The second and final place to go.");
 
@@ -24,36 +26,55 @@ public class RouteTest {
    */
   @Before
   public void initialise() {
-    ArrayList<Tuple> toAdd = new ArrayList<Tuple>();
-    toAdd.add(new Tuple(first, second));
+    ArrayList<Tuple> route = new ArrayList<Tuple>();
+    route.add(new Tuple(first, second));
 
-    toTest = new Route((long) 42, toAdd);
+    object = new Route(42, route);
+    object.setTimestamp(0);
   }
 
   /**
-   * Test to validate the isCompleted false functionality.
+   * When a Route's duration has not passed since it was created, it is not completed yet.
    */
   @Test
   public void testIsCompletedFalse() {
-    assertFalse(toTest.isCompleted(1));
+    assertFalse(object.isCompleted(41));
   }
 
-  // /**
-  // * Test to validate the isCompleted true functionality.
-  // */
-  // @Test TODO VALIDATE FUNCTIONALITY
-  // public void testIsCompletedTrue() {
-  // assertTrue(toTest.isCompleted(0));
-  // }
+  /**
+   * When a Route's duration has passed since it was created, it is completed.
+   */
+  @Test
+  public void testIsCompletedTrue() {
+    assertTrue(object.isCompleted(42));
+  }
 
   /**
-   * Test to validate arraylist popping behavior for all cases.
+   * Directly after a new Route is generated, it should not be completed yet.
+   */
+  @Test
+  public void testGenerateRoute() {
+    Route route = Route.generateRoute();
+    assertFalse(route.isCompleted(System.currentTimeMillis()));
+  }
+
+  /**
+   * The toString method should generate a correct String representation.
+   */
+  @Test
+  public void testToString() {
+    assertEquals("<Route (42 ms): [(AllyNode, AsteroidNode)]>", object.toString());
+  }
+
+  /**
+   * When it popping from the Route, the next tuple of RouteNode's should be returned and removed
+   * from the Route.
    */
   @Test
   public void testRouteNodePopping() {
-    Tuple tp = toTest.popRouteNode();
+    Tuple tp = object.popRouteNode();
     assertEquals(tp.getLeft().getDescription(), first.getDescription());
     assertEquals(tp.getRight().getDescription(), second.getDescription());
-    assertEquals(toTest.popRouteNode(), null);
+    assertEquals(object.popRouteNode(), null);
   }
 }
