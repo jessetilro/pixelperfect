@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.jme3.network.Server;
+
 import nl.tudelft.pixelperfect.Spaceship;
 
 /**
@@ -26,6 +28,7 @@ import nl.tudelft.pixelperfect.Spaceship;
 public class EventLogTest extends EventListenerTest {
   private EventLog object;
   private Spaceship mockedSpaceship;
+  private Server mockedServer;
 
   /**
    * Setting test object and mocked dependencies.
@@ -33,7 +36,9 @@ public class EventLogTest extends EventListenerTest {
   @Before
   public void initialise() {
     mockedSpaceship = mock(Spaceship.class);
+    mockedServer = mock(Server.class);
     object = new EventLog(mockedSpaceship);
+    object.setServer(mockedServer);
   }
 
   /**
