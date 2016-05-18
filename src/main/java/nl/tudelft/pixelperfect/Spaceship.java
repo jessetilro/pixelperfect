@@ -26,7 +26,7 @@ public class Spaceship {
   private double health;
   private Route route;
   private EventListener log;
-  private long timer;
+  private float timer;
   private boolean victorious;
   private ArrayList<Player> crew;
 
@@ -121,6 +121,15 @@ public class Spaceship {
     return victorious;
   }
 
+  /**
+   * Get the ship's timer.
+   * 
+   * @return The time the ship has been on its way.
+   */
+  public float getTimer() {
+  	return this.timer;
+  }
+  
   /**
    * Update the Spaceship and related model classes for the step in the game loop.
    * 

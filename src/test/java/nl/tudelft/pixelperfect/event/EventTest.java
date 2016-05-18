@@ -8,8 +8,7 @@ import static org.mockito.Mockito.mock;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jme3.scene.Geometry;
-
+import nl.tudelft.pixelperfect.Scene;
 import nl.tudelft.pixelperfect.Spaceship;
 
 /**
@@ -31,8 +30,8 @@ public abstract class EventTest {
     toTest = createEvent();
 
     // For line coverage.
-    Geometry geo = mock(Geometry.class);
-    toTest.notification(geo);
+    Scene scene = mock(Scene.class);
+    toTest.notification(scene);
   }
 
   /**

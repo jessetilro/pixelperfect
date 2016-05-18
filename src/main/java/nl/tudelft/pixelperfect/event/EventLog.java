@@ -29,7 +29,7 @@ public class EventLog implements EventListener {
     this.spaceship = spaceship;
 
   }
-
+  
   /**
    * Get the current log of events.
    * 

@@ -1,7 +1,7 @@
 package nl.tudelft.pixelperfect.event;
 
-import com.jme3.scene.Geometry;
 
+import nl.tudelft.pixelperfect.Scene;
 import nl.tudelft.pixelperfect.Spaceship;
 
 /**
@@ -125,8 +125,8 @@ public abstract class Event {
   /**
    * Allow events to render notifications to the players.
    *
-   * @param geo
-   *          Object to be mutated as notification.
+   * @param scene
+   *          The scene in which the notification must appear.
    */
-  public abstract void notification(Geometry geo);
+  public abstract void notification(Scene scene);
 }
