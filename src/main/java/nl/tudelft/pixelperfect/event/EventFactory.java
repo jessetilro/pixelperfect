@@ -44,7 +44,7 @@ public class EventFactory {
    * @return an Event.
    */
   public Event randomEvent() {
-    int rand = random.nextInt(4);
+    int rand = 1 + random.nextInt(4);
     return create(rand);
   }
 
