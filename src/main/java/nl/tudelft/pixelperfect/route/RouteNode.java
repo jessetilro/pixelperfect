@@ -7,7 +7,7 @@ package nl.tudelft.pixelperfect.route;
  * @author Floris Doolaard
  *
  */
-public class RouteNode {
+public abstract class RouteNode {
 
   private String summary;
   private String description;

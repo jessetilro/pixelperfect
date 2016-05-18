@@ -2,47 +2,32 @@ package nl.tudelft.pixelperfect.route;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 
 /**
  * Test Suite for the MarsNode class.
  * 
  * @author David Alderliesten
+ * @author Jesse Tilro
  *
  */
 public class MarsNodeTest extends RouteNodeTest {
-  private MarsNode node;
 
   /**
-   * Initializing objects.
+   * Create a test object.
+   * 
+   * @return A RouteNode.
    */
-  @Before
-  public void before() {
-    node = new MarsNode("summary", "description");
+  @Override
+  protected RouteNode create() {
+    return new MarsNode("summary", "description");
   }
 
-  /**
-   * Testing the getSummary method.
-   */
-  @Test
-  public void testRouteSummary() {
-    assertEquals("summary", node.getSummary());
-  }
-
-  /**
-   * Testing the getDescription method.
-   */
-  @Test
-  public void testRouteDescription() {
-    assertEquals("description", node.getDescription());
-  }
-  
   /**
    * Testing toString.
    */
   @Test
   public void testToString() {
-    assertEquals("MarsNode", node.toString());
+    assertEquals("MarsNode", getObject().toString());
   }
 }
