@@ -47,11 +47,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
    * 
    */
   public void messageReceived(HostedConnection source, Message message) {
-    if (message instanceof HelloMessage) {
-      HelloMessage helloMessage = (HelloMessage) message;
-      System.out.println(
-          "Server received '" + helloMessage.getSomething() + "' from client #" + source.getId());
-    } else if (message instanceof EventCompletedMessage) {
+    if (message instanceof EventCompletedMessage) {
       EventCompletedMessage eve = (EventCompletedMessage) message;
       System.out.println("Received a completed event: " + eve.getCompletedEvent());
     }

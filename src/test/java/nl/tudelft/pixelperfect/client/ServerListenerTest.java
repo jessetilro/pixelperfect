@@ -56,16 +56,16 @@ public class ServerListenerTest {
   public void testMessageReceived() {
     // Fixtures
     HostedConnection mockedSource = mock(HostedConnection.class);
-    HelloMessage mockedMessage = mock(HelloMessage.class);
+    EventCompletedMessage mockedMessage = mock(EventCompletedMessage.class);
 
     // Stubbing
-    when(mockedMessage.getSomething()).thenReturn("Hello World!");
+    when(mockedMessage.getCompletedEvent()).thenReturn("Hello Message!");
 
     // Execution
     object.messageReceived(mockedSource, mockedMessage);
 
     // Verification
-    verify(mockedMessage).getSomething();
+    verify(mockedMessage).getCompletedEvent();
   }
 
   /**
