@@ -13,7 +13,10 @@ import com.jme3.network.serializing.Serializable;
 @Serializable
 public class EventsMessage extends AbstractMessage {
 
-  private String eve;
+  public int id;
+  public String type;
+  public Long timestamp;
+  public Long duration;
 
   /**
    * Constructs a new EventsMessage instance.
@@ -24,21 +27,56 @@ public class EventsMessage extends AbstractMessage {
 
   /**
    * Changes the content of the message.
-   * 
-   * @param event
-   *          The event that will be the new message.
+   *
+   * @param identifier
+   *          The id of the event.
+   * @param type
+   *          The type of the event.
+   * @param started
+   *          The timestamp of the event.
+   * @param limit
+   *          The time limit of the event.
    */
-  public EventsMessage(String event) {
-    eve = event;
+  public EventsMessage(int identifier ,String type, Long started, Long limit) {
+    id = identifier;
+    this.type = type;
+    timestamp = started;
+    duration = limit;
   }
 
   /**
-   * Returns the event to send to the client.
-   * 
-   * @return The event.
+   * Returns the event id to send to the client.
+   *
+   * @return The event id.
    */
-  public String getLog() {
-    return eve;
+  public int getId() {
+    return id;
   }
 
+  /**
+   * Returns the event type to send to the client.
+   *
+   * @return The event type.
+   */
+  public String getType() {
+    return type;
+  }
+
+  /**
+   * Returns the event timestamp to send to the client.
+   *
+   * @return The event timestamp.
+   */
+  public Long getTime() {
+    return timestamp;
+  }
+
+  /**
+   * Returns the event time limit to send to the client.
+   *
+   * @return The event time limit.
+   */
+  public Long getDuration() {
+    return duration;
+  }
 }

@@ -68,12 +68,10 @@ public class EventLog implements EventListener {
   public synchronized void notify(Event event) {
     events.add(event);
     System.out.println("The ship received a new event: " + event.getDescription());
-    String id = Integer.toString(event.getId());
     String type = event.getClass().getSimpleName();
-    String time = Long.toString(event.getTimestamp());
-    String dur = Long.toString(event.getDuration());
-    EventsMessage eve = new EventsMessage(id + " " + type + " " + time + " " + dur);
-    //serve.broadcast(eve);
+    EventsMessage eve = 
+        new EventsMessage(event.getId(),type,event.getTimestamp(),event.getDuration());
+    serve.broadcast(eve);
   }
 
   /**
