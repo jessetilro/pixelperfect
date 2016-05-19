@@ -53,10 +53,18 @@ public class GameHeadsUpDisplay {
     // Loading the font stored in the jme default manager.
     hudFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
 
-    // Init for the log text, including font loading.
+    // Init for the log text, including font loading and text setting.
     captainLog = new BitmapText(hudFont, true);
     captainLog.setLocalTranslation(screenWidth - Constants.guiWidthOffset,
         screenHeight - Constants.guiHeightOffset, 0);
-    captainLog.setText(EventLog.getEvents());
+    captainLog.setText("check hud");
+    guiNodes.attachChild(captainLog);
+  }
+
+  /**
+   * Method responsible for the updating of the hud text.
+   */
+  public void updateHud() {
+    captainLog.setText("update hud");
   }
 }
