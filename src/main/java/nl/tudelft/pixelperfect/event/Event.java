@@ -1,6 +1,5 @@
 package nl.tudelft.pixelperfect.event;
 
-
 import nl.tudelft.pixelperfect.Scene;
 import nl.tudelft.pixelperfect.Spaceship;
 
@@ -16,6 +15,7 @@ public abstract class Event {
   private int id;
   private long timestamp;
   private long duration;
+  private long timeLeft;
   private double damage;
 
   /**
@@ -45,7 +45,6 @@ public abstract class Event {
     this.duration = duration;
     this.damage = damage;
   }
-  
 
   /**
    * Getter for the event id.
@@ -73,7 +72,7 @@ public abstract class Event {
   public String getDescription() {
     return this.description;
   }
-  
+
   /**
    * Get the timestamp of the event.
    * 
@@ -82,7 +81,7 @@ public abstract class Event {
   public Long getTimestamp() {
     return this.timestamp;
   }
-  
+
   /**
    * Get the duration of the event.
    * 
@@ -90,6 +89,15 @@ public abstract class Event {
    */
   public Long getDuration() {
     return this.duration;
+  }
+
+  /**
+   * Get the time remaining of the event.
+   * 
+   * @return The time remaining.
+   */
+  public Long getTimeLeft() {
+    return this.timeLeft;
   }
 
   /**
@@ -101,6 +109,16 @@ public abstract class Event {
    */
   public boolean isExpired(long time) {
     return (time > (timestamp + duration));
+  }
+
+  /**
+   * Updates the time left variable for the event.
+   * 
+   * @param currentTime
+   *          the current time of the game
+   */
+  public void updateTimeLeft(long currentTime) {
+    this.timeLeft = this.timestamp - currentTime;
   }
 
   /**
