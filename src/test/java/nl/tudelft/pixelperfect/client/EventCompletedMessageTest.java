@@ -22,7 +22,7 @@ public class EventCompletedMessageTest {
    */
   @Before
   public void init() {
-    object = new EventCompletedMessage("Hello World!");
+    object = new EventCompletedMessage(0);
   }
 
   /**
@@ -31,7 +31,7 @@ public class EventCompletedMessageTest {
   @Test
   public void testEmptyConstructor() {
     EventCompletedMessage obj = new EventCompletedMessage();
-    assertThat(obj.getCompletedEvent(), is(nullValue()));
+    assertThat(obj.getCompletedEvent(), is(0));
   }
 
   /**
@@ -39,6 +39,6 @@ public class EventCompletedMessageTest {
    */
   @Test
   public void testGetCompletedEvent() {
-    assertThat(object.getCompletedEvent(), is("Hello World!"));
+    assertThat(object.getCompletedEvent(), is(0));
   }
 }

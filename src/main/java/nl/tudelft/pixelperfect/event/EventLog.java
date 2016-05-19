@@ -110,6 +110,8 @@ public class EventLog implements EventListener {
     }
     //For now hardcoded
     spaceship.updateHealth(-10);
+    //Manual Testing
+    System.out.println(spaceship.getHealth());
   }
 
   /**
