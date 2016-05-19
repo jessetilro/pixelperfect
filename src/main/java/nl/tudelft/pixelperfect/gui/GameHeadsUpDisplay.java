@@ -1,6 +1,8 @@
 package nl.tudelft.pixelperfect.gui;
 
 import com.jme3.asset.AssetManager;
+import com.jme3.font.BitmapFont;
+import com.jme3.font.BitmapText;
 import com.jme3.scene.Node;
 
 /**
@@ -14,6 +16,9 @@ public class GameHeadsUpDisplay {
   private Node guiNodes;
   private int screenWidth;
   private int screenHeight;
+
+  private BitmapFont hudFont;
+  private BitmapText captainLog;
 
   /**
    * Constructor for the heads-up display for in-game utiliztion.
@@ -33,5 +38,19 @@ public class GameHeadsUpDisplay {
     this.guiNodes = passedGuiNode;
     this.screenWidth = passedWid;
     this.screenHeight = passedHi;
+
+    // Sets-up the text display using the private method.
+    setupTextDisplay();
+  }
+
+  /**
+   * Sets-up text display for the in-game HUD.
+   */
+  private void setupTextDisplay() {
+    // Loading the font stored in the jme default manager.
+    hudFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
+    
+    // Init for the log text, including font loading.
+    captainLog = new BitmapText(hudFont, true);
   }
 }
