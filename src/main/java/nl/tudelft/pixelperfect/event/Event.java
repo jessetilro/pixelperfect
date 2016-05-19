@@ -119,7 +119,7 @@ public abstract class Event {
    *          the current time of the game
    */
   public void updateTimeLeft(long currentTime) {
-    this.timeLeft = this.timestamp - currentTime;
+    this.timeLeft = (this.timestamp + this.duration) - currentTime;
   }
 
   /**
