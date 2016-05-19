@@ -43,7 +43,7 @@ public class EventCompletedMessage extends AbstractMessage {
   /**
    * Retrieves the label of the completed event.
    * 
-   * @return , a String.
+   * @return label , a String.
    */
   public String getLabel() {
     return label;
