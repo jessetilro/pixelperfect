@@ -37,7 +37,7 @@ public class EventLog implements EventListener {
    * 
    * @param server The server.
    */
-  public void setServer(Server server) {
+  public synchronized void setServer(Server server) {
     this.server = server;
   }
   
