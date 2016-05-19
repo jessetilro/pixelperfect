@@ -43,6 +43,7 @@ public abstract class Event {
     this.description = description;
     this.timestamp = timestamp;
     this.duration = duration;
+    this.timeLeft = duration;
     this.damage = damage;
   }
 
