@@ -7,6 +7,8 @@ import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.anyObject;
 
 import java.util.ArrayList;
 
@@ -16,6 +18,7 @@ import org.junit.Test;
 import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.Spaceship;
+import nl.tudelft.pixelperfect.client.EventsMessage;
 
 /**
  * Test Suite for the EventLog class.
@@ -65,6 +68,17 @@ public class EventLogTest extends EventListenerTest {
     Event evt1 = new FireEvent(0, "Lorem", "Ipsum", 0, 0, 50);
     object.notify(evt1);
     assertTrue(object.getEvents().contains(evt1));
+  }
+  
+  /**
+   * Tests to see if the server.broadcast() method is called once.
+   * 
+   */
+  @Test
+  public void testServerVerify() {
+    Event evt1 = new FireEvent(0, "Lorem", "Ipsum", 0, 0, 50);
+    object.notify(evt1);
+    verify(mockedServer, times(1)).broadcast((EventsMessage) anyObject());
   }
 
   /**

@@ -72,7 +72,7 @@ public class EventLog implements EventListener {
     String type = event.getClass().getSimpleName();
     EventsMessage eve = 
         new EventsMessage(event.getId(), type, event.getTimestamp(), event.getDuration());
-    server.broadcast(Filters.in(server.getConnection(0)), eve);
+    server.broadcast(eve);
   }
 
   /**
