@@ -28,6 +28,7 @@ public class ServerListenerTest {
 
   private Game mockedGame;
   private ServerListener object;
+  private HostedConnection mockedSource;
 
   /**
    * Set up mocked dependencies, stubs and the test object.
@@ -40,6 +41,7 @@ public class ServerListenerTest {
     // Set up test object.
     object = new ServerListener();
     object.setGame(mockedGame);
+    mockedSource = mock(HostedConnection.class);
   }
 
   /**
@@ -89,18 +91,17 @@ public class ServerListenerTest {
   }
   
   /**
-   * When the ServerListener receives an CompletedEventMessage, it should do something with its contents.
+   * When the ServerListener receives an CompletedEventMessage, it should do something with it.
    */
   @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
   @Test
   public void testCompletedEventMessageReceived() {
     // Fixtures
-    HostedConnection mockedSource = mock(HostedConnection.class);
+    
     EventCompletedMessage mockedMessage = mock(EventCompletedMessage.class);
     Spaceship mockedShip = mock(Spaceship.class);
     EventLog mockedLog = mock(EventLog.class);
     
-
     // Stubbing
     when(mockedMessage.getCompletedEvent()).thenReturn("1");
     when(mockedGame.getSpaceship()).thenReturn(mockedShip);
