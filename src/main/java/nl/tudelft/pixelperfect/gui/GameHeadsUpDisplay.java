@@ -6,6 +6,7 @@ import com.jme3.font.BitmapText;
 import com.jme3.scene.Node;
 
 import nl.tudelft.pixelperfect.Constants;
+import nl.tudelft.pixelperfect.Spaceship;
 import nl.tudelft.pixelperfect.event.EventLog;
 
 /**
@@ -15,6 +16,8 @@ import nl.tudelft.pixelperfect.event.EventLog;
  *
  */
 public class GameHeadsUpDisplay {
+  private Spaceship spaceship;
+  
   private AssetManager assetManager;
   private Node guiNodes;
   private int screenWidth;
@@ -36,11 +39,12 @@ public class GameHeadsUpDisplay {
    *          the passed screen height.
    */
   public GameHeadsUpDisplay(AssetManager passedMan, Node passedGuiNode, int passedWid,
-      int passedHi) {
+      int passedHi, Spaceship passedShip) {
     this.assetManager = passedMan;
     this.guiNodes = passedGuiNode;
     this.screenWidth = passedWid;
     this.screenHeight = passedHi;
+    this.spaceship = passedShip;
 
     // Sets-up the text display using the private method.
     setupTextDisplay();
@@ -57,7 +61,9 @@ public class GameHeadsUpDisplay {
     captainLog = new BitmapText(hudFont, true);
     captainLog.setLocalTranslation(screenWidth - Constants.guiWidthOffset,
         screenHeight - Constants.guiHeightOffset, 0);
-    captainLog.setText("check hud");
+    captainLog.setText("Captain's log...");
+
+    // Attach the log to the gui nodes.
     guiNodes.attachChild(captainLog);
   }
 

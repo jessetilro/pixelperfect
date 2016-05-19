@@ -24,9 +24,11 @@ import nl.tudelft.pixelperfect.client.HelloMessage;
 import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventScheduler;
+import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
-
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
@@ -49,6 +51,7 @@ public class Game extends VRApplication {
   private boolean rotateLeft;
   private boolean rotateRight;
   private Scene scene;
+  private GameHeadsUpDisplay gameHud;
 
   /**
    * Main method bootstrapping the process by constructing this class and initializing a
@@ -62,25 +65,25 @@ public class Game extends VRApplication {
 
     // Use full screen distortion and maximum FOV.
     app.preconfigureVRApp(PRECONFIG_PARAMETER.USE_CUSTOM_DISTORTION, false);
-    
+
     // Runs faster when set to false, but will allow mirroring.
     app.preconfigureVRApp(PRECONFIG_PARAMETER.ENABLE_MIRROR_WINDOW, true);
-    
+
     // Render two eyes, regardless of SteamVR.
     app.preconfigureVRApp(PRECONFIG_PARAMETER.FORCE_VR_MODE, false);
     app.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_CURVED_SURFACE, true);
     app.preconfigureVRApp(PRECONFIG_PARAMETER.FLIP_EYES, false);
-    
+
     // Show gui even if it is behind the current timing.
     app.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_OVERDRAW, true);
-    
+
     // Faster VR rendering, requires some vertex shader changes.
     app.preconfigureVRApp(PRECONFIG_PARAMETER.INSTANCE_VR_RENDERING, true);
     app.preconfigureVRApp(PRECONFIG_PARAMETER.NO_GUI, false);
-    
+
     // Set frustum distances here before app starts.
     app.preconfigureFrustrumNearFar(0.1f, 512f);
-    
+
     app.start();
   }
 
@@ -105,6 +108,8 @@ public class Game extends VRApplication {
     spaceship.getLog().setServer(server);
     scheduler = new EventScheduler(0.5);
     scheduler.subscribe(spaceship.getLog());
+
+    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 500, 300, spaceship);
   }
 
   private void initNetwork() {
@@ -215,6 +220,7 @@ public class Game extends VRApplication {
 
     scheduler.update(tpf);
     spaceship.update(tpf);
+    gameHud.updateHud();
 
     if (spaceship.isDead()) {
       this.stop();
