@@ -50,7 +50,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
   public void messageReceived(HostedConnection source, Message message) {
     if (message instanceof EventCompletedMessage) {
       EventCompletedMessage eve = (EventCompletedMessage) message;
-      System.out.println("Received a completed event: " + eve.getCompletedEvent());
+      System.out.println("Received a completed event: " + eve.getLabel());
       app.getSpaceship().getLog().complete(eve.getCompletedEvent());
     }
   }

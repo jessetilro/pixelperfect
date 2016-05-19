@@ -109,9 +109,10 @@ public class EventLog implements EventListener {
       }
     }
     //For now hardcoded
+    System.out.println("You pressed wrong button, DAMAGE will be done to the ship.");
     spaceship.updateHealth(-10);
     //Manual Testing
-    System.out.println(spaceship.getHealth());
+    System.out.println("New ship HEALTH: " + spaceship.getHealth());
   }
 
   /**
