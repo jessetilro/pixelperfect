@@ -7,5 +7,5 @@ package nl.tudelft.pixelperfect.gui;
  *
  */
 public class GameHeadsUpDisplay {
-
+  
 }

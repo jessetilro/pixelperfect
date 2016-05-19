@@ -59,23 +59,28 @@ public class Game extends VRApplication {
    */
   public static void main(String[] args) {
     Game app = new Game();
-    // VR SETTINGS
-    // use full screen distortion, maximum FOV, possibly quicker (not compatible with instancing)
+
+    // Use full screen distortion and maximum FOV.
     app.preconfigureVRApp(PRECONFIG_PARAMETER.USE_CUSTOM_DISTORTION, false);
-    // runs faster when set to false, but will allow mirroring
+    
+    // Runs faster when set to false, but will allow mirroring.
     app.preconfigureVRApp(PRECONFIG_PARAMETER.ENABLE_MIRROR_WINDOW, true);
-    // render two eyes, regardless of SteamVR
+    
+    // Render two eyes, regardless of SteamVR.
     app.preconfigureVRApp(PRECONFIG_PARAMETER.FORCE_VR_MODE, false);
     app.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_CURVED_SURFACE, true);
     app.preconfigureVRApp(PRECONFIG_PARAMETER.FLIP_EYES, false);
-    // show gui even if it is behind things
+    
+    // Show gui even if it is behind the current timing.
     app.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_OVERDRAW, true);
-    // faster VR rendering, requires some vertex shader changes (see jmevr/shaders/Unshaded.j3md)
+    
+    // Faster VR rendering, requires some vertex shader changes.
     app.preconfigureVRApp(PRECONFIG_PARAMETER.INSTANCE_VR_RENDERING, true);
     app.preconfigureVRApp(PRECONFIG_PARAMETER.NO_GUI, false);
-    // set frustum distances here before app starts
+    
+    // Set frustum distances here before app starts.
     app.preconfigureFrustrumNearFar(0.1f, 512f);
-    // app.preconfigureResolutionMultiplier(0.666f); // you can downsample for performance reasons
+    
     app.start();
   }
 
