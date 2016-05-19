@@ -71,6 +71,6 @@ public class GameHeadsUpDisplay {
    * Method responsible for the updating of the hud text.
    */
   public void updateHud() {
-    captainLog.setText("update hud");
+    captainLog.setText(spaceship.getLog().getEvents().toString());
   }
 }
