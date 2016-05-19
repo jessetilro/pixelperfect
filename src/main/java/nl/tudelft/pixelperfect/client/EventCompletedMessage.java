@@ -11,7 +11,7 @@ import com.jme3.network.serializing.Serializable;
  */
 @Serializable
 public class EventCompletedMessage extends AbstractMessage {
-  private String completed;
+  private int completed;
 
   /**
    * The EventCompletedMessage constructor.
@@ -25,7 +25,7 @@ public class EventCompletedMessage extends AbstractMessage {
    * 
    * @param completed , a completed Event.
    */
-  public EventCompletedMessage(String completed) {
+  public EventCompletedMessage(int completed) {
     this.completed = completed;
   }
   
@@ -34,7 +34,7 @@ public class EventCompletedMessage extends AbstractMessage {
    * 
    * @return a completed Event.
    */
-  public String getCompletedEvent() {
+  public int getCompletedEvent() {
     return completed;
   }
 }

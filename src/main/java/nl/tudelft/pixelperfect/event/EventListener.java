@@ -39,7 +39,7 @@ public interface EventListener {
    * @param id
    *           The id used to find the event in the log.
    */
-  void complete(String id);
+  void complete(int id);
   
   /**
    * Get all the events that are in the log.
