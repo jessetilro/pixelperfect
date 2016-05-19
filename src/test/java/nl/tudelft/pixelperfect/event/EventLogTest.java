@@ -80,7 +80,31 @@ public class EventLogTest extends EventListenerTest {
     object.notify(evt1);
     verify(mockedServer, times(1)).broadcast((EventsMessage) anyObject());
   }
-
+  
+  /**
+   * Checks the complete method of an existing event in the log.
+   * 
+   */
+  @Test
+  public void testCompleteExisting() {
+    Event evt1 = new FireEvent(0, "Lorem", "Ipsum", 0, 0, 50);
+    object.getEvents().add(evt1);
+    object.complete("0");
+    assertEquals(0, object.getEvents().size());
+  }
+  
+  /**
+   * Checks the complete method of an non-existing event in the log.
+   * 
+   */
+  @Test
+  public void testCompleteMissing() {
+    Event evt1 = new FireEvent(0, "Lorem", "Ipsum", 0, 0, 50);
+    object.getEvents().add(evt1);
+    object.complete("1");
+    assertEquals(1, object.getEvents().size());
+  }
+  
   /**
    * When an Event is discarded from the log, it should be removed from the list of active events
    * without damaging the ship.

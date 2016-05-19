@@ -5,7 +5,6 @@ import nl.tudelft.pixelperfect.client.EventsMessage;
 
 import java.util.ArrayList;
 
-import com.jme3.network.Filters;
 import com.jme3.network.Server;
 
 /**
