@@ -1,7 +1,5 @@
 package nl.tudelft.pixelperfect;
 
-import java.io.IOException;
-
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
@@ -14,6 +12,11 @@ import com.jme3.post.FilterPostProcessor;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
+import jmevr.app.VRApplication;
+import jmevr.input.OpenVR;
+import jmevr.post.CartoonSSAO;
+import jmevr.util.VRGuiManager;
+
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.EventsMessage;
@@ -22,10 +25,9 @@ import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 
-import jmevr.input.OpenVR;
-import jmevr.app.VRApplication;
-import jmevr.post.CartoonSSAO;
-import jmevr.util.VRGuiManager;
+import java.io.IOException;
+
+
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
  * 
@@ -42,7 +44,10 @@ public class Game extends VRApplication {
   private EventScheduler scheduler;
   private Server server;
   private Spatial observer;
-  private boolean moveForward, moveBackwards, rotateLeft, rotateRight;
+  private boolean moveForward;
+  private boolean moveBackwards;
+  private boolean rotateLeft;
+  private boolean rotateRight;
   private Scene scene;
 
   /**
@@ -54,7 +59,7 @@ public class Game extends VRApplication {
    */
   public static void main(String[] args) {
     Game app = new Game();
-    //VR SETTINGS
+    // VR SETTINGS
     // use full screen distortion, maximum FOV, possibly quicker (not compatible with instancing)
     app.preconfigureVRApp(PRECONFIG_PARAMETER.USE_CUSTOM_DISTORTION, false);
     // runs faster when set to false, but will allow mirroring
@@ -70,7 +75,7 @@ public class Game extends VRApplication {
     app.preconfigureVRApp(PRECONFIG_PARAMETER.NO_GUI, false);
     // set frustum distances here before app starts
     app.preconfigureFrustrumNearFar(0.1f, 512f);
-    //app.preconfigureResolutionMultiplier(0.666f); // you can downsample for performance reasons
+    // app.preconfigureResolutionMultiplier(0.666f); // you can downsample for performance reasons
     app.start();
   }
 
@@ -79,13 +84,13 @@ public class Game extends VRApplication {
    */
   @Override
   public void simpleInitApp() {
-	  observer = new Node("observer");
-	  observer.setLocalTranslation(new Vector3f(0.0f, 2.0f, 0.0f));
-	  VRApplication.setObserver(observer);
-	  rootNode.attachChild(observer);
+    observer = new Node("observer");
+    observer.setLocalTranslation(new Vector3f(0.0f, 2.0f, 0.0f));
+    VRApplication.setObserver(observer);
+    rootNode.attachChild(observer);
 
     initInputs();
-    
+
     scene = new Scene(this);
     scene.createMap();
 
@@ -120,7 +125,7 @@ public class Game extends VRApplication {
   /**
    * Initiate input for the game.
    */
-  @SuppressWarnings({"checkstyle:methodlength", "PMD"})
+  @SuppressWarnings({ "checkstyle:methodlength", "PMD" })
   private void initInputs() {
     InputManager inputManager = getInputManager();
     inputManager.addMapping("toggle", new KeyTrigger(KeyInput.KEY_SPACE));
@@ -157,18 +162,22 @@ public class Game extends VRApplication {
         } else if (name.equals("back")) {
           moveBackwards = keyPressed;
         } else if (name.equals("dumpImages")) {
-            OpenVR.getCompositor().CompositorDumpImages.apply();
+          OpenVR.getCompositor().CompositorDumpImages.apply();
         } else if (name.equals("left")) {
-            rotateLeft = keyPressed;
+          rotateLeft = keyPressed;
         } else if (name.equals("right")) {
-            rotateRight = keyPressed;
+          rotateRight = keyPressed;
         }
       }
     };
-    inputManager.addListener(acl, "forward"); inputManager.addListener(acl, "back");
-    inputManager.addListener(acl, "left"); inputManager.addListener(acl, "right");
-    inputManager.addListener(acl, "toggle"); inputManager.addListener(acl, "incShift");
-    inputManager.addListener(acl, "decShift"); inputManager.addListener(acl, "filter");
+    inputManager.addListener(acl, "forward");
+    inputManager.addListener(acl, "back");
+    inputManager.addListener(acl, "left");
+    inputManager.addListener(acl, "right");
+    inputManager.addListener(acl, "toggle");
+    inputManager.addListener(acl, "incShift");
+    inputManager.addListener(acl, "decShift");
+    inputManager.addListener(acl, "filter");
     inputManager.addListener(acl, "dumpImages");
   }
 
@@ -205,11 +214,11 @@ public class Game extends VRApplication {
     if (spaceship.isDead()) {
       this.stop();
     }
-    
+
     for (Event event : spaceship.getLog().getEvents()) {
       event.notification(scene);
     }
-    
+
     if (spaceship.isVictorious()) {
       System.out.println("Well played, you have completed the game!");
       this.stop();
