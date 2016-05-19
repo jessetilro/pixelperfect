@@ -8,7 +8,6 @@ import com.jme3.scene.Node;
 import nl.tudelft.pixelperfect.Constants;
 import nl.tudelft.pixelperfect.Spaceship;
 import nl.tudelft.pixelperfect.event.Event;
-import nl.tudelft.pixelperfect.event.EventLog;
 
 import java.util.ArrayList;
 
