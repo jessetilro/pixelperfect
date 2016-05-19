@@ -14,6 +14,8 @@ import com.jme3.network.HostedConnection;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import nl.tudelft.pixelperfect.Game;
+import nl.tudelft.pixelperfect.Spaceship;
+import nl.tudelft.pixelperfect.event.EventLog;
 
 /**
  * Test Suite for the ServerListener class.
@@ -74,7 +76,7 @@ public class ServerListenerTest {
    */
   @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
   @Test
-  public void testMessageReceivedNull() {
+  public void testHelloMessageReceivedNull() {
     // Fixtures
     HostedConnection mockedSource = mock(HostedConnection.class);
     AbstractMessage mockedMessage = mock(AbstractMessage.class);
@@ -84,6 +86,32 @@ public class ServerListenerTest {
 
     // Verification
     verifyNoMoreInteractions(mockedMessage);
+  }
+  
+  /**
+   * When the ServerListener receives an CompletedEventMessage, it should do something with its contents.
+   */
+  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
+  @Test
+  public void testCompletedEventMessageReceived() {
+    // Fixtures
+    HostedConnection mockedSource = mock(HostedConnection.class);
+    EventCompletedMessage mockedMessage = mock(EventCompletedMessage.class);
+    Spaceship mockedShip = mock(Spaceship.class);
+    EventLog mockedLog = mock(EventLog.class);
+    
+
+    // Stubbing
+    when(mockedMessage.getCompletedEvent()).thenReturn("1");
+    when(mockedGame.getSpaceship()).thenReturn(mockedShip);
+    when(mockedShip.getLog()).thenReturn(mockedLog);
+    
+
+    // Execution
+    object.messageReceived(mockedSource, mockedMessage);
+
+    // Verification
+    verify(mockedLog).complete("1");
   }
 
 }
