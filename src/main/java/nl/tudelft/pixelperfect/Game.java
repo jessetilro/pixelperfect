@@ -195,7 +195,7 @@ public class Game extends VRApplication {
       observer.rotate(0, -0.75f * tpf, 0);
     }
 
-    scheduler.update(tpf);
+    scheduler.update(tpf / 8);
     spaceship.update(tpf);
 
     if (spaceship.isDead()) {
