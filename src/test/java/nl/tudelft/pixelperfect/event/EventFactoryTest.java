@@ -33,9 +33,9 @@ public class EventFactoryTest {
   @Test
   public void testUniqueId() {
     Event e1 = factory.create(1);
-    assertEquals(e1.getId(), 0);
+    assertEquals(e1.getId(), 1);
     Event e2 = factory.create(1);
-    assertEquals(e2.getId(), 1);
+    assertEquals(e2.getId(), 2);
   }
 
   /**
@@ -53,7 +53,7 @@ public class EventFactoryTest {
   @Test
   public void testCreateFireEvent() {
     Event e1 = factory.create(2);
-    assertEquals(e1.getSummary(), "Fire");
+    assertEquals(e1.getSummary(), "Fire Outbreak");
   }
 
   /**
