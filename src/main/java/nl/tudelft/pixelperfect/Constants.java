@@ -7,6 +7,8 @@ package nl.tudelft.pixelperfect;
  *
  */
 public final class Constants {
-  // Gui-styling related constants.
-  private static final int fontSize = 30;
+  // Gui-styling related constants for the in-game HUD.
+  public static final int fontSize = 30;
+  public static final int guiWidthOffset = 150;
+  public static final int guiHeightOffset = 50;
 }

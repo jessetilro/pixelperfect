@@ -1,11 +1,11 @@
 package nl.tudelft.pixelperfect.event;
 
+import com.jme3.network.Server;
+
 import nl.tudelft.pixelperfect.Spaceship;
 import nl.tudelft.pixelperfect.client.EventsMessage;
 
 import java.util.ArrayList;
-
-import com.jme3.network.Server;
 
 /**
  * The captain's log of events, which should be subscribed to the event schedulers in the game.

@@ -5,6 +5,9 @@ import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
 import com.jme3.scene.Node;
 
+import nl.tudelft.pixelperfect.Constants;
+import nl.tudelft.pixelperfect.event.EventLog;
+
 /**
  * Class that displays relevant information in the heads-up display during the gameplay.
  * 
@@ -49,8 +52,11 @@ public class GameHeadsUpDisplay {
   private void setupTextDisplay() {
     // Loading the font stored in the jme default manager.
     hudFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
-    
+
     // Init for the log text, including font loading.
     captainLog = new BitmapText(hudFont, true);
+    captainLog.setLocalTranslation(screenWidth - Constants.guiWidthOffset,
+        screenHeight - Constants.guiHeightOffset, 0);
+    captainLog.setText(EventLog.getEvents());
   }
 }
