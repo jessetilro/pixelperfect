@@ -70,9 +70,9 @@ public class EventLog implements EventListener {
     events.add(event);
     System.out.println("The ship received a new event: " + event.getDescription());
     String type = event.getClass().getSimpleName();
-    EventsMessage eve = 
+    EventsMessage message = 
         new EventsMessage(event.getId(), type, event.getTimestamp(), event.getDuration());
-    server.broadcast(eve);
+    server.broadcast(message);
   }
 
   /**
