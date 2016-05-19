@@ -1,5 +1,7 @@
 package nl.tudelft.pixelperfect.gui;
 
+import java.util.ArrayList;
+
 import com.jme3.asset.AssetManager;
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
@@ -7,6 +9,7 @@ import com.jme3.scene.Node;
 
 import nl.tudelft.pixelperfect.Constants;
 import nl.tudelft.pixelperfect.Spaceship;
+import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventLog;
 
 /**
@@ -17,7 +20,7 @@ import nl.tudelft.pixelperfect.event.EventLog;
  */
 public class GameHeadsUpDisplay {
   private Spaceship spaceship;
-  
+
   private AssetManager assetManager;
   private Node guiNodes;
   private int screenWidth;
@@ -38,8 +41,8 @@ public class GameHeadsUpDisplay {
    * @param passedHi
    *          the passed screen height.
    */
-  public GameHeadsUpDisplay(AssetManager passedMan, Node passedGuiNode, int passedWid,
-      int passedHi, Spaceship passedShip) {
+  public GameHeadsUpDisplay(AssetManager passedMan, Node passedGuiNode, int passedWid, int passedHi,
+      Spaceship passedShip) {
     this.assetManager = passedMan;
     this.guiNodes = passedGuiNode;
     this.screenWidth = passedWid;
@@ -71,6 +74,13 @@ public class GameHeadsUpDisplay {
    * Method responsible for the updating of the hud text.
    */
   public void updateHud() {
-    captainLog.setText(spaceship.getLog().getEvents().toString());
+    ArrayList<Event> currentEvents = spaceship.getLog().getEvents();
+    ArrayList<String> currentEventsToDisplay = new ArrayList<String>();
+
+    for (Event current : currentEvents) {
+      currentEventsToDisplay.add(current.getSummary());
+    }
+
+    captainLog.setText(currentEventsToDisplay.toString());
   }
 }
