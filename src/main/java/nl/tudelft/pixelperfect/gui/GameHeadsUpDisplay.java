@@ -64,14 +64,14 @@ public class GameHeadsUpDisplay {
     captainLog = new BitmapText(hudFont, true);
     captainLog.setLocalTranslation(screenWidth - Constants.guiWidthOffset,
         screenHeight - Constants.guiHeightOffset, 0);
-    captainLog.setText("Captain's log...");
 
     // Attach the log to the gui nodes.
     guiNodes.attachChild(captainLog);
   }
 
   /**
-   * Method responsible for the updating of the hud text.
+   * Method responsible for the updating of the hud text and displaying the events, along with their
+   * remaining time.
    */
   public void updateHud() {
     ArrayList<Event> currentEvents = spaceship.getLog().getEvents();
@@ -81,6 +81,10 @@ public class GameHeadsUpDisplay {
       currentEventsToDisplay.add(current.getSummary() + " (" + current.getDuration() / 1000 + ")");
     }
 
-    captainLog.setText(currentEventsToDisplay.toString());
+    if (currentEventsToDisplay.isEmpty()) {
+      captainLog.setText(Constants.noEventsLogText);
+    } else {
+      captainLog.setText(currentEventsToDisplay.toString());
+    }
   }
 }

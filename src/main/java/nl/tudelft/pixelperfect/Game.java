@@ -26,8 +26,6 @@ import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.io.IOException;
 
 /**
@@ -110,8 +108,7 @@ public class Game extends VRApplication {
     scheduler = new EventScheduler(0.5);
     scheduler.subscribe(spaceship.getLog());
 
-    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 200,
-        200, spaceship);
+    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
   }
 
   private void initNetwork() {
@@ -222,6 +219,8 @@ public class Game extends VRApplication {
 
     scheduler.update(tpf);
     spaceship.update(tpf);
+
+    // Update the in-game heads up display.
     gameHud.updateHud();
 
     if (spaceship.isDead()) {

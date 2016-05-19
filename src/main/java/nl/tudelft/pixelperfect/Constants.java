@@ -10,4 +10,7 @@ public final class Constants {
   // Gui-styling related constants for the in-game HUD.
   public static final int guiWidthOffset = 150;
   public static final int guiHeightOffset = 50;
+  
+  // Gui text for the in-game HUd.
+  public static final String noEventsLogText = "Everything looks clear, cap'n!";
 }
