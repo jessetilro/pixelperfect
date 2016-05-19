@@ -103,7 +103,7 @@ public class ServerListenerTest {
     EventLog mockedLog = mock(EventLog.class);
     
     // Stubbing
-    when(mockedMessage.getCompletedEvent()).thenReturn("1");
+    when(mockedMessage.getLabel()).thenReturn("Fire Event");
     when(mockedGame.getSpaceship()).thenReturn(mockedShip);
     when(mockedShip.getLog()).thenReturn(mockedLog);
     
@@ -112,7 +112,7 @@ public class ServerListenerTest {
     object.messageReceived(mockedSource, mockedMessage);
 
     // Verification
-    verify(mockedLog).complete("1");
+    verify(mockedLog).complete(0);
   }
 
 }
