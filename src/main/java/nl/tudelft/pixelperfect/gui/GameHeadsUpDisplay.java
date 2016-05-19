@@ -1,7 +1,5 @@
 package nl.tudelft.pixelperfect.gui;
 
-import java.util.ArrayList;
-
 import com.jme3.asset.AssetManager;
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
@@ -11,6 +9,8 @@ import nl.tudelft.pixelperfect.Constants;
 import nl.tudelft.pixelperfect.Spaceship;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventLog;
+
+import java.util.ArrayList;
 
 /**
  * Class that displays relevant information in the heads-up display during the gameplay.
@@ -78,7 +78,7 @@ public class GameHeadsUpDisplay {
     ArrayList<String> currentEventsToDisplay = new ArrayList<String>();
 
     for (Event current : currentEvents) {
-      currentEventsToDisplay.add(current.getSummary());
+      currentEventsToDisplay.add(current.getSummary() + " (" + current.getDuration() / 1000 + ")");
     }
 
     captainLog.setText(currentEventsToDisplay.toString());

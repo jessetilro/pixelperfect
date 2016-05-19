@@ -42,6 +42,7 @@ import java.io.IOException;
  */
 public class Game extends VRApplication {
 
+  private static Game appGame;
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private Server server;
@@ -61,30 +62,30 @@ public class Game extends VRApplication {
    *          The parameters passed to the process.
    */
   public static void main(String[] args) {
-    Game app = new Game();
+    appGame = new Game();
 
     // Use full screen distortion and maximum FOV.
-    app.preconfigureVRApp(PRECONFIG_PARAMETER.USE_CUSTOM_DISTORTION, false);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.USE_CUSTOM_DISTORTION, false);
 
     // Runs faster when set to false, but will allow mirroring.
-    app.preconfigureVRApp(PRECONFIG_PARAMETER.ENABLE_MIRROR_WINDOW, true);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.ENABLE_MIRROR_WINDOW, true);
 
     // Render two eyes, regardless of SteamVR.
-    app.preconfigureVRApp(PRECONFIG_PARAMETER.FORCE_VR_MODE, false);
-    app.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_CURVED_SURFACE, true);
-    app.preconfigureVRApp(PRECONFIG_PARAMETER.FLIP_EYES, false);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.FORCE_VR_MODE, false);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_CURVED_SURFACE, true);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.FLIP_EYES, false);
 
     // Show gui even if it is behind the current timing.
-    app.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_OVERDRAW, true);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_OVERDRAW, true);
 
     // Faster VR rendering, requires some vertex shader changes.
-    app.preconfigureVRApp(PRECONFIG_PARAMETER.INSTANCE_VR_RENDERING, true);
-    app.preconfigureVRApp(PRECONFIG_PARAMETER.NO_GUI, false);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.INSTANCE_VR_RENDERING, true);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.NO_GUI, false);
 
     // Set frustum distances here before app starts.
-    app.preconfigureFrustrumNearFar(0.1f, 512f);
+    appGame.preconfigureFrustrumNearFar(0.1f, 512f);
 
-    app.start();
+    appGame.start();
   }
 
   /**
@@ -109,7 +110,8 @@ public class Game extends VRApplication {
     scheduler = new EventScheduler(0.5);
     scheduler.subscribe(spaceship.getLog());
 
-    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 500, 300, spaceship);
+    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 200,
+        200, spaceship);
   }
 
   private void initNetwork() {
