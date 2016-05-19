@@ -5,7 +5,6 @@ import nl.tudelft.pixelperfect.client.EventsMessage;
 
 import java.util.ArrayList;
 
-import com.jme3.network.Filters;
 import com.jme3.network.Server;
 
 /**
@@ -37,7 +36,7 @@ public class EventLog implements EventListener {
    * 
    * @param server The server.
    */
-  public void setServer(Server server) {
+  public synchronized void setServer(Server server) {
     this.server = server;
   }
   
@@ -69,9 +68,9 @@ public class EventLog implements EventListener {
     events.add(event);
     System.out.println("The ship received a new event: " + event.getDescription());
     String type = event.getClass().getSimpleName();
-    EventsMessage eve = 
+    EventsMessage message = 
         new EventsMessage(event.getId(), type, event.getTimestamp(), event.getDuration());
-    server.broadcast(Filters.in(server.getConnection(0)), eve);
+    server.broadcast(message);
   }
 
   /**

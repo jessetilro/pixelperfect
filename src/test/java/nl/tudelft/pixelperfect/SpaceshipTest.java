@@ -41,6 +41,14 @@ public class SpaceshipTest {
   public void before() {
     ship = new Spaceship();
   }
+  
+  /**
+   * Tests the getTimer method.
+   */
+  @Test
+  public void testGetTimer() {
+    assertEquals(0, ship.getTimer(), 0);
+  }
 
   /**
    * Initiallly the ship's health value should be set to 100.
