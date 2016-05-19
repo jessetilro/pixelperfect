@@ -7,5 +7,6 @@ package nl.tudelft.pixelperfect;
  *
  */
 public final class Constants {
-
+  // Gui-styling related constants.
+  private static final int fontSize = 30;
 }
