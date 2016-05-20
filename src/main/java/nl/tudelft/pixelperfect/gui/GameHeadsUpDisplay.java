@@ -79,7 +79,8 @@ public class GameHeadsUpDisplay {
     ArrayList<String> currentEventsToDisplay = new ArrayList<String>();
 
     for (Event current : currentEvents) {
-      currentEventsToDisplay.add(current.getSummary() + " (" + current.getTimeLeft() / 1000 + ")");
+      currentEventsToDisplay.add(current.getSummary() + " ("
+          + current.getTimeLeft(System.currentTimeMillis()) / 1000 + ")");
     }
 
     if (currentEventsToDisplay.isEmpty()) {

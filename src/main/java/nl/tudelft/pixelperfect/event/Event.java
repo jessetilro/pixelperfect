@@ -7,6 +7,7 @@ import nl.tudelft.pixelperfect.Spaceship;
  * A class for storing and defining events, called upon by the event scheduler.
  * 
  * @author David Alderliesten
+ * @author Jesse Tilro
  *
  */
 public abstract class Event {
@@ -15,7 +16,6 @@ public abstract class Event {
   private int id;
   private long timestamp;
   private long duration;
-  private long timeLeft;
   private double damage;
 
   /**
@@ -43,7 +43,6 @@ public abstract class Event {
     this.description = description;
     this.timestamp = timestamp;
     this.duration = duration;
-    this.timeLeft = duration;
     this.damage = damage;
   }
 
@@ -95,10 +94,13 @@ public abstract class Event {
   /**
    * Get the time remaining of the event.
    * 
+   * @param currentTime
+   *          the current time.
+   * 
    * @return The time remaining.
    */
-  public Long getTimeLeft() {
-    return this.timeLeft;
+  public Long getTimeLeft(long currentTime) {
+    return ((this.timestamp + this.duration) - currentTime);
   }
 
   /**
@@ -110,16 +112,6 @@ public abstract class Event {
    */
   public boolean isExpired(long time) {
     return (time > (timestamp + duration));
-  }
-
-  /**
-   * Updates the time left variable for the event.
-   * 
-   * @param currentTime
-   *          the current time of the game
-   */
-  public void updateTimeLeft(long currentTime) {
-    this.timeLeft = (this.timestamp + this.duration) - currentTime;
   }
 
   /**
