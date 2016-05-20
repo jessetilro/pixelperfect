@@ -20,13 +20,13 @@ import jmevr.util.VRGuiManager;
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.EventsMessage;
-import nl.tudelft.pixelperfect.client.HelloMessage;
 import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
 import java.io.IOException;
+
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
@@ -114,13 +114,11 @@ public class Game extends VRApplication {
   private void initNetwork() {
     try {
       server = Network.createServer(6143);
-      Serializer.registerClass(HelloMessage.class);
       Serializer.registerClass(EventCompletedMessage.class);
       Serializer.registerClass(EventsMessage.class);
       server.start();
       ServerListener listen = new ServerListener();
       listen.setGame(this);
-      server.addMessageListener(listen, HelloMessage.class);
       server.addMessageListener(listen, EventCompletedMessage.class);
       server.addMessageListener(listen, EventsMessage.class);
       ConnectListener connect = new ConnectListener();
@@ -217,7 +215,7 @@ public class Game extends VRApplication {
       observer.rotate(0, -0.75f * tpf, 0);
     }
 
-    scheduler.update(tpf);
+    scheduler.update(tpf / 8);
     spaceship.update(tpf);
 
     // Update the in-game heads up display.

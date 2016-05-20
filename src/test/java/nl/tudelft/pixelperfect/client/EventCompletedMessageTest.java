@@ -1,7 +1,7 @@
 package nl.tudelft.pixelperfect.client;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
@@ -22,7 +22,7 @@ public class EventCompletedMessageTest {
    */
   @Before
   public void init() {
-    object = new EventCompletedMessage("Hello World!");
+    object = new EventCompletedMessage("test", 0);
   }
 
   /**
@@ -31,7 +31,7 @@ public class EventCompletedMessageTest {
   @Test
   public void testEmptyConstructor() {
     EventCompletedMessage obj = new EventCompletedMessage();
-    assertThat(obj.getCompletedEvent(), is(nullValue()));
+    assertThat(obj.getCompletedEvent(), is(0));
   }
 
   /**
@@ -39,6 +39,14 @@ public class EventCompletedMessageTest {
    */
   @Test
   public void testGetCompletedEvent() {
-    assertThat(object.getCompletedEvent(), is("Hello World!"));
+    assertThat(object.getCompletedEvent(), is(0));
+  }
+  
+  /**
+   * Testing the getLabel method.
+   */
+  @Test
+  public void testGetLabel() {
+    assertEquals("test", object.getLabel());
   }
 }
