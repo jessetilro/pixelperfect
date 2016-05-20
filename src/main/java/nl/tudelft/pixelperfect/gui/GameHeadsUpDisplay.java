@@ -61,8 +61,8 @@ public class GameHeadsUpDisplay {
 
     // Init for the log text, including font loading and text setting.
     captainLog = new BitmapText(hudFont, true);
-    captainLog.setLocalTranslation(screenWidth - Constants.guiWidthOffset,
-        screenHeight - Constants.guiHeightOffset, 0);
+    captainLog.setLocalTranslation(screenWidth - Constants.GUIWIDTHOFFSET,
+        screenHeight - Constants.GUIHEIGHTOFFSET, 0);
 
     // Attach the log to the gui nodes.
     guiNodes.attachChild(captainLog);
@@ -81,7 +81,7 @@ public class GameHeadsUpDisplay {
     }
 
     if (currentEventsToDisplay.isEmpty()) {
-      captainLog.setText(Constants.noEventsLogText);
+      captainLog.setText(Constants.NOEVENTSLOGTEXT);
     } else {
       captainLog.setText(currentEventsToDisplay.toString());
     }
