@@ -8,14 +8,10 @@ import com.jme3.math.Vector3f;
 import com.jme3.network.Network;
 import com.jme3.network.Server;
 import com.jme3.network.serializing.Serializer;
-import com.jme3.post.FilterPostProcessor;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
 import jmevr.app.VRApplication;
-import jmevr.input.OpenVR;
-import jmevr.post.CartoonSSAO;
-import jmevr.util.VRGuiManager;
 
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.EventCompletedMessage;
@@ -26,7 +22,6 @@ import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 
 
 /**
