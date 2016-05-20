@@ -29,7 +29,6 @@ public class EventLog implements EventListener {
   public EventLog(Spaceship spaceship) {
     this.events = new ArrayList<Event>();
     this.spaceship = spaceship;
-
   }
   
   /**
@@ -101,13 +100,18 @@ public class EventLog implements EventListener {
    * @param identity 
    *           The id used to find the event in the log.
    */
-  public synchronized void complete(String identity) {
+  public synchronized void complete(int identity) {
     for (int t = 0; t < events.size(); t++) {
-      if (events.get(t).getId() == Integer.parseInt(identity)) {
+      if (events.get(t).getId() == identity) {
         events.remove(t);
         return;
       }
     }
+    //For now hardcoded
+    System.out.println("You pressed wrong button, DAMAGE will be done to the ship.");
+    spaceship.updateHealth(-10);
+    //Manual Testing
+    System.out.println("New ship HEALTH: " + spaceship.getHealth());
   }
 
   /**

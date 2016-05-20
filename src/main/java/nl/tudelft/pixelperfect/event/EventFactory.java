@@ -11,6 +11,8 @@ import java.util.Random;
  * id's.
  * 
  * @author Wouter Zirkzee
+ * @author Jesse Tilro
+ * @author Floris Doolaard
  * 
  */
 public class EventFactory {

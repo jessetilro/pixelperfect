@@ -17,11 +17,9 @@ import com.jme3.scene.Spatial;
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.EventsMessage;
-import nl.tudelft.pixelperfect.client.HelloMessage;
 import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventScheduler;
-
 import jmevr.input.OpenVR;
 import jmevr.app.VRApplication;
 import jmevr.post.CartoonSSAO;
@@ -100,13 +98,11 @@ public class Game extends VRApplication {
   private void initNetwork() {
     try {
       server = Network.createServer(6143);
-      Serializer.registerClass(HelloMessage.class);
       Serializer.registerClass(EventCompletedMessage.class);
       Serializer.registerClass(EventsMessage.class);
       server.start();
       ServerListener listen = new ServerListener();
       listen.setGame(this);
-      server.addMessageListener(listen, HelloMessage.class);
       server.addMessageListener(listen, EventCompletedMessage.class);
       server.addMessageListener(listen, EventsMessage.class);
       ConnectListener connect = new ConnectListener();
@@ -199,7 +195,7 @@ public class Game extends VRApplication {
       observer.rotate(0, -0.75f * tpf, 0);
     }
 
-    scheduler.update(tpf);
+    scheduler.update(tpf / 8);
     spaceship.update(tpf);
 
     if (spaceship.isDead()) {

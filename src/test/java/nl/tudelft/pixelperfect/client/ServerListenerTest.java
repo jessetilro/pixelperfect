@@ -53,23 +53,27 @@ public class ServerListenerTest {
   }
 
   /**
-   * When the ServerListener receives a HelloMessage, it should do something with its contents.
+   * When the ServerListener receives a Message, it should do something with its contents.
    */
   @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
   @Test
   public void testMessageReceived() {
     // Fixtures
-    HostedConnection mockedSource = mock(HostedConnection.class);
-    HelloMessage mockedMessage = mock(HelloMessage.class);
+    EventCompletedMessage mockedMessage = mock(EventCompletedMessage.class);
+    Spaceship mockedShip = mock(Spaceship.class);
+    EventLog mockedLog = mock(EventLog.class);
 
     // Stubbing
-    when(mockedMessage.getSomething()).thenReturn("Hello World!");
+    when(mockedMessage.getLabel()).thenReturn("Fire Event");
 
-    // Execution
+    // Execution    
+    when(mockedGame.getSpaceship()).thenReturn(mockedShip);
+    when(mockedShip.getLog()).thenReturn(mockedLog);
+    
     object.messageReceived(mockedSource, mockedMessage);
 
     // Verification
-    verify(mockedMessage).getSomething();
+    verify(mockedMessage).getLabel();
   }
 
   /**
@@ -103,7 +107,7 @@ public class ServerListenerTest {
     EventLog mockedLog = mock(EventLog.class);
     
     // Stubbing
-    when(mockedMessage.getCompletedEvent()).thenReturn("1");
+    when(mockedMessage.getLabel()).thenReturn("Fire Event");
     when(mockedGame.getSpaceship()).thenReturn(mockedShip);
     when(mockedShip.getLog()).thenReturn(mockedLog);
     
@@ -112,7 +116,7 @@ public class ServerListenerTest {
     object.messageReceived(mockedSource, mockedMessage);
 
     // Verification
-    verify(mockedLog).complete("1");
+    verify(mockedLog).complete(0);
   }
 
 }

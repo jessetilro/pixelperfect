@@ -89,7 +89,7 @@ public class EventLogTest extends EventListenerTest {
   public void testCompleteExisting() {
     Event evt1 = new FireEvent(0, "Lorem", "Ipsum", 0, 0, 50);
     object.getEvents().add(evt1);
-    object.complete("0");
+    object.complete(0);
     assertEquals(0, object.getEvents().size());
   }
   
@@ -101,7 +101,7 @@ public class EventLogTest extends EventListenerTest {
   public void testCompleteMissing() {
     Event evt1 = new FireEvent(0, "Lorem", "Ipsum", 0, 0, 50);
     object.getEvents().add(evt1);
-    object.complete("1");
+    object.complete(1);
     assertEquals(1, object.getEvents().size());
   }
   
