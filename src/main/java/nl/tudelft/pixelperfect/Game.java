@@ -201,6 +201,7 @@ public class Game extends VRApplication {
    * Main update loop for the game.
    */
   @Override
+  @SuppressWarnings({ "checkstyle:methodlength"})
   public void simpleUpdate(float tpf) {
     if (moveForward) {
       observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(tpf * 8f));
