@@ -52,25 +52,29 @@ public class ServerListenerTest {
     assertEquals(mockedGame, object.getGame());
   }
 
-//  /**
-//   * When the ServerListener receives a HelloMessage, it should do something with its contents.
-//   */
-//  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
-//  @Test
-//  public void testMessageReceived() {
-//    // Fixtures
-//    HostedConnection mockedSource = mock(HostedConnection.class);
-//    EventCompletedMessage mockedMessage = mock(EventCompletedMessage.class);
-//
-//    // Stubbing
-//    when(mockedMessage.getCompletedEvent()).thenReturn(0);
-//
-//    // Execution
-//    object.messageReceived(mockedSource, mockedMessage);
-//
-//    // Verification
-//    verify(mockedMessage).getCompletedEvent();
-//  }
+  /**
+   * When the ServerListener receives a Message, it should do something with its contents.
+   */
+  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
+  @Test
+  public void testMessageReceived() {
+    // Fixtures
+    EventCompletedMessage mockedMessage = mock(EventCompletedMessage.class);
+    Spaceship mockedShip = mock(Spaceship.class);
+    EventLog mockedLog = mock(EventLog.class);
+
+    // Stubbing
+    when(mockedMessage.getLabel()).thenReturn("Fire Event");
+
+    // Execution    
+    when(mockedGame.getSpaceship()).thenReturn(mockedShip);
+    when(mockedShip.getLog()).thenReturn(mockedLog);
+    
+    object.messageReceived(mockedSource, mockedMessage);
+
+    // Verification
+    verify(mockedMessage).getLabel();
+  }
 
   /**
    * When the ServerListener receives some message it does not recognize, it should do nothing with
