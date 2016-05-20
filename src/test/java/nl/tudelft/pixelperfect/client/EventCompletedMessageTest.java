@@ -45,6 +45,7 @@ public class EventCompletedMessageTest {
   /**
    * Testing the getLabel method.
    */
+  @Test
   public void testGetLabel() {
     assertEquals("test", object.getLabel());
   }
