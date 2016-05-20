@@ -40,19 +40,17 @@ public class Scene {
    */
   public void createMap() {  	
     drawDashboard();
-    drawPane(new Vector3f(0f, 0f, 0f), new Quaternion(), ColorRGBA.Yellow);
-    drawPane(new Vector3f(-8, 7, 0)
-        , new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1))
-        , ColorRGBA.Orange);
-    drawPane(new Vector3f(8, 7, 0)
-        , new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1))
-        , ColorRGBA.Orange);
-    drawPane(new Vector3f(0, 7, -8)
-        , new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(1, 0, 0))
-        , ColorRGBA.Green);
-    drawPane(new Vector3f(0, 7, 8)
-        , new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(1, 0, 0))
-        , ColorRGBA.Green);
+    drawPane(new Vector3f(0f, 0f, 0f), ColorRGBA.Yellow, new Quaternion());
+    drawPane(new Vector3f(-8, 7, 0), ColorRGBA.Orange, new Quaternion()
+        .fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+    drawPane(new Vector3f(8, 7, 0), ColorRGBA.Orange, new Quaternion()
+        .fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+    drawPane(new Vector3f(0, 7, -8), ColorRGBA.Green, new Quaternion()
+        .fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(1, 0, 0)));
+    drawPane(new Vector3f(0, 7, 8), ColorRGBA.Green, new Quaternion()
+        .fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(1, 0, 0)));
+
+    //    drawWalls();
     drawTimer();
     addButton(new Vector3f(0, 1, 7), 2, 2);
   }
@@ -79,7 +77,7 @@ public class Scene {
    * @param color
    *                Color of the pane.
    */
-  private void drawPane(Vector3f location, Quaternion rotation, ColorRGBA color) {
+  private void drawPane(Vector3f location, ColorRGBA color, Quaternion rotation) {
     Box pane = new Box(8, 0.01f, 8);
     Geometry geometry = new Geometry("Pane", pane);
     Material material = new Material(app.getAssetManager(), basicMat);
