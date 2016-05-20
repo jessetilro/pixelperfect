@@ -5,10 +5,7 @@ import com.jme3.network.Message;
 import com.jme3.network.MessageListener;
 
 import nl.tudelft.pixelperfect.Game;
-import nl.tudelft.pixelperfect.event.Event;
-import nl.tudelft.pixelperfect.event.EventLog;
 
-import java.util.ArrayList;
 
 /**
  * Listener for the Game's server, which handles incoming messages.
@@ -51,17 +48,10 @@ public class ServerListener implements MessageListener<HostedConnection> {
    * 
    */
   public void messageReceived(HostedConnection source, Message message) {
-    // TODO add else clause and correctly parse message.
-    if (message instanceof HelloMessage) {
-      HelloMessage helloMessage = (HelloMessage) message;
-      System.out.println(
-          "Server received '" + helloMessage.getSomething() + "' from client #" + source.getId());
-    } else if (message instanceof EventsMessage) {
-      EventsMessage eve = (EventsMessage) message;
-      ArrayList<Event> log = eve.getLog();
-      EventLog curr = (EventLog) app.getSpaceship().getLog();
-      curr.replace(log);
-
+    if (message instanceof EventCompletedMessage) {
+      EventCompletedMessage eve = (EventCompletedMessage) message;
+      System.out.println("Received a completed event: " + eve.getLabel());
+      app.getSpaceship().getLog().complete(eve.getCompletedEvent());
     }
   }
 }

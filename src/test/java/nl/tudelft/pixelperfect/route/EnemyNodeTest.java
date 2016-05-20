@@ -2,47 +2,32 @@ package nl.tudelft.pixelperfect.route;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 
 /**
  * Test Suite for the EnemyNode class.
  * 
  * @author David Alderliesten
+ * @author Jesse Tilro
  *
  */
 public class EnemyNodeTest extends RouteNodeTest {
-  private EnemyNode node;
 
   /**
-   * Initializing objects.
+   * Create a test object.
+   * 
+   * @return A RouteNode.
    */
-  @Before
-  public void before() {
-    node = new EnemyNode("summary", "description");
+  @Override
+  protected RouteNode create() {
+    return new EnemyNode("summary", "description");
   }
 
-  /**
-   * Testing the getSummary method.
-   */
-  @Test
-  public void testRouteSummary() {
-    assertEquals("summary", node.getSummary());
-  }
-
-  /**
-   * Testing the getDescription method.
-   */
-  @Test
-  public void testRouteDescription() {
-    assertEquals("description", node.getDescription());
-  }
-  
   /**
    * Testing toString.
    */
   @Test
   public void testToString() {
-    assertEquals("EnemyNode", node.toString());
+    assertEquals("EnemyNode", getObject().toString());
   }
 }

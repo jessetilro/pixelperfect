@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.jmonkeyengine</groupId>
+  <artifactId>jme3-plugins</artifactId>
+  <versioning>
+    <release>3.1.0-beta1</release>
+    <versions>
+      <version>3.1.0-beta1</version>
+    </versions>
+    <lastUpdated>20160516203209</lastUpdated>
+  </versioning>
+</metadata>

@@ -1,6 +1,7 @@
 package nl.tudelft.pixelperfect.event;
 
-import com.jme3.scene.Geometry;
+
+import nl.tudelft.pixelperfect.Scene;
 
 /**
  * A type of Event, imposing the problem of a fire outbreak.
@@ -31,13 +32,14 @@ public class FireEvent extends Event {
     super(id, summary, description, timestamp, duration, damage);
   }
 
+  
   /**
    * Show a specific notification for this event.
    * 
-   * @param geo
-   *          Object to be mutated.
+   * @param scene
+   *          Scene to be mutated.
    */
-  public void notification(Geometry geo) {
+  public void notification(Scene scene) {
     // TODO
   }
 }

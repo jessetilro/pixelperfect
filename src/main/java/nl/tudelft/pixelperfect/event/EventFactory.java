@@ -1,5 +1,9 @@
 package nl.tudelft.pixelperfect.event;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -7,19 +11,33 @@ import java.util.Random;
  * id's.
  * 
  * @author Wouter Zirkzee
+ * @author Jesse Tilro
+ * @author Floris Doolaard
  * 
  */
 public class EventFactory {
 
+  private static String dataFile = "src/main/resources/data/events.json";
+
   private int id;
   private Random random;
+  private EventReader reader;
+  private Map<Integer, Class<? extends Event>> associations;
 
   /**
    * Constructor for EventFactory.
    */
   public EventFactory() {
-    id = 0;
+    id = 1;
+    reader = EventReader.getInstance();
+    reader.readFromFile(dataFile);
     random = new Random();
+
+    associations = new HashMap<Integer, Class<? extends Event>>();
+    associations.put(1, AsteroidFieldEvent.class);
+    associations.put(2, FireEvent.class);
+    associations.put(3, HostileShipEvent.class);
+    associations.put(4, PlasmaLeakEvent.class);
   }
 
   /**
@@ -28,45 +46,37 @@ public class EventFactory {
    * @return an Event.
    */
   public Event randomEvent() {
-    int rand = random.nextInt(4);
+    int rand = 1 + random.nextInt(4);
     return create(rand);
   }
 
   /**
    * Create an event based on the parameter.
    *
-   * @param ind
+   * @param type
    *          Defines which event is to be created.
    * 
    * @return an Event.
    */
-  public Event create(int ind) {
-    Event tbr;
-    switch (ind) {
-      default:
-        tbr = null;
-        break;
-      case 0:
-        tbr = new AsteroidFieldEvent(id, "Asteroid Field",
-            "Watch out, you are approaching an asteroid field!", System.currentTimeMillis(), 4000,
-            10);
-        break;
-      case 1:
-        tbr = new FireEvent(id, "Fire", "Alert! Faulty wiring caused a fire!",
-            System.currentTimeMillis(), 4000, 10);
-        break;
-      case 2:
-        tbr = new HostileShipEvent(id, "Hostile Ship",
-            "A hostile spaceship is near, prepare to defend yourself!", System.currentTimeMillis(),
-            4000, 10);
-        break;
-      case 3:
-        tbr = new PlasmaLeakEvent(id, "Plasma Leak",
-            "Plasma pressure is dropping, there must be a leak!", System.currentTimeMillis(), 4000,
-            10);
-        break;
+  public Event create(int type) {
+    Class<? extends Event> eventClass = associations.get(type);
+    if (eventClass != null) {
+      Constructor<? extends Event>[] constructors = (Constructor<? extends Event>[]) eventClass
+          .getConstructors();
+      Constructor<? extends Event> constructor = constructors[0];
+      try {
+        return constructor.newInstance(id++, reader.getSummary(type), reader.getDescription(type),
+            System.currentTimeMillis(), reader.getDuration(type), reader.getDamage(type));
+      } catch (InstantiationException e) {
+        return null;
+      } catch (IllegalAccessException e) {
+        return null;
+      } catch (IllegalArgumentException e) {
+        return null;
+      } catch (InvocationTargetException e) {
+        return null;
+      }
     }
-    id++;
-    return tbr;
+    return null;
   }
 }

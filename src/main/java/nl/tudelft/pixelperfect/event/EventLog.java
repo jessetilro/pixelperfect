@@ -1,6 +1,9 @@
 package nl.tudelft.pixelperfect.event;
 
+import com.jme3.network.Server;
+
 import nl.tudelft.pixelperfect.Spaceship;
+import nl.tudelft.pixelperfect.client.EventsMessage;
 
 import java.util.ArrayList;
 
@@ -15,6 +18,7 @@ public class EventLog implements EventListener {
 
   private ArrayList<Event> events;
   private Spaceship spaceship;
+  private Server server;
 
   /**
    * Construct a new EventLog instance.
@@ -26,7 +30,16 @@ public class EventLog implements EventListener {
     this.events = new ArrayList<Event>();
     this.spaceship = spaceship;
   }
-
+  
+  /**
+   * Sets the server for reference purposes.
+   * 
+   * @param server The server.
+   */
+  public synchronized void setServer(Server server) {
+    this.server = server;
+  }
+  
   /**
    * Get the current log of events.
    * 
@@ -54,6 +67,10 @@ public class EventLog implements EventListener {
   public synchronized void notify(Event event) {
     events.add(event);
     System.out.println("The ship received a new event: " + event.getDescription());
+    String type = event.getClass().getSimpleName();
+    EventsMessage message = 
+        new EventsMessage(event.getId(), type, event.getTimestamp(), event.getDuration());
+    server.broadcast(message);
   }
 
   /**
@@ -75,6 +92,26 @@ public class EventLog implements EventListener {
   public synchronized void replace(ArrayList<Event> log) {
     events = log;
     update();
+  }
+  
+  /**
+   * Removes a completed event from the list before it is expired.
+   *  
+   * @param identity 
+   *           The id used to find the event in the log.
+   */
+  public synchronized void complete(int identity) {
+    for (int t = 0; t < events.size(); t++) {
+      if (events.get(t).getId() == identity) {
+        events.remove(t);
+        return;
+      }
+    }
+    //For now hardcoded
+    System.out.println("You pressed wrong button, DAMAGE will be done to the ship.");
+    spaceship.updateHealth(-10);
+    //Manual Testing
+    System.out.println("New ship HEALTH: " + spaceship.getHealth());
   }
 
   /**

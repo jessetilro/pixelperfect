@@ -1,15 +1,32 @@
 package nl.tudelft.pixelperfect;
 
-import com.jme3.app.SimpleApplication;
+import com.jme3.input.InputManager;
+import com.jme3.input.KeyInput;
+import com.jme3.input.controls.ActionListener;
+import com.jme3.input.controls.KeyTrigger;
+import com.jme3.math.Vector3f;
 import com.jme3.network.Network;
 import com.jme3.network.Server;
 import com.jme3.network.serializing.Serializer;
+import com.jme3.post.FilterPostProcessor;
+import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
+
+import jmevr.app.VRApplication;
+import jmevr.input.OpenVR;
+import jmevr.post.CartoonSSAO;
+import jmevr.util.VRGuiManager;
+
 import nl.tudelft.pixelperfect.client.ConnectListener;
-import nl.tudelft.pixelperfect.client.HelloMessage;
+import nl.tudelft.pixelperfect.client.EventCompletedMessage;
+import nl.tudelft.pixelperfect.client.EventsMessage;
 import nl.tudelft.pixelperfect.client.ServerListener;
+import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventScheduler;
+import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
 import java.io.IOException;
+
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
@@ -21,12 +38,19 @@ import java.io.IOException;
  * @author Wouter Zirkzee
  *
  */
-public class Game extends SimpleApplication {
+public class Game extends VRApplication {
 
+  private static Game appGame;
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private Server server;
+  private Spatial observer;
+  private boolean moveForward;
+  private boolean moveBackwards;
+  private boolean rotateLeft;
+  private boolean rotateRight;
   private Scene scene;
+  private GameHeadsUpDisplay gameHud;
 
   /**
    * Main method bootstrapping the process by constructing this class and initializing a
@@ -36,8 +60,30 @@ public class Game extends SimpleApplication {
    *          The parameters passed to the process.
    */
   public static void main(String[] args) {
-    Game app = new Game();
-    app.start();
+    appGame = new Game();
+
+    // Use full screen distortion and maximum FOV.
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.USE_CUSTOM_DISTORTION, false);
+
+    // Runs faster when set to false, but will allow mirroring.
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.ENABLE_MIRROR_WINDOW, true);
+
+    // Render two eyes, regardless of SteamVR.
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.FORCE_VR_MODE, false);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_CURVED_SURFACE, true);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.FLIP_EYES, false);
+
+    // Show gui even if it is behind the current timing.
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_OVERDRAW, true);
+
+    // Faster VR rendering, requires some vertex shader changes.
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.INSTANCE_VR_RENDERING, true);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.NO_GUI, false);
+
+    // Set frustum distances here before app starts.
+    appGame.preconfigureFrustrumNearFar(0.1f, 512f);
+
+    appGame.start();
   }
 
   /**
@@ -45,29 +91,101 @@ public class Game extends SimpleApplication {
    */
   @Override
   public void simpleInitApp() {
+    observer = new Node("observer");
+    observer.setLocalTranslation(new Vector3f(0.0f, 2.0f, 0.0f));
+    VRApplication.setObserver(observer);
+    rootNode.attachChild(observer);
+
+    initInputs();
+
     scene = new Scene(this);
     scene.createMap();
-    // increase movement speed
-    flyCam.setMoveSpeed(50);
 
+    initNetwork();
+
+    spaceship = new Spaceship();
+    spaceship.getLog().setServer(server);
+    scheduler = new EventScheduler(0.5);
+    scheduler.subscribe(spaceship.getLog());
+
+    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
+  }
+
+  private void initNetwork() {
     try {
       server = Network.createServer(6143);
-      Serializer.registerClass(HelloMessage.class);
+      Serializer.registerClass(EventCompletedMessage.class);
+      Serializer.registerClass(EventsMessage.class);
       server.start();
       ServerListener listen = new ServerListener();
       listen.setGame(this);
-      server.addMessageListener(listen, HelloMessage.class);
+      server.addMessageListener(listen, EventCompletedMessage.class);
+      server.addMessageListener(listen, EventsMessage.class);
       ConnectListener connect = new ConnectListener();
       connect.setGame(this);
       server.addConnectionListener(connect);
-
     } catch (IOException except) {
       except.printStackTrace();
     }
-    spaceship = new Spaceship();
-    scheduler = new EventScheduler(0.5);
+  }
 
-    scheduler.subscribe(spaceship.getLog());
+  /**
+   * Initiate input for the game.
+   */
+  @SuppressWarnings({ "checkstyle:methodlength", "PMD" })
+  private void initInputs() {
+    InputManager inputManager = getInputManager();
+    inputManager.addMapping("toggle", new KeyTrigger(KeyInput.KEY_SPACE));
+    inputManager.addMapping("incShift", new KeyTrigger(KeyInput.KEY_Q));
+    inputManager.addMapping("decShift", new KeyTrigger(KeyInput.KEY_E));
+    inputManager.addMapping("forward", new KeyTrigger(KeyInput.KEY_W));
+    inputManager.addMapping("back", new KeyTrigger(KeyInput.KEY_S));
+    inputManager.addMapping("left", new KeyTrigger(KeyInput.KEY_A));
+    inputManager.addMapping("right", new KeyTrigger(KeyInput.KEY_D));
+    inputManager.addMapping("filter", new KeyTrigger(KeyInput.KEY_F));
+    inputManager.addMapping("dumpImages", new KeyTrigger(KeyInput.KEY_I));
+    ActionListener acl = new ActionListener() {
+
+      public void onAction(String name, boolean keyPressed, float tpf) {
+        if (name.equals("incShift") && keyPressed) {
+          VRGuiManager.adjustGuiDistance(-0.1f);
+        } else if (name.equals("decShift") && keyPressed) {
+          VRGuiManager.adjustGuiDistance(0.1f);
+        } else if (name.equals("filter") && keyPressed) {
+          // adding filters in realtime
+          CartoonSSAO cartfilt = new CartoonSSAO();
+          FilterPostProcessor fpp = new FilterPostProcessor(getAssetManager());
+          fpp.addFilter(cartfilt);
+          getViewPort().addProcessor(fpp);
+          // filters added to main viewport during runtime,
+          // move them into VR processing (won't do anything if not in VR mode)
+          VRApplication.moveScreenProcessingToVR();
+        }
+        if (name.equals("toggle")) {
+          VRGuiManager.positionGui();
+        }
+        if (name.equals("forward")) {
+          moveForward = keyPressed;
+        } else if (name.equals("back")) {
+          moveBackwards = keyPressed;
+        } else if (name.equals("dumpImages")) {
+          OpenVR.getCompositor().CompositorDumpImages.apply();
+        } else if (name.equals("left")) {
+          rotateLeft = keyPressed;
+        } else if (name.equals("right")) {
+          rotateRight = keyPressed;
+        }
+      }
+    };
+    inputManager.addListener(acl, "forward");
+    inputManager.addListener(acl, "back");
+    inputManager.addListener(acl, "left");
+    inputManager.addListener(acl, "right");
+    inputManager.addListener(acl, "toggle");
+    inputManager.addListener(acl, "incShift");
+    inputManager.addListener(acl, "decShift");
+    inputManager.addListener(acl, "filter");
+    inputManager.addListener(acl, "dumpImages");
   }
 
   /**
@@ -83,12 +201,33 @@ public class Game extends SimpleApplication {
    * Main update loop for the game.
    */
   @Override
+  @SuppressWarnings({ "checkstyle:methodlength"})
   public void simpleUpdate(float tpf) {
-    scheduler.update(tpf);
+    if (moveForward) {
+      observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(tpf * 8f));
+    }
+    if (moveBackwards) {
+      observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(-tpf * 8f));
+    }
+    if (rotateLeft) {
+      observer.rotate(0, 0.75f * tpf, 0);
+    }
+    if (rotateRight) {
+      observer.rotate(0, -0.75f * tpf, 0);
+    }
+
+    scheduler.update(tpf / 8);
     spaceship.update(tpf);
+
+    // Update the in-game heads up display.
+    gameHud.updateHud();
 
     if (spaceship.isDead()) {
       this.stop();
+    }
+
+    for (Event event : spaceship.getLog().getEvents()) {
+      event.notification(scene);
     }
 
     if (spaceship.isVictorious()) {

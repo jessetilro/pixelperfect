@@ -1,6 +1,7 @@
 package nl.tudelft.pixelperfect.event;
 
-import com.jme3.scene.Geometry;
+
+import nl.tudelft.pixelperfect.Scene;
 
 /**
  * A type of event, imposing the problem of a plasma leak.
@@ -8,6 +9,7 @@ import com.jme3.scene.Geometry;
  * @author Wouter Zirkzee
  * 
  */
+
 public class PlasmaLeakEvent extends Event {
 
   /**
@@ -31,13 +33,14 @@ public class PlasmaLeakEvent extends Event {
     super(id, summary, description, timestamp, duration, damage);
   }
 
+
   /**
    * Show a specific notification for this event.
    * 
-   * @param geo
-   *          Object to be mutated.
+   * @param scene
+   *          Scene to be mutated.
    */
-  public void notification(Geometry geo) {
+  public void notification(Scene scene) {
     // TODO
   }
 }

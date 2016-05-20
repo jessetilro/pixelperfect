@@ -12,16 +12,32 @@ import org.junit.Test;
  * @author Floris Doolaard
  *
  */
-public class RouteNodeTest {
+public abstract class RouteNodeTest {
 
-  private RouteNode node;
+  private RouteNode object;
+
+  /**
+   * Create a test object.
+   * 
+   * @return A RouteNode.
+   */
+  protected abstract RouteNode create();
 
   /**
    * Initializing objects.
    */
   @Before
   public void before() {
-    node = new RouteNode("summary", "description");
+    object = create();
+  }
+
+  /**
+   * Getter for the test object, so subclasses may use it as well.
+   * 
+   * @return The test object.
+   */
+  protected RouteNode getObject() {
+    return object;
   }
 
   /**
@@ -29,7 +45,7 @@ public class RouteNodeTest {
    */
   @Test
   public void testRouteSummary() {
-    assertEquals("summary", node.getSummary());
+    assertEquals("summary", getObject().getSummary());
   }
 
   /**
@@ -37,6 +53,6 @@ public class RouteNodeTest {
    */
   @Test
   public void testRouteDescription() {
-    assertEquals("description", node.getDescription());
+    assertEquals("description", getObject().getDescription());
   }
 }

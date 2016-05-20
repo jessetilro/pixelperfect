@@ -1,13 +1,13 @@
 package nl.tudelft.pixelperfect.event;
 
-import com.jme3.scene.Geometry;
-
+import nl.tudelft.pixelperfect.Scene;
 import nl.tudelft.pixelperfect.Spaceship;
 
 /**
  * A class for storing and defining events, called upon by the event scheduler.
  * 
  * @author David Alderliesten
+ * @author Jesse Tilro
  *
  */
 public abstract class Event {
@@ -74,6 +74,36 @@ public abstract class Event {
   }
 
   /**
+   * Get the timestamp of the event.
+   * 
+   * @return Timestamp of event.
+   */
+  public Long getTimestamp() {
+    return this.timestamp;
+  }
+
+  /**
+   * Get the duration of the event.
+   * 
+   * @return Duration of event.
+   */
+  public Long getDuration() {
+    return this.duration;
+  }
+
+  /**
+   * Get the time remaining of the event.
+   * 
+   * @param currentTime
+   *          the current time.
+   * 
+   * @return The time remaining.
+   */
+  public Long getTimeLeft(long currentTime) {
+    return ((this.timestamp + this.duration) - currentTime);
+  }
+
+  /**
    * Check whether the event is expired at a given moment in time.
    * 
    * @param time
@@ -106,8 +136,8 @@ public abstract class Event {
   /**
    * Allow events to render notifications to the players.
    *
-   * @param geo
-   *          Object to be mutated as notification.
+   * @param scene
+   *          The scene in which the notification must appear.
    */
-  public abstract void notification(Geometry geo);
+  public abstract void notification(Scene scene);
 }
