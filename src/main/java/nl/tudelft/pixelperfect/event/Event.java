@@ -1,6 +1,5 @@
 package nl.tudelft.pixelperfect.event;
 
-
 import nl.tudelft.pixelperfect.Scene;
 import nl.tudelft.pixelperfect.Spaceship;
 
@@ -8,6 +7,7 @@ import nl.tudelft.pixelperfect.Spaceship;
  * A class for storing and defining events, called upon by the event scheduler.
  * 
  * @author David Alderliesten
+ * @author Jesse Tilro
  *
  */
 public abstract class Event {
@@ -45,7 +45,6 @@ public abstract class Event {
     this.duration = duration;
     this.damage = damage;
   }
-  
 
   /**
    * Getter for the event id.
@@ -73,7 +72,7 @@ public abstract class Event {
   public String getDescription() {
     return this.description;
   }
-  
+
   /**
    * Get the timestamp of the event.
    * 
@@ -82,7 +81,7 @@ public abstract class Event {
   public Long getTimestamp() {
     return this.timestamp;
   }
-  
+
   /**
    * Get the duration of the event.
    * 
@@ -90,6 +89,18 @@ public abstract class Event {
    */
   public Long getDuration() {
     return this.duration;
+  }
+
+  /**
+   * Get the time remaining of the event.
+   * 
+   * @param currentTime
+   *          the current time.
+   * 
+   * @return The time remaining.
+   */
+  public Long getTimeLeft(long currentTime) {
+    return ((this.timestamp + this.duration) - currentTime);
   }
 
   /**
