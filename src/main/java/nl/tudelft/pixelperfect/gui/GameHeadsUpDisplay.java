@@ -39,6 +39,8 @@ public class GameHeadsUpDisplay {
    *          the passed screen width.
    * @param passedHi
    *          the passed screen height.
+   * @param passedShip
+   *          the passed Sapceship instance.
    */
   public GameHeadsUpDisplay(AssetManager passedMan, Node passedGuiNode, int passedWid, int passedHi,
       Spaceship passedShip) {
