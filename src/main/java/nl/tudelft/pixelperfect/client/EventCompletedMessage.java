@@ -25,6 +25,7 @@ public class EventCompletedMessage extends AbstractMessage {
    * The constructor with a specific Event completed.
    * 
    * @param completed , a completed Event.
+   * @param label , a name as a String.
    */
   public EventCompletedMessage(String label, int completed) {
     this.label = label;
