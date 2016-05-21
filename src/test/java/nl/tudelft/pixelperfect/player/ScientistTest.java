@@ -9,6 +9,11 @@ import nl.tudelft.pixelperfect.Spaceship;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test suite for the Scientist.
+ * 
+ * @author Floris Doolaard
+ */
 public class ScientistTest extends CrewPlayerTest {
   private Scientist player1;
   private Scientist player2;

@@ -3,7 +3,6 @@ package nl.tudelft.pixelperfect.player;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import nl.tudelft.pixelperfect.Spaceship;
-import nl.tudelft.pixelperfect.event.Event;
 
 import org.junit.Before;
 import org.junit.Test;

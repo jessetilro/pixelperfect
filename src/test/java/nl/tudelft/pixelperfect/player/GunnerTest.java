@@ -9,6 +9,11 @@ import nl.tudelft.pixelperfect.Spaceship;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test suite for the Gunner class.
+ * 
+ * @author Floris Doolaard
+ */
 public class GunnerTest extends CrewPlayerTest {
   private Gunner player1;
   private Gunner player2;

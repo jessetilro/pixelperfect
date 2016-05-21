@@ -9,6 +9,11 @@ import nl.tudelft.pixelperfect.Spaceship;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Tests suite for the Engineer class.
+ * 
+ * @author Floris Doolaard
+ */
 public class EngineerTest extends CrewPlayerTest {
   private Engineer player1;
   private Engineer player2;

@@ -8,6 +8,12 @@ package nl.tudelft.pixelperfect.player;
  */
 public class Scientist extends CrewPlayer {
 
+  /**
+   * Constructor for the Scientist.
+   * 
+   * @param name
+   *          , a String as a name.
+   */
   public Scientist(String name) {
     super(name);
   }
