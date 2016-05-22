@@ -28,8 +28,7 @@ public class Gunner extends CrewPlayer {
   @Override
   public boolean equals(Object that) {
     if (that instanceof Gunner) {
-      Gunner other = (Gunner) that;
-      return (other.getName().equals(this.getName()));
+      return super.equals(that) && ((Gunner) that).getName().equals(this.getName());
     }
     return false;
   }
