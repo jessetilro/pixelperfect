@@ -16,6 +16,7 @@ public class EventScheduler {
   private double intensity;
   private ArrayList<EventListener> listeners;
   private EventFactory factory;
+  private boolean active;
 
   /**
    * Construct a new EventScheduler instance.
@@ -27,6 +28,21 @@ public class EventScheduler {
     this.intensity = intensity;
     this.listeners = new ArrayList<EventListener>();
     this.factory = new EventFactory();
+    this.active = false;
+  }
+
+  /**
+   * Allow the Scheduler to resume scheduling events by making it active.
+   */
+  public void start() {
+    active = true;
+  }
+
+  /**
+   * Disallow the Scheduler to schedule any event by making it inactive.
+   */
+  public void stop() {
+    active = false;
   }
 
   /**
@@ -60,6 +76,9 @@ public class EventScheduler {
    *          process.
    */
   public void update(float tpf) {
+    if (!active) {
+      return;
+    }
     // The random generator should be more efficient and less biased than the Math.random function.
     Random rg = new Random();
 

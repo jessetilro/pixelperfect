@@ -4,6 +4,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.atMost;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.util.Arrays;
@@ -59,21 +60,52 @@ public class EventSchedulerTest {
   }
 
   /**
+   * When the scheduler is started, the number of events it will subsequently schedule must be
+   * within an expected range.
+   */
+  @Test
+  public void testUpdateStart() {
+    // Fixtures
+    double expectedValue = intensity * duration;
+    int expectedEvents = (int) (expectedValue * sampleSize);
+    int allowedDeviation = (int) (percentage * expectedEvents);
+
+    // Execution
+    object.start();
+    execute();
+
+    // Verification
+    verify(mockedListener, atLeast(expectedEvents - allowedDeviation)).notify(any(Event.class));
+    verify(mockedListener, atMost(expectedEvents + allowedDeviation)).notify(any(Event.class));
+  }
+
+  /**
+   * When the scheduler is stopped, the number of events it will subsequently schedule must be 0,
+   * regardless of the intensity and time interval.
+   */
+  @Test
+  public void testUpdateStop() {
+    // Execution
+    object.start();
+    object.stop();
+    execute();
+
+    // Verification
+    verify(mockedListener, times(0)).notify(any(Event.class));
+  }
+
+  /**
+   * Execute the code under test.
+   * 
    * According to the law of large numbers, as the sample size of a random sample approaches
    * infinity, the deviation of the sample mean from the distribution's expected value will approach
    * 0. That's what we will use to test the Poisson process, while testing it with different
    * parameters.
    */
-  @Test
-  public void testUpdate() {
-    double expectedValue = intensity * duration;
-    int expectedEvents = (int) (expectedValue * sampleSize);
-    int allowedDeviation = (int) (percentage * expectedEvents);
+  public void execute() {
     for (int i = 0; i < sampleSize; i++) {
       object.update(duration);
     }
-    verify(mockedListener, atLeast(expectedEvents - allowedDeviation)).notify(any(Event.class));
-    verify(mockedListener, atMost(expectedEvents + allowedDeviation)).notify(any(Event.class));
   }
 
   /**

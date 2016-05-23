@@ -101,6 +101,7 @@ public class Game extends VRApplication {
     spaceship.getLog().setServer(server);
     scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY);
     scheduler.subscribe(spaceship.getLog());
+    scheduler.start();
 
     gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
   }
