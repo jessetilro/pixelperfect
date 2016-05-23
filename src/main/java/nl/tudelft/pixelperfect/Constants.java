@@ -18,7 +18,7 @@ public final class Constants {
   public static final int GUI_LOG_WIDTH_OFFSET = 150;
   public static final int GUI_LOG_HEIGHT_OFFSET = 50;
   
-  public static final int GUI_HEALTH_WIDTH_OFFSET = 150;
+  public static final int GUI_HEALTH_WIDTH_OFFSET = 300;
   public static final int GUI_HEALTH_HEIGHT_OFFSET = 100;
 
   // Gui text for the in-game HUd.
