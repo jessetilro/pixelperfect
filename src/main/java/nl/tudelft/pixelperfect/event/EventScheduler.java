@@ -107,6 +107,10 @@ public class EventScheduler {
    * Update the intensity percentage representing what the current intensity should be with respect
    * to the predefined minimum and maximum intensities. Zero meaning minimum intensity and one
    * hundred meaning maximum intensity.
+   * 
+   * @param intensityPercentage
+   *          A percentage between zero and one hundred percent used to linearly interpolate between
+   *          the predefined minimum and maximum intensities.
    */
   public void updateIntensity(double intensityPercentage) {
     if (intensityPercentage > 1) {

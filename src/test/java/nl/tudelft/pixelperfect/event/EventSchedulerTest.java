@@ -40,8 +40,10 @@ public class EventSchedulerTest {
   /**
    * Construct a new parameterized test suite for the EventScheduler class.
    * 
-   * @param intensity
-   *          The average number of events generated per second by the Poisson process.
+   * @param intensityMin
+   *          The minimum average number of events generated per second by the Poisson process.
+   * @param intensityMax
+   *          The maximum average number of events generated per second by the Poisson process.
    * @param percentage
    *          The percentage of events the sample mean can deviate from the expected value (after
    *          multiplication with the sample size).
