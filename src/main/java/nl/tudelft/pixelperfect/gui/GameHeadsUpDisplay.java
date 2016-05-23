@@ -64,13 +64,13 @@ public class GameHeadsUpDisplay {
 
     // Init for the log text, including font loading and text setting.
     captainLog = new BitmapText(hudFont, true);
-    captainLog.setLocalTranslation(screenWidth - Constants.GUI_WIDTH_OFFSET,
-        screenHeight - Constants.GUI_HEIGHT_OFFSET, 0);
+    captainLog.setLocalTranslation(screenWidth - Constants.GUI_LOG_WIDTH_OFFSET,
+        screenHeight - Constants.GUI_LOG_HEIGHT_OFFSET, 0);
 
     // Init for the health text, including font loading and text setting.
     shipHealth = new BitmapText(hudFont, true);
-    shipHealth.setLocalTranslation((screenWidth + 150) - Constants.GUI_WIDTH_OFFSET,
-        (screenHeight + 150) - Constants.GUI_HEIGHT_OFFSET, 0);
+    shipHealth.setLocalTranslation(screenWidth + 150 - Constants.GUI_HEALTH_WIDTH_OFFSET,
+        screenHeight - Constants.GUI_HEALTH_HEIGHT_OFFSET, 0);
 
     // Attach the elements to the gui nodes.
     guiNodes.attachChild(captainLog);
@@ -97,7 +97,7 @@ public class GameHeadsUpDisplay {
     } else {
       captainLog.setText(currentEventsToDisplay.toString());
     }
-    
+
     // Update the ship's health indicator.
     shipHealth.setText(Constants.SHIP_HEALTH_LABEL + spaceship.getHealth());
   }
