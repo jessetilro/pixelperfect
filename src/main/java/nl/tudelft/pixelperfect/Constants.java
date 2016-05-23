@@ -20,4 +20,5 @@ public final class Constants {
 
   // Gui text for the in-game HUd.
   public static final String NO_EVENTS_LOG_TEXT = "Everything looks clear, cap'n!";
+  public static final String SHIP_HEALTH_LABEL = "Health: ";
 }
