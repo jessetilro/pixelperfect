@@ -13,19 +13,45 @@ import java.util.Random;
  */
 public class EventScheduler {
 
-  private double intensity;
+  private double intensityMin;
+  private double intensityMax;
+  private double intensityPercentage;
   private ArrayList<EventListener> listeners;
   private EventFactory factory;
   private boolean active;
 
   /**
-   * Construct a new EventScheduler instance.
+   * Construct a new EventScheduler instance with an intensity varying between a given minimum and
+   * maximum.
+   * 
+   * @param intensityMin
+   *          The minimum average number of events introduced per second in the game.
+   * @param intensityMax
+   *          The minimum average number of events introduced per second in the game.
+   */
+  public EventScheduler(double intensityMin, double intensityMax) {
+    this.intensityMin = intensityMin;
+    this.intensityMax = intensityMax;
+    construct();
+  }
+
+  /**
+   * Construct a new EventScheduler instance with a fixed intensity.
    * 
    * @param intensity
    *          The average number of events introduced per second in the game.
    */
   public EventScheduler(double intensity) {
-    this.intensity = intensity;
+    this.intensityMin = intensity;
+    this.intensityMax = intensity;
+    construct();
+  }
+
+  /**
+   * Repeated part of the constructors.
+   */
+  private void construct() {
+    this.intensityPercentage = 0;
     this.listeners = new ArrayList<EventListener>();
     this.factory = new EventFactory();
     this.active = false;
@@ -68,6 +94,31 @@ public class EventScheduler {
   }
 
   /**
+   * Compute the intensity based on the minimum and maximum intensities in combination with the
+   * intensity percentage.
+   * 
+   * @return The current intensity.
+   */
+  private double getIntensity() {
+    return intensityMin + intensityPercentage * (intensityMax - intensityMin);
+  }
+
+  /**
+   * Update the intensity percentage representing what the current intensity should be with respect
+   * to the predefined minimum and maximum intensities. Zero meaning minimum intensity and one
+   * hundred meaning maximum intensity.
+   */
+  public void updateIntensity(double intensityPercentage) {
+    if (intensityPercentage > 1) {
+      this.intensityPercentage = 1;
+    } else if (intensityPercentage < 0) {
+      this.intensityPercentage = 0;
+    } else {
+      this.intensityPercentage = intensityPercentage;
+    }
+  }
+
+  /**
    * With a given probability, introduce a new random event for the next step in the game loop. This
    * models a poisson process, with the specified intensity as lambda parameter.
    * 
@@ -84,7 +135,7 @@ public class EventScheduler {
 
     // The tpf is expressed in seconds, therefore intensity times tpf represents the expected value
     // of the probability distribution.
-    double mu = intensity * tpf;
+    double mu = getIntensity() * tpf;
     double pzero = Math.exp(-mu);
     int kvalue = 0;
     double pvalue = 1.0;

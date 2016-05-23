@@ -99,7 +99,8 @@ public class Game extends VRApplication {
 
     spaceship = new Spaceship();
     spaceship.getLog().setServer(server);
-    scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY);
+    scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY_MIN,
+        Constants.EVENT_SCHEDULER_INTENSITY_MAX);
     scheduler.subscribe(spaceship.getLog());
     scheduler.start();
 

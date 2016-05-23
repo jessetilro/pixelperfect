@@ -26,5 +26,6 @@ public final class Constants {
   public static final String SHIP_HEALTH_LABEL = "Health: ";
 
   // Target intensity for the Event Scheduler.
-  public static final double EVENT_SCHEDULER_INTENSITY = 0.125;
+  public static final double EVENT_SCHEDULER_INTENSITY_MIN = 0.125;
+  public static final double EVENT_SCHEDULER_INTENSITY_MAX = 0.5;
 }
