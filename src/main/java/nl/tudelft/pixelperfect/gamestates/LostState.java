@@ -12,7 +12,7 @@ public class LostState extends GameState {
   }
 
   public void update(float tpf){
-    System.out.println("Lost");
+//    System.out.println("Lost");
   }
 
   public GameState handleState() {

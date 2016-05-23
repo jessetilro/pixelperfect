@@ -13,7 +13,7 @@ public class StartState extends GameState {
   }
 
   public void update(float tpf) {
-    System.out.println("Start");
+//    System.out.println("Start");
   }
 
   public GameState handleState() {

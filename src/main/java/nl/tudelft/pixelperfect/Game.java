@@ -11,6 +11,7 @@ import com.jme3.network.serializing.Serializer;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
+import javafx.scene.input.KeyEvent;
 import jmevr.app.VRApplication;
 
 import nl.tudelft.pixelperfect.client.ConnectListener;
@@ -23,8 +24,10 @@ import nl.tudelft.pixelperfect.gamestates.GameState;
 import nl.tudelft.pixelperfect.gamestates.StartState;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
-import javax.swing.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -43,46 +46,18 @@ public class Game extends VRApplication {
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private Server server;
-
-  public Spatial getGameObserver() {
-    return observer;
-  }
-
   private Spatial observer;
-
-  public boolean isMoveForward() {
-    return moveForward;
-  }
-
-  public boolean isMoveBackwards() {
-    return moveBackwards;
-  }
-
-  public boolean isRotateLeft() {
-    return rotateLeft;
-  }
-
-  public boolean isRotateRight() {
-    return rotateRight;
-  }
 
   private boolean moveForward;
   private boolean moveBackwards;
   private boolean rotateLeft;
   private boolean rotateRight;
-
-  public boolean isStartKey() {
-    return startKey;
-  }
-
   private boolean startKey;
+
   private Scene scene;
 
-  public GameHeadsUpDisplay getGameHud() {
-    return gameHud;
-  }
-
   private GameHeadsUpDisplay gameHud;
+
   private GameState gameState;
 
   /**
@@ -170,11 +145,12 @@ public class Game extends VRApplication {
   @SuppressWarnings({ "checkstyle:methodlength", "PMD" })
   private void initInputs() {
     InputManager inputManager = getInputManager();
-    inputManager.addMapping("forward", new KeyTrigger(KeyInput.KEY_W));
-    inputManager.addMapping("back", new KeyTrigger(KeyInput.KEY_S));
-    inputManager.addMapping("left", new KeyTrigger(KeyInput.KEY_A));
-    inputManager.addMapping("right", new KeyTrigger(KeyInput.KEY_D));
-    inputManager.addMapping(("start"), new KeyTrigger(KeyInput.KEY_P));
+    int[] keyTriggers = {KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A,
+        KeyInput.KEY_D, KeyInput.KEY_P};
+    String[] mappings = {"forward", "back", "left", "right", "start"};
+    for (int i = 0; i < keyTriggers.length - 1; i++) {
+      inputManager.addMapping(mappings[i], new KeyTrigger(keyTriggers[i]));
+    }
     ActionListener acl = new ActionListener() {
 
       public void onAction(String name, boolean keyPressed, float tpf) {
@@ -191,7 +167,7 @@ public class Game extends VRApplication {
         }
       }
     };
-    String[] mappings = {"forward", "back", "left", "right", "start"};
+
     for (String mapping : mappings) {
       inputManager.addListener(acl, mapping);
     }
@@ -214,6 +190,34 @@ public class Game extends VRApplication {
   public void simpleUpdate(float tpf) {
     gameState = gameState.handleState();
     gameState.update(tpf);
+  }
+  
+  public Spatial getGameObserver() {
+    return observer;
+  }
+
+  public boolean isMoveForward() {
+    return moveForward;
+  }
+
+  public boolean isMoveBackwards() {
+    return moveBackwards;
+  }
+
+  public boolean isRotateLeft() {
+    return rotateLeft;
+  }
+
+  public boolean isRotateRight() {
+    return rotateRight;
+  }
+
+  public boolean isStartKey() {
+    return startKey;
+  }
+
+  public GameHeadsUpDisplay getGameHud() {
+    return gameHud;
   }
 
   public EventScheduler getScheduler() {

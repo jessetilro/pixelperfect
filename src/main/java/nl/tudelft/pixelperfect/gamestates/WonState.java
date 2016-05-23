@@ -11,7 +11,7 @@ public class WonState extends GameState {
   }
 
   public void update(float tpf) {
-    System.out.println("Well played, you have completed the game!");
+//    System.out.println("Well played, you have completed the game!");
   }
 
   public GameState handleState() {
