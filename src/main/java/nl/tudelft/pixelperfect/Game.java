@@ -8,14 +8,10 @@ import com.jme3.math.Vector3f;
 import com.jme3.network.Network;
 import com.jme3.network.Server;
 import com.jme3.network.serializing.Serializer;
-import com.jme3.post.FilterPostProcessor;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
 import jmevr.app.VRApplication;
-import jmevr.input.OpenVR;
-import jmevr.post.CartoonSSAO;
-import jmevr.util.VRGuiManager;
 
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.EventCompletedMessage;
@@ -135,41 +131,17 @@ public class Game extends VRApplication {
   @SuppressWarnings({ "checkstyle:methodlength", "PMD" })
   private void initInputs() {
     InputManager inputManager = getInputManager();
-    inputManager.addMapping("toggle", new KeyTrigger(KeyInput.KEY_SPACE));
-    inputManager.addMapping("incShift", new KeyTrigger(KeyInput.KEY_Q));
-    inputManager.addMapping("decShift", new KeyTrigger(KeyInput.KEY_E));
     inputManager.addMapping("forward", new KeyTrigger(KeyInput.KEY_W));
     inputManager.addMapping("back", new KeyTrigger(KeyInput.KEY_S));
     inputManager.addMapping("left", new KeyTrigger(KeyInput.KEY_A));
     inputManager.addMapping("right", new KeyTrigger(KeyInput.KEY_D));
-    inputManager.addMapping("filter", new KeyTrigger(KeyInput.KEY_F));
-    inputManager.addMapping("dumpImages", new KeyTrigger(KeyInput.KEY_I));
     ActionListener acl = new ActionListener() {
 
       public void onAction(String name, boolean keyPressed, float tpf) {
-        if (name.equals("incShift") && keyPressed) {
-          VRGuiManager.adjustGuiDistance(-0.1f);
-        } else if (name.equals("decShift") && keyPressed) {
-          VRGuiManager.adjustGuiDistance(0.1f);
-        } else if (name.equals("filter") && keyPressed) {
-          // adding filters in realtime
-          CartoonSSAO cartfilt = new CartoonSSAO();
-          FilterPostProcessor fpp = new FilterPostProcessor(getAssetManager());
-          fpp.addFilter(cartfilt);
-          getViewPort().addProcessor(fpp);
-          // filters added to main viewport during runtime,
-          // move them into VR processing (won't do anything if not in VR mode)
-          VRApplication.moveScreenProcessingToVR();
-        }
-        if (name.equals("toggle")) {
-          VRGuiManager.positionGui();
-        }
         if (name.equals("forward")) {
           moveForward = keyPressed;
         } else if (name.equals("back")) {
           moveBackwards = keyPressed;
-        } else if (name.equals("dumpImages")) {
-          OpenVR.getCompositor().CompositorDumpImages.apply();
         } else if (name.equals("left")) {
           rotateLeft = keyPressed;
         } else if (name.equals("right")) {
@@ -177,15 +149,10 @@ public class Game extends VRApplication {
         }
       }
     };
-    inputManager.addListener(acl, "forward");
-    inputManager.addListener(acl, "back");
-    inputManager.addListener(acl, "left");
-    inputManager.addListener(acl, "right");
-    inputManager.addListener(acl, "toggle");
-    inputManager.addListener(acl, "incShift");
-    inputManager.addListener(acl, "decShift");
-    inputManager.addListener(acl, "filter");
-    inputManager.addListener(acl, "dumpImages");
+    String[] mappings = {"forward", "back", "left", "right"};
+    for (String mapping : mappings) {
+      inputManager.addListener(acl, mapping);
+    }
   }
 
   /**

@@ -21,7 +21,7 @@ public class Scene {
 
   private Game app;
   private String basicMat;
-  private String color = "Color";
+  private String colorStr = "Color";
   private ArrayList<Geometry> buttons = new ArrayList<Geometry>();
 
   /**
@@ -40,8 +40,17 @@ public class Scene {
    */
   public void createMap() {  	
     drawDashboard();
-    drawFloor();
-    drawWalls();
+    drawPane(new Vector3f(0f, 0f, 0f), ColorRGBA.Yellow, new Quaternion());
+    drawPane(new Vector3f(-8, 7, 0), ColorRGBA.Orange, new Quaternion()
+        .fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+    drawPane(new Vector3f(8, 7, 0), ColorRGBA.Orange, new Quaternion()
+        .fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+    drawPane(new Vector3f(0, 7, -8), ColorRGBA.Green, new Quaternion()
+        .fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(1, 0, 0)));
+    drawPane(new Vector3f(0, 7, 8), ColorRGBA.Green, new Quaternion()
+        .fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(1, 0, 0)));
+
+    //    drawWalls();
     drawTimer();
     addButton(new Vector3f(0, 1, 7), 2, 2);
   }
@@ -53,59 +62,30 @@ public class Scene {
     Box dashboard = new Box(8, 1f, 1);
     Geometry geometry = new Geometry("Box", dashboard);
     Material material = new Material(app.getAssetManager(), basicMat);
-    material.setColor(color, ColorRGBA.Blue);
+    material.setColor(colorStr, ColorRGBA.Blue);
     geometry.setMaterial(material);
     geometry.setLocalTranslation(new Vector3f(0, 0, 7));
     app.getRootNode().attachChild(geometry);
   }
 
   /**
-   * Render the floor of the scene.
+   * Render a flat pane.
+   * @param location
+   *                The location of the center.
+   * @param rotation
+   *                The rotation of the pane.
+   * @param color
+   *                Color of the pane.
    */
-  private void drawFloor() {
-    // green floor
-    Box floor = new Box(8, 0.01f, 8);
-    Geometry geometry = new Geometry("Floor", floor);
+  private void drawPane(Vector3f location, ColorRGBA color, Quaternion rotation) {
+    Box pane = new Box(8, 0.01f, 8);
+    Geometry geometry = new Geometry("Pane", pane);
     Material material = new Material(app.getAssetManager(), basicMat);
-    material.setColor(color, ColorRGBA.Green);
+    material.setColor(colorStr, color);
     geometry.setMaterial(material);
-    geometry.setLocalTranslation(0, -1, 0);
+    geometry.setLocalTranslation(location);
+    geometry.setLocalRotation(rotation);
     app.getRootNode().attachChild(geometry);
-    
-  }
-
-  /**
-   * Render the walls of the scene.
-   */
-  private void drawWalls() {
-    // walls
-    Box wallLeft = new Box(0.01f, 8, 8);
-    Geometry geometry1 = new Geometry("leftwall", wallLeft);
-    Material material1 = new Material(app.getAssetManager(), basicMat);
-    material1.setColor(color, ColorRGBA.Orange);
-    geometry1.setMaterial(material1);
-    geometry1.setLocalTranslation(new Vector3f(-8, 7, 0));
-    app.getRootNode().attachChild(geometry1);
-
-    Box wallRight = new Box(0.01f, 8, 8);
-    Geometry geometry2 = new Geometry("rightwall", wallRight);
-    geometry2.setMaterial(material1);
-    geometry2.setLocalTranslation(new Vector3f(8, 7, 0));
-    app.getRootNode().attachChild(geometry2);
-
-    Box wallFront = new Box(8, 8, 0.01f);
-    Geometry geometry3 = new Geometry("frontwall", wallFront);
-    Material material2 = new Material(app.getAssetManager(), basicMat);
-    material2.setColor(color, ColorRGBA.Yellow);
-    geometry3.setMaterial(material2);
-    geometry3.setLocalTranslation(new Vector3f(0, 7, -8));
-    app.getRootNode().attachChild(geometry3);
-
-    Box wallBack = new Box(8, 8, 0.01f);
-    Geometry geometry4 = new Geometry("backwall", wallBack);
-    geometry4.setMaterial(material2);
-    geometry4.setLocalTranslation(new Vector3f(0, 7, 8));
-    app.getRootNode().attachChild(geometry4);
   }
 
   /**
