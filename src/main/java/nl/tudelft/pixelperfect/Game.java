@@ -1,5 +1,7 @@
 package nl.tudelft.pixelperfect;
 
+import java.io.IOException;
+
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
@@ -12,7 +14,6 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
 import jmevr.app.VRApplication;
-
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.EventsMessage;
@@ -20,9 +21,6 @@ import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
-
-import java.io.IOException;
-
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
@@ -101,7 +99,7 @@ public class Game extends VRApplication {
 
     spaceship = new Spaceship();
     spaceship.getLog().setServer(server);
-    scheduler = new EventScheduler(0.5);
+    scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY);
     scheduler.subscribe(spaceship.getLog());
 
     gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
@@ -149,7 +147,7 @@ public class Game extends VRApplication {
         }
       }
     };
-    String[] mappings = {"forward", "back", "left", "right"};
+    String[] mappings = { "forward", "back", "left", "right" };
     for (String mapping : mappings) {
       inputManager.addListener(acl, mapping);
     }
@@ -168,7 +166,7 @@ public class Game extends VRApplication {
    * Main update loop for the game.
    */
   @Override
-  @SuppressWarnings({ "checkstyle:methodlength"})
+  @SuppressWarnings({ "checkstyle:methodlength" })
   public void simpleUpdate(float tpf) {
     if (moveForward) {
       observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(tpf * 8f));
@@ -183,7 +181,7 @@ public class Game extends VRApplication {
       observer.rotate(0, -0.75f * tpf, 0);
     }
 
-    scheduler.update(tpf / 8);
+    scheduler.update(tpf);
     spaceship.update(tpf);
 
     // Update the in-game heads up display.
