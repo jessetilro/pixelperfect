@@ -49,8 +49,7 @@ public class Game extends VRApplication {
   private boolean rotateLeft;
   private boolean rotateRight;
   private boolean startKey;
-
-  private boolean pauseKey;
+//  private boolean pauseKey;
 
   private Scene scene;
 
@@ -161,8 +160,8 @@ public class Game extends VRApplication {
           rotateRight = keyPressed;
         } else if (name.equals("start")) {
           startKey = keyPressed;
-        } else if (name.equals("pause")) {
-          pauseKey = keyPressed;
+//        } else if (name.equals("pause")) {
+//          pauseKey = keyPressed;
         }
       }
     };
@@ -216,9 +215,9 @@ public class Game extends VRApplication {
     return startKey;
   }
 
-  public boolean isPauseKey() {
-    return pauseKey;
-  }
+//  public boolean isPauseKey() {
+//    return pauseKey;
+//  }
 
   public GameHeadsUpDisplay getGameHud() {
     return gameHud;

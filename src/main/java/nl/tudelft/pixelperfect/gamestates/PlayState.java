@@ -27,7 +27,6 @@ public class PlayState extends GameState {
   }
 
   public void update(float tpf) {
-    System.out.println("Play");
     if (game.isMoveForward()) {
       observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(tpf * 8f));
     }
@@ -54,13 +53,13 @@ public class PlayState extends GameState {
   }
 
   public GameState handleState() {
-    if (game.isPauseKey()) {
-      return new PauseState(game);
-    } else if (spaceship.isVictorious()) {
+    if (spaceship.isVictorious()) {
       return new WonState(game);
     } else if (spaceship.isDead()) {
       return new LostState(game);
+//    } else if (game.isPauseKey()) {
+//      return new PauseState(game);
     }
-    return this;
+      return this;
   }
 }
