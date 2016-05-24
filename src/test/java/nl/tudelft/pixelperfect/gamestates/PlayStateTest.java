@@ -41,7 +41,12 @@ public class PlayStateTest extends GameStateTest {
   }
 
   @Test
-  public void update() {}
+  public void update() {
+    testState.update(1f);
+    verify(mockScheduler).update(1f);
+    verify(mockSpaceship).update(anyFloat());
+    verify(mockHeadsUp).updateHud();
+  }
 
   @Test
   public void updateMoveForward() {
@@ -77,13 +82,6 @@ public class PlayStateTest extends GameStateTest {
     testState.updateMovement(1f);
     verify(mockGame).isRotateRight();
     verify(mockObserver).rotate(anyFloat(), anyFloat(), anyFloat());
-  }
-
-  @Test
-  public void updateScheduler() {
-//    doNothing().when(mockScheduler).update(1f);
-//    testState.update(1f);
-//    verify(mockScheduler).update(1f);
   }
 
   @Test
