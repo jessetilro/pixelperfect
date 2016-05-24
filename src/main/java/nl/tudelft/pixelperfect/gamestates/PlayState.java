@@ -54,7 +54,7 @@ public class PlayState extends GameState {
   }
 
   public GameState handleState() {
-    if (game.isStartKey()) {
+    if (game.isPauseKey()) {
       return new PauseState(game);
     } else if (spaceship.isVictorious()) {
       return new WonState(game);

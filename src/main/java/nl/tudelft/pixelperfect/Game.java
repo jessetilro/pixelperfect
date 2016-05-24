@@ -10,24 +10,20 @@ import com.jme3.network.Server;
 import com.jme3.network.serializing.Serializer;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-
-import javafx.scene.input.KeyEvent;
 import jmevr.app.VRApplication;
 
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.EventsMessage;
 import nl.tudelft.pixelperfect.client.ServerListener;
-import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gamestates.GameState;
 import nl.tudelft.pixelperfect.gamestates.StartState;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
+import javax.swing.*;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 /**
@@ -53,6 +49,8 @@ public class Game extends VRApplication {
   private boolean rotateLeft;
   private boolean rotateRight;
   private boolean startKey;
+
+  private boolean pauseKey;
 
   private Scene scene;
 
@@ -145,10 +143,9 @@ public class Game extends VRApplication {
   @SuppressWarnings({ "checkstyle:methodlength", "PMD" })
   private void initInputs() {
     InputManager inputManager = getInputManager();
-    int[] keyTriggers = {KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A,
-        KeyInput.KEY_D, KeyInput.KEY_P};
-    String[] mappings = {"forward", "back", "left", "right", "start"};
-    for (int i = 0; i < keyTriggers.length - 1; i++) {
+    int[] keyTriggers = {KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A, KeyInput.KEY_D, KeyInput.KEY_P, KeyInput.KEY_O};
+    String[] mappings = {"forward", "back", "left", "right", "start", "pause"};
+    for (int i = 0; i < keyTriggers.length; i++) {
       inputManager.addMapping(mappings[i], new KeyTrigger(keyTriggers[i]));
     }
     ActionListener acl = new ActionListener() {
@@ -164,6 +161,8 @@ public class Game extends VRApplication {
           rotateRight = keyPressed;
         } else if (name.equals("start")) {
           startKey = keyPressed;
+        } else if (name.equals("pause")) {
+          pauseKey = keyPressed;
         }
       }
     };
@@ -188,10 +187,11 @@ public class Game extends VRApplication {
   @Override
   @SuppressWarnings({ "checkstyle:methodlength"})
   public void simpleUpdate(float tpf) {
-    gameState = gameState.handleState();
+
     gameState.update(tpf);
+    gameState = gameState.handleState();
   }
-  
+
   public Spatial getGameObserver() {
     return observer;
   }
@@ -214,6 +214,10 @@ public class Game extends VRApplication {
 
   public boolean isStartKey() {
     return startKey;
+  }
+
+  public boolean isPauseKey() {
+    return pauseKey;
   }
 
   public GameHeadsUpDisplay getGameHud() {

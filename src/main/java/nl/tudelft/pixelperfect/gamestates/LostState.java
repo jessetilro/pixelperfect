@@ -12,7 +12,7 @@ public class LostState extends GameState {
   }
 
   public void update(float tpf){
-//    System.out.println("Lost");
+    //render lost screen
   }
 
   public GameState handleState() {

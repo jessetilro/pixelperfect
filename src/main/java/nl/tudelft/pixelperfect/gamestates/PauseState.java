@@ -12,7 +12,7 @@ public class PauseState extends GameState {
   }
 
   public void update(float tpf) {
-    System.out.println("Pause");
+    //render paused overlay
   }
 
   public GameState handleState() {
