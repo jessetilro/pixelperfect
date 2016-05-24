@@ -43,10 +43,6 @@ public class Game extends VRApplication {
   private EventScheduler scheduler;
   private Server server;
 
-  public void setGameObserver(Spatial observer) {
-    this.observer = observer;
-  }
-
   private Spatial observer;
 
   private boolean moveForward;
@@ -54,7 +50,6 @@ public class Game extends VRApplication {
   private boolean rotateLeft;
   private boolean rotateRight;
   private boolean startKey;
-//  private boolean pauseKey;
 
   private Scene scene;
 
@@ -94,14 +89,6 @@ public class Game extends VRApplication {
     appGame.preconfigureFrustrumNearFar(0.1f, 512f);
 
     appGame.start();
-  }
-
-  public void setScheduler(EventScheduler scheduler) {
-    this.scheduler = scheduler;
-  }
-
-  public void setSpaceship(Spaceship spaceship) {
-    this.spaceship = spaceship;
   }
 
   /**
@@ -155,8 +142,8 @@ public class Game extends VRApplication {
   @SuppressWarnings({ "checkstyle:methodlength", "PMD" })
   private void initInputs() {
     InputManager inputManager = getInputManager();
-    int[] keyTriggers = {KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A, KeyInput.KEY_D, KeyInput.KEY_P, KeyInput.KEY_O};
-    String[] mappings = {"forward", "back", "left", "right", "start", "pause"};
+    int[] keyTriggers = {KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A, KeyInput.KEY_D, KeyInput.KEY_P};
+    String[] mappings = {"forward", "back", "left", "right", "start"};
     for (int i = 0; i < keyTriggers.length; i++) {
       inputManager.addMapping(mappings[i], new KeyTrigger(keyTriggers[i]));
     }
@@ -173,8 +160,6 @@ public class Game extends VRApplication {
           rotateRight = keyPressed;
         } else if (name.equals("start")) {
           startKey = keyPressed;
-//        } else if (name.equals("pause")) {
-//          pauseKey = keyPressed;
         }
       }
     };
@@ -199,7 +184,6 @@ public class Game extends VRApplication {
   @Override
   @SuppressWarnings({ "checkstyle:methodlength"})
   public void simpleUpdate(float tpf) {
-
     gameState.update(tpf);
     gameState = gameState.handleState();
   }
@@ -228,10 +212,6 @@ public class Game extends VRApplication {
     return startKey;
   }
 
-//  public boolean isPauseKey() {
-//    return pauseKey;
-//  }
-
   public GameHeadsUpDisplay getGameHud() {
     return gameHud;
   }
@@ -242,5 +222,17 @@ public class Game extends VRApplication {
 
   public void setHeadsUpDisplay(GameHeadsUpDisplay headsUpDisplay) {
     this.gameHud = headsUpDisplay;
+  }
+
+  public void setGameObserver(Spatial observer) {
+    this.observer = observer;
+  }
+
+  public void setScheduler(EventScheduler scheduler) {
+    this.scheduler = scheduler;
+  }
+
+  public void setSpaceship(Spaceship spaceship) {
+    this.spaceship = spaceship;
   }
 }
