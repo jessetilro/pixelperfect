@@ -27,18 +27,7 @@ public class PlayState extends GameState {
   }
 
   public void update(float tpf) {
-    if (game.isMoveForward()) {
-      observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(tpf * 8f));
-    }
-    if (game.isMoveBackwards()) {
-      observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(-tpf * 8f));
-    }
-    if (game.isRotateLeft()) {
-      observer.rotate(0, 0.75f * tpf, 0);
-    }
-    if (game.isRotateRight()) {
-      observer.rotate(0, -0.75f * tpf, 0);
-    }
+    updateMovement(tpf);
 
     scheduler.update(tpf);
     spaceship.update(tpf);
@@ -51,6 +40,22 @@ public class PlayState extends GameState {
 //    }
 
   }
+
+  public void updateMovement(float tpf) {
+    if (game.isMoveForward()) {
+      observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(tpf * 8f));
+    }
+    if (game.isMoveBackwards()) {
+      observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(-tpf * 8f));
+    }
+    if (game.isRotateLeft()) {
+      observer.rotate(0, 0.75f * tpf, 0);
+    }
+    if (game.isRotateRight()) {
+      observer.rotate(0, -0.75f * tpf, 0);
+    }
+  }
+
 
   public GameState handleState() {
     if (spaceship.isVictorious()) {

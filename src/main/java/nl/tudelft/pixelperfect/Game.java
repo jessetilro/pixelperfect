@@ -42,6 +42,11 @@ public class Game extends VRApplication {
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private Server server;
+
+  public void setGameObserver(Spatial observer) {
+    this.observer = observer;
+  }
+
   private Spatial observer;
 
   private boolean moveForward;
@@ -89,6 +94,14 @@ public class Game extends VRApplication {
     appGame.preconfigureFrustrumNearFar(0.1f, 512f);
 
     appGame.start();
+  }
+
+  public void setScheduler(EventScheduler scheduler) {
+    this.scheduler = scheduler;
+  }
+
+  public void setSpaceship(Spaceship spaceship) {
+    this.spaceship = spaceship;
   }
 
   /**
@@ -225,5 +238,9 @@ public class Game extends VRApplication {
 
   public EventScheduler getScheduler() {
     return scheduler;
+  }
+
+  public void setHeadsUpDisplay(GameHeadsUpDisplay headsUpDisplay) {
+    this.gameHud = headsUpDisplay;
   }
 }

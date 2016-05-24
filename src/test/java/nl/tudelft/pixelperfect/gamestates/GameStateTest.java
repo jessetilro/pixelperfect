@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 /**
  * Created by woute on 5/24/2016.
  */
-public class GameStateTest {
+public abstract class GameStateTest {
   @Before
   public void setUp() throws Exception {
 
