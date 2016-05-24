@@ -18,7 +18,7 @@ public class StartState extends GameState {
 
   public GameState handleState() {
     if (game.isStartKey()) {
-      return new PauseState(game);
+      return new PlayState(game);
     }
     return this;
   }
