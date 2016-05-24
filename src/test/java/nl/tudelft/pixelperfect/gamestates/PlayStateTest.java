@@ -10,11 +10,10 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyFloat;
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+
 /**
  * Created by woute on 5/24/2016.
  */
@@ -40,9 +39,12 @@ public class PlayStateTest extends GameStateTest {
     mockGame.setHeadsUpDisplay(mockHeadsUp);
     testState = new PlayState(mockGame);
   }
-  
+
   @Test
-  public void updateMoveForward() throws Exception {
+  public void update() {}
+
+  @Test
+  public void updateMoveForward() {
     when(mockGame.isMoveForward()).thenReturn(false);
 //    when(mockObserver.move(anyFloat(), anyFloat(), anyFloat())).thenReturn(mock(Spatial.class));
     testState.updateMovement(1f);
@@ -51,7 +53,7 @@ public class PlayStateTest extends GameStateTest {
   }
 
   @Test
-  public void updateMoveBackwards() throws Exception {
+  public void updateMoveBackwards() {
     when(mockGame.isMoveBackwards()).thenReturn(false);
 //    when(mockObserver.move(anyFloat(), anyFloat(), anyFloat())).thenReturn(mock(Spatial.class));
     testState.updateMovement(1f);
@@ -60,7 +62,7 @@ public class PlayStateTest extends GameStateTest {
   }
 
   @Test
-  public void updateRotateLeft() throws Exception {
+  public void updateRotateLeft() {
     when(mockGame.isRotateLeft()).thenReturn(true);
     when(mockObserver.rotate(anyFloat(), anyFloat(), anyFloat())).thenReturn(mock(Spatial.class));
     testState.updateMovement(1f);
@@ -69,7 +71,7 @@ public class PlayStateTest extends GameStateTest {
   }
 
   @Test
-  public void updateRotateRight() throws Exception {
+  public void updateRotateRight() {
     when(mockGame.isRotateRight()).thenReturn(true);
     when(mockObserver.rotate(anyFloat(), anyFloat(), anyFloat())).thenReturn(mock(Spatial.class));
     testState.updateMovement(1f);
@@ -78,30 +80,30 @@ public class PlayStateTest extends GameStateTest {
   }
 
   @Test
-  public void updateScheduler() throws Exception {
+  public void updateScheduler() {
 //    doNothing().when(mockScheduler).update(1f);
 //    testState.update(1f);
 //    verify(mockScheduler).update(1f);
   }
 
   @Test
-  public void handleStateWon() throws Exception {
+  public void handleStateWon() {
     when(mockSpaceship.isVictorious()).thenReturn(true);
     GameState newState = testState.handleState();
-    assertTrue(newState instanceof WonState);
+    assertSame(newState.getClass(), WonState.class);
   }
 
   @Test
-  public void handleStateLost() throws Exception {
+  public void handleStateLost() {
     when(mockSpaceship.isDead()).thenReturn(true);
     GameState newState = testState.handleState();
-    assertTrue(newState instanceof LostState);
+    assertSame(newState.getClass(), LostState.class);
   }
 
   @Test
-  public void handleStateThis() throws Exception {
+  public void handleState() {
     GameState newState = testState.handleState();
-    assertTrue(newState instanceof PlayState);
+    assertSame(newState.getClass(), PlayState.class);
   }
 
 }

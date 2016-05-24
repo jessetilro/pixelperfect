@@ -15,12 +15,12 @@ public class StartStateTest extends GameStateTest {
   }
 
   @Test
-  public void update() throws Exception {
+  public void update() {
 
   }
 
   @Test
-  public void handleState() throws Exception {
+  public void handleState() {
 
   }
 

@@ -9,19 +9,11 @@ import static org.junit.Assert.*;
  * Created by woute on 5/24/2016.
  */
 public abstract class GameStateTest {
-  @Before
-  public void setUp() throws Exception {
-
-  }
 
   @Test
-  public void update() throws Exception {
-
-  }
+  public abstract void update();
 
   @Test
-  public void handleState() throws Exception {
-
-  }
+  public abstract void handleState();
 
 }
