@@ -3,7 +3,8 @@ package nl.tudelft.pixelperfect.gamestates;
 import org.junit.Test;
 
 /**
- * Created by woute on 5/24/2016.
+ * Class to test GameState.
+ * @author Wouter Zirkzee
  */
 @SuppressWarnings("PMD")
 public abstract class GameStateTest {

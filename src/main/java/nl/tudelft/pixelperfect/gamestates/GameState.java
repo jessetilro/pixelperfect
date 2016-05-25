@@ -4,7 +4,7 @@ import nl.tudelft.pixelperfect.Game;
 
 /**
  * Abstract class for the other GameStates.
- * Created by woute on 5/23/2016.
+ * @author Wouter Zirkzee
  */
 public abstract class GameState {
 

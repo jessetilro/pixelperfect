@@ -8,7 +8,8 @@ import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
 /**
- * Created by woute on 5/23/2016.
+ * State for when you are playing the game.
+ * @author Wouter Zirkzee
  */
 public class PlayState extends GameState {
 

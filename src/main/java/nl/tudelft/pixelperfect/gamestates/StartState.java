@@ -4,7 +4,8 @@ package nl.tudelft.pixelperfect.gamestates;
 import nl.tudelft.pixelperfect.Game;
 
 /**
- * Created by woute on 5/23/2016.
+ * First state that the game loads.
+ * @author Wouter Zirkzee
  */
 public class StartState extends GameState {
 

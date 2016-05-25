@@ -16,7 +16,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by woute on 5/24/2016.
+ * Class to test PlayState.
+ * @author Wouter Zirkzee
  */
 @SuppressWarnings("PMD")
 public class PlayStateTest extends GameStateTest {

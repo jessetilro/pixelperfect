@@ -3,8 +3,8 @@ package nl.tudelft.pixelperfect.gamestates;
 import nl.tudelft.pixelperfect.Game;
 
 /**
- * State for when the game is lost.
- * Created by woute on 5/23/2016.
+ * State for when you have lost the game.
+ * @author Wouter Zirkzee
  */
 public class LostState extends GameState {
 
