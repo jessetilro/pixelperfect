@@ -8,7 +8,7 @@ import nl.tudelft.pixelperfect.Game;
  */
 public abstract class GameState {
 
-  @SuppressWarnings({"checkstyle:VisibilityModifier"})
+  @SuppressWarnings({"VisibilityModifier"})
   protected Game game;
 
   /**

@@ -45,7 +45,8 @@ public class LostStateTest extends GameStateTest {
   /**
    * Test branch for new StartState.
    */
-  private void handleStateStartKey() {
+  @Test
+  public void handleStateStartKey() {
     when(mockGame.isStartKey()).thenReturn(true);
     GameState newState = testState.handleState();
     assertSame(newState.getClass(), StartState.class);
@@ -54,7 +55,8 @@ public class LostStateTest extends GameStateTest {
   /**
    * Test branch for LostState.
    */
-  private void handleStateThis() {
+  @Test
+  public void handleStateThis() {
     when(mockGame.isStartKey()).thenReturn(false);
     GameState newState = testState.handleState();
     assertSame(newState.getClass(), LostState.class);
