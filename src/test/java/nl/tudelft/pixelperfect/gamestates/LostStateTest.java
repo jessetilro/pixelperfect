@@ -11,6 +11,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by woute on 5/24/2016.
  */
+@SuppressWarnings("PMD")
 public class LostStateTest extends GameStateTest {
 
   private Game mockGame;
