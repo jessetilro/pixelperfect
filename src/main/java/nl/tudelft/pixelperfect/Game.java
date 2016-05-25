@@ -118,6 +118,9 @@ public class Game extends VRApplication {
     gameState = new StartState(this);
   }
 
+  /**
+   * Method to initialize the network.
+   */
   private void initNetwork() {
     try {
       server = Network.createServer(6143);
@@ -188,50 +191,98 @@ public class Game extends VRApplication {
     gameState = gameState.handleState();
   }
 
+  /**
+   * Getter for observer.
+   * @return observer
+   */
   public Spatial getGameObserver() {
     return observer;
   }
 
+  /**
+   * Getter for moveForward.
+   * @return moveForward
+   */
   public boolean isMoveForward() {
     return moveForward;
   }
 
+  /**
+   * Getter for moveBackwards.
+   * @return moveBackwards
+   */
   public boolean isMoveBackwards() {
     return moveBackwards;
   }
 
+  /**
+   * Getter for rotateLeft.
+   * @return rotateLeft
+   */
   public boolean isRotateLeft() {
     return rotateLeft;
   }
 
+  /**
+   * Getter for rotateRight.
+   * @return rotateRight
+   */
   public boolean isRotateRight() {
     return rotateRight;
   }
 
+  /**
+   * Getter for startKey.
+   * @return startKey
+   */
   public boolean isStartKey() {
     return startKey;
   }
 
+  /**
+   * Getter for gameHud.
+   * @return gameHud
+   */
   public GameHeadsUpDisplay getGameHud() {
     return gameHud;
   }
 
+  /**
+   * Getter for scheduler.
+   * @return scheduler
+   */
   public EventScheduler getScheduler() {
     return scheduler;
   }
 
+  /**
+   * Setter for headsUpDisplay.
+   * @return headsUpDisplay
+   */
   public void setHeadsUpDisplay(GameHeadsUpDisplay headsUpDisplay) {
     this.gameHud = headsUpDisplay;
   }
 
+  /**
+   * Setter for observer.
+   * @return observer
+   */
   public void setGameObserver(Spatial observer) {
     this.observer = observer;
   }
 
+  /**
+   * Setter for scheduler. (testing purposes)
+   * @return scheduler
+   */
   public void setScheduler(EventScheduler scheduler) {
     this.scheduler = scheduler;
   }
 
+  /**
+   * Setter for spaceship.
+   * @return spaceship
+   */
   public void setSpaceship(Spaceship spaceship) {
     this.spaceship = spaceship;
   }
