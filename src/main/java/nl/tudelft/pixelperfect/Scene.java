@@ -40,7 +40,9 @@ public class Scene {
    */
   public void createMap() {  	
     drawDashboard();
+    //floor
     drawPane(new Vector3f(0f, 0f, 0f), ColorRGBA.Yellow, new Quaternion());
+    //walls
     drawPane(new Vector3f(-8, 7, 0), ColorRGBA.Orange, new Quaternion()
         .fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1)));
     drawPane(new Vector3f(8, 7, 0), ColorRGBA.Orange, new Quaternion()
@@ -49,8 +51,6 @@ public class Scene {
         .fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(1, 0, 0)));
     drawPane(new Vector3f(0, 7, 8), ColorRGBA.Green, new Quaternion()
         .fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(1, 0, 0)));
-
-    //    drawWalls();
     drawTimer();
     addButton(new Vector3f(0, 1, 7), 2, 2);
   }

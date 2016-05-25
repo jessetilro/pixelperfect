@@ -12,14 +12,14 @@ import com.jme3.network.Server;
 import com.jme3.network.serializing.Serializer;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-
 import jmevr.app.VRApplication;
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.EventsMessage;
 import nl.tudelft.pixelperfect.client.ServerListener;
-import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventScheduler;
+import nl.tudelft.pixelperfect.gamestates.GameState;
+import nl.tudelft.pixelperfect.gamestates.StartState;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
 /**
@@ -38,13 +38,20 @@ public class Game extends VRApplication {
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private Server server;
+
   private Spatial observer;
+
   private boolean moveForward;
   private boolean moveBackwards;
   private boolean rotateLeft;
   private boolean rotateRight;
+  private boolean startKey;
+
   private Scene scene;
+
   private GameHeadsUpDisplay gameHud;
+
+  private GameState gameState;
 
   /**
    * Main method bootstrapping the process by constructing this class and initializing a
@@ -105,8 +112,13 @@ public class Game extends VRApplication {
     scheduler.start();
 
     gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
+
+    gameState = new StartState(this);
   }
 
+  /**
+   * Method to initialize the network.
+   */
   private void initNetwork() {
     try {
       server = Network.createServer(6143);
@@ -131,10 +143,12 @@ public class Game extends VRApplication {
   @SuppressWarnings({ "checkstyle:methodlength", "PMD" })
   private void initInputs() {
     InputManager inputManager = getInputManager();
-    inputManager.addMapping("forward", new KeyTrigger(KeyInput.KEY_W));
-    inputManager.addMapping("back", new KeyTrigger(KeyInput.KEY_S));
-    inputManager.addMapping("left", new KeyTrigger(KeyInput.KEY_A));
-    inputManager.addMapping("right", new KeyTrigger(KeyInput.KEY_D));
+    int[] keyTriggers = {KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A,
+        KeyInput.KEY_D, KeyInput.KEY_P};
+    String[] mappings = {"forward", "back", "left", "right", "start"};
+    for (int i = 0; i < keyTriggers.length; i++) {
+      inputManager.addMapping(mappings[i], new KeyTrigger(keyTriggers[i]));
+    }
     ActionListener acl = new ActionListener() {
 
       public void onAction(String name, boolean keyPressed, float tpf) {
@@ -146,10 +160,11 @@ public class Game extends VRApplication {
           rotateLeft = keyPressed;
         } else if (name.equals("right")) {
           rotateRight = keyPressed;
+        } else if (name.equals("start")) {
+          startKey = keyPressed;
         }
       }
     };
-    String[] mappings = { "forward", "back", "left", "right" };
     for (String mapping : mappings) {
       inputManager.addListener(acl, mapping);
     }
@@ -170,36 +185,119 @@ public class Game extends VRApplication {
   @Override
   @SuppressWarnings({ "checkstyle:methodlength" })
   public void simpleUpdate(float tpf) {
-    if (moveForward) {
-      observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(tpf * 8f));
-    }
-    if (moveBackwards) {
-      observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(-tpf * 8f));
-    }
-    if (rotateLeft) {
-      observer.rotate(0, 0.75f * tpf, 0);
-    }
-    if (rotateRight) {
-      observer.rotate(0, -0.75f * tpf, 0);
-    }
+    gameState.update(tpf);
+    gameState = gameState.handleState();
+  }
 
-    scheduler.update(tpf);
-    spaceship.update(tpf);
+  /**
+   * Getter for observer.
+   *
+   * @return observer
+   */
+  public Spatial getGameObserver() {
+    return observer;
+  }
 
-    // Update the in-game heads up display.
-    gameHud.updateHud();
+  /**
+   * Getter for moveForward.
+   *
+   * @return moveForward
+   */
+  public boolean isMoveForward() {
+    return moveForward;
+  }
 
-    if (spaceship.isDead()) {
-      this.stop();
-    }
+  /**
+   * Getter for moveBackwards.
+   *
+   * @return moveBackwards
+   */
+  public boolean isMoveBackwards() {
+    return moveBackwards;
+  }
 
-    for (Event event : spaceship.getLog().getEvents()) {
-      event.notification(scene);
-    }
+  /**
+   * Getter for rotateLeft.
+   *
+   * @return rotateLeft
+   */
+  public boolean isRotateLeft() {
+    return rotateLeft;
+  }
 
-    if (spaceship.isVictorious()) {
-      System.out.println("Well played, you have completed the game!");
-      this.stop();
-    }
+  /**
+   * Getter for rotateRight.
+   *
+   * @return rotateRight
+   */
+  public boolean isRotateRight() {
+    return rotateRight;
+  }
+
+  /**
+   * Getter for startKey.
+   *
+   * @return startKey
+   */
+  public boolean isStartKey() {
+    return startKey;
+  }
+
+  /**
+   * Getter for gameHud.
+   *
+   * @return gameHud
+   */
+  public GameHeadsUpDisplay getGameHud() {
+    return gameHud;
+  }
+
+  /**
+   * Getter for scheduler.
+   *
+   * @return scheduler
+   */
+  public EventScheduler getScheduler() {
+    return scheduler;
+  }
+
+  /**
+   * Setter for headsUpDisplay.
+   *
+   * @param headsUpDisplay
+   *                HeadsUpDisplay to be set.
+   */
+  public void setHeadsUpDisplay(GameHeadsUpDisplay headsUpDisplay) {
+    this.gameHud = headsUpDisplay;
+  }
+
+  /**
+   * Setter for observer.
+   *
+   * @param observer
+   *                Observer to be set.
+   */
+  public void setGameObserver(Spatial observer) {
+    this.observer = observer;
+  }
+
+  /**
+   * Setter for scheduler.
+   *
+   * @param scheduler
+   *                Scheduler to be set.
+   */
+  public void setScheduler(EventScheduler scheduler) {
+    this.scheduler = scheduler;
+  }
+
+  /**
+   * Setter for spaceship.
+   *
+   * @param spaceship
+   *                Spaceship to be set.
+   */
+  public void setSpaceship(Spaceship spaceship) {
+    this.spaceship = spaceship;
   }
 }
