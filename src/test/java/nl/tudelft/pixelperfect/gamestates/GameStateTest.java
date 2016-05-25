@@ -4,6 +4,7 @@ import org.junit.Test;
 
 /**
  * Class to test GameState.
+ *
  * @author Wouter Zirkzee
  */
 @SuppressWarnings("PMD")

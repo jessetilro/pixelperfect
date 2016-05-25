@@ -9,6 +9,7 @@ import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
 /**
  * State for when you are playing the game.
+ *
  * @author Wouter Zirkzee
  */
 public class PlayState extends GameState {

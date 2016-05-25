@@ -4,6 +4,7 @@ import nl.tudelft.pixelperfect.Game;
 
 /**
  * State for when you have won the game.
+ * 
  * @author Wouter Zirkzee
  */
 public class WonState extends GameState {

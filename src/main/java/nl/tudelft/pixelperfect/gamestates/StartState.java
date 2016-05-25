@@ -5,6 +5,7 @@ import nl.tudelft.pixelperfect.Game;
 
 /**
  * First state that the game loads.
+ *
  * @author Wouter Zirkzee
  */
 public class StartState extends GameState {

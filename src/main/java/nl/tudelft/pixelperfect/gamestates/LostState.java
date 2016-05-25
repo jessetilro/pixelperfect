@@ -4,6 +4,7 @@ import nl.tudelft.pixelperfect.Game;
 
 /**
  * State for when you have lost the game.
+ *
  * @author Wouter Zirkzee
  */
 public class LostState extends GameState {

@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * Class to test LostState.
+ *
  * @author Wouter Zirkzee
  */
 @SuppressWarnings("PMD")
