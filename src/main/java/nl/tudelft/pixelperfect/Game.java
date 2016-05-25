@@ -191,6 +191,7 @@ public class Game extends VRApplication {
 
   /**
    * Getter for observer.
+   *
    * @return observer
    */
   public Spatial getGameObserver() {
@@ -199,6 +200,7 @@ public class Game extends VRApplication {
 
   /**
    * Getter for moveForward.
+   *
    * @return moveForward
    */
   public boolean isMoveForward() {
@@ -207,6 +209,7 @@ public class Game extends VRApplication {
 
   /**
    * Getter for moveBackwards.
+   *
    * @return moveBackwards
    */
   public boolean isMoveBackwards() {
@@ -215,6 +218,7 @@ public class Game extends VRApplication {
 
   /**
    * Getter for rotateLeft.
+   *
    * @return rotateLeft
    */
   public boolean isRotateLeft() {
@@ -223,6 +227,7 @@ public class Game extends VRApplication {
 
   /**
    * Getter for rotateRight.
+   *
    * @return rotateRight
    */
   public boolean isRotateRight() {
@@ -231,6 +236,7 @@ public class Game extends VRApplication {
 
   /**
    * Getter for startKey.
+   *
    * @return startKey
    */
   public boolean isStartKey() {
@@ -239,6 +245,7 @@ public class Game extends VRApplication {
 
   /**
    * Getter for gameHud.
+   *
    * @return gameHud
    */
   public GameHeadsUpDisplay getGameHud() {
@@ -247,6 +254,7 @@ public class Game extends VRApplication {
 
   /**
    * Getter for scheduler.
+   *
    * @return scheduler
    */
   public EventScheduler getScheduler() {
@@ -255,6 +263,7 @@ public class Game extends VRApplication {
 
   /**
    * Setter for headsUpDisplay.
+   *
    * @param headsUpDisplay
    *                HeadsUpDisplay to be set.
    */
@@ -264,6 +273,7 @@ public class Game extends VRApplication {
 
   /**
    * Setter for observer.
+   *
    * @param observer
    *                Observer to be set.
    */
@@ -273,6 +283,7 @@ public class Game extends VRApplication {
 
   /**
    * Setter for scheduler.
+   *
    * @param scheduler
    *                Scheduler to be set.
    */
@@ -282,6 +293,7 @@ public class Game extends VRApplication {
 
   /**
    * Setter for spaceship.
+   *
    * @param spaceship
    *                Spaceship to be set.
    */

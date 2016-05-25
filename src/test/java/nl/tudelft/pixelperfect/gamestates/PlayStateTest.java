@@ -134,5 +134,4 @@ public class PlayStateTest extends GameStateTest {
     GameState newState = testState.handleState();
     assertSame(newState.getClass(), PlayState.class);
   }
-
 }

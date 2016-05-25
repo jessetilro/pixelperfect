@@ -21,6 +21,7 @@ public class PlayState extends GameState {
 
   /**
    * Constructor for PlayState.
+   *
    * @param game
    *            Game for which it controlls the state.
    */
@@ -34,6 +35,7 @@ public class PlayState extends GameState {
 
   /**
    * Method that to update in this state.
+   *
    * @param tpf
    *          Time since last frame.
    */
@@ -45,15 +47,11 @@ public class PlayState extends GameState {
 
     // Update the in-game heads up display.
     headsUpDisplay.updateHud();
-
-//    for (Event event : spaceship.getLog().getEvents()) {
-//      event.notification(game.getScene());
-//    }
-
   }
 
   /**
    * Method to check for movement.
+   *
    * @param tpf
    *           Time since last check.
    */
@@ -74,6 +72,7 @@ public class PlayState extends GameState {
 
   /**
    * Method to update the state.
+   *
    * @return
    *        new state.
    */

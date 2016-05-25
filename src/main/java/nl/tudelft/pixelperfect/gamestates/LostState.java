@@ -11,6 +11,7 @@ public class LostState extends GameState {
 
   /**
    * Constructor for LostState.
+   *
    * @param game
    *            Game for which it controlls the state.
    */
@@ -20,6 +21,7 @@ public class LostState extends GameState {
 
   /**
    * Method that to update in this state.
+   *
    * @param tpf
    *          Time since last frame.
    */
@@ -29,6 +31,7 @@ public class LostState extends GameState {
 
   /**
    * Method to update the state.
+   *
    * @return
    *        new state.
    */

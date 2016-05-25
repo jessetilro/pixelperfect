@@ -4,13 +4,14 @@ import nl.tudelft.pixelperfect.Game;
 
 /**
  * State for when you have won the game.
- * 
+ *
  * @author Wouter Zirkzee
  */
 public class WonState extends GameState {
 
   /**
    * Constructor for WonState.
+   *
    * @param game
    *            Game for which it controlls the state.
    */
@@ -21,6 +22,7 @@ public class WonState extends GameState {
 
   /**
    * Method that to update in this state.
+   *
    * @param tpf
    *          Time since last frame.
    */
@@ -30,6 +32,7 @@ public class WonState extends GameState {
 
   /**
    * Method to update the state.
+   *
    * @return
    *        new state.
    */

@@ -64,5 +64,4 @@ public class LostStateTest extends GameStateTest {
     GameState newState = testState.handleState();
     assertSame(newState.getClass(), LostState.class);
   }
-
 }

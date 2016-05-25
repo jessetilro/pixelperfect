@@ -14,6 +14,7 @@ public abstract class GameState {
 
   /**
    * Constructor for GameState.
+   *
    * @param game
    *            Game for which it controlls the state.
    */
@@ -23,6 +24,7 @@ public abstract class GameState {
 
   /**
    * Abstract class for what should be updated in the GameState.
+   *
    * @param tpf
    *          time that has passed.
    */
@@ -30,6 +32,7 @@ public abstract class GameState {
 
   /**
    * Abstract class for updating the GameState.
+   *
    * @return the new gamestate.
    */
   public abstract GameState handleState();
