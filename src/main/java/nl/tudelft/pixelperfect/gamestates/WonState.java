@@ -32,7 +32,7 @@ public class WonState extends GameState {
    *        new state.
    */
   public GameState handleState() {
-    if (game.isStartKey()){
+    if (game.isStartKey()) {
       return new StartState(game);
     }
     return this;

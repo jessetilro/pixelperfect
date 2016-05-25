@@ -21,8 +21,6 @@ import nl.tudelft.pixelperfect.gamestates.GameState;
 import nl.tudelft.pixelperfect.gamestates.StartState;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
-import javax.swing.*;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 
@@ -145,7 +143,8 @@ public class Game extends VRApplication {
   @SuppressWarnings({ "checkstyle:methodlength", "PMD" })
   private void initInputs() {
     InputManager inputManager = getInputManager();
-    int[] keyTriggers = {KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A, KeyInput.KEY_D, KeyInput.KEY_P};
+    int[] keyTriggers = {KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A,
+        KeyInput.KEY_D, KeyInput.KEY_P};
     String[] mappings = {"forward", "back", "left", "right", "start"};
     for (int i = 0; i < keyTriggers.length; i++) {
       inputManager.addMapping(mappings[i], new KeyTrigger(keyTriggers[i]));
@@ -257,7 +256,8 @@ public class Game extends VRApplication {
 
   /**
    * Setter for headsUpDisplay.
-   * @return headsUpDisplay
+   * @param headsUpDisplay
+   *                HeadsUpDisplay to be set.
    */
   public void setHeadsUpDisplay(GameHeadsUpDisplay headsUpDisplay) {
     this.gameHud = headsUpDisplay;
@@ -265,15 +265,17 @@ public class Game extends VRApplication {
 
   /**
    * Setter for observer.
-   * @return observer
+   * @param observer
+   *                Observer to be set.
    */
   public void setGameObserver(Spatial observer) {
     this.observer = observer;
   }
 
   /**
-   * Setter for scheduler. (testing purposes)
-   * @return scheduler
+   * Setter for scheduler.
+   * @param scheduler
+   *                Scheduler to be set.
    */
   public void setScheduler(EventScheduler scheduler) {
     this.scheduler = scheduler;
@@ -281,7 +283,8 @@ public class Game extends VRApplication {
 
   /**
    * Setter for spaceship.
-   * @return spaceship
+   * @param spaceship
+   *                Spaceship to be set.
    */
   public void setSpaceship(Spaceship spaceship) {
     this.spaceship = spaceship;

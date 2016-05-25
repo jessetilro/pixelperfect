@@ -1,15 +1,10 @@
 package nl.tudelft.pixelperfect.gamestates;
 
-import com.jme3.scene.Spatial;
 import nl.tudelft.pixelperfect.Game;
-import nl.tudelft.pixelperfect.Spaceship;
-import nl.tudelft.pixelperfect.event.EventScheduler;
-import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -21,6 +16,9 @@ public class WonStateTest extends GameStateTest {
   private Game mockGame;
   private WonState testState;
 
+  /**
+   * Setup classes for testing.
+   */
   @Before
   public void setUp() {
     mockGame = mock(Game.class);

@@ -8,11 +8,12 @@ import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Matchers.anyFloat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by woute on 5/24/2016.
@@ -26,8 +27,11 @@ public class PlayStateTest extends GameStateTest {
   private Spaceship mockSpaceship;
   private GameHeadsUpDisplay mockHeadsUp;
 
+  /**
+   * Setup the classes for testing.
+   */
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     mockGame = mock(Game.class, Mockito.CALLS_REAL_METHODS);
     mockScheduler = mock(EventScheduler.class);
     mockObserver = mock(Spatial.class);

@@ -13,7 +13,7 @@ public class StartState extends GameState {
    * @param game
    *            Game for which it controlls the state.
    */
-  public StartState(Game game){
+  public StartState(Game game) {
     super(game);
   }
 

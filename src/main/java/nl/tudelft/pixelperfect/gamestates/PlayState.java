@@ -4,7 +4,6 @@ import com.jme3.scene.Spatial;
 import jmevr.app.VRApplication;
 import nl.tudelft.pixelperfect.Game;
 import nl.tudelft.pixelperfect.Spaceship;
-import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
@@ -23,7 +22,7 @@ public class PlayState extends GameState {
    * @param game
    *            Game for which it controlls the state.
    */
-  public PlayState(Game game){
+  public PlayState(Game game) {
     super(game);
     observer = game.getGameObserver();
     spaceship = game.getSpaceship();

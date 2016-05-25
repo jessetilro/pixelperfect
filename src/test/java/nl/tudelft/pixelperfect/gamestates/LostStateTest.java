@@ -4,7 +4,7 @@ import nl.tudelft.pixelperfect.Game;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -16,6 +16,9 @@ public class LostStateTest extends GameStateTest {
   private Game mockGame;
   private LostState testState;
 
+  /**
+   * Setup for the test.
+   */
   @Before
   public void setUp() {
     mockGame = mock(Game.class);
@@ -27,11 +30,11 @@ public class LostStateTest extends GameStateTest {
    */
   @Test
   public void update() {
-    //update method is empty for now
+    //update method is empty for now.
   }
 
   /**
-   * Test handleState
+   * Test handleState.
    */
   @Test
   public void handleState() {
@@ -40,7 +43,7 @@ public class LostStateTest extends GameStateTest {
   }
 
   /**
-   * Test branch for new StartState
+   * Test branch for new StartState.
    */
   private void handleStateStartKey() {
     when(mockGame.isStartKey()).thenReturn(true);
@@ -49,7 +52,7 @@ public class LostStateTest extends GameStateTest {
   }
 
   /**
-   * Test branch for LostState
+   * Test branch for LostState.
    */
   private void handleStateThis() {
     when(mockGame.isStartKey()).thenReturn(false);

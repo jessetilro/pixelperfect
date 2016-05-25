@@ -22,7 +22,7 @@ public class LostState extends GameState {
    * @param tpf
    *          Time since last frame.
    */
-  public void update(float tpf){
+  public void update(float tpf) {
     //render lost screen
   }
 
@@ -32,7 +32,7 @@ public class LostState extends GameState {
    *        new state.
    */
   public GameState handleState() {
-    if (game.isStartKey()){
+    if (game.isStartKey()) {
       return new StartState(game);
     }
     return this;
