@@ -22,22 +22,35 @@ public class LostStateTest extends GameStateTest {
     testState = new LostState(mockGame);
   }
 
+  /**
+   * Test update function.
+   */
   @Test
   public void update() {
+    //update method is empty for now
   }
 
+  /**
+   * Test handleState
+   */
   @Test
   public void handleState() {
     handleStateStartKey();
     handleStateThis();
   }
 
+  /**
+   * Test branch for new StartState
+   */
   private void handleStateStartKey() {
     when(mockGame.isStartKey()).thenReturn(true);
     GameState newState = testState.handleState();
     assertSame(newState.getClass(), StartState.class);
   }
 
+  /**
+   * Test branch for LostState
+   */
   private void handleStateThis() {
     when(mockGame.isStartKey()).thenReturn(false);
     GameState newState = testState.handleState();

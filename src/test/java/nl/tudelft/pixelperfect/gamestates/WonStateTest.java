@@ -27,23 +27,35 @@ public class WonStateTest extends GameStateTest {
     testState = new WonState(mockGame);
   }
 
+  /**
+   * Test update function.
+   */
   @Test
   public void update() {
-
+    //update method is empty for now
   }
 
+  /**
+   * Tests for state changes.
+   */
   @Test
   public void handleState() {
     handleStateStartKey();
     handleStateThis();
   }
 
+  /**
+   * Test that you go to StartState when startkey is pressed.
+   */
   private void handleStateStartKey() {
     when(mockGame.isStartKey()).thenReturn(true);
     GameState newState = testState.handleState();
     assertSame(newState.getClass(), StartState.class);
   }
 
+  /**
+   * Test that you stay in WonState if key is not pressed.
+   */
   private void handleStateThis() {
     when(mockGame.isStartKey()).thenReturn(false);
     GameState newState = testState.handleState();

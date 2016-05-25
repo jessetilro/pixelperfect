@@ -18,6 +18,11 @@ public class PlayState extends GameState {
   private GameHeadsUpDisplay headsUpDisplay;
   private EventScheduler scheduler;
 
+  /**
+   * Constructor for PlayState.
+   * @param game
+   *            Game for which it controlls the state.
+   */
   public PlayState(Game game){
     super(game);
     observer = game.getGameObserver();
@@ -26,6 +31,11 @@ public class PlayState extends GameState {
     scheduler = game.getScheduler();
   }
 
+  /**
+   * Method that to update in this state.
+   * @param tpf
+   *          Time since last frame.
+   */
   public void update(float tpf) {
     updateMovement(tpf);
 
@@ -41,6 +51,11 @@ public class PlayState extends GameState {
 
   }
 
+  /**
+   * Method to check for movement.
+   * @param tpf
+   *           Time since last check.
+   */
   public void updateMovement(float tpf) {
     if (game.isMoveForward()) {
       observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(tpf * 8f));
@@ -56,14 +71,16 @@ public class PlayState extends GameState {
     }
   }
 
-
+  /**
+   * Method to update the state.
+   * @return
+   *        new state.
+   */
   public GameState handleState() {
     if (spaceship.isVictorious()) {
       return new WonState(game);
     } else if (spaceship.isDead()) {
       return new LostState(game);
-//    } else if (game.isPauseKey()) {
-//      return new PauseState(game);
     }
       return this;
   }

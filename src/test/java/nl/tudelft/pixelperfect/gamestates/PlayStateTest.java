@@ -40,6 +40,9 @@ public class PlayStateTest extends GameStateTest {
     testState = new PlayState(mockGame);
   }
 
+  /**
+   * Test update function.
+   */
   @Test
   public void update() {
     testState.update(1f);
@@ -48,6 +51,9 @@ public class PlayStateTest extends GameStateTest {
     verify(mockHeadsUp).updateHud();
   }
 
+  /**
+   * Test for move forward.
+   */
   @Test
   public void updateMoveForward() {
     when(mockGame.isMoveForward()).thenReturn(false);
@@ -57,6 +63,9 @@ public class PlayStateTest extends GameStateTest {
 //    verify(mockObserver).move(anyFloat(), anyFloat(), anyFloat());
   }
 
+  /**
+   * Test for move backwards.
+   */
   @Test
   public void updateMoveBackwards() {
     when(mockGame.isMoveBackwards()).thenReturn(false);
@@ -66,6 +75,9 @@ public class PlayStateTest extends GameStateTest {
 //    verify(mockObserver).move(anyFloat(), anyFloat(), anyFloat());
   }
 
+  /**
+   * Test for rotation left.
+   */
   @Test
   public void updateRotateLeft() {
     when(mockGame.isRotateLeft()).thenReturn(true);
@@ -75,6 +87,9 @@ public class PlayStateTest extends GameStateTest {
     verify(mockObserver).rotate(anyFloat(), anyFloat(), anyFloat());
   }
 
+  /**
+   * Test for rotation right.
+   */
   @Test
   public void updateRotateRight() {
     when(mockGame.isRotateRight()).thenReturn(true);
@@ -84,6 +99,9 @@ public class PlayStateTest extends GameStateTest {
     verify(mockObserver).rotate(anyFloat(), anyFloat(), anyFloat());
   }
 
+  /**
+   * Test that after you won WonState is returned.
+   */
   @Test
   public void handleStateWon() {
     when(mockSpaceship.isVictorious()).thenReturn(true);
@@ -91,6 +109,9 @@ public class PlayStateTest extends GameStateTest {
     assertSame(newState.getClass(), WonState.class);
   }
 
+  /**
+   * Test that after you lost LoseState is returned.
+   */
   @Test
   public void handleStateLost() {
     when(mockSpaceship.isDead()).thenReturn(true);
@@ -98,6 +119,9 @@ public class PlayStateTest extends GameStateTest {
     assertSame(newState.getClass(), LostState.class);
   }
 
+  /**
+   * Test that when nothing changed PlayState is returned.
+   */
   @Test
   public void handleState() {
     GameState newState = testState.handleState();
