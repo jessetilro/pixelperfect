@@ -5,6 +5,7 @@ import org.junit.Test;
 /**
  * Created by woute on 5/24/2016.
  */
+@SuppressWarnings("PMD")
 public abstract class GameStateTest {
 
   /**
