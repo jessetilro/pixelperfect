@@ -1,5 +1,6 @@
 package nl.tudelft.pixelperfect.client;
 
+import com.jme3.network.Filters;
 import com.jme3.network.HostedConnection;
 import com.jme3.network.Message;
 import com.jme3.network.MessageListener;
@@ -64,7 +65,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
       System.out.println("Received a completed event: " + eve.getLabel());
       app.getSpaceship().getLog().complete(eve.getCompletedEvent());
     } else if (message instanceof RoleChosenMessage) {
-      server.broadcast(message);
+      server.broadcast(Filters.notEqualTo(source), message);
     }
   }
 }
