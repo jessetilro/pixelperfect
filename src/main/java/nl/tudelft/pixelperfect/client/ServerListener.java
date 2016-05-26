@@ -1,11 +1,12 @@
 package nl.tudelft.pixelperfect.client;
 
+import com.jme3.network.Filters;
 import com.jme3.network.HostedConnection;
 import com.jme3.network.Message;
 import com.jme3.network.MessageListener;
+import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.Game;
-
 
 /**
  * Listener for the Game's server, which handles incoming messages.
@@ -18,6 +19,7 @@ import nl.tudelft.pixelperfect.Game;
 public class ServerListener implements MessageListener<HostedConnection> {
 
   private Game app;
+  private Server server;
 
   /**
    * Sets the game whose server to listen for.
@@ -39,6 +41,16 @@ public class ServerListener implements MessageListener<HostedConnection> {
   }
 
   /**
+   * Uses the server of the game to broadcast messages that has come in here.
+   * 
+   * @param server
+   *          , the server of the game.
+   */
+  public synchronized void setServer(Server server) {
+    this.server = server;
+  }
+
+  /**
    * Functionality for server behavior upon receiving a message.
    * 
    * @param source
@@ -52,6 +64,8 @@ public class ServerListener implements MessageListener<HostedConnection> {
       EventCompletedMessage eve = (EventCompletedMessage) message;
       System.out.println("Received a completed event: " + eve.getLabel());
       app.getSpaceship().getLog().complete(eve.getCompletedEvent());
+    } else if (message instanceof RoleChosenMessage) {
+      server.broadcast(Filters.notEqualTo(source), message);
     }
   }
 }
