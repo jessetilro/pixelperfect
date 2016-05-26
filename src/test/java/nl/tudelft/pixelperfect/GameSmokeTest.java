@@ -22,9 +22,9 @@ public class GameSmokeTest {
    * interrupting the running thread and verifying the behavior.
    * 
    * @throws InterruptedException
-   *           Since we're sleeping in this test.
+   *           Thrown for the thread kill.
    * @throws AWTException
-   *           Since we're using the Robot.
+   *           Thrown for Robot exceptions.
    */
   @Test
   public void gameFullSmokeTest() throws InterruptedException, AWTException {
