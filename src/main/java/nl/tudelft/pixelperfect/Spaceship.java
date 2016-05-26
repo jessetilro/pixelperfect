@@ -97,6 +97,15 @@ public class Spaceship {
   }
 
   /**
+   * Get the ship crew's current score.
+   * 
+   * @return The ship crew's current score.
+   */
+  public int getScore() {
+    return this.score;
+  }
+
+  /**
    * Get the ship's health.
    * 
    * @return The ship's current health value.
