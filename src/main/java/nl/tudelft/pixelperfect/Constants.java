@@ -24,6 +24,7 @@ public final class Constants {
   // Gui text for the in-game HUd.
   public static final String NO_EVENTS_LOG_TEXT = "Everything looks clear, cap'n!";
   public static final String SHIP_HEALTH_LABEL = "Health: ";
+  public static final String SHIP_SCORE_LABEL = "Score: ";
 
   // Target intensity for the Event Scheduler.
   public static final double EVENT_SCHEDULER_INTENSITY_MIN = 0.125;

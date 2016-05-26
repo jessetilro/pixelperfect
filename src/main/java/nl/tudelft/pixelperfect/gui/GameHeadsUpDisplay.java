@@ -28,6 +28,8 @@ public class GameHeadsUpDisplay {
   private BitmapFont hudFont;
   private BitmapText captainLog;
   private BitmapText shipHealth;
+  private BitmapText teamScore;
+  private BitmapText timeLeft;
 
   /**
    * Constructor for the heads-up display for in-game utiliztion.
@@ -98,7 +100,8 @@ public class GameHeadsUpDisplay {
       captainLog.setText(currentEventsToDisplay.toString());
     }
 
-    // Update the ship's health indicator.
+    // Update the ship's health, team score, and time left indicators.
     shipHealth.setText(Constants.SHIP_HEALTH_LABEL + spaceship.getHealth());
+    teamScore.setText(spaceship);
   }
 }
