@@ -73,6 +73,10 @@ public class GameHeadsUpDisplay {
     shipHealth = new BitmapText(hudFont, true);
     shipHealth.setLocalTranslation(screenWidth + 150 - Constants.GUI_HEALTH_WIDTH_OFFSET,
         screenHeight - Constants.GUI_HEALTH_HEIGHT_OFFSET, 0);
+    
+    teamScore = new BitmapText(hudFont, true);
+    teamScore.setLocalTranslation(screenWidth + 250 - Constants.GUI_SCORE_WIDTH_OFFSET,
+        screenHeight - Constants.GUI_SCORE_HEIGHT_OFFSET, 0);
 
     // Attach the elements to the gui nodes.
     guiNodes.attachChild(captainLog);
