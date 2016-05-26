@@ -8,7 +8,7 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 
 /**
- * Test Suite for the Game class.
+ * Smoke Test for the Game class.
  * 
  * @author David Alderliesten
  * @author Jesse Tilro
@@ -30,17 +30,20 @@ public class GameSmokeTest {
   public void gameFullSmokeTest() throws InterruptedException, AWTException {
     Thread testThread = new Thread() {
       public void run() {
-        String[] args = {};
-        Game.main(args);
+        Game.main(null);
       }
     };
+    
     Robot robot = new Robot();
     testThread.start();
+    
     Thread.sleep(500);
     robot.keyPress(KeyEvent.VK_ENTER);
     Thread.sleep(1500);
+    
     Thread runTest = testThread;
     testThread = null;
+    
     runTest.interrupt();
   }
 
