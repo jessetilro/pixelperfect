@@ -1,5 +1,7 @@
 package nl.tudelft.pixelperfect.client;
 
+import nl.tudelft.pixelperfect.Roles;
+
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
 
@@ -11,7 +13,7 @@ import com.jme3.network.serializing.Serializable;
  */
 @Serializable
 public class RoleChosenMessage extends AbstractMessage {
-  private int role;
+  private Roles role;
   private String label;
 
   /**
@@ -29,7 +31,7 @@ public class RoleChosenMessage extends AbstractMessage {
    * @param role
    *          , the role in terms of an integer.
    */
-  public RoleChosenMessage(String label, int role) {
+  public RoleChosenMessage(String label, Roles role) {
     this.role = role;
     this.label = label;
   }
@@ -48,7 +50,7 @@ public class RoleChosenMessage extends AbstractMessage {
    *
    * @return role as an Integer.
    */
-  public int getRole() {
+  public Roles getRole() {
     return role;
   }
 
