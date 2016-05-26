@@ -1,49 +1,46 @@
 package nl.tudelft.pixelperfect;
 
+import org.junit.Ignore;
+import org.junit.Test;
+
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
 /**
  * Test Suite for the Game class.
  * 
+ * @author David Alderliesten
  * @author Jesse Tilro
  *
  */
-
-@SuppressWarnings("PMD")
 public class GameSmokeTest {
 
   /**
    * Increase the test coverage by running the Game class methods inside a test case. There is
-   * little functionality to test here, just integration with the jMonkeyEngine.
-   * 
-   * Added the nice threading in order to be able to kill the application.
+   * little functionality to test here, just integration with the jMonkeyEngine. Testing is done by
+   * interrupting the running thread and verifying the behavior.
    * 
    * @throws InterruptedException
    *           Since we're sleeping in this test.
    * @throws AWTException
    *           Since we're using the Robot.
    */
-  @Ignore
   @Test
   public void increaseTestCoverage() throws InterruptedException, AWTException {
-    Thread t = new Thread() {
+    Thread testThread = new Thread() {
       public void run() {
         String[] args = {};
         Game.main(args);
       }
     };
     Robot robot = new Robot();
-    t.start();
+    testThread.start();
     Thread.sleep(500);
     robot.keyPress(KeyEvent.VK_ENTER);
     Thread.sleep(1500);
-    Thread runTest = t;
-    t = null;
+    Thread runTest = testThread;
+    testThread = null;
     runTest.interrupt();
   }
 
