@@ -77,6 +77,7 @@ public class GameHeadsUpDisplay {
     // Attach the elements to the gui nodes.
     guiNodes.attachChild(captainLog);
     guiNodes.attachChild(shipHealth);
+    guiNodes.attachChild(teamScore);
   }
 
   /**
@@ -102,6 +103,6 @@ public class GameHeadsUpDisplay {
 
     // Update the ship's health, team score, and time left indicators.
     shipHealth.setText(Constants.SHIP_HEALTH_LABEL + spaceship.getHealth());
-    teamScore.setText(spaceship);
+    teamScore.setText(Constants.SHIP_SCORE_LABEL + spaceship.getScore());
   }
 }
