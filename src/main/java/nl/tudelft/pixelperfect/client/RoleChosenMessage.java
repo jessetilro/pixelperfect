@@ -29,7 +29,7 @@ public class RoleChosenMessage extends AbstractMessage {
    * @param label
    *          , the label of the chosen role as a String.
    * @param role
-   *          , the role in terms of an integer.
+   *          , the role in terms of an Enum.
    */
   public RoleChosenMessage(String label, Roles role) {
     this.role = role;
@@ -46,9 +46,9 @@ public class RoleChosenMessage extends AbstractMessage {
   }
 
   /**
-   * Returns the role chosen as an integer.
+   * Returns the role chosen as an Enum.
    *
-   * @return role as an Integer.
+   * @return role as an Enum.
    */
   public Roles getRole() {
     return role;
