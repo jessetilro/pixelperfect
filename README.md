@@ -1,4 +1,5 @@
 [![Build Status](https://api.travis-ci.org/jessetilro/pixelperfect.svg?branch=master)](https://travis-ci.org/jessetilro/pixelperfect)
+[![Coverage Status](https://coveralls.io/repos/github/jessetilro/pixelperfect/badge.svg?branch=master)](https://coveralls.io/github/jessetilro/pixelperfect?branch=master)
 
 # PixelPerfect
 Software project for the Computer Games Contextproject 2015-2016 (TI2806) at Delft University of Technology by group PixelPerfect.
