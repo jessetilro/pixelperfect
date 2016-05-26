@@ -27,7 +27,7 @@ public class GameSmokeTest {
    *           Since we're using the Robot.
    */
   @Test
-  public void increaseTestCoverage() throws InterruptedException, AWTException {
+  public void gameFullSmokeTest() throws InterruptedException, AWTException {
     Thread testThread = new Thread() {
       public void run() {
         String[] args = {};
