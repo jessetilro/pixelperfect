@@ -35,24 +35,24 @@ public interface EventListener {
 
   /**
    * Removes a completed event from the list before it is expired.
-   *  
+   * 
    * @param id
-   *           The id used to find the event in the log.
+   *          The id used to find the event in the log.
    */
   void complete(int id);
-  
+
   /**
    * Get all the events that are in the log.
    * 
-   * @return
-   * 				All events in the log.
+   * @return All events in the log.
    */
   ArrayList<Event> getEvents();
 
   /**
    * Sets the server for reference purposes.
    * 
-   * @param server The server.
+   * @param server
+   *          The server.
    */
   void setServer(Server server);
 }

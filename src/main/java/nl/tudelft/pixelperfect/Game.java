@@ -1,5 +1,7 @@
 package nl.tudelft.pixelperfect;
 
+import java.io.IOException;
+
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
@@ -8,25 +10,18 @@ import com.jme3.math.Vector3f;
 import com.jme3.network.Network;
 import com.jme3.network.Server;
 import com.jme3.network.serializing.Serializer;
-import com.jme3.post.FilterPostProcessor;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-
 import jmevr.app.VRApplication;
-import jmevr.input.OpenVR;
-import jmevr.post.CartoonSSAO;
-import jmevr.util.VRGuiManager;
-
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.EventsMessage;
+import nl.tudelft.pixelperfect.client.RoleChosenMessage;
 import nl.tudelft.pixelperfect.client.ServerListener;
-import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventScheduler;
+import nl.tudelft.pixelperfect.gamestates.GameState;
+import nl.tudelft.pixelperfect.gamestates.StartState;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
-
-import java.io.IOException;
-
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
@@ -44,13 +39,20 @@ public class Game extends VRApplication {
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private Server server;
+
   private Spatial observer;
+
   private boolean moveForward;
   private boolean moveBackwards;
   private boolean rotateLeft;
   private boolean rotateRight;
+  private boolean startKey;
+
   private Scene scene;
+
   private GameHeadsUpDisplay gameHud;
+
+  private GameState gameState;
 
   /**
    * Main method bootstrapping the process by constructing this class and initializing a
@@ -105,22 +107,32 @@ public class Game extends VRApplication {
 
     spaceship = new Spaceship();
     spaceship.getLog().setServer(server);
-    scheduler = new EventScheduler(0.5);
+    scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY_MIN,
+        Constants.EVENT_SCHEDULER_INTENSITY_MAX);
     scheduler.subscribe(spaceship.getLog());
+    scheduler.start();
 
     gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
+
+    gameState = new StartState(this);
   }
 
+  /**
+   * Method to initialize the network.
+   */
   private void initNetwork() {
     try {
       server = Network.createServer(6143);
       Serializer.registerClass(EventCompletedMessage.class);
       Serializer.registerClass(EventsMessage.class);
+      Serializer.registerClass(RoleChosenMessage.class);
       server.start();
       ServerListener listen = new ServerListener();
       listen.setGame(this);
+      listen.setServer(server);
       server.addMessageListener(listen, EventCompletedMessage.class);
       server.addMessageListener(listen, EventsMessage.class);
+      server.addMessageListener(listen, RoleChosenMessage.class);
       ConnectListener connect = new ConnectListener();
       connect.setGame(this);
       server.addConnectionListener(connect);
@@ -135,57 +147,31 @@ public class Game extends VRApplication {
   @SuppressWarnings({ "checkstyle:methodlength", "PMD" })
   private void initInputs() {
     InputManager inputManager = getInputManager();
-    inputManager.addMapping("toggle", new KeyTrigger(KeyInput.KEY_SPACE));
-    inputManager.addMapping("incShift", new KeyTrigger(KeyInput.KEY_Q));
-    inputManager.addMapping("decShift", new KeyTrigger(KeyInput.KEY_E));
-    inputManager.addMapping("forward", new KeyTrigger(KeyInput.KEY_W));
-    inputManager.addMapping("back", new KeyTrigger(KeyInput.KEY_S));
-    inputManager.addMapping("left", new KeyTrigger(KeyInput.KEY_A));
-    inputManager.addMapping("right", new KeyTrigger(KeyInput.KEY_D));
-    inputManager.addMapping("filter", new KeyTrigger(KeyInput.KEY_F));
-    inputManager.addMapping("dumpImages", new KeyTrigger(KeyInput.KEY_I));
+    int[] keyTriggers = {KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A,
+        KeyInput.KEY_D, KeyInput.KEY_P};
+    String[] mappings = {"forward", "back", "left", "right", "start"};
+    for (int i = 0; i < keyTriggers.length; i++) {
+      inputManager.addMapping(mappings[i], new KeyTrigger(keyTriggers[i]));
+    }
     ActionListener acl = new ActionListener() {
 
       public void onAction(String name, boolean keyPressed, float tpf) {
-        if (name.equals("incShift") && keyPressed) {
-          VRGuiManager.adjustGuiDistance(-0.1f);
-        } else if (name.equals("decShift") && keyPressed) {
-          VRGuiManager.adjustGuiDistance(0.1f);
-        } else if (name.equals("filter") && keyPressed) {
-          // adding filters in realtime
-          CartoonSSAO cartfilt = new CartoonSSAO();
-          FilterPostProcessor fpp = new FilterPostProcessor(getAssetManager());
-          fpp.addFilter(cartfilt);
-          getViewPort().addProcessor(fpp);
-          // filters added to main viewport during runtime,
-          // move them into VR processing (won't do anything if not in VR mode)
-          VRApplication.moveScreenProcessingToVR();
-        }
-        if (name.equals("toggle")) {
-          VRGuiManager.positionGui();
-        }
         if (name.equals("forward")) {
           moveForward = keyPressed;
         } else if (name.equals("back")) {
           moveBackwards = keyPressed;
-        } else if (name.equals("dumpImages")) {
-          OpenVR.getCompositor().CompositorDumpImages.apply();
         } else if (name.equals("left")) {
           rotateLeft = keyPressed;
         } else if (name.equals("right")) {
           rotateRight = keyPressed;
+        } else if (name.equals("start")) {
+          startKey = keyPressed;
         }
       }
     };
-    inputManager.addListener(acl, "forward");
-    inputManager.addListener(acl, "back");
-    inputManager.addListener(acl, "left");
-    inputManager.addListener(acl, "right");
-    inputManager.addListener(acl, "toggle");
-    inputManager.addListener(acl, "incShift");
-    inputManager.addListener(acl, "decShift");
-    inputManager.addListener(acl, "filter");
-    inputManager.addListener(acl, "dumpImages");
+    for (String mapping : mappings) {
+      inputManager.addListener(acl, mapping);
+    }
   }
 
   /**
@@ -201,38 +187,120 @@ public class Game extends VRApplication {
    * Main update loop for the game.
    */
   @Override
-  @SuppressWarnings({ "checkstyle:methodlength"})
   public void simpleUpdate(float tpf) {
-    if (moveForward) {
-      observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(tpf * 8f));
-    }
-    if (moveBackwards) {
-      observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(2).mult(-tpf * 8f));
-    }
-    if (rotateLeft) {
-      observer.rotate(0, 0.75f * tpf, 0);
-    }
-    if (rotateRight) {
-      observer.rotate(0, -0.75f * tpf, 0);
-    }
+    gameState.update(tpf);
+    gameState = gameState.handleState();
+  }
 
-    scheduler.update(tpf / 8);
-    spaceship.update(tpf);
+  /**
+   * Getter for observer.
+   *
+   * @return observer
+   */
+  public Spatial getGameObserver() {
+    return observer;
+  }
 
-    // Update the in-game heads up display.
-    gameHud.updateHud();
+  /**
+   * Getter for moveForward.
+   *
+   * @return moveForward
+   */
+  public boolean isMoveForward() {
+    return moveForward;
+  }
 
-    if (spaceship.isDead()) {
-      this.stop();
-    }
+  /**
+   * Getter for moveBackwards.
+   *
+   * @return moveBackwards
+   */
+  public boolean isMoveBackwards() {
+    return moveBackwards;
+  }
 
-    for (Event event : spaceship.getLog().getEvents()) {
-      event.notification(scene);
-    }
+  /**
+   * Getter for rotateLeft.
+   *
+   * @return rotateLeft
+   */
+  public boolean isRotateLeft() {
+    return rotateLeft;
+  }
 
-    if (spaceship.isVictorious()) {
-      System.out.println("Well played, you have completed the game!");
-      this.stop();
-    }
+  /**
+   * Getter for rotateRight.
+   *
+   * @return rotateRight
+   */
+  public boolean isRotateRight() {
+    return rotateRight;
+  }
+
+  /**
+   * Getter for startKey.
+   *
+   * @return startKey
+   */
+  public boolean isStartKey() {
+    return startKey;
+  }
+
+  /**
+   * Getter for gameHud.
+   *
+   * @return gameHud
+   */
+  public GameHeadsUpDisplay getGameHud() {
+    return gameHud;
+  }
+
+  /**
+   * Getter for scheduler.
+   *
+   * @return scheduler
+   */
+  public EventScheduler getScheduler() {
+    return scheduler;
+  }
+
+  /**
+   * Setter for headsUpDisplay.
+   *
+   * @param headsUpDisplay
+   *                HeadsUpDisplay to be set.
+   */
+  public void setHeadsUpDisplay(GameHeadsUpDisplay headsUpDisplay) {
+    this.gameHud = headsUpDisplay;
+  }
+
+  /**
+   * Setter for observer.
+   *
+   * @param observer
+   *                Observer to be set.
+   */
+  public void setGameObserver(Spatial observer) {
+    this.observer = observer;
+  }
+
+  /**
+   * Setter for scheduler.
+   *
+   * @param scheduler
+   *                Scheduler to be set.
+   */
+  public void setScheduler(EventScheduler scheduler) {
+    this.scheduler = scheduler;
+  }
+
+  /**
+   * Setter for spaceship.
+   *
+   * @param spaceship
+   *                Spaceship to be set.
+   */
+  public void setSpaceship(Spaceship spaceship) {
+    this.spaceship = spaceship;
   }
 }

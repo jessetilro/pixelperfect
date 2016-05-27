@@ -1,23 +1,23 @@
 package nl.tudelft.pixelperfect.player;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThat;
 import nl.tudelft.pixelperfect.Spaceship;
 
 import org.junit.Before;
 import org.junit.Test;
+
 /**
- * Test Suite for the CrewPlayer class.
+ * Test suite for the Scientist.
  * 
- * @author David Alderliesten
- * @author Jesse Tilro
- *
+ * @author Floris Doolaard
  */
-@SuppressWarnings("PMD")
-public class CrewPlayerTest extends PlayerTest {
-  private CrewPlayer player1;
-  private CrewPlayer player2;
-  private CrewPlayer player3;
+public class ScientistTest extends CrewPlayerTest {
+  private Scientist player1;
+  private Scientist player2;
+  private Scientist player3;
   private Spaceship spaceship;
 
   /**
@@ -25,18 +25,10 @@ public class CrewPlayerTest extends PlayerTest {
    */
   @Before
   public void before() {
-    player1 = new CrewPlayer("Player 1");
-    player2 = new CrewPlayer("Player 2");
-    player3 = new CrewPlayer("Player 1");
+    player1 = new Scientist("Player 1");
+    player2 = new Scientist("Player 2");
+    player3 = new Scientist("Player 1");
     spaceship = new Spaceship();
-  }
-  
-  /**
-   * Create a CrewPlayer instance as test object.
-   */
-  @Override
-  public CrewPlayer createPlayer(String name) {
-    return new CrewPlayer(name);
   }
   
   /**
@@ -62,5 +54,13 @@ public class CrewPlayerTest extends PlayerTest {
   public void testEqualsType() {
     assertNotEquals(player1, spaceship);
   }
-
+  
+  /**
+   * Two different player instances should have different hash codes. Since the hash code method is
+   * not implemented yet however, this test case is stubbed.
+   */
+  @Test
+  public void testHashCode() {
+    assertThat(player1.hashCode(), equalTo(42));
+  }
 }

@@ -39,9 +39,7 @@ public final class RouteGenerator {
   public static RouteGenerator getInstance() {
     if (instance == null) {
       synchronized (RouteGenerator.class) {
-        if (instance == null) {
-          instance = new RouteGenerator();
-        }
+        instance = new RouteGenerator();
       }
     }
     return instance;
