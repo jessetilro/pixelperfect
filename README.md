@@ -30,4 +30,5 @@ The deliverable documents for group PixelPerfect are included in the docs direct
 * [Sprint Backlog #4 (13-05-2016)](https://github.com/jessetilro/pixelperfect/blob/master/docs/sprint-backlog-4.pdf)
 * [Sprint Retrospective #4 (20-05-2016)](https://github.com/jessetilro/pixelperfect/blob/master/docs/sprint-retrospective-4.pdf)
 * [Sprint Backlog #5 (20-05-2016)](https://github.com/jessetilro/pixelperfect/blob/master/docs/sprint-backlog-5.pdf)
-
+* [Sprint Retrospective #5 (27-05-2016)](https://github.com/jessetilro/pixelperfect/blob/master/docs/sprint-retrospective-5.pdf)
+* [Sprint Backlog #6 (27-05-2016)](https://github.com/jessetilro/pixelperfect/blob/master/docs/sprint-backlog-6.pdf)
