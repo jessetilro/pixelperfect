@@ -93,8 +93,8 @@ public class GameHeadsUpDisplay {
         screenHeight - Constants.GUI_SCORE_HEIGHT_OFFSET, 0);
 
     timeLeft = new BitmapText(hudFont, true);
-    timeLeft.setLocalTranslation(screenWidth + 250 - Constants.GUI_SCORE_WIDTH_OFFSET,
-        screenHeight - Constants.GUI_SCORE_HEIGHT_OFFSET, 0);
+    timeLeft.setLocalTranslation(screenWidth + 250 - Constants.GUI_TIME_WIDTH_OFFSET,
+        screenHeight - Constants.GUI_TIME_HEIGHT_OFFSET, 0);
   }
 
   /**
@@ -121,5 +121,6 @@ public class GameHeadsUpDisplay {
     // Update the ship's health, team score, and time left indicators.
     shipHealth.setText(Constants.SHIP_HEALTH_LABEL + spaceship.getHealth());
     teamScore.setText(Constants.SHIP_SCORE_LABEL + spaceship.getScore());
+    timeLeft.setText(Constants.SHIP_TIME_LABEL + spaceship.getTimer());
   }
 }
