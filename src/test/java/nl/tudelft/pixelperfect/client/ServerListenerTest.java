@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.Filter;
-import com.jme3.network.Filters;
 import com.jme3.network.HostedConnection;
 import com.jme3.network.Message;
 import com.jme3.network.Server;
@@ -126,12 +125,16 @@ public class ServerListenerTest {
     verify(mockedLog).complete(0);
   }
 
+  /**
+   * When the Server recieves a RoleChosenMessage, it should send it to other clients.
+   * 
+   */
   @SuppressWarnings("unchecked")
   @Test
   public void testRoleChosenMessage() {
     RoleChosenMessage message = mock(RoleChosenMessage.class);
     object.messageReceived(mockedSource, message);
-    verify(mockServer).broadcast( (Filter<? super HostedConnection>) anyObject(), 
+    verify(mockServer).broadcast((Filter<? super HostedConnection>) anyObject(), 
         (Message) anyObject());
   }
 }

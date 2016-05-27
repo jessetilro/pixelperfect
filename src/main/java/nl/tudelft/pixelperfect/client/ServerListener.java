@@ -59,7 +59,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
    *          The message sent.
    * 
    */
-  public void messageReceived(HostedConnection source, Message message) {
+  public synchronized void messageReceived(HostedConnection source, Message message) {
     if (message instanceof EventCompletedMessage) {
       EventCompletedMessage eve = (EventCompletedMessage) message;
       System.out.println("Received a completed event: " + eve.getLabel());
