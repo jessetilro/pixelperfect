@@ -31,6 +31,8 @@ public class GameHeadsUpDisplay {
   private BitmapText teamScore;
   private BitmapText timeLeft;
 
+  private BitmapText[] textToInit;
+
   /**
    * Constructor for the heads-up display for in-game utiliztion.
    * 
@@ -53,8 +55,23 @@ public class GameHeadsUpDisplay {
     this.screenHeight = passedHi;
     this.spaceship = passedShip;
 
+    // Create the array of bitmaps for the gui node placement.
+    bitmapArrayFactory();
+
     // Sets-up the text display using the private method.
     setupTextDisplay();
+  }
+
+  /**
+   * Initializes the bitmap array containing the gui elements.
+   */
+  private void bitmapArrayFactory() {
+    textToInit = new BitmapText[4];
+
+    textToInit[0] = captainLog;
+    textToInit[1] = shipHealth;
+    textToInit[2] = teamScore;
+    textToInit[3] = timeLeft;
   }
 
   /**
@@ -64,11 +81,10 @@ public class GameHeadsUpDisplay {
     // Set-up the bitmap text needed for HUD display.
     setUpBitmapText();
 
-    // Attach the elements to the gui nodes.
-    guiNodes.attachChild(captainLog);
-    guiNodes.attachChild(shipHealth);
-    guiNodes.attachChild(teamScore);
-    guiNodes.attachChild(timeLeft);
+    // Attach the elements to the gui nodes using the bitmap array.
+    for (BitmapText current : textToInit) {
+      guiNodes.attachChild(current);
+    }
   }
 
   /**
