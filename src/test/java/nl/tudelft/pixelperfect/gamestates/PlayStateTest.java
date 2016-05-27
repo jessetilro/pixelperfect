@@ -13,6 +13,7 @@ import static org.junit.Assert.assertSame;
 import static org.mockito.Matchers.anyFloat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 /**
@@ -51,7 +52,7 @@ public class PlayStateTest extends GameStateTest {
    * Test update function.
    */
   @Test
-  public void update() {
+  public void testUpdate() {
     testState.update(1f);
     verify(mockScheduler).update(1f);
     verify(mockSpaceship).update(anyFloat());
@@ -62,35 +63,30 @@ public class PlayStateTest extends GameStateTest {
    * Test for move forward.
    */
   @Test
-  public void updateMoveForward() {
+  public void testUpdateMoveForward() {
     when(mockGame.isMoveForward()).thenReturn(false);
-    //when(mockObserver.move(anyFloat(), anyFloat(), anyFloat())).thenReturn(mock(Spatial.class));
     testState.updateMovement(1f);
-    verify(mockGame).isMoveForward();
-    //verify(mockObserver).move(anyFloat(), anyFloat(), anyFloat());
+    verifyNoMoreInteractions(mockObserver);
   }
 
   /**
    * Test for move backwards.
    */
   @Test
-  public void updateMoveBackwards() {
+  public void testUpdateMoveBackwards() {
     when(mockGame.isMoveBackwards()).thenReturn(false);
-    //when(mockObserver.move(anyFloat(), anyFloat(), anyFloat())).thenReturn(mock(Spatial.class));
     testState.updateMovement(1f);
-    verify(mockGame).isMoveBackwards();
-    //verify(mockObserver).move(anyFloat(), anyFloat(), anyFloat());
+    verifyNoMoreInteractions(mockObserver);
   }
 
   /**
    * Test for rotation left.
    */
   @Test
-  public void updateRotateLeft() {
+  public void testUpdateRotateLeft() {
     when(mockGame.isRotateLeft()).thenReturn(true);
     when(mockObserver.rotate(anyFloat(), anyFloat(), anyFloat())).thenReturn(mock(Spatial.class));
     testState.updateMovement(1f);
-    verify(mockGame).isRotateLeft();
     verify(mockObserver).rotate(anyFloat(), anyFloat(), anyFloat());
   }
 
@@ -98,11 +94,10 @@ public class PlayStateTest extends GameStateTest {
    * Test for rotation right.
    */
   @Test
-  public void updateRotateRight() {
+  public void testUpdateRotateRight() {
     when(mockGame.isRotateRight()).thenReturn(true);
     when(mockObserver.rotate(anyFloat(), anyFloat(), anyFloat())).thenReturn(mock(Spatial.class));
     testState.updateMovement(1f);
-    verify(mockGame).isRotateRight();
     verify(mockObserver).rotate(anyFloat(), anyFloat(), anyFloat());
   }
 
@@ -110,7 +105,7 @@ public class PlayStateTest extends GameStateTest {
    * Test that after you won WonState is returned.
    */
   @Test
-  public void handleStateWon() {
+  public void testHandleStateWon() {
     when(mockSpaceship.isVictorious()).thenReturn(true);
     GameState newState = testState.handleState();
     assertSame(newState.getClass(), WonState.class);
@@ -120,7 +115,7 @@ public class PlayStateTest extends GameStateTest {
    * Test that after you lost LoseState is returned.
    */
   @Test
-  public void handleStateLost() {
+  public void testHandleStateLost() {
     when(mockSpaceship.isDead()).thenReturn(true);
     GameState newState = testState.handleState();
     assertSame(newState.getClass(), LostState.class);
@@ -130,7 +125,7 @@ public class PlayStateTest extends GameStateTest {
    * Test that when nothing changed PlayState is returned.
    */
   @Test
-  public void handleState() {
+  public void testHandleState() {
     GameState newState = testState.handleState();
     assertSame(newState.getClass(), PlayState.class);
   }

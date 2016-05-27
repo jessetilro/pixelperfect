@@ -29,6 +29,7 @@ import nl.tudelft.pixelperfect.route.Route;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD")
 public class SpaceshipTest {
 
   private Spaceship ship;
@@ -59,6 +60,10 @@ public class SpaceshipTest {
     assertEquals(25, ship.getScore());
   }
   
+  /**
+   * Updates the score to a negative value and verifies it.
+   * 
+   */
   @Test
   public void testChangeScoreNegative() {
     ship.updateScore(-50);
@@ -194,6 +199,7 @@ public class SpaceshipTest {
     ship.updateCrew(clients);
 
     verify(mockedHc).getId();
+    assertEquals(1, ship.getCrew().size());
   }
 
   /**
