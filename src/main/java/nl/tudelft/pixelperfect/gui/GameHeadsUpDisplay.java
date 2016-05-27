@@ -61,6 +61,20 @@ public class GameHeadsUpDisplay {
    * Sets-up text display for the in-game HUD, along with all of its elements.
    */
   private void setupTextDisplay() {
+    // Set-up the bitmap text needed for HUD display.
+    setUpBitmapText();
+
+    // Attach the elements to the gui nodes.
+    guiNodes.attachChild(captainLog);
+    guiNodes.attachChild(shipHealth);
+    guiNodes.attachChild(teamScore);
+    guiNodes.attachChild(timeLeft);
+  }
+
+  /**
+   * Set-up the bitmap associations for the HUD text.
+   */
+  private void setUpBitmapText() {
     // Loading the font stored in the jme default manager.
     hudFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
 
@@ -69,19 +83,18 @@ public class GameHeadsUpDisplay {
     captainLog.setLocalTranslation(screenWidth - Constants.GUI_LOG_WIDTH_OFFSET,
         screenHeight - Constants.GUI_LOG_HEIGHT_OFFSET, 0);
 
-    // Init for the health text, including font loading and text setting.
+    // Init for the HUD text, including font loading and text setting.
     shipHealth = new BitmapText(hudFont, true);
     shipHealth.setLocalTranslation(screenWidth + 150 - Constants.GUI_HEALTH_WIDTH_OFFSET,
         screenHeight - Constants.GUI_HEALTH_HEIGHT_OFFSET, 0);
-    
+
     teamScore = new BitmapText(hudFont, true);
     teamScore.setLocalTranslation(screenWidth + 250 - Constants.GUI_SCORE_WIDTH_OFFSET,
         screenHeight - Constants.GUI_SCORE_HEIGHT_OFFSET, 0);
 
-    // Attach the elements to the gui nodes.
-    guiNodes.attachChild(captainLog);
-    guiNodes.attachChild(shipHealth);
-    guiNodes.attachChild(teamScore);
+    timeLeft = new BitmapText(hudFont, true);
+    timeLeft.setLocalTranslation(screenWidth + 250 - Constants.GUI_SCORE_WIDTH_OFFSET,
+        screenHeight - Constants.GUI_SCORE_HEIGHT_OFFSET, 0);
   }
 
   /**
