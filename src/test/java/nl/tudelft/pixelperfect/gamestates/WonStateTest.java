@@ -32,7 +32,7 @@ public class WonStateTest extends GameStateTest {
    * Test update function.
    */
   @Test
-  public void update() {
+  public void testUpdate() {
     //update method is empty for now
   }
 
@@ -40,7 +40,7 @@ public class WonStateTest extends GameStateTest {
    * Tests for state changes.
    */
   @Test
-  public void handleState() {
+  public void testHandleState() {
     handleStateStartKey();
     handleStateThis();
   }

@@ -31,7 +31,7 @@ public class StartStateTest extends GameStateTest {
    * Test update function.
    */
   @Test
-  public void update() {
+  public void testUpdate() {
     //update method is empty for now
   }
 
@@ -39,15 +39,15 @@ public class StartStateTest extends GameStateTest {
    * Test for correct states being returned.
    */
   @Test
-  public void handleState() {
-    handleStateStartKey();
-    handleStateThis();
+  public void testHandleState() {
+    testHandleStateStartKey();
+    testHandleStateThis();
   }
 
   /**
    * Test that PlayState is returned when startkey is pressed.
    */
-  private void handleStateStartKey() {
+  private void testHandleStateStartKey() {
     when(mockGame.isStartKey()).thenReturn(true);
     GameState newState = testState.handleState();
     assertSame(newState.getClass(), PlayState.class);
@@ -56,7 +56,7 @@ public class StartStateTest extends GameStateTest {
   /**
    * Test that StartState is returned when nothing is done.
    */
-  private void handleStateThis() {
+  private void testHandleStateThis() {
     when(mockGame.isStartKey()).thenReturn(false);
     GameState newState = testState.handleState();
     assertSame(newState.getClass(), StartState.class);

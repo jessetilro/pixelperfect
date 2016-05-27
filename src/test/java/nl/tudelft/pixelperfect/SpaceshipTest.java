@@ -59,6 +59,10 @@ public class SpaceshipTest {
     assertEquals(25, ship.getScore());
   }
   
+  /**
+   * Updates the score to a negative value and verifies it.
+   * 
+   */
   @Test
   public void testChangeScoreNegative() {
     ship.updateScore(-50);
@@ -194,6 +198,7 @@ public class SpaceshipTest {
     ship.updateCrew(clients);
 
     verify(mockedHc).getId();
+    assertEquals(1, ship.getCrew().size());
   }
 
   /**

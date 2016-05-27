@@ -32,7 +32,7 @@ public class LostStateTest extends GameStateTest {
    * Test update function.
    */
   @Test
-  public void update() {
+  public void testUpdate() {
     //update method is empty for now.
   }
 
@@ -40,16 +40,16 @@ public class LostStateTest extends GameStateTest {
    * Test handleState.
    */
   @Test
-  public void handleState() {
-    handleStateStartKey();
-    handleStateThis();
+  public void testHandleState() {
+    testHandleStateStartKey();
+    testHandleStateThis();
   }
 
   /**
    * Test branch for new StartState.
    */
   @Test
-  public void handleStateStartKey() {
+  public void testHandleStateStartKey() {
     when(mockGame.isStartKey()).thenReturn(true);
     GameState newState = testState.handleState();
     assertSame(newState.getClass(), StartState.class);
@@ -59,7 +59,7 @@ public class LostStateTest extends GameStateTest {
    * Test branch for LostState.
    */
   @Test
-  public void handleStateThis() {
+  public void testHandleStateThis() {
     when(mockGame.isStartKey()).thenReturn(false);
     GameState newState = testState.handleState();
     assertSame(newState.getClass(), LostState.class);

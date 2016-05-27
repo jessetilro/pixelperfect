@@ -14,12 +14,12 @@ public abstract class GameStateTest {
    * Abstract method for update.
    */
   @Test
-  public abstract void update();
+  public abstract void testUpdate();
 
   /**
    * Abstract method for handleState.
    */
   @Test
-  public abstract void handleState();
+  public abstract void testHandleState();
 
 }
