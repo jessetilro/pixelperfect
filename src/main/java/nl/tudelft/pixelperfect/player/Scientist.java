@@ -29,7 +29,7 @@ public class Scientist extends CrewPlayer {
   @Override
   public boolean equals(Object that) {
     if (that instanceof Scientist) {
-      return super.equals(that) && ((Scientist) that).getName().equals(this.getName());
+      return super.equals(that);
     }
     return false;
   }

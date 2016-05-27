@@ -102,4 +102,9 @@ public abstract class EventTest {
   public void testGetDamage() {
     assertEquals(99.42, toTest.getDamage(), 0.0);
   }
-}
+  
+  @Test
+  public void testGetTimeLeft() {
+    assertEquals(4, toTest.getTimeLeft(80L), 0.0);
+  }
+  }
