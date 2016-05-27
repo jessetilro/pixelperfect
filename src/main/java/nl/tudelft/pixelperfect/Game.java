@@ -183,7 +183,6 @@ public class Game extends VRApplication {
    * Main update loop for the game.
    */
   @Override
-  @SuppressWarnings({ "checkstyle:methodlength" })
   public void simpleUpdate(float tpf) {
     gameState.update(tpf);
     gameState = gameState.handleState();
