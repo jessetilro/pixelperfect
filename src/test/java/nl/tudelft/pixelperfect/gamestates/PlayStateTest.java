@@ -64,10 +64,10 @@ public class PlayStateTest extends GameStateTest {
   @Test
   public void updateMoveForward() {
     when(mockGame.isMoveForward()).thenReturn(false);
-//    when(mockObserver.move(anyFloat(), anyFloat(), anyFloat())).thenReturn(mock(Spatial.class));
+    //when(mockObserver.move(anyFloat(), anyFloat(), anyFloat())).thenReturn(mock(Spatial.class));
     testState.updateMovement(1f);
     verify(mockGame).isMoveForward();
-//    verify(mockObserver).move(anyFloat(), anyFloat(), anyFloat());
+    //verify(mockObserver).move(anyFloat(), anyFloat(), anyFloat());
   }
 
   /**
@@ -76,10 +76,10 @@ public class PlayStateTest extends GameStateTest {
   @Test
   public void updateMoveBackwards() {
     when(mockGame.isMoveBackwards()).thenReturn(false);
-//    when(mockObserver.move(anyFloat(), anyFloat(), anyFloat())).thenReturn(mock(Spatial.class));
+    //when(mockObserver.move(anyFloat(), anyFloat(), anyFloat())).thenReturn(mock(Spatial.class));
     testState.updateMovement(1f);
     verify(mockGame).isMoveBackwards();
-//    verify(mockObserver).move(anyFloat(), anyFloat(), anyFloat());
+    //verify(mockObserver).move(anyFloat(), anyFloat(), anyFloat());
   }
 
   /**

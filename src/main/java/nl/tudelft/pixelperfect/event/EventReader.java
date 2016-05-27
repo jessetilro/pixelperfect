@@ -30,9 +30,7 @@ public final class EventReader {
   public static EventReader getInstance() {
     if (instance == null) {
       synchronized (EventReader.class) {
-        if (instance == null) {
-          instance = new EventReader();
-        }
+        instance = new EventReader();
       }
     }
     return instance;
