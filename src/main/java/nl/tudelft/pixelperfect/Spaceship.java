@@ -23,6 +23,7 @@ public class Spaceship {
 
   private static final int STARTING_HEALTH = 100;
 
+  private int score;
   private double health;
   private Route route;
   private EventListener log;
@@ -34,6 +35,7 @@ public class Spaceship {
    * Construct a new Spaceship instance.
    */
   public Spaceship() {
+    this.score = 0;
     this.health = STARTING_HEALTH;
     this.victorious = false;
     RouteGenerator rg = RouteGenerator.getInstance();
@@ -95,6 +97,25 @@ public class Spaceship {
   }
 
   /**
+   * Get the ship crew's current score.
+   * 
+   * @return The ship crew's current score.
+   */
+  public int getScore() {
+    return this.score;
+  }
+
+  /**
+   * Updates the score based on the passed parameter.
+   * 
+   * @param toChange
+   *          the value to change the score with.
+   */
+  public void updateScore(int toChange) {
+    this.score = this.score + toChange;
+  }
+
+  /**
    * Get the ship's health.
    * 
    * @return The ship's current health value.
@@ -127,9 +148,9 @@ public class Spaceship {
    * @return The time the ship has been on its way.
    */
   public float getTimer() {
-  	return this.timer;
+    return this.timer;
   }
-  
+
   /**
    * Update the Spaceship and related model classes for the step in the game loop.
    * 

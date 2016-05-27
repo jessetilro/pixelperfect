@@ -104,6 +104,7 @@ public class EventLog implements EventListener {
     for (int t = 0; t < events.size(); t++) {
       if (events.get(t).getId() == identity) {
         events.remove(t);
+        spaceship.updateScore(10);
         return;
       }
     }
@@ -126,6 +127,7 @@ public class EventLog implements EventListener {
       }
     }
     for (Event event : discardPile) {
+      spaceship.updateScore(-5);
       event.applyDamage(spaceship);
       discard(event);
     }

@@ -29,7 +29,6 @@ import nl.tudelft.pixelperfect.route.Route;
  * @author Jesse Tilro
  *
  */
-@SuppressWarnings("PMD")
 public class SpaceshipTest {
 
   private Spaceship ship;
@@ -41,7 +40,32 @@ public class SpaceshipTest {
   public void before() {
     ship = new Spaceship();
   }
+
+  /**
+   * Tests the getScore method.
+   */
+  @Test
+  public void testGetScore() {
+    assertEquals(0, ship.getScore());
+  }
+
+  /**
+   * Updates the score to a positive value and verifies it.
+   */
+  @Test
+  public void testChangeScorePositive() {
+    ship.updateScore(25);
+
+    assertEquals(25, ship.getScore());
+  }
   
+  @Test
+  public void testChangeScoreNegative() {
+    ship.updateScore(-50);
+    
+    assertEquals(-50, ship.getScore());
+  }
+
   /**
    * Tests the getTimer method.
    */
@@ -161,15 +185,15 @@ public class SpaceshipTest {
   @Test
   public void testUpdateCrewNewConnection() {
     // Mock connections.
-    HostedConnection mockedHC = mock(HostedConnection.class);
-    when(mockedHC.getId()).thenReturn(42);
+    HostedConnection mockedHc = mock(HostedConnection.class);
+    when(mockedHc.getId()).thenReturn(42);
     ArrayList<HostedConnection> clients = new ArrayList<HostedConnection>();
-    clients.add(mockedHC);
+    clients.add(mockedHc);
 
     // Execute
     ship.updateCrew(clients);
 
-    verify(mockedHC).getId();
+    verify(mockedHc).getId();
   }
 
   /**
@@ -178,10 +202,10 @@ public class SpaceshipTest {
   @Test
   public void testUpdateCrewNoChanges() {
     // Mock connections.
-    HostedConnection mockedHC = mock(HostedConnection.class);
-    when(mockedHC.getId()).thenReturn(42);
+    HostedConnection mockedHc = mock(HostedConnection.class);
+    when(mockedHc.getId()).thenReturn(42);
     ArrayList<HostedConnection> clients = new ArrayList<HostedConnection>();
-    clients.add(mockedHC);
+    clients.add(mockedHc);
 
     // Execute first time
     ship.updateCrew(clients);
@@ -191,7 +215,7 @@ public class SpaceshipTest {
     ship.updateCrew(clients);
     ArrayList<Player> crewSecond = ship.getCrew();
 
-    verify(mockedHC, times(2)).getId();
+    verify(mockedHc, times(2)).getId();
     assertEquals(crewFirst, crewSecond);
   }
 }
