@@ -5,12 +5,17 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.anyObject;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.jme3.network.AbstractMessage;
+import com.jme3.network.Filter;
+import com.jme3.network.Filters;
 import com.jme3.network.HostedConnection;
+import com.jme3.network.Message;
+import com.jme3.network.Server;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import nl.tudelft.pixelperfect.Game;
@@ -29,6 +34,7 @@ public class ServerListenerTest {
   private Game mockedGame;
   private ServerListener object;
   private HostedConnection mockedSource;
+  private Server mockServer;
 
   /**
    * Set up mocked dependencies, stubs and the test object.
@@ -37,10 +43,11 @@ public class ServerListenerTest {
   public void init() {
     // Mock dependencies
     mockedGame = mock(Game.class);
-
+    mockServer = mock(Server.class);
     // Set up test object.
     object = new ServerListener();
     object.setGame(mockedGame);
+    object.setServer(mockServer);
     mockedSource = mock(HostedConnection.class);
   }
 
@@ -119,4 +126,12 @@ public class ServerListenerTest {
     verify(mockedLog).complete(0);
   }
 
+  @SuppressWarnings("unchecked")
+  @Test
+  public void testRoleChosenMessage() {
+    RoleChosenMessage message = mock(RoleChosenMessage.class);
+    object.messageReceived(mockedSource, message);
+    verify(mockServer).broadcast( (Filter<? super HostedConnection>) anyObject(), 
+        (Message) anyObject());
+  }
 }

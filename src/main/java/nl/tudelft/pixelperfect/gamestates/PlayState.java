@@ -82,6 +82,6 @@ public class PlayState extends GameState {
     } else if (spaceship.isDead()) {
       return new LostState(game);
     }
-      return this;
+    return this;
   }
 }
