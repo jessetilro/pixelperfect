@@ -21,6 +21,7 @@ import static org.mockito.Mockito.when;
  *
  * @author Wouter Zirkzee
  */
+@SuppressWarnings("PMD")
 public class PlayStateTest extends GameStateTest {
 
   private Game mockGame;

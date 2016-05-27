@@ -29,6 +29,7 @@ import nl.tudelft.pixelperfect.route.Route;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD")
 public class SpaceshipTest {
 
   private Spaceship ship;
