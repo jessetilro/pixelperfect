@@ -106,6 +106,16 @@ public class Spaceship {
   }
 
   /**
+   * Updates the score based on the passed parameter.
+   * 
+   * @param toChange
+   *          the value to change the score with.
+   */
+  public void updateScore(int toChange) {
+    this.score = this.score + toChange;
+  }
+
+  /**
    * Get the ship's health.
    * 
    * @return The ship's current health value.
