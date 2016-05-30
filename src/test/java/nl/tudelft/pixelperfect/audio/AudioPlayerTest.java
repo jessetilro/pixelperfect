@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
  *
  * @author Wouter Zirkzee
  */
-@SuppressWarnings({"checkstyle:avoidstarimport"})
+@SuppressWarnings({"checkstyle:AvoidStarImport", "PMD"})
 public class AudioPlayerTest {
   private AudioPlayer audioPlayer;
 
