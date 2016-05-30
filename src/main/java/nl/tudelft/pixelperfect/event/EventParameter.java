@@ -14,13 +14,13 @@ public class EventParameter {
   private int number;
 
   /**
-   * Construct an EventParameter with a discrete value (part of the EventParameterValue
+   * Construct an EventParameter with a specific value (part of the EventParameterValue
    * enumeration).
    * 
    * @param key
    *          The key of the parameter.
    * @param value
-   *          The (discrete) value of the parameter.
+   *          The specific value of the parameter.
    */
   public EventParameter(String key, EventParameterValues value) {
     this.key = key;
@@ -29,12 +29,12 @@ public class EventParameter {
   }
 
   /**
-   * Construct an EventParameter with a continuous value (a number).
+   * Construct an EventParameter with a generic value (a number).
    * 
    * @param key
    *          The key of the parameter.
    * @param value
-   *          The (continuous) value of the parameter.
+   *          The number value of the parameter.
    */
   public EventParameter(String key, int value) {
     this.key = key;
@@ -56,17 +56,67 @@ public class EventParameter {
    * 
    * @return A boolean.
    */
-  public boolean isContinuous() {
+  public boolean isGeneric() {
     return (value == EventParameterValues.GENERIC);
   }
 
   /**
-   * Check whether this parameter has a discrete value.
+   * Get this parameter's number value.
    * 
-   * @return A boolean.
+   * @return A number value.
    */
-  public boolean isDiscrete() {
-    return !isContinuous();
+  protected int getNumber() {
+    return number;
+  }
+
+  /**
+   * Get this parameter's specific value.
+   * 
+   * @return A specific value.
+   */
+  protected EventParameterValues getValue() {
+    return value;
+  }
+
+  /**
+   * Compares two EventParameters to see if they're the same.
+   * 
+   * @param that
+   *          The object to compare this instance to.
+   * 
+   * @return Whether or not the compared objects are the same EventParameter.
+   */
+  @Override
+  public boolean equals(Object that) {
+    if (that instanceof EventParameter) {
+      EventParameter other = (EventParameter) that;
+      if (key != other.getKey()) {
+        return false;
+      }
+      if (isGeneric() && other.isGeneric()) {
+        return number == other.getNumber();
+      } else {
+        return value.equals(other.getValue());
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Generate a Hash Code for this instance.
+   * 
+   * @return A likely unique hash code for this instance.
+   */
+  @Override
+  public int hashCode() {
+    int result = 42;
+    int prime = 37;
+    for (char ch : key.toCharArray()) {
+      result = prime * result + (int) ch;
+    }
+    result = prime * result + value.ordinal();
+    result = prime * result + number;
+    return result;
   }
 
 }
