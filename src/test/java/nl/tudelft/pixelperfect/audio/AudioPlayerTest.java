@@ -68,7 +68,7 @@ public class AudioPlayerTest {
    * Verify stop issn't called when sound is not playing.
    */
   @Test
-  public void stopSoundNotPlaying() {
+  public void stopSoundWhenNotPlaying() {
     HashMap<String, AudioNode> testMap = new HashMap<String, AudioNode>();
     AudioNode testAudio = mock(AudioNode.class);
     when(testAudio.getStatus()).thenReturn(AudioSource.Status.Stopped);
@@ -83,7 +83,7 @@ public class AudioPlayerTest {
    * Verify stop is called when sound is playing.
    */
   @Test
-  public void stopSoundPlaying() {
+  public void stopSoundWhenPlaying() {
     HashMap<String, AudioNode> testMap = new HashMap<String, AudioNode>();
     AudioNode testAudio = mock(AudioNode.class);
     when(testAudio.getStatus()).thenReturn(AudioSource.Status.Playing);
