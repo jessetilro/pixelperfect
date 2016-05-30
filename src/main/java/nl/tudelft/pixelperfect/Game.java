@@ -13,6 +13,7 @@ import com.jme3.network.serializing.Serializer;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import jmevr.app.VRApplication;
+import nl.tudelft.pixelperfect.audio.AudioPlayer;
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.EventsMessage;
@@ -39,6 +40,7 @@ public class Game extends VRApplication {
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private Server server;
+  private AudioPlayer audioPlayer;
 
   private Spatial observer;
 
@@ -102,6 +104,12 @@ public class Game extends VRApplication {
 
     scene = new Scene(this);
     scene.createMap();
+
+    audioPlayer = new AudioPlayer(this);
+    //TODO load acutal sounds
+     String[] names = {};
+     String[] locations = {};
+     audioPlayer.loadSounds(names, locations);
 
     initNetwork();
 
