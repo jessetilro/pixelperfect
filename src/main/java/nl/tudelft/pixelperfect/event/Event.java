@@ -1,6 +1,5 @@
 package nl.tudelft.pixelperfect.event;
 
-import nl.tudelft.pixelperfect.Scene;
 import nl.tudelft.pixelperfect.Spaceship;
 
 /**
@@ -132,12 +131,4 @@ public abstract class Event {
   public double getDamage() {
     return this.damage;
   }
-
-  /**
-   * Allow events to render notifications to the players.
-   *
-   * @param scene
-   *          The scene in which the notification must appear.
-   */
-  public abstract void notification(Scene scene);
 }

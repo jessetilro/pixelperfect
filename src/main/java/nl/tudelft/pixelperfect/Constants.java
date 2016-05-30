@@ -20,10 +20,10 @@ public final class Constants {
 
   public static final int GUI_HEALTH_WIDTH_OFFSET = 300;
   public static final int GUI_HEALTH_HEIGHT_OFFSET = 100;
-  
+
   public static final int GUI_SCORE_WIDTH_OFFSET = 400;
   public static final int GUI_SCORE_HEIGHT_OFFSET = 150;
-  
+
   public static final int GUI_TIME_WIDTH_OFFSET = 400;
   public static final int GUI_TIME_HEIGHT_OFFSET = 0;
 
@@ -36,4 +36,7 @@ public final class Constants {
   // Target intensity for the Event Scheduler.
   public static final double EVENT_SCHEDULER_INTENSITY_MIN = 0.125;
   public static final double EVENT_SCHEDULER_INTENSITY_MAX = 0.5;
+
+  // Path to the Events data file on the file system.
+  public static final String EVENT_DATA_FILE = "src/main/resources/data/events.json";
 }

@@ -65,7 +65,7 @@ public class EventLogTest extends EventListenerTest {
    */
   @Test
   public void testNotify() {
-    Event evt1 = new FireEvent(0, "Lorem", "Ipsum", 0, 0, 50);
+    Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
     object.notify(evt1);
     assertTrue(object.getEvents().contains(evt1));
   }
@@ -76,7 +76,7 @@ public class EventLogTest extends EventListenerTest {
    */
   @Test
   public void testServerVerify() {
-    Event evt1 = new FireEvent(0, "Lorem", "Ipsum", 0, 0, 50);
+    Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
     object.notify(evt1);
     verify(mockedServer, times(1)).broadcast((EventsMessage) anyObject());
   }
@@ -87,7 +87,7 @@ public class EventLogTest extends EventListenerTest {
    */
   @Test
   public void testCompleteExisting() {
-    Event evt1 = new FireEvent(0, "Lorem", "Ipsum", 0, 0, 50);
+    Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
     object.getEvents().add(evt1);
     object.complete(0);
     assertEquals(0, object.getEvents().size());
@@ -99,7 +99,7 @@ public class EventLogTest extends EventListenerTest {
    */
   @Test
   public void testCompleteMissing() {
-    Event evt1 = new FireEvent(0, "Lorem", "Ipsum", 0, 0, 50);
+    Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
     object.getEvents().add(evt1);
     object.complete(1);
     assertEquals(1, object.getEvents().size());
@@ -111,7 +111,7 @@ public class EventLogTest extends EventListenerTest {
    */
   @Test
   public void testDiscard() {
-    Event evt1 = new FireEvent(0, "Apple", "Banana", 0, 0, 50);
+    Event evt1 = new FireOutbreakEvent(0, "Apple", "Banana", 0, 0, 50);
     object.notify(evt1);
     object.discard(evt1);
     assertFalse(object.getEvents().contains(evt1));
@@ -124,8 +124,8 @@ public class EventLogTest extends EventListenerTest {
    */
   @Test
   public void testUpdate() {
-    Event evt1 = new FireEvent(0, "Whale", "Shark", 0, 0, 50);
-    Event evt2 = new AsteroidFieldEvent(1, "Pie", "Cake", System.currentTimeMillis(), 99999999, 50);
+    Event evt1 = new FireOutbreakEvent(0, "Whale", "Shark", 0, 0, 50);
+    Event evt2 = new AsteroidImpactEvent(1, "Pie", "Cake", System.currentTimeMillis(), 99999999, 50);
     object.notify(evt1);
     object.notify(evt2);
 
@@ -143,8 +143,8 @@ public class EventLogTest extends EventListenerTest {
    */
   @Test
   public void testReplace() {
-    Event evt1 = new FireEvent(0, "Mango", "Pineapple", 0, 0, 50);
-    Event evt2 = new AsteroidFieldEvent(1, "Pear", "Kiwi Fruit", System.currentTimeMillis(),
+    Event evt1 = new FireOutbreakEvent(0, "Mango", "Pineapple", 0, 0, 50);
+    Event evt2 = new AsteroidImpactEvent(1, "Pear", "Kiwi Fruit", System.currentTimeMillis(),
         99999999, 50);
     ArrayList<Event> events = new ArrayList<Event>();
     events.add(evt1);

@@ -1,19 +1,16 @@
 package nl.tudelft.pixelperfect.event;
 
-
-import nl.tudelft.pixelperfect.Scene;
-
 /**
- * A type of Event, imposing a dangerous Asteroid Field.
+ * A type of event, imposing the problem of a lack of caffeine.
  * 
- * @author Wouter Zirkzee
+ * @author Jesse Tilro
  * 
  */
 
-public class AsteroidFieldEvent extends Event {
+public class CoffeeBoostEvent extends Event {
 
   /**
-   * Constructor for AstroidField event.
+   * Constructor for PlasmaLeakEvent event.
    *
    * @param id
    *          The desired id.
@@ -28,19 +25,8 @@ public class AsteroidFieldEvent extends Event {
    * @param damage
    *          The damage done to the ship on even failure.
    */
-  public AsteroidFieldEvent(int id, String summary, String description, long timestamp,
-      long duration, double damage) {
+  public CoffeeBoostEvent(int id, String summary, String description, long timestamp, long duration,
+      double damage) {
     super(id, summary, description, timestamp, duration, damage);
-  }
-
-
-  /**
-   * Show a specific notification for this event.
-   * 
-   * @param scene
-   *          Scene to be mutated.
-   */
-  public void notification(Scene scene) {
-    // TODO
   }
 }

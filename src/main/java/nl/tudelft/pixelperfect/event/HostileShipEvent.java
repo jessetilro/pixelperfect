@@ -1,8 +1,5 @@
 package nl.tudelft.pixelperfect.event;
 
-
-import nl.tudelft.pixelperfect.Scene;
-
 /**
  * A type of event, imposing the problem of a hostile alien spaceship.
  * 
@@ -31,16 +28,5 @@ public class HostileShipEvent extends Event {
   public HostileShipEvent(int id, String summary, String description, long timestamp, long duration,
       double damage) {
     super(id, summary, description, timestamp, duration, damage);
-  }
-
-
-  /**
-   * Show a specific notification for this event.
-   * 
-   * @param scene
-   *          Scene to be mutated.
-   */
-  public void notification(Scene scene) {
-    // TODO
   }
 }

@@ -1,15 +1,12 @@
 package nl.tudelft.pixelperfect.event;
 
-
-import nl.tudelft.pixelperfect.Scene;
-
 /**
  * A type of Event, imposing the problem of a fire outbreak.
  * 
  * @author Wouter Zirkzee
  * 
  */
-public class FireEvent extends Event {
+public class FireOutbreakEvent extends Event {
 
   /**
    * Constructor for FireEvent event.
@@ -27,19 +24,8 @@ public class FireEvent extends Event {
    * @param damage
    *          The damage done to the ship on even failure.
    */
-  public FireEvent(int id, String summary, String description, long timestamp, long duration,
+  public FireOutbreakEvent(int id, String summary, String description, long timestamp, long duration,
       double damage) {
     super(id, summary, description, timestamp, duration, damage);
-  }
-
-  
-  /**
-   * Show a specific notification for this event.
-   * 
-   * @param scene
-   *          Scene to be mutated.
-   */
-  public void notification(Scene scene) {
-    // TODO
   }
 }

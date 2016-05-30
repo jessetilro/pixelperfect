@@ -3,12 +3,10 @@ package nl.tudelft.pixelperfect.event;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.tudelft.pixelperfect.Scene;
 import nl.tudelft.pixelperfect.Spaceship;
 
 /**
@@ -28,10 +26,6 @@ public abstract class EventTest {
   @Before
   public void initialize() {
     toTest = createEvent();
-
-    // For line coverage.
-    Scene scene = mock(Scene.class);
-    toTest.notification(scene);
   }
 
   /**
@@ -102,7 +96,7 @@ public abstract class EventTest {
   public void testGetDamage() {
     assertEquals(99.42, toTest.getDamage(), 0.0);
   }
-  
+
   /**
    * Thest the getTimeLeft method.
    * 
