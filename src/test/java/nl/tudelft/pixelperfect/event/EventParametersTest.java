@@ -29,6 +29,10 @@ public class EventParametersTest {
   private EventParameters parameters;
   private EventParameters parametersEmpty;
 
+  /**
+   * Set up the test objects an dependencies. (Dependencies are not mocked in order to test
+   * integration.)
+   */
   @Before
   public void setup() {
     collection = new ArrayList<EventParameter>();

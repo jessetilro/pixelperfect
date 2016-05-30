@@ -31,7 +31,7 @@ public class EventParameterTest {
   }
 
   /**
-   * The isDiscrete method should tell the truth, i.e. whether the parameter has a discrete value
+   * The isGeneric method should tell the truth, i.e. whether the parameter has a discrete value
    * assigned.
    */
   @Test
