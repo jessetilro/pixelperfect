@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -98,11 +101,34 @@ public abstract class EventTest {
   }
 
   /**
-   * Thest the getTimeLeft method.
+   * Test the getTimeLeft method.
    * 
    */
   @Test
   public void testGetTimeLeft() {
     assertEquals(4, toTest.getTimeLeft(80L), 0.0);
+  }
+
+  /**
+   * When setting the parameter collection of an Event and subsequently validating against the same
+   * collection, it should yield true.
+   */
+  @Test
+  public void testSetAndValidateParametersTrue() {
+    Collection<EventParameter> collection = new ArrayList<EventParameter>();
+    collection.add(new EventParameter("test", 42));
+    toTest.setParameters(collection);
+    assertTrue(toTest.validateParameters(collection));
+  }
+
+  /**
+   * When validating against a collection when none has been set for the Event yet, it should yield
+   * false.
+   */
+  @Test
+  public void testSetAndValidateParametersFalse() {
+    Collection<EventParameter> collection = new ArrayList<EventParameter>();
+    collection.add(new EventParameter("test", 42));
+    assertFalse(toTest.validateParameters(collection));
   }
 }
