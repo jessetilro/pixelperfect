@@ -1,5 +1,6 @@
 package nl.tudelft.pixelperfect.event;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -21,8 +22,12 @@ public class HostileShipEventFactory extends EventFactory {
 
   @Override
   public Collection<EventParameter> createParameters() {
-    // Create parameters for an Event.
-    return null;
+    Collection<EventParameter> collection = new ArrayList<EventParameter>();
+    collection.add(new EventParameter("position-x", 1));
+    collection.add(new EventParameter("position-y", 2));
+    collection
+        .add(new EventParameter("armor", EventParameterValues.HOSTILE_SHIP_ARMOR_ENERGY_SHIELD));
+    return collection;
   }
 
 }

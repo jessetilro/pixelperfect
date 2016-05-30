@@ -7,7 +7,7 @@ package nl.tudelft.pixelperfect.event;
  * @author Floris Doolaard
  */
 @SuppressWarnings("PMD")
-public class FireOutbreakTest extends EventTest {
+public class FireOutbreakEventTest extends EventTest {
 
   /**
    * Factory method for testing.

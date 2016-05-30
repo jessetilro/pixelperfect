@@ -1,5 +1,6 @@
 package nl.tudelft.pixelperfect.event;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -33,8 +34,8 @@ public class AsteroidImpactEventFactory extends EventFactory {
 
   @Override
   public Collection<EventParameter> createParameters() {
-    // Create parameters for an AsteroidFieldEvent.
-    return null;
+    Collection<EventParameter> collection = new ArrayList<EventParameter>();
+    return collection;
   }
 
 }

@@ -57,6 +57,7 @@ public class EventBuilder {
   public Event buildEvent() {
     if (factory != null) {
       Event event = factory.createEvent();
+      event.setParameters(parameters);
       return event;
     }
     return null;
