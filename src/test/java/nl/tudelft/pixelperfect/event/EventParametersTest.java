@@ -21,6 +21,7 @@ import org.junit.Test;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD.TooManyStaticImports")
 public class EventParametersTest {
 
   private Collection<EventParameter> collection;
@@ -29,14 +30,17 @@ public class EventParametersTest {
   private EventParameters parameters;
   private EventParameters parametersEmpty;
 
+  private String key;
+
   /**
    * Set up the test objects an dependencies. (Dependencies are not mocked in order to test
    * integration.)
    */
   @Before
-  public void setup() {
+  public void setUp() {
+    key = "test";
     collection = new ArrayList<EventParameter>();
-    param = new EventParameter("test", 42);
+    param = new EventParameter(key, 42);
     collection.add(param);
 
     parameters = new EventParameters(collection);
@@ -49,7 +53,7 @@ public class EventParametersTest {
    */
   @Test
   public void testGetFromEmpty() {
-    assertThat(parametersEmpty.get("test"), is(nullValue()));
+    assertThat(parametersEmpty.get(key), is(nullValue()));
   }
 
   /**
@@ -58,7 +62,7 @@ public class EventParametersTest {
    */
   @Test
   public void testGet() {
-    assertThat(parameters.get("test"), is(param));
+    assertThat(parameters.get(key), is(param));
   }
 
   /**
@@ -68,7 +72,7 @@ public class EventParametersTest {
   @Test
   public void testAdd() {
     parametersEmpty.add(param);
-    assertThat(parametersEmpty.get("test"), is(param));
+    assertThat(parametersEmpty.get(key), is(param));
   }
 
   /**
@@ -95,7 +99,7 @@ public class EventParametersTest {
    */
   @Test
   public void testEqualsSameInstance() {
-    assertTrue(parameters.equals(parameters));
+    assertEquals(parameters, parameters);
   }
 
   /**
@@ -103,7 +107,7 @@ public class EventParametersTest {
    */
   @Test
   public void testEqualsDifferentSizes() {
-    assertFalse(parameters.equals(parametersEmpty));
+    assertThat(parameters, not(equalTo(parametersEmpty)));
   }
 
   /**

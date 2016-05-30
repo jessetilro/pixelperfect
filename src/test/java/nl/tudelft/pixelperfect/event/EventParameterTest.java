@@ -16,18 +16,21 @@ import org.junit.Test;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD.TooManyStaticImports")
 public class EventParameterTest {
 
   private EventParameter object;
   private EventParameter objectGeneric;
+  private String key;
 
   /**
    * Set up the test objects.
    */
   @Before
-  public void setup() {
-    object = new EventParameter("test", EventParameterValues.HOSTILE_SHIP_ARMOR_ENERGY_SHIELD);
-    objectGeneric = new EventParameter("test", 42);
+  public void setUp() {
+    key = "test";
+    object = new EventParameter(key, EventParameterValues.HOSTILE_SHIP_ARMOR_ENERGY_SHIELD);
+    objectGeneric = new EventParameter(key, 42);
   }
 
   /**
@@ -45,8 +48,8 @@ public class EventParameterTest {
    */
   @Test
   public void testGetKey() {
-    assertEquals("test", object.getKey());
-    assertEquals("test", objectGeneric.getKey());
+    assertEquals(key, object.getKey());
+    assertEquals(key, objectGeneric.getKey());
   }
 
   /**
@@ -54,7 +57,7 @@ public class EventParameterTest {
    */
   @Test
   public void testEqualsSameInstance() {
-    assertTrue(object.equals(object));
+    assertEquals(object, object);
   }
 
   /**
@@ -62,7 +65,7 @@ public class EventParameterTest {
    */
   @Test
   public void testEqualsGenericAndNotGeneric() {
-    assertFalse(object.equals(objectGeneric));
+    assertThat(object, not(equalTo(objectGeneric)));
   }
 
   /**
@@ -72,7 +75,7 @@ public class EventParameterTest {
   public void testEqualsDifferentKeys() {
     EventParameter other = new EventParameter("different",
         EventParameterValues.HOSTILE_SHIP_ARMOR_ENERGY_SHIELD);
-    assertFalse(object.equals(other));
+    assertThat(object, not(equalTo(other)));
   }
 
   /**
@@ -80,9 +83,9 @@ public class EventParameterTest {
    */
   @Test
   public void testEqualsDifferentValues() {
-    EventParameter other = new EventParameter("test",
+    EventParameter other = new EventParameter(key,
         EventParameterValues.HOSTILE_SHIP_ARMOR_TITANIUM);
-    assertFalse(object.equals(other));
+    assertThat(object, not(equalTo(other)));
   }
 
   /**
@@ -90,8 +93,8 @@ public class EventParameterTest {
    */
   @Test
   public void testEqualsDifferentNumbers() {
-    EventParameter other = new EventParameter("test", 41);
-    assertFalse(objectGeneric.equals(other));
+    EventParameter other = new EventParameter(key, 41);
+    assertThat(object, not(equalTo(other)));
   }
 
   /**
@@ -107,7 +110,7 @@ public class EventParameterTest {
    */
   @Test
   public void testHashCodeSame() {
-    EventParameter other = new EventParameter("test",
+    EventParameter other = new EventParameter(key,
         EventParameterValues.HOSTILE_SHIP_ARMOR_ENERGY_SHIELD);
     assertThat(object.hashCode(), equalTo(other.hashCode()));
   }
