@@ -16,6 +16,7 @@ import java.util.HashMap;
 public class AudioPlayer {
 
   private Game mainApp;
+
   private HashMap<String, AudioNode> sounds;
 
   public AudioPlayer(Game app){
@@ -69,6 +70,23 @@ public class AudioPlayer {
       }
     }
   }
-}
 
+  /**
+   * Get game.
+   *
+   * @return game
+   */
+  public Game getGame() {
+    return mainApp;
+  }
+
+  /**
+   * Set a Hashmap with sounds (used for testing).
+   *
+   * @param sounds
+   *             HashMap with String key and AudioNode value.
+   */
+  public void setSounds(HashMap<String, AudioNode> sounds) {
+    this.sounds = sounds;
+  }
 }
