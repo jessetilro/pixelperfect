@@ -71,10 +71,9 @@ public class AudioPlayer {
    *            Name of sound to stop playing.
    */
   public void stopSound(String name) {
-    if (sounds.containsKey(name)) {
-      if (sounds.get(name).getStatus().equals(AudioSource.Status.Playing)) {
-        sounds.get(name).stop();
-      }
+    if (sounds.containsKey(name)
+        || sounds.get(name).getStatus().equals(AudioSource.Status.Playing)) {
+      sounds.get(name).stop();
     }
   }
 

@@ -9,14 +9,16 @@ import org.junit.Test;
 import java.util.HashMap;
 
 import static junit.framework.TestCase.assertSame;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
 /**
- * Class to test AudioPlayer
+ * Class to test AudioPlayer.
  *
  * @author Wouter Zirkzee
  */
+@SuppressWarnings({"checkstyle:avoidstarimport"})
 public class AudioPlayerTest {
   private AudioPlayer audioPlayer;
 
@@ -59,7 +61,7 @@ public class AudioPlayerTest {
   public void playSound() {
     HashMap<String, AudioNode> testMap = new HashMap<String, AudioNode>();
     AudioNode testAudio = mock(AudioNode.class);
-    testMap.put("test",testAudio);
+    testMap.put("test", testAudio);
     audioPlayer.setSounds(testMap);
 
     audioPlayer.playSound("test", false);
