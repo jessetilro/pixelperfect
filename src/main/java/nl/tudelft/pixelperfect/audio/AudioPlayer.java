@@ -19,7 +19,13 @@ public class AudioPlayer {
 
   private HashMap<String, AudioNode> sounds;
 
-  public AudioPlayer(Game app){
+  /**
+   * Constructor for AudioPlayer.
+   *
+   * @param app
+   *          app for which this handles the audio.
+   */
+  public AudioPlayer(Game app) {
     mainApp = app;
     sounds = new HashMap<String, AudioNode>();
   }
@@ -35,7 +41,8 @@ public class AudioPlayer {
   public void loadSounds(String[] name, String[] location) {
     if (name.length == location.length) {
       for (int i = 0; i < name.length; i++) {
-        AudioNode audioNode = new AudioNode(mainApp.getAssetManager(), location[i], AudioData.DataType.Buffer);
+        AudioNode audioNode = new AudioNode(mainApp.getAssetManager(),
+            location[i], AudioData.DataType.Buffer);
         sounds.put(name[i], audioNode);
       }
     }

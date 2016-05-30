@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.util.HashMap;
 
 import static junit.framework.TestCase.assertSame;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
 /**
@@ -19,6 +20,9 @@ import static org.mockito.Mockito.*;
 public class AudioPlayerTest {
   private AudioPlayer audioPlayer;
 
+  /**
+   * Setup the tests.
+   */
   @Before
   public void setUp() {
     audioPlayer = mock(AudioPlayer.class, CALLS_REAL_METHODS);
@@ -43,7 +47,7 @@ public class AudioPlayerTest {
     audioPlayer.setSounds(testMap);
     String[] names = {"1", "2"};
     String[] locations = {"1"};
-    audioPlayer.loadSounds(names ,locations);
+    audioPlayer.loadSounds(names, locations);
 
     verify(testMap, never()).put(anyString(), any(AudioNode.class));
   }
@@ -72,7 +76,7 @@ public class AudioPlayerTest {
     HashMap<String, AudioNode> testMap = new HashMap<String, AudioNode>();
     AudioNode testAudio = mock(AudioNode.class);
     when(testAudio.getStatus()).thenReturn(AudioSource.Status.Stopped);
-    testMap.put("test",testAudio);
+    testMap.put("test", testAudio);
     audioPlayer.setSounds(testMap);
 
     audioPlayer.stopSound("test");
@@ -87,7 +91,7 @@ public class AudioPlayerTest {
     HashMap<String, AudioNode> testMap = new HashMap<String, AudioNode>();
     AudioNode testAudio = mock(AudioNode.class);
     when(testAudio.getStatus()).thenReturn(AudioSource.Status.Playing);
-    testMap.put("test",testAudio);
+    testMap.put("test", testAudio);
     audioPlayer.setSounds(testMap);
 
     audioPlayer.stopSound("test");
