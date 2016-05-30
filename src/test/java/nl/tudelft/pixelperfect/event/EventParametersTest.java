@@ -85,13 +85,24 @@ public class EventParametersTest {
   }
 
   /**
-   * When an EventParameter instance does not exactly aggregate the parameters in a given
-   * collection, the validation should yield false.
+   * When an EventParameter instance does not exactly aggregate the parameters in a given collection
+   * (different size), the validation should yield false.
    */
   @Test
-  public void testValidateFalse() {
+  public void testValidateFalseDifferentSize() {
     Collection<EventParameter> none = new ArrayList<EventParameter>();
     assertFalse(parameters.validate(none));
+  }
+
+  /**
+   * When an EventParameter instance does not exactly aggregate the parameters in a given collection
+   * (different parameters), the validation should yield false.
+   */
+  @Test
+  public void testValidateFalseDifferentParameters() {
+    Collection<EventParameter> other = new ArrayList<EventParameter>();
+    other.add(new EventParameter(key, 41));
+    assertFalse(parameters.validate(other));
   }
 
   /**
@@ -108,6 +119,14 @@ public class EventParametersTest {
   @Test
   public void testEqualsDifferentSizes() {
     assertThat(parameters, not(equalTo(parametersEmpty)));
+  }
+
+  /**
+   * An EventParameters instance should no be considered equal to something of another type.
+   */
+  @Test
+  public void testEqualsNotAnEventParameters() {
+    assertThat(parameters, not(equalTo(null)));
   }
 
   /**

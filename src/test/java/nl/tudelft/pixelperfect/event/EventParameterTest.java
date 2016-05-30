@@ -61,6 +61,25 @@ public class EventParameterTest {
   }
 
   /**
+   * Two generic parameters with the same key and number should be considered equal.
+   */
+  @Test
+  public void testEqualsSameNumber() {
+    EventParameter other = new EventParameter(key, 42);
+    assertEquals(objectGeneric, other);
+  }
+
+  /**
+   * Two parameters with the same key and value should be considered equal.
+   */
+  @Test
+  public void testEqualsSameValue() {
+    EventParameter other = new EventParameter(key,
+        EventParameterValues.HOSTILE_SHIP_ARMOR_ENERGY_SHIELD);
+    assertEquals(object, other);
+  }
+
+  /**
    * A generic and a not generic instance with the same key should not be considered equal.
    */
   @Test
@@ -95,6 +114,14 @@ public class EventParameterTest {
   public void testEqualsDifferentNumbers() {
     EventParameter other = new EventParameter(key, 41);
     assertThat(object, not(equalTo(other)));
+  }
+
+  /**
+   * An EventParameter instance should no be considered equal to something of another type.
+   */
+  @Test
+  public void testEqualsNotAnEventParameter() {
+    assertThat(object, not(equalTo(null)));
   }
 
   /**
