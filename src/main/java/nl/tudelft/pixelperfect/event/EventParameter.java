@@ -90,7 +90,7 @@ public class EventParameter {
   public boolean equals(Object that) {
     if (that instanceof EventParameter) {
       EventParameter other = (EventParameter) that;
-      if (key != other.getKey()) {
+      if (!key.equals(other.getKey())) {
         return false;
       }
       if (isGeneric() && other.isGeneric()) {
