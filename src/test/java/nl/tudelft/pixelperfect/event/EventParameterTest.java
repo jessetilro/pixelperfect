@@ -11,12 +11,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test Suite for the EventParameter class.
+ * Test Suite for the EventParameter class. Suppressing some warnings because we needs all the
+ * static imports for testing. Also a test suite can contain relatively many methods if they are all
+ * small and simple test cases.
  * 
  * @author Jesse Tilro
  *
  */
-@SuppressWarnings("PMD.TooManyStaticImports")
+@SuppressWarnings({ "PMD.TooManyStaticImports", "PMD.TooManyMethods" })
 public class EventParameterTest {
 
   private EventParameter object;
@@ -117,11 +119,19 @@ public class EventParameterTest {
   }
 
   /**
-   * An EventParameter instance should no be considered equal to something of another type.
+   * An EventParameter instance should not be considered equal to something of another type.
+   */
+  @Test
+  public void testEqualsNull() {
+    assertFalse(object.equals(null));
+  }
+
+  /**
+   * An EventParameter instance should not be considered equal to something of another type.
    */
   @Test
   public void testEqualsNotAnEventParameter() {
-    assertThat(object, not(equalTo(null)));
+    assertFalse(object.equals(key));
   }
 
   /**

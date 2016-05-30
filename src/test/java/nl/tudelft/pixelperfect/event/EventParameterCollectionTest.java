@@ -16,19 +16,21 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test Suite for the EventParameters class.
+ * Test Suite for the EventParameterCollection class. Suppressing some warnings because we needs all
+ * the static imports for testing. Also a test suite can contain relatively many methods if they are
+ * all small and simple test cases.
  * 
  * @author Jesse Tilro
  *
  */
-@SuppressWarnings("PMD.TooManyStaticImports")
-public class EventParametersTest {
+@SuppressWarnings({ "PMD.TooManyStaticImports", "PMD.TooManyMethods" })
+public class EventParameterCollectionTest {
 
   private Collection<EventParameter> collection;
   private EventParameter param;
 
-  private EventParameters parameters;
-  private EventParameters parametersEmpty;
+  private EventParameterCollection parameters;
+  private EventParameterCollection parametersEmpty;
 
   private String key;
 
@@ -43,8 +45,8 @@ public class EventParametersTest {
     param = new EventParameter(key, 42);
     collection.add(param);
 
-    parameters = new EventParameters(collection);
-    parametersEmpty = new EventParameters();
+    parameters = new EventParameterCollection(collection);
+    parametersEmpty = new EventParameterCollection();
   }
 
   /**
@@ -122,11 +124,20 @@ public class EventParametersTest {
   }
 
   /**
-   * An EventParameters instance should no be considered equal to something of another type.
+   * An EventParameterCollection instance should not be considered equal to null.
    */
   @Test
-  public void testEqualsNotAnEventParameters() {
-    assertThat(parameters, not(equalTo(null)));
+  public void testEqualsNull() {
+    assertFalse(parameters.equals(null));
+  }
+
+  /**
+   * An EventParameterCollection instance should not be considered equal to something of another
+   * type.
+   */
+  @Test
+  public void testEqualsNotAnEventParameterCollection() {
+    assertFalse(parameters.equals(collection));
   }
 
   /**

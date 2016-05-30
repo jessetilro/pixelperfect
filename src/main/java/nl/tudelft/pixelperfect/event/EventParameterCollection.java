@@ -13,14 +13,14 @@ import com.jme3.network.serializing.Serializable;
  *
  */
 @Serializable
-public class EventParameters {
+public class EventParameterCollection {
 
   private Map<String, EventParameter> map;
 
   /**
    * Construct a new empty aggregation of parameters.
    */
-  public EventParameters() {
+  public EventParameterCollection() {
     map = new HashMap<String, EventParameter>();
   }
 
@@ -30,7 +30,7 @@ public class EventParameters {
    * @param parameters
    *          The parameters to be aggregated.
    */
-  public EventParameters(Collection<EventParameter> parameters) {
+  public EventParameterCollection(Collection<EventParameter> parameters) {
     map = new HashMap<String, EventParameter>();
     for (EventParameter param : parameters) {
       add(param);
@@ -92,8 +92,8 @@ public class EventParameters {
    */
   @Override
   public boolean equals(Object that) {
-    if (that instanceof EventParameters) {
-      EventParameters other = (EventParameters) that;
+    if (that instanceof EventParameterCollection) {
+      EventParameterCollection other = (EventParameterCollection) that;
       return other.validate(map.values());
     }
     return false;

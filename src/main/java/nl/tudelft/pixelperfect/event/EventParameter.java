@@ -11,7 +11,7 @@ public class EventParameter {
 
   private String key;
   private EventParameterValues value;
-  private int number;
+  private int numberValue;
 
   /**
    * Construct an EventParameter with a specific value (part of the EventParameterValue
@@ -25,7 +25,7 @@ public class EventParameter {
   public EventParameter(String key, EventParameterValues value) {
     this.key = key;
     this.value = value;
-    this.number = 0;
+    this.numberValue = 0;
   }
 
   /**
@@ -33,13 +33,13 @@ public class EventParameter {
    * 
    * @param key
    *          The key of the parameter.
-   * @param value
+   * @param numberValue
    *          The number value of the parameter.
    */
-  public EventParameter(String key, int value) {
+  public EventParameter(String key, int numberValue) {
     this.key = key;
     this.value = EventParameterValues.GENERIC;
-    this.number = value;
+    this.numberValue = numberValue;
   }
 
   /**
@@ -65,8 +65,8 @@ public class EventParameter {
    * 
    * @return A number value.
    */
-  protected int getNumber() {
-    return number;
+  protected int getNumberValue() {
+    return numberValue;
   }
 
   /**
@@ -94,7 +94,7 @@ public class EventParameter {
         return false;
       }
       if (isGeneric() && other.isGeneric()) {
-        return number == other.getNumber();
+        return numberValue == other.getNumberValue();
       } else {
         return value.equals(other.getValue());
       }
@@ -115,7 +115,7 @@ public class EventParameter {
       result = prime * result + (int) ch;
     }
     result = prime * result + value.ordinal();
-    result = prime * result + number;
+    result = prime * result + numberValue;
     return result;
   }
 
