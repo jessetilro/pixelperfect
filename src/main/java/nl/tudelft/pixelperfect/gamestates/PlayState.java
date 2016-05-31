@@ -17,7 +17,7 @@ public class PlayState extends GameState {
 
   private Spatial observer;
   private Spaceship spaceship;
-  private DebugHeadsUpDisplay headsUpDisplay;
+  private DebugHeadsUpDisplay debugDisplay;
   private EventScheduler scheduler;
 
   /**
@@ -30,7 +30,7 @@ public class PlayState extends GameState {
     super(game);
     observer = game.getGameObserver();
     spaceship = game.getSpaceship();
-    headsUpDisplay = game.getGameHud();
+    debugDisplay = game.getGameHud();
     scheduler = game.getScheduler();
   }
 
@@ -48,7 +48,9 @@ public class PlayState extends GameState {
 
     // If debug mode is enabled, activate the debug update.
     if (Constants.isDebug) {
-      headsUpDisplay.updateHud();
+      debugDisplay.updateHud();
+    } else {
+      debugDisplay.clearHud();
     }
   }
 

@@ -124,4 +124,14 @@ public class DebugHeadsUpDisplay {
     timeLeft.setText(Constants.SHIP_TIME_LABEL + spaceship.getTimer());
   }
 
+  /**
+   * Clears the debug display after de-activation.
+   */
+  public void clearHud() {
+    captainLog.setText("");
+    shipHealth.setText("");
+    teamScore.setText("");
+    timeLeft.setText("");
+  }
+
 }
