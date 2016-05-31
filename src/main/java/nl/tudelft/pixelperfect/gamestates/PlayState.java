@@ -71,6 +71,9 @@ public class PlayState extends GameState {
     if (game.isRotateRight()) {
       observer.rotate(0, -0.75f * tpf, 0);
     }
+    if (game.isDebugTrigger()) {
+      Constants.isDebug = !Constants.isDebug;
+    }
   }
 
   /**

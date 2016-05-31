@@ -34,7 +34,7 @@ public final class Constants {
   public static final String SHIP_TIME_LABEL = "Time: ";
   
   // Boolean variables to dictate debug and alternative modes.
-  public static final boolean isDebug = false;
+  public static boolean isDebug = false;
 
   // Target intensity for the Event Scheduler.
   public static final double EVENT_SCHEDULER_INTENSITY_MIN = 0.125;
