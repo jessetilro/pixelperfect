@@ -1,13 +1,13 @@
 package nl.tudelft.pixelperfect.event;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
 /**
  * Reads the parameters of the different types of events from the file system or a given String.
@@ -62,7 +62,7 @@ public final class EventReader {
       JSONTokener tokener = new JSONTokener(stream);
       data = new JSONArray(tokener);
       return true;
-    } catch (FileNotFoundException e) {
+    } catch (FileNotFoundException error) {
       return false;
     }
   }

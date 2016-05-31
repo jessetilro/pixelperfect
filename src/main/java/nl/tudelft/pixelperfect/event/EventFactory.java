@@ -67,13 +67,13 @@ public class EventFactory {
       try {
         return constructor.newInstance(id++, reader.getSummary(type), reader.getDescription(type),
             System.currentTimeMillis(), reader.getDuration(type), reader.getDamage(type));
-      } catch (InstantiationException e) {
+      } catch (InstantiationException error) {
         return null;
-      } catch (IllegalAccessException e) {
+      } catch (IllegalAccessException error) {
         return null;
-      } catch (IllegalArgumentException e) {
+      } catch (IllegalArgumentException error) {
         return null;
-      } catch (InvocationTargetException e) {
+      } catch (InvocationTargetException error) {
         return null;
       }
     }
