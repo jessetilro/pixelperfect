@@ -192,15 +192,17 @@ public final class EventReader {
     Map<String, String> map = new HashMap<String, String>();
     JSONObject obj = getByType(type);
     if (obj != null) {
-      JSONArray parameters = obj.getJSONArray("parameters");
-      int index = 0;
-      while (index >= 0) {
-        JSONObject object = parameters.getJSONObject(index);
-        if (object != null) {
-          map.put(object.getString("key"), object.getString("summary"));
-          ++index;
-        } else {
-          index = -1;
+      JSONArray parameters = obj.optJSONArray("parameters");
+      if (parameters != null) {
+        int index = 0;
+        while (index >= 0) {
+          JSONObject object = parameters.optJSONObject(index);
+          if (object != null) {
+            map.put(object.getString("key"), object.getString("summary"));
+            ++index;
+          } else {
+            index = -1;
+          }
         }
       }
     }
