@@ -13,12 +13,14 @@ import org.junit.Test;
 import nl.tudelft.pixelperfect.Spaceship;
 
 /**
- * Class for testing the Event class.
+ * Class for testing the Event class. Suppressing some PMD warnings since it is ok for a test suite
+ * to consist of a relatively large amount of (simple) test cases.
  * 
  * @author David Alderliesten
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public abstract class EventTest {
 
   private Event toTest;
