@@ -4,7 +4,13 @@
       "summary": "Banana",
       "description": "Grows on a tree.",
       "duration": 1234,
-      "damage": 42
+      "damage": 42,
+      "parameters": [
+        {
+          "key": "color",
+          "summary": "The color the banana."
+        }
+      ]
     },
     {
       "type": 2,

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -176,6 +178,33 @@ public final class EventReader {
       return obj.getDouble("damage");
     }
     return 0;
+  }
+
+  /**
+   * Get a map of associations between parameter keys and their summary for a specific type of
+   * Event.
+   * 
+   * @param type
+   *          The numeric Event Type identifier.
+   * @return A Map of parameter key / summary associations.
+   */
+  public Map<String, String> getParameters(int type) {
+    Map<String, String> map = new HashMap<String, String>();
+    JSONObject obj = getByType(type);
+    if (obj != null) {
+      JSONArray parameters = obj.getJSONArray("parameters");
+      int index = 0;
+      while (index >= 0) {
+        JSONObject object = parameters.getJSONObject(index);
+        if (object != null) {
+          map.put(object.getString("key"), object.getString("summary"));
+          ++index;
+        } else {
+          index = -1;
+        }
+      }
+    }
+    return map;
   }
 
   /**
