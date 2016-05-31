@@ -2,7 +2,6 @@ package nl.tudelft.pixelperfect.event.factory;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Map;
 
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventReader;
@@ -35,7 +34,6 @@ public class HostileShipEventFactory extends EventFactory {
 
   @Override
   public Collection<EventParameter> createParameters() {
-    Map<String, String> summaries = getReader().getParameters(getType().ordinal());
     Collection<EventParameter> collection = new ArrayList<EventParameter>();
     collection.add(new EventParameter("positionX", 1));
     collection.add(new EventParameter("positionY", 2));
