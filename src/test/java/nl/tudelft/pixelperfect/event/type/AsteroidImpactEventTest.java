@@ -1,7 +1,6 @@
 package nl.tudelft.pixelperfect.event.type;
 
 import nl.tudelft.pixelperfect.event.EventTest;
-import nl.tudelft.pixelperfect.event.type.AsteroidImpactEvent;
 
 /**
  * Tesing the AsteroidFieldEvent class.
@@ -18,8 +17,8 @@ public class AsteroidImpactEventTest extends EventTest {
    * @return PlasmaLeakEvent class
    */
   @Override
-  public AsteroidImpactEvent createEvent() {
-    return new AsteroidImpactEvent(1, "TestEvent", "An Event to test the Class.", 42, 42, 99.42);
+  public AsteroidImpactEvent createEvent(String summary, String description) {
+    return new AsteroidImpactEvent(1, summary, description, 42, 42, 99.42);
   }
 
 }

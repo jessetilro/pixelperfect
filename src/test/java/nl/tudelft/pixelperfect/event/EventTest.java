@@ -26,12 +26,17 @@ public abstract class EventTest {
 
   private Event toTest;
 
+  private String summary;
+  private String description;
+
   /**
    * Setting up the Event class for the test.
    */
   @Before
   public void initialize() {
-    toTest = createEvent();
+    summary = "Test Event";
+    description = "Test Description.";
+    toTest = createEvent(summary, description);
   }
 
   /**
@@ -39,7 +44,7 @@ public abstract class EventTest {
    * 
    * @return class to be tested.
    */
-  public abstract Event createEvent();
+  public abstract Event createEvent(String summary, String description);
 
   /**
    * Testing the getId method.
@@ -54,7 +59,7 @@ public abstract class EventTest {
    */
   @Test
   public void testGetSummary() {
-    assertEquals(toTest.getSummary(), "TestEvent");
+    assertEquals(summary, toTest.getSummary());
   }
 
   /**
@@ -62,7 +67,7 @@ public abstract class EventTest {
    */
   @Test
   public void testGetDescription() {
-    assertEquals(toTest.getDescription(), "An Event to test the Class.");
+    assertEquals(description, toTest.getDescription());
   }
 
   /**
@@ -133,5 +138,14 @@ public abstract class EventTest {
     Collection<EventParameter> collection = new ArrayList<EventParameter>();
     collection.add(new EventParameter("test", 42));
     assertFalse(toTest.validateParameters(collection));
+  }
+
+  /**
+   * The toString method should generate a correct String representation of the Event.
+   */
+  @Test
+  public void testToStringNoParameters() {
+    assertEquals("Test Event: Test Description. Take note of the following details: .",
+        toTest.toString());
   }
 }

@@ -1,7 +1,6 @@
 package nl.tudelft.pixelperfect.event.type;
 
 import nl.tudelft.pixelperfect.event.EventTest;
-import nl.tudelft.pixelperfect.event.type.FireOutbreakEvent;
 
 /**
  * Tesing the FireEvent class.
@@ -18,8 +17,8 @@ public class FireOutbreakEventTest extends EventTest {
    * @return PlasmaLeakEvent class
    */
   @Override
-  public FireOutbreakEvent createEvent() {
-    return new FireOutbreakEvent(1, "TestEvent", "An Event to test the Class.", 42, 42, 99.42);
+  public FireOutbreakEvent createEvent(String summary, String description) {
+    return new FireOutbreakEvent(1, summary, description, 42, 42, 99.42);
   }
 
 }

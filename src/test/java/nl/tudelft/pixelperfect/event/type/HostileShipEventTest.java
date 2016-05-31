@@ -1,7 +1,6 @@
 package nl.tudelft.pixelperfect.event.type;
 
 import nl.tudelft.pixelperfect.event.EventTest;
-import nl.tudelft.pixelperfect.event.type.HostileShipEvent;
 
 /**
  * Tesing the HostileShipEvent class.
@@ -18,8 +17,8 @@ public class HostileShipEventTest extends EventTest {
    * @return PlasmaLeakEvent class
    */
   @Override
-  public HostileShipEvent createEvent() {
-    return new HostileShipEvent(1, "TestEvent", "An Event to test the Class.", 42, 42, 99.42);
+  public HostileShipEvent createEvent(String summary, String description) {
+    return new HostileShipEvent(1, summary, description, 42, 42, 99.42);
   }
 
 }

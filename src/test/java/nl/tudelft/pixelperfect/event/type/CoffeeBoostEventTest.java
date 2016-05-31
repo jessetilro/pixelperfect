@@ -1,7 +1,6 @@
 package nl.tudelft.pixelperfect.event.type;
 
 import nl.tudelft.pixelperfect.event.EventTest;
-import nl.tudelft.pixelperfect.event.type.CoffeeBoostEvent;
 
 /**
  * Testing the CoffeeBoostEvent class.
@@ -17,8 +16,8 @@ public class CoffeeBoostEventTest extends EventTest {
    * @return CoffeeBoostEvent instance.
    */
   @Override
-  public CoffeeBoostEvent createEvent() {
-    return new CoffeeBoostEvent(1, "TestEvent", "An Event to test the Class.", 42, 42, 99.42);
+  public CoffeeBoostEvent createEvent(String summary, String description) {
+    return new CoffeeBoostEvent(1, summary, description, 42, 42, 99.42);
   }
 
 }
