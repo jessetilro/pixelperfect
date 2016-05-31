@@ -22,7 +22,7 @@ import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gamestates.GameState;
 import nl.tudelft.pixelperfect.gamestates.StartState;
-import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
+import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
@@ -52,7 +52,7 @@ public class Game extends VRApplication {
 
   private Scene scene;
 
-  private GameHeadsUpDisplay gameHud;
+  private DebugHeadsUpDisplay gameHud;
 
   private GameState gameState;
 
@@ -120,7 +120,7 @@ public class Game extends VRApplication {
     scheduler.subscribe(spaceship.getLog());
     scheduler.start();
 
-    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
+    gameHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
 
     gameState = new StartState(this);
   }
@@ -259,7 +259,7 @@ public class Game extends VRApplication {
    *
    * @return gameHud
    */
-  public GameHeadsUpDisplay getGameHud() {
+  public DebugHeadsUpDisplay getGameHud() {
     return gameHud;
   }
 
@@ -278,7 +278,7 @@ public class Game extends VRApplication {
    * @param headsUpDisplay
    *                HeadsUpDisplay to be set.
    */
-  public void setHeadsUpDisplay(GameHeadsUpDisplay headsUpDisplay) {
+  public void setHeadsUpDisplay(DebugHeadsUpDisplay headsUpDisplay) {
     this.gameHud = headsUpDisplay;
   }
 

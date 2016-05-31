@@ -4,7 +4,8 @@ import com.jme3.scene.Spatial;
 import nl.tudelft.pixelperfect.Game;
 import nl.tudelft.pixelperfect.Spaceship;
 import nl.tudelft.pixelperfect.event.EventScheduler;
-import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
+import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -29,7 +30,7 @@ public class PlayStateTest extends GameStateTest {
   private Spatial mockObserver;
   private EventScheduler mockScheduler;
   private Spaceship mockSpaceship;
-  private GameHeadsUpDisplay mockHeadsUp;
+  private DebugHeadsUpDisplay mockHeadsUp;
 
   /**
    * Setup the classes for testing.
@@ -40,7 +41,7 @@ public class PlayStateTest extends GameStateTest {
     mockScheduler = mock(EventScheduler.class);
     mockObserver = mock(Spatial.class);
     mockSpaceship = mock(Spaceship.class);
-    mockHeadsUp = mock(GameHeadsUpDisplay.class);
+    mockHeadsUp = mock(DebugHeadsUpDisplay.class);
     mockGame.setGameObserver(mockObserver);
     mockGame.setScheduler(mockScheduler);
     mockGame.setSpaceship(mockSpaceship);

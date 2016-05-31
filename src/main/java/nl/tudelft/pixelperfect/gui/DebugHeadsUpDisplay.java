@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * @author David Alderliesten
  *
  */
-public class GameHeadsUpDisplay {
+public class DebugHeadsUpDisplay {
   private Spaceship spaceship;
 
   private AssetManager assetManager;
@@ -32,7 +32,7 @@ public class GameHeadsUpDisplay {
   private BitmapText timeLeft;
 
   /**
-   * Constructor for the heads-up display for in-game utiliztion.
+   * Constructor for the heads-up display for in-game utilization.
    * 
    * @param passedMan
    *          the passed assetmanager.
@@ -43,10 +43,10 @@ public class GameHeadsUpDisplay {
    * @param passedHi
    *          the passed screen height.
    * @param passedShip
-   *          the passed Sapceship instance.
+   *          the passed Spaceship instance.
    */
-  public GameHeadsUpDisplay(AssetManager passedMan, Node passedGuiNode, int passedWid, int passedHi,
-      Spaceship passedShip) {
+  public DebugHeadsUpDisplay(AssetManager passedMan, Node passedGuiNode, int passedWid,
+      int passedHi, Spaceship passedShip) {
     this.assetManager = passedMan;
     this.guiNodes = passedGuiNode;
     this.screenWidth = passedWid;

@@ -5,7 +5,7 @@ import jmevr.app.VRApplication;
 import nl.tudelft.pixelperfect.Game;
 import nl.tudelft.pixelperfect.Spaceship;
 import nl.tudelft.pixelperfect.event.EventScheduler;
-import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
+import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
 
 /**
  * State for when you are playing the game.
@@ -16,7 +16,7 @@ public class PlayState extends GameState {
 
   private Spatial observer;
   private Spaceship spaceship;
-  private GameHeadsUpDisplay headsUpDisplay;
+  private DebugHeadsUpDisplay headsUpDisplay;
   private EventScheduler scheduler;
 
   /**
