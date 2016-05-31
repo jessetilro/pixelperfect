@@ -10,6 +10,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
+import nl.tudelft.pixelperfect.event.parameter.EventParameterValues;
+
 /**
  * Test Suite for the EventParameter class. Suppressing some warnings because we needs all the
  * static imports for testing. Also a test suite can contain relatively many methods if they are all

@@ -6,6 +6,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import nl.tudelft.pixelperfect.event.factory.EventFactory;
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
+import nl.tudelft.pixelperfect.event.type.Event;
+import nl.tudelft.pixelperfect.event.type.EventTypes;
+
 /**
  * Builder for Events. Uses an abstract factory for construction of an Event and its parameters.
  * 

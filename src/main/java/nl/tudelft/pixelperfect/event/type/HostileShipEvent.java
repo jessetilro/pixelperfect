@@ -1,15 +1,16 @@
-package nl.tudelft.pixelperfect.event;
+package nl.tudelft.pixelperfect.event.type;
 
 /**
- * A type of Event, imposing the problem of a fire outbreak.
+ * A type of event, imposing the problem of a hostile alien spaceship.
  * 
  * @author Wouter Zirkzee
  * 
  */
-public class FireOutbreakEvent extends Event {
+
+public class HostileShipEvent extends Event {
 
   /**
-   * Constructor for FireOutbreakEvent event.
+   * Constructor for HostileShipEvent event.
    *
    * @param id
    *          The desired id.
@@ -24,8 +25,8 @@ public class FireOutbreakEvent extends Event {
    * @param damage
    *          The damage done to the ship on even failure.
    */
-  public FireOutbreakEvent(int id, String summary, String description, long timestamp,
-      long duration, double damage) {
+  public HostileShipEvent(int id, String summary, String description, long timestamp, long duration,
+      double damage) {
     super(id, summary, description, timestamp, duration, damage);
   }
 }

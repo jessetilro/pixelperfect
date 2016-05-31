@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import nl.tudelft.pixelperfect.Constants;
+import nl.tudelft.pixelperfect.event.factory.EventFactory;
+import nl.tudelft.pixelperfect.event.type.Event;
 
 /**
  * Test Suite for the EventFactory class.

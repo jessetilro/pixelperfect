@@ -4,7 +4,13 @@
     "summary": "Fire Outbreak",
     "description": "Alert! Faulty wiring caused a fire!",
     "duration": 20000,
-    "damage": 10
+    "damage": 10,
+    "parameters" : [
+      {
+      "key": "armor",
+      "summary": "The Ship's Armor Type"
+      }
+    ]
   },
   {
     "type": 1,

@@ -1,16 +1,16 @@
-package nl.tudelft.pixelperfect.event;
+package nl.tudelft.pixelperfect.event.type;
 
 /**
- * A type of event, imposing the problem of a hostile alien spaceship.
+ * A type of Event, imposing a dangerous Asteroid Field.
  * 
  * @author Wouter Zirkzee
  * 
  */
 
-public class HostileShipEvent extends Event {
+public class AsteroidImpactEvent extends Event {
 
   /**
-   * Constructor for HostileShipEvent event.
+   * Constructor for AstroidField event.
    *
    * @param id
    *          The desired id.
@@ -25,8 +25,8 @@ public class HostileShipEvent extends Event {
    * @param damage
    *          The damage done to the ship on even failure.
    */
-  public HostileShipEvent(int id, String summary, String description, long timestamp, long duration,
-      double damage) {
+  public AsteroidImpactEvent(int id, String summary, String description, long timestamp,
+      long duration, double damage) {
     super(id, summary, description, timestamp, duration, damage);
   }
 }

@@ -1,4 +1,4 @@
-package nl.tudelft.pixelperfect.event;
+package nl.tudelft.pixelperfect.event.parameter;
 
 /**
  * Enumeration of possible specific values for an EventParameter.

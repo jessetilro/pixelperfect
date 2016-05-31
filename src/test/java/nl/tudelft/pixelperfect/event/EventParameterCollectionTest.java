@@ -15,6 +15,9 @@ import java.util.Collection;
 import org.junit.Before;
 import org.junit.Test;
 
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
+import nl.tudelft.pixelperfect.event.parameter.EventParameterCollection;
+
 /**
  * Test Suite for the EventParameterCollection class. Suppressing some warnings because we needs all
  * the static imports for testing. Also a test suite can contain relatively many methods if they are

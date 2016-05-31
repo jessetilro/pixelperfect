@@ -1,6 +1,10 @@
-package nl.tudelft.pixelperfect.event;
+package nl.tudelft.pixelperfect.event.factory;
 
 import java.util.Collection;
+
+import nl.tudelft.pixelperfect.event.EventReader;
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
+import nl.tudelft.pixelperfect.event.type.Event;
 
 /**
  * An abstract factory for creating a specific type of Event and its parameters, according to the

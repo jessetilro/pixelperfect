@@ -1,13 +1,13 @@
-package nl.tudelft.pixelperfect.event;
+package nl.tudelft.pixelperfect.event.type;
 
 /**
- * A type of event, imposing the problem of a plasma leak.
+ * A type of event, imposing the problem of a lack of caffeine.
  * 
- * @author Wouter Zirkzee
+ * @author Jesse Tilro
  * 
  */
 
-public class PlasmaLeakEvent extends Event {
+public class CoffeeBoostEvent extends Event {
 
   /**
    * Constructor for PlasmaLeakEvent event.
@@ -25,7 +25,7 @@ public class PlasmaLeakEvent extends Event {
    * @param damage
    *          The damage done to the ship on even failure.
    */
-  public PlasmaLeakEvent(int id, String summary, String description, long timestamp, long duration,
+  public CoffeeBoostEvent(int id, String summary, String description, long timestamp, long duration,
       double damage) {
     super(id, summary, description, timestamp, duration, damage);
   }

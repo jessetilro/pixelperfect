@@ -1,5 +1,7 @@
 package nl.tudelft.pixelperfect.event;
 
+import nl.tudelft.pixelperfect.event.type.AsteroidImpactEvent;
+
 /**
  * Tesing the AsteroidFieldEvent class.
  * 

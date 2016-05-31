@@ -16,6 +16,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import nl.tudelft.pixelperfect.event.type.Event;
+
 /**
  * Test Suite for the EventScheduler class.
  * 

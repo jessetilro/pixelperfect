@@ -1,4 +1,4 @@
-package nl.tudelft.pixelperfect.event;
+package nl.tudelft.pixelperfect.event.parameter;
 
 import java.util.Collection;
 import java.util.HashMap;

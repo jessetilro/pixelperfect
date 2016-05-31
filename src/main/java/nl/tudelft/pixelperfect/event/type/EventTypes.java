@@ -1,4 +1,11 @@
-package nl.tudelft.pixelperfect.event;
+package nl.tudelft.pixelperfect.event.type;
+
+import nl.tudelft.pixelperfect.event.factory.AsteroidImpactEventFactory;
+import nl.tudelft.pixelperfect.event.factory.CoffeeBoostEventFactory;
+import nl.tudelft.pixelperfect.event.factory.EventFactory;
+import nl.tudelft.pixelperfect.event.factory.FireOutbreakEventFactory;
+import nl.tudelft.pixelperfect.event.factory.HostileShipEventFactory;
+import nl.tudelft.pixelperfect.event.factory.PlasmaLeakEventFactory;
 
 /**
  * Enumeration of the different types of Events in the game. The ordinals, i.e. the indices of the

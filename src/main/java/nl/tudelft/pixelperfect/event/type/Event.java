@@ -1,8 +1,10 @@
-package nl.tudelft.pixelperfect.event;
+package nl.tudelft.pixelperfect.event.type;
 
 import java.util.Collection;
 
 import nl.tudelft.pixelperfect.Spaceship;
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
+import nl.tudelft.pixelperfect.event.parameter.EventParameterCollection;
 
 /**
  * A class for storing and defining events, called upon by the event scheduler.

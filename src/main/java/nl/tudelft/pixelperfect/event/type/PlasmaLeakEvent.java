@@ -1,16 +1,16 @@
-package nl.tudelft.pixelperfect.event;
+package nl.tudelft.pixelperfect.event.type;
 
 /**
- * A type of Event, imposing a dangerous Asteroid Field.
+ * A type of event, imposing the problem of a plasma leak.
  * 
  * @author Wouter Zirkzee
  * 
  */
 
-public class AsteroidImpactEvent extends Event {
+public class PlasmaLeakEvent extends Event {
 
   /**
-   * Constructor for AstroidField event.
+   * Constructor for PlasmaLeakEvent event.
    *
    * @param id
    *          The desired id.
@@ -25,8 +25,8 @@ public class AsteroidImpactEvent extends Event {
    * @param damage
    *          The damage done to the ship on even failure.
    */
-  public AsteroidImpactEvent(int id, String summary, String description, long timestamp,
-      long duration, double damage) {
+  public PlasmaLeakEvent(int id, String summary, String description, long timestamp, long duration,
+      double damage) {
     super(id, summary, description, timestamp, duration, damage);
   }
 }
