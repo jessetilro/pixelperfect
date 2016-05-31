@@ -106,29 +106,29 @@ public class Scene {
   
   /**
    * Render a group of small buttons.
+   * 
    * @param location
-   * 							Location of the top left button.
+   *          Location of the top left button.
    * @param row
-   * 						Amount of rows of buttons.
+   *          Amount of rows of buttons.
    * @param col
-   * 						Amount of collums of buttons.
+   *          Amount of collums of buttons.
    */
   private void addButton(Vector3f location, int row, int col) {
-  	float distance = 1f;
-  	for (int x = 0; x < row; x++) {
-  		for (int z = 0; z < col; z++) {
-  			Box box = new Box(1f, 1f, 1f);
-  	    Geometry button = new Geometry("Box", box);
-  	    button.setLocalScale(0.2f);
-  	  	Material buttonMat = new Material(app.getAssetManager(), basicMat);
-  	  	buttonMat.setColor("Color", ColorRGBA.Red);
-  	    button.setMaterial(buttonMat);
-  	    button.setLocalTranslation(
-  	    		new Vector3f(location.getX() + x * distance,
-  	    				location.getY(), location.getZ() + z * distance));
-  	    app.getRootNode().attachChild(button);
-  	    buttons.add(button);
-  		}
-  	}
+    float distance = 1f;
+    for (int x = 0; x < row; x++) {
+      for (int z = 0; z < col; z++) {
+        Box box = new Box(1f, 1f, 1f);
+        Geometry button = new Geometry("Box", box);
+        button.setLocalScale(0.2f);
+        Material buttonMat = new Material(app.getAssetManager(), basicMat);
+        buttonMat.setColor("Color", ColorRGBA.Red);
+        button.setMaterial(buttonMat);
+        button.setLocalTranslation(new Vector3f(location.getX() + x * distance, location.getY(),
+            location.getZ() + z * distance));
+        app.getRootNode().attachChild(button);
+        buttons.add(button);
+      }
+    }
   }
 }
