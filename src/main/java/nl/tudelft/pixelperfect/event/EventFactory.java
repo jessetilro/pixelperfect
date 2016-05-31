@@ -3,17 +3,15 @@ package nl.tudelft.pixelperfect.event;
 import java.util.Collection;
 
 /**
- * Not a factory as the design pattern, but used for id's, to create a random event, with unique
- * id's.
+ * An abstract factory for creating a specific type of Event and its parameters, according to the
+ * Abstract Factory design pattern.
  * 
- * @author Wouter Zirkzee
  * @author Jesse Tilro
- * @author Floris Doolaard
  * 
  */
 public abstract class EventFactory {
 
-  protected EventReader reader;
+  private EventReader reader;
 
   /**
    * Constructor for EventFactory.
@@ -22,7 +20,26 @@ public abstract class EventFactory {
     reader = EventReader.getInstance();
   }
 
+  /**
+   * Get the EventReader used by this Factory.
+   * 
+   * @return The EventReader.
+   */
+  protected EventReader getReader() {
+    return reader;
+  }
+
+  /**
+   * Create a specific type of Event.
+   * 
+   * @return A specific type of Event.
+   */
   public abstract Event createEvent();
 
+  /**
+   * Create a random collection of parameters for the type of Event created by this Factory.
+   * 
+   * @return A random collection of parameters.
+   */
   public abstract Collection<EventParameter> createParameters();
 }

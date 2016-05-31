@@ -9,7 +9,7 @@ package nl.tudelft.pixelperfect.event;
 public class FireOutbreakEvent extends Event {
 
   /**
-   * Constructor for FireEvent event.
+   * Constructor for FireOutbreakEvent event.
    *
    * @param id
    *          The desired id.
@@ -24,8 +24,8 @@ public class FireOutbreakEvent extends Event {
    * @param damage
    *          The damage done to the ship on even failure.
    */
-  public FireOutbreakEvent(int id, String summary, String description, long timestamp, long duration,
-      double damage) {
+  public FireOutbreakEvent(int id, String summary, String description, long timestamp,
+      long duration, double damage) {
     super(id, summary, description, timestamp, duration, damage);
   }
 }

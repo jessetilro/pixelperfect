@@ -4,6 +4,12 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+/**
+ * Test Suite for the CoffeeBoostEventFactory class.
+ * 
+ * @author Jesse Tilro
+ *
+ */
 public class CoffeeBoostEventFactoryTest extends EventFactoryTest {
 
   /**

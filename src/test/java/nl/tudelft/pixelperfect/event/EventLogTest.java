@@ -4,11 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyDouble;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.anyObject;
+import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 
@@ -69,7 +69,7 @@ public class EventLogTest extends EventListenerTest {
     object.notify(evt1);
     assertTrue(object.getEvents().contains(evt1));
   }
-  
+
   /**
    * Tests to see if the server.broadcast() method is called once.
    * 
@@ -80,7 +80,7 @@ public class EventLogTest extends EventListenerTest {
     object.notify(evt1);
     verify(mockedServer, times(1)).broadcast((EventsMessage) anyObject());
   }
-  
+
   /**
    * Checks the complete method of an existing event in the log.
    * 
@@ -92,7 +92,7 @@ public class EventLogTest extends EventListenerTest {
     object.complete(0);
     assertEquals(0, object.getEvents().size());
   }
-  
+
   /**
    * Checks the complete method of an non-existing event in the log.
    * 
@@ -104,7 +104,7 @@ public class EventLogTest extends EventListenerTest {
     object.complete(1);
     assertEquals(1, object.getEvents().size());
   }
-  
+
   /**
    * When an Event is discarded from the log, it should be removed from the list of active events
    * without damaging the ship.
@@ -125,7 +125,8 @@ public class EventLogTest extends EventListenerTest {
   @Test
   public void testUpdate() {
     Event evt1 = new FireOutbreakEvent(0, "Whale", "Shark", 0, 0, 50);
-    Event evt2 = new AsteroidImpactEvent(1, "Pie", "Cake", System.currentTimeMillis(), 99999999, 50);
+    Event evt2 = new AsteroidImpactEvent(1, "Pie", "Cake", System.currentTimeMillis(), 99999999,
+        50);
     object.notify(evt1);
     object.notify(evt2);
 

@@ -66,7 +66,7 @@ public class EventBuilder {
   /**
    * Build a completely random Event.
    * 
-   * @return
+   * @return A random Event.
    */
   public Event buildRandomEvent() {
     EventTypes type = getRandomEventType();

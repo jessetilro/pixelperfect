@@ -15,6 +15,7 @@ public class HostileShipEventFactory extends EventFactory {
 
   @Override
   public Event createEvent() {
+    EventReader reader = getReader();
     return new HostileShipEvent(reader.getNextId(), reader.getSummary(type.ordinal()),
         reader.getDescription(type.ordinal()), System.currentTimeMillis(),
         reader.getDuration(type.ordinal()), reader.getDamage(type.ordinal()));

@@ -4,6 +4,12 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+/**
+ * Test Suite for the PlasmaLeakEventFactory class.
+ * 
+ * @author Jesse Tilro
+ *
+ */
 public class PlasmaLeakEventFactoryTest extends EventFactoryTest {
 
   /**
