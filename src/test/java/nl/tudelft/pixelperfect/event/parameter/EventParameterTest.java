@@ -10,9 +10,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.tudelft.pixelperfect.event.parameter.EventParameter;
-import nl.tudelft.pixelperfect.event.parameter.EventParameterValues;
-
 /**
  * Test Suite for the EventParameter class. Suppressing some warnings because we needs all the
  * static imports for testing. Also a test suite can contain relatively many methods if they are all
@@ -153,6 +150,29 @@ public class EventParameterTest {
     EventParameter other = new EventParameter(key,
         EventParameterValues.HOSTILE_SHIP_ARMOR_ENERGY_SHIELD);
     assertThat(object.hashCode(), equalTo(other.hashCode()));
+  }
+
+  /**
+   * The toString method should generate a correct String representation of a generic
+   * EventParameter.
+   */
+  @Test
+  public void testToStringGeneric() {
+    objectGeneric
+        .setSummary("The Answer to the Ultimate Question of Life, the Universe, and Everything");
+    String expected = "The Answer to the Ultimate Question of Life, the Universe, and Everything is Number 42";
+    assertEquals(expected, objectGeneric.toString());
+  }
+
+  /**
+   * The toString method should generate a correct String representation of a specific
+   * EventParameter.
+   */
+  @Test
+  public void testToStringSpecific() {
+    object.setSummary("The thing that keeps you safe");
+    String expected = "The thing that keeps you safe is Energy Shield";
+    assertEquals(expected, object.toString());
   }
 
 }

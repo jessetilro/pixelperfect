@@ -95,12 +95,20 @@ public class EventParameter {
   }
 
   /**
-   * To String.
+   * Generate a String representation of this EventParameter.
    * 
    * @return A String representation.
    */
   public String toString() {
-    return summary;
+    StringBuilder sb = new StringBuilder();
+    sb.append(summary);
+    sb.append(" is ");
+    sb.append(value.toString());
+    if (isGeneric()) {
+      sb.append(" ");
+      sb.append(Integer.toString(numberValue));
+    }
+    return sb.toString();
   }
 
   /**
