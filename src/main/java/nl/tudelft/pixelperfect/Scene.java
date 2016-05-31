@@ -1,6 +1,5 @@
 package nl.tudelft.pixelperfect;
 
-import java.util.ArrayList;
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
 import com.jme3.material.Material;
@@ -10,6 +9,8 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
+
+import java.util.ArrayList;
 
 /**
  * Class for drawing objects in the game.
@@ -38,19 +39,19 @@ public class Scene {
   /**
    * Method that contains all objects for the scene.
    */
-  public void createMap() {  	
+  public void createMap() {
     drawDashboard();
-    //floor
+    // floor
     drawPane(new Vector3f(0f, 0f, 0f), ColorRGBA.Yellow, new Quaternion());
-    //walls
-    drawPane(new Vector3f(-8, 7, 0), ColorRGBA.Orange, new Quaternion()
-        .fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1)));
-    drawPane(new Vector3f(8, 7, 0), ColorRGBA.Orange, new Quaternion()
-        .fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1)));
-    drawPane(new Vector3f(0, 7, -8), ColorRGBA.Green, new Quaternion()
-        .fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(1, 0, 0)));
-    drawPane(new Vector3f(0, 7, 8), ColorRGBA.Green, new Quaternion()
-        .fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(1, 0, 0)));
+    // walls
+    drawPane(new Vector3f(-8, 7, 0), ColorRGBA.Orange,
+        new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+    drawPane(new Vector3f(8, 7, 0), ColorRGBA.Orange,
+        new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+    drawPane(new Vector3f(0, 7, -8), ColorRGBA.Green,
+        new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(1, 0, 0)));
+    drawPane(new Vector3f(0, 7, 8), ColorRGBA.Green,
+        new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(1, 0, 0)));
     drawTimer();
     addButton(new Vector3f(0, 1, 7), 2, 2);
   }
@@ -70,12 +71,13 @@ public class Scene {
 
   /**
    * Render a flat pane.
+   * 
    * @param location
-   *                The location of the center.
+   *          The location of the center.
    * @param rotation
-   *                The rotation of the pane.
+   *          The rotation of the pane.
    * @param color
-   *                Color of the pane.
+   *          Color of the pane.
    */
   private void drawPane(Vector3f location, ColorRGBA color, Quaternion rotation) {
     Box pane = new Box(8, 0.01f, 8);
@@ -103,7 +105,7 @@ public class Scene {
         new Quaternion().fromAngleAxis(180 * FastMath.DEG_TO_RAD, new Vector3f(0, 1, 0)));
     app.getRootNode().attachChild(timer);
   }
-  
+
   /**
    * Render a group of small buttons.
    * 

@@ -1,8 +1,8 @@
 package nl.tudelft.pixelperfect.event;
 
-import java.util.ArrayList;
-
 import com.jme3.network.Server;
+
+import java.util.ArrayList;
 
 /**
  * Interface for classes that can subscribe themselves to an EventScheduler.

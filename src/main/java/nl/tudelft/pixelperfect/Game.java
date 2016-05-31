@@ -1,7 +1,5 @@
 package nl.tudelft.pixelperfect;
 
-import java.io.IOException;
-
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
@@ -23,6 +21,8 @@ import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gamestates.GameState;
 import nl.tudelft.pixelperfect.gamestates.StartState;
 import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
+
+import java.io.IOException;
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
