@@ -2,6 +2,7 @@ package nl.tudelft.pixelperfect.gamestates;
 
 import com.jme3.scene.Spatial;
 import jmevr.app.VRApplication;
+import nl.tudelft.pixelperfect.Constants;
 import nl.tudelft.pixelperfect.Game;
 import nl.tudelft.pixelperfect.Spaceship;
 import nl.tudelft.pixelperfect.event.EventScheduler;
@@ -23,7 +24,7 @@ public class PlayState extends GameState {
    * Constructor for PlayState.
    *
    * @param game
-   *            Game for which it controlls the state.
+   *          Game for which it controlls the state.
    */
   public PlayState(Game game) {
     super(game);
@@ -45,15 +46,17 @@ public class PlayState extends GameState {
     scheduler.update(tpf);
     spaceship.update(tpf);
 
-    // Update the in-game heads up display.
-    headsUpDisplay.updateHud();
+    // If debug mode is enabled, activate the debug update.
+    if (Constants.isDebug) {
+      headsUpDisplay.updateHud();
+    }
   }
 
   /**
    * Method to check for movement.
    *
    * @param tpf
-   *           Time since last check.
+   *          Time since last check.
    */
   public void updateMovement(float tpf) {
     if (game.isMoveForward()) {
@@ -73,8 +76,7 @@ public class PlayState extends GameState {
   /**
    * Method to update the state.
    *
-   * @return
-   *        new state.
+   * @return new state.
    */
   public GameState handleState() {
     if (spaceship.isVictorious()) {

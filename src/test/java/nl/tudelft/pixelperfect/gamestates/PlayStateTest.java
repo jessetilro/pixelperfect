@@ -1,6 +1,8 @@
 package nl.tudelft.pixelperfect.gamestates;
 
 import com.jme3.scene.Spatial;
+
+import nl.tudelft.pixelperfect.Constants;
 import nl.tudelft.pixelperfect.Game;
 import nl.tudelft.pixelperfect.Spaceship;
 import nl.tudelft.pixelperfect.event.EventScheduler;
@@ -57,7 +59,10 @@ public class PlayStateTest extends GameStateTest {
     testState.update(1f);
     verify(mockScheduler).update(1f);
     verify(mockSpaceship).update(anyFloat());
-    verify(mockHeadsUp).updateHud();
+
+    if (Constants.isDebug) {
+      verify(mockHeadsUp).updateHud();
+    }
   }
 
   /**
