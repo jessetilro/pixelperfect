@@ -28,7 +28,7 @@ public final class Constants {
   public static final int GUI_TIME_HEIGHT_OFFSET = 0;
 
   // Gui text for the in-game HUD.
-  public static final String NO_EVENTS_LOG_TEXT = "Everything looks clear, cap'n!";
+  public static final String NO_EVENTS_LOG_TEXT = "No events currently active.";
   public static final String SHIP_HEALTH_LABEL = "Health: ";
   public static final String SHIP_SCORE_LABEL = "Score: ";
   public static final String SHIP_TIME_LABEL = "Time: ";
