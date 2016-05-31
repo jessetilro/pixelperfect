@@ -101,12 +101,9 @@ public class EventParameter {
    */
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append(summary);
-    sb.append(" is ");
-    sb.append(value.toString());
+    sb.append(summary).append(" is ").append(value.toString());
     if (isGeneric()) {
-      sb.append(" ");
-      sb.append(Integer.toString(numberValue));
+      sb.append(' ').append(Integer.toString(numberValue));
     }
     return sb.toString();
   }
