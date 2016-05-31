@@ -158,7 +158,7 @@ public class Game extends VRApplication {
     InputManager inputManager = getInputManager();
     int[] keyTriggers = { KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A, KeyInput.KEY_D,
         KeyInput.KEY_P, KeyInput.KEY_0 };
-    String[] mappings = { "forward", "back", "left", "right", "start", "zero" };
+    String[] mappings = { "forward", "back", "left", "right", "start", "debug" };
     for (int i = 0; i < keyTriggers.length; i++) {
       inputManager.addMapping(mappings[i], new KeyTrigger(keyTriggers[i]));
     }
@@ -175,7 +175,7 @@ public class Game extends VRApplication {
           rotateRight = keyPressed;
         } else if (name.equals("start")) {
           startKey = keyPressed;
-        } else if (name.equals("zero")) {
+        } else if (name.equals("debug")) {
           debugKey = keyPressed;
         }
       }
