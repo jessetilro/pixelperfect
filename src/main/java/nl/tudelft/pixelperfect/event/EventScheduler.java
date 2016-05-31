@@ -3,8 +3,6 @@ package nl.tudelft.pixelperfect.event;
 import java.util.ArrayList;
 import java.util.Random;
 
-import nl.tudelft.pixelperfect.event.type.Event;
-
 /**
  * Random generator for events, simulating space. The random distribution is modelled as a poisson
  * process.

@@ -4,7 +4,6 @@ import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.Spaceship;
 import nl.tudelft.pixelperfect.client.EventsMessage;
-import nl.tudelft.pixelperfect.event.type.Event;
 
 import java.util.ArrayList;
 

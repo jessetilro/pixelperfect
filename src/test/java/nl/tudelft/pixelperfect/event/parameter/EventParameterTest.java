@@ -1,4 +1,4 @@
-package nl.tudelft.pixelperfect.event;
+package nl.tudelft.pixelperfect.event.parameter;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;

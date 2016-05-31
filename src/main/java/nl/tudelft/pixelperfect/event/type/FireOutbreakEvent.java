@@ -1,5 +1,7 @@
 package nl.tudelft.pixelperfect.event.type;
 
+import nl.tudelft.pixelperfect.event.Event;
+
 /**
  * A type of Event, imposing the problem of a fire outbreak.
  * 

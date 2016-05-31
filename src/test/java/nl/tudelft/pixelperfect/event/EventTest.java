@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import nl.tudelft.pixelperfect.Spaceship;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
-import nl.tudelft.pixelperfect.event.type.Event;
 
 /**
  * Class for testing the Event class. Suppressing some PMD warnings since it is ok for a test suite

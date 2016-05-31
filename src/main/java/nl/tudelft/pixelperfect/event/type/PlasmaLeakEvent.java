@@ -1,5 +1,7 @@
 package nl.tudelft.pixelperfect.event.type;
 
+import nl.tudelft.pixelperfect.event.Event;
+
 /**
  * A type of event, imposing the problem of a plasma leak.
  * 

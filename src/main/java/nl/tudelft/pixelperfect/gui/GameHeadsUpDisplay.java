@@ -7,7 +7,7 @@ import com.jme3.scene.Node;
 
 import nl.tudelft.pixelperfect.Constants;
 import nl.tudelft.pixelperfect.Spaceship;
-import nl.tudelft.pixelperfect.event.type.Event;
+import nl.tudelft.pixelperfect.event.Event;
 
 import java.util.ArrayList;
 

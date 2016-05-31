@@ -1,4 +1,4 @@
-package nl.tudelft.pixelperfect.event;
+package nl.tudelft.pixelperfect.event.factory;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,8 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import nl.tudelft.pixelperfect.Constants;
+import nl.tudelft.pixelperfect.event.Event;
+import nl.tudelft.pixelperfect.event.EventReader;
 import nl.tudelft.pixelperfect.event.factory.EventFactory;
-import nl.tudelft.pixelperfect.event.type.Event;
 
 /**
  * Test Suite for the EventFactory class.

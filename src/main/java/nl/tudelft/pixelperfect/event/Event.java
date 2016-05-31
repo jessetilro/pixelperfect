@@ -1,4 +1,4 @@
-package nl.tudelft.pixelperfect.event.type;
+package nl.tudelft.pixelperfect.event;
 
 import java.util.Collection;
 

@@ -1,5 +1,6 @@
-package nl.tudelft.pixelperfect.event;
+package nl.tudelft.pixelperfect.event.type;
 
+import nl.tudelft.pixelperfect.event.EventTest;
 import nl.tudelft.pixelperfect.event.type.HostileShipEvent;
 
 /**

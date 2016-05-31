@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import com.jme3.network.Server;
 
-import nl.tudelft.pixelperfect.event.type.Event;
-
 /**
  * Interface for classes that can subscribe themselves to an EventScheduler.
  * 

@@ -8,7 +8,6 @@ import java.util.Random;
 
 import nl.tudelft.pixelperfect.event.factory.EventFactory;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
-import nl.tudelft.pixelperfect.event.type.Event;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
 
 /**

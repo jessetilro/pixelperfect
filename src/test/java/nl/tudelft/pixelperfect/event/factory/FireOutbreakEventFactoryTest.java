@@ -1,20 +1,20 @@
-package nl.tudelft.pixelperfect.event;
+package nl.tudelft.pixelperfect.event.factory;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import nl.tudelft.pixelperfect.event.factory.CoffeeBoostEventFactory;
+import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.factory.EventFactory;
-import nl.tudelft.pixelperfect.event.type.Event;
+import nl.tudelft.pixelperfect.event.factory.FireOutbreakEventFactory;
 
 /**
- * Test Suite for the CoffeeBoostEventFactory class.
+ * Test Suite for the FireOutbreakEventFactory class.
  * 
  * @author Jesse Tilro
  *
  */
-public class CoffeeBoostEventFactoryTest extends EventFactoryTest {
+public class FireOutbreakEventFactoryTest extends EventFactoryTest {
 
   /**
    * Create the test object.
@@ -23,7 +23,7 @@ public class CoffeeBoostEventFactoryTest extends EventFactoryTest {
    */
   @Override
   public EventFactory createEventFactory() {
-    return new CoffeeBoostEventFactory();
+    return new FireOutbreakEventFactory();
   }
 
   /**
@@ -33,7 +33,7 @@ public class CoffeeBoostEventFactoryTest extends EventFactoryTest {
   @Test
   public void testIntegrationWithReader() {
     Event event = getObject().createEvent();
-    assertEquals("Coffee Boost", event.getSummary());
+    assertEquals("Fire Outbreak", event.getSummary());
   }
 
 }

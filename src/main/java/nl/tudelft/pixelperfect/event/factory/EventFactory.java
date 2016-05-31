@@ -3,9 +3,9 @@ package nl.tudelft.pixelperfect.event.factory;
 import java.util.Collection;
 import java.util.Map;
 
+import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventReader;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
-import nl.tudelft.pixelperfect.event.type.Event;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
 
 /**

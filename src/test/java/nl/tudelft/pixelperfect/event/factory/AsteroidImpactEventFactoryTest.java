@@ -1,12 +1,12 @@
-package nl.tudelft.pixelperfect.event;
+package nl.tudelft.pixelperfect.event.factory;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.factory.AsteroidImpactEventFactory;
 import nl.tudelft.pixelperfect.event.factory.EventFactory;
-import nl.tudelft.pixelperfect.event.type.Event;
 
 /**
  * Test Suite for the AsteroidImpactEventFactory class.
