@@ -7,7 +7,7 @@ package nl.tudelft.pixelperfect.event;
  * @author Floris Doolaard
  */
 @SuppressWarnings("PMD")
-public class AsteroidFieldEventTest extends EventTest {
+public class AsteroidImpactEventTest extends EventTest {
 
   /**
    * Factory method for testing.
@@ -15,8 +15,8 @@ public class AsteroidFieldEventTest extends EventTest {
    * @return PlasmaLeakEvent class
    */
   @Override
-  public AsteroidFieldEvent createEvent() {
-    return new AsteroidFieldEvent(1, "TestEvent", "An Event to test the Class.", 42, 42, 99.42);
+  public AsteroidImpactEvent createEvent() {
+    return new AsteroidImpactEvent(1, "TestEvent", "An Event to test the Class.", 42, 42, 99.42);
   }
 
 }

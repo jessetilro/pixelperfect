@@ -17,7 +17,7 @@ public class EventScheduler {
   private double intensityMax;
   private double intensityPercentage;
   private ArrayList<EventListener> listeners;
-  private EventFactory factory;
+  private EventBuilder builder;
   private boolean active;
 
   /**
@@ -53,7 +53,7 @@ public class EventScheduler {
   private void construct() {
     this.intensityPercentage = 0;
     this.listeners = new ArrayList<EventListener>();
-    this.factory = new EventFactory();
+    this.builder = new EventBuilder();
     this.active = false;
   }
 
@@ -151,7 +151,7 @@ public class EventScheduler {
     kvalue--;
 
     for (int i = 0; i < kvalue; i++) {
-      Event evt = factory.randomEvent();
+      Event evt = builder.buildRandomEvent();
       publish(evt);
     }
   }

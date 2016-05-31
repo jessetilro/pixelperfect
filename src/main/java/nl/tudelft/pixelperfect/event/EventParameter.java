@@ -1,5 +1,7 @@
 package nl.tudelft.pixelperfect.event;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  * Class representing a single parameter of an Event, having either a discrete value
  * (EventParameterValue) or a continuous one (Integer).
@@ -7,6 +9,7 @@ package nl.tudelft.pixelperfect.event;
  * @author Jesse Tilro
  *
  */
+@Serializable
 public class EventParameter {
 
   private String key;

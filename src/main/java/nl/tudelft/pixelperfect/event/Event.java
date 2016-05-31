@@ -1,6 +1,7 @@
 package nl.tudelft.pixelperfect.event;
 
-import nl.tudelft.pixelperfect.Scene;
+import java.util.Collection;
+
 import nl.tudelft.pixelperfect.Spaceship;
 
 /**
@@ -17,6 +18,7 @@ public abstract class Event {
   private long timestamp;
   private long duration;
   private double damage;
+  private EventParameterCollection parameters;
 
   /**
    * Constructor for the event class, taking parameters for the type of event, a summary of the
@@ -44,6 +46,7 @@ public abstract class Event {
     this.timestamp = timestamp;
     this.duration = duration;
     this.damage = damage;
+    this.parameters = new EventParameterCollection();
   }
 
   /**
@@ -134,10 +137,23 @@ public abstract class Event {
   }
 
   /**
-   * Allow events to render notifications to the players.
-   *
-   * @param scene
-   *          The scene in which the notification must appear.
+   * Update this Event's parameter collection to consist of the parameters in the given collection.
+   * 
+   * @param collection
+   *          A Collection of EventParameters.
    */
-  public abstract void notification(Scene scene);
+  public void setParameters(Collection<EventParameter> collection) {
+    parameters = new EventParameterCollection(collection);
+  }
+
+  /**
+   * Check whether the given collection of parameters matches this Event's parameters.
+   * 
+   * @param collection
+   *          A Collection of EventParameters.
+   * @return Whether the parameters are valid.
+   */
+  public boolean validateParameters(Collection<EventParameter> collection) {
+    return parameters.validate(collection);
+  }
 }

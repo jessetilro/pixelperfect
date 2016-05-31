@@ -78,14 +78,6 @@ public class EventReaderTest {
   }
 
   /**
-   * When data is queried before anything was read, it should yield no data whatsoever.
-   */
-  @Test
-  public void testNoReadingBeforeQuery() {
-    assertFalse(object.has(1));
-  }
-
-  /**
    * When calling the getSummary method, it should return the correct summary of the Event type with
    * the specified type identifier.
    */

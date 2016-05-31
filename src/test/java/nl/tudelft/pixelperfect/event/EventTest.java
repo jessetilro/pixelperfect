@@ -3,21 +3,24 @@ package nl.tudelft.pixelperfect.event;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.tudelft.pixelperfect.Scene;
 import nl.tudelft.pixelperfect.Spaceship;
 
 /**
- * Class for testing the Event class.
+ * Class for testing the Event class. Suppressing some PMD warnings since it is ok for a test suite
+ * to consist of a relatively large amount of (simple) test cases.
  * 
  * @author David Alderliesten
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public abstract class EventTest {
 
   private Event toTest;
@@ -28,10 +31,6 @@ public abstract class EventTest {
   @Before
   public void initialize() {
     toTest = createEvent();
-
-    // For line coverage.
-    Scene scene = mock(Scene.class);
-    toTest.notification(scene);
   }
 
   /**
@@ -102,13 +101,36 @@ public abstract class EventTest {
   public void testGetDamage() {
     assertEquals(99.42, toTest.getDamage(), 0.0);
   }
-  
+
   /**
-   * Thest the getTimeLeft method.
+   * Test the getTimeLeft method.
    * 
    */
   @Test
   public void testGetTimeLeft() {
     assertEquals(4, toTest.getTimeLeft(80L), 0.0);
+  }
+
+  /**
+   * When setting the parameter collection of an Event and subsequently validating against the same
+   * collection, it should yield true.
+   */
+  @Test
+  public void testSetAndValidateParametersTrue() {
+    Collection<EventParameter> collection = new ArrayList<EventParameter>();
+    collection.add(new EventParameter("test", 42));
+    toTest.setParameters(collection);
+    assertTrue(toTest.validateParameters(collection));
+  }
+
+  /**
+   * When validating against a collection when none has been set for the Event yet, it should yield
+   * false.
+   */
+  @Test
+  public void testSetAndValidateParametersFalse() {
+    Collection<EventParameter> collection = new ArrayList<EventParameter>();
+    collection.add(new EventParameter("test", 42));
+    assertFalse(toTest.validateParameters(collection));
   }
 }

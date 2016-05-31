@@ -9,6 +9,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import nl.tudelft.pixelperfect.Constants;
+
 /**
  * Reads the parameters of the different types of events from the file system or a given String.
  * Makes the data accessible to use as parameters to build Events with.
@@ -19,7 +21,7 @@ import org.json.JSONTokener;
 public final class EventReader {
 
   private static volatile EventReader instance;
-
+  private int id;
   private JSONArray data;
 
   /**
@@ -37,6 +39,8 @@ public final class EventReader {
   }
 
   private EventReader() {
+    id = 1;
+    readFromFile(Constants.EVENT_DATA_FILE);
   }
 
   /**
@@ -172,6 +176,16 @@ public final class EventReader {
       return obj.getDouble("damage");
     }
     return 0;
+  }
+
+  /**
+   * Since this is a Singleton, it is the perfect place to keep track of the unique numeric
+   * identifier for Events.
+   * 
+   * @return The next Event id.
+   */
+  public int getNextId() {
+    return id++;
   }
 
 }
