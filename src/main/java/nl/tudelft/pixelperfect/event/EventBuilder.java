@@ -74,7 +74,7 @@ public class EventBuilder {
   public Event buildRandomEvent() {
     EventTypes type = getRandomEventType();
     setType(type);
-    setParameters(factory.createParameters());
+    setParameters(factory.createSummarizedParameters());
     return buildEvent();
   }
 

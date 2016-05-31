@@ -1,10 +1,12 @@
 package nl.tudelft.pixelperfect.event.factory;
 
 import java.util.Collection;
+import java.util.Map;
 
 import nl.tudelft.pixelperfect.event.EventReader;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.Event;
+import nl.tudelft.pixelperfect.event.type.EventTypes;
 
 /**
  * An abstract factory for creating a specific type of Event and its parameters, according to the
@@ -34,6 +36,13 @@ public abstract class EventFactory {
   }
 
   /**
+   * Return the Type of the Events this factory creates.
+   * 
+   * @return An EventType.
+   */
+  protected abstract EventTypes getType();
+
+  /**
    * Create a specific type of Event.
    * 
    * @return A specific type of Event.
@@ -46,4 +55,18 @@ public abstract class EventFactory {
    * @return A random collection of parameters.
    */
   public abstract Collection<EventParameter> createParameters();
+
+  /**
+   * Uses the createParameters method to create parameters for the type of Event this factory
+   * produces, and subsequently provides the created parameters with summaries read from the data
+   * file.
+   */
+  public Collection<EventParameter> createSummarizedParameters() {
+    Collection<EventParameter> parameters = createParameters();
+    Map<String, String> summaries = reader.getParameters(getType().ordinal());
+    for (EventParameter param : parameters) {
+      param.setSummary(summaries.get(param.getKey()));
+    }
+    return parameters;
+  }
 }

@@ -13,6 +13,7 @@ import com.jme3.network.serializing.Serializable;
 public class EventParameter {
 
   private String key;
+  private String summary;
   private EventParameterValues value;
   private int numberValue;
 
@@ -29,6 +30,7 @@ public class EventParameter {
     this.key = key;
     this.value = value;
     this.numberValue = 0;
+    this.summary = "";
   }
 
   /**
@@ -43,6 +45,7 @@ public class EventParameter {
     this.key = key;
     this.value = EventParameterValues.GENERIC;
     this.numberValue = numberValue;
+    this.summary = "";
   }
 
   /**
@@ -79,6 +82,25 @@ public class EventParameter {
    */
   protected EventParameterValues getValue() {
     return value;
+  }
+
+  /**
+   * Set the summary for this parameter.
+   * 
+   * @param summary
+   *          The summary.
+   */
+  public void setSummary(String summary) {
+    this.summary = summary;
+  }
+
+  /**
+   * To String.
+   * 
+   * @return A String representation.
+   */
+  public String toString() {
+    return summary;
   }
 
   /**

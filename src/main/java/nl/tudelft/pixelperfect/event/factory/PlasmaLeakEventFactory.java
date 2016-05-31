@@ -16,12 +16,16 @@ import nl.tudelft.pixelperfect.event.type.PlasmaLeakEvent;
  *
  */
 public class PlasmaLeakEventFactory extends EventFactory {
-
-  private static EventTypes type = EventTypes.PLASMA_LEAK;
+  
+  @Override
+  public EventTypes getType() {
+    return EventTypes.PLASMA_LEAK;
+  }
 
   @Override
   public Event createEvent() {
     EventReader reader = getReader();
+    EventTypes type = getType();
     return new PlasmaLeakEvent(reader.getNextId(), reader.getSummary(type.ordinal()),
         reader.getDescription(type.ordinal()), System.currentTimeMillis(),
         reader.getDuration(type.ordinal()), reader.getDamage(type.ordinal()));

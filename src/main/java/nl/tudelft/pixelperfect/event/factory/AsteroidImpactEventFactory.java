@@ -15,24 +15,16 @@ import nl.tudelft.pixelperfect.event.type.EventTypes;
  *
  */
 public class AsteroidImpactEventFactory extends EventFactory {
-
-  private static EventTypes type = EventTypes.ASTEROID_IMPACT;
-
-  /**
-   * Construct a new AsteroidImpactEventFactory instance.
-   */
-  public AsteroidImpactEventFactory() {
-    super();
+  
+  @Override
+  public EventTypes getType() {
+    return EventTypes.ASTEROID_IMPACT;
   }
-
-  /**
-   * Create a new AsteroidImpactEvent.
-   * 
-   * @return An AsteroidImpactEvent.
-   */
+  
   @Override
   public AsteroidImpactEvent createEvent() {
     EventReader reader = getReader();
+    EventTypes type = getType();
     return new AsteroidImpactEvent(reader.getNextId(), reader.getSummary(type.ordinal()),
         reader.getDescription(type.ordinal()), System.currentTimeMillis(),
         reader.getDuration(type.ordinal()), reader.getDamage(type.ordinal()));

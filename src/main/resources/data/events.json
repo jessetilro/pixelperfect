@@ -3,12 +3,12 @@
     "type": 0,
     "summary": "Fire Outbreak",
     "description": "Alert! Faulty wiring caused a fire!",
-    "duration": 20000,
+    "duration": 30000,
     "damage": 10,
     "parameters" : [
       {
-      "key": "armor",
-      "summary": "The Ship's Armor Type"
+      "key": "approach",
+      "summary": "The approach required for fighting the fire"
       }
     ]
   },
@@ -16,28 +16,43 @@
     "type": 1,
     "summary": "Plasma Leak",
     "description": "Plasma pressure is dropping, there must be a leak!",
-    "duration": 20000,
+    "duration": 30000,
     "damage": 10
   },
   {
     "type": 2,
     "summary": "Asteroid Impact",
     "description": "Get to work, the ship has been hit by an Asteroid!",
-    "duration": 20000,
+    "duration": 30000,
     "damage": 10
   },
   {
     "type": 3,
     "summary": "Hostile Ship",
     "description": "A hostile spaceship is near, prepare to defend yourself!",
-    "duration": 20000,
-    "damage": 10
+    "duration": 30000,
+    "damage": 10,
+    "parameters": [
+      {
+        "key": "positionX",
+        "summary": "The x-coordinate of the ship's position"
+      },
+      {
+        "key": "positionY",
+        "summary": "The x-coordinate of the ship's position"
+      },
+      {
+        "key": "armor",
+        "summary": "The ship's type of armor"
+      }
+
+    ]
   },
   {
     "type": 4,
     "summary": "Coffee Boost",
     "description": "Give me fuel, given me fire, give me that which I desire!",
-    "duration": 20000,
+    "duration": 30000,
     "damage": 10
   }
 

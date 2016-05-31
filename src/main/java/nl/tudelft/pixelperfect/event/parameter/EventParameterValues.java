@@ -7,5 +7,27 @@ package nl.tudelft.pixelperfect.event.parameter;
  *
  */
 public enum EventParameterValues {
-  GENERIC, HOSTILE_SHIP_ARMOR_ENERGY_SHIELD, HOSTILE_SHIP_ARMOR_TITANIUM
+  GENERIC {
+    @Override
+    public String toString() {
+      return "Number";
+    }
+  },
+  HOSTILE_SHIP_ARMOR_ENERGY_SHIELD {
+    @Override
+    public String toString() {
+      return "Energy Shield";
+    }
+  },
+  HOSTILE_SHIP_ARMOR_TITANIUM {
+    @Override
+    public String toString() {
+      return "Titanium";
+    }
+  };
+
+  /**
+   * Returns the String representation of this parameter value.
+   */
+  public abstract String toString();
 }
