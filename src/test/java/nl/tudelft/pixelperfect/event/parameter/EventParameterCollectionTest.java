@@ -10,13 +10,11 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import nl.tudelft.pixelperfect.event.parameter.EventParameter;
-import nl.tudelft.pixelperfect.event.parameter.EventParameterCollection;
 
 /**
  * Test Suite for the EventParameterCollection class. Suppressing some warnings because we needs all
@@ -158,6 +156,23 @@ public class EventParameterCollectionTest {
   @Test
   public void testHashCodeDifferentInstances() {
     assertThat(parameters.hashCode(), not(equalTo(parametersEmpty.hashCode())));
+  }
+
+  /**
+   * The String representation of an EventParameterCollection should take into account all
+   * parameters.
+   */
+  @Test
+  public void testToString() {
+    param.setSummary("The Question");
+    EventParameter secondParam = new EventParameter("answer", 42);
+    secondParam.setSummary("The Answer");
+    Collection<EventParameter> collection = Arrays
+        .asList(new EventParameter[] { param, secondParam });
+    EventParameterCollection object = new EventParameterCollection(collection);
+
+    String expected = "The Question is Number 42 and The Answer is Number 42";
+    assertEquals(expected, object.toString());
   }
 
 }

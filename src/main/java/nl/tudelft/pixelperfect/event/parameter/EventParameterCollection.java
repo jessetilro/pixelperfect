@@ -59,6 +59,22 @@ public class EventParameterCollection {
   }
 
   /**
+   * Generate a String representation of the collection of parameters.
+   * 
+   * @return A String representation of this instance.
+   */
+  public String toString() {
+    String and = "";
+    StringBuilder sb = new StringBuilder();
+    for (EventParameter param : map.values()) {
+      sb.append(and);
+      sb.append(param.toString());
+      and = " and ";
+    }
+    return sb.toString();
+  }
+
+  /**
    * Validate whether a given collection of parameters matches the parameters aggregated by this
    * instance. This method is used this way for efficiency (iterating over collection, while getting
    * by key from hash map).
