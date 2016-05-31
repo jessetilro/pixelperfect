@@ -5,8 +5,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import nl.tudelft.pixelperfect.event.Event;
-import nl.tudelft.pixelperfect.event.factory.AsteroidImpactEventFactory;
-import nl.tudelft.pixelperfect.event.factory.EventFactory;
 
 /**
  * Test Suite for the AsteroidImpactEventFactory class.

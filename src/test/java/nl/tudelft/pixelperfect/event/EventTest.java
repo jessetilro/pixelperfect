@@ -40,9 +40,14 @@ public abstract class EventTest {
   }
 
   /**
-   * Factory method for testing.
+   * Factory method for creating a test object.
    * 
-   * @return class to be tested.
+   * @param summary
+   *          The summary of the Event.
+   * @param description
+   *          The description of the Event.
+   * 
+   * @return A test object.
    */
   public abstract Event createEvent(String summary, String description);
 

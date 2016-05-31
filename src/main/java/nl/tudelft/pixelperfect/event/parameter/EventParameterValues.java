@@ -28,6 +28,8 @@ public enum EventParameterValues {
 
   /**
    * Returns the String representation of this parameter value.
+   * 
+   * @return A String representation of the value.
    */
   public abstract String toString();
 }

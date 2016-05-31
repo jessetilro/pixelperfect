@@ -8,7 +8,6 @@ import org.junit.Test;
 import nl.tudelft.pixelperfect.Constants;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventReader;
-import nl.tudelft.pixelperfect.event.factory.EventFactory;
 
 /**
  * Test Suite for the EventFactory class.

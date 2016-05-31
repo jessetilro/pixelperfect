@@ -5,8 +5,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import nl.tudelft.pixelperfect.event.Event;
-import nl.tudelft.pixelperfect.event.factory.EventFactory;
-import nl.tudelft.pixelperfect.event.factory.HostileShipEventFactory;
 
 /**
  * Test Suite for the HostileShipEventFactory class.

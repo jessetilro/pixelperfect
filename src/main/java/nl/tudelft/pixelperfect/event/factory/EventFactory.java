@@ -60,6 +60,8 @@ public abstract class EventFactory {
    * Uses the createParameters method to create parameters for the type of Event this factory
    * produces, and subsequently provides the created parameters with summaries read from the data
    * file.
+   * 
+   * @return A random collection of summarized parameters.
    */
   public Collection<EventParameter> createSummarizedParameters() {
     Collection<EventParameter> parameters = createParameters();

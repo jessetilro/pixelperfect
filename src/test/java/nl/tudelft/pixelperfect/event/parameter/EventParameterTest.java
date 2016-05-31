@@ -160,7 +160,8 @@ public class EventParameterTest {
   public void testToStringGeneric() {
     objectGeneric
         .setSummary("The Answer to the Ultimate Question of Life, the Universe, and Everything");
-    String expected = "The Answer to the Ultimate Question of Life, the Universe, and Everything is Number 42";
+    String expected = "The Answer to the Ultimate Question of Life,"
+        + "the Universe, and Everything is Number 42";
     assertEquals(expected, objectGeneric.toString());
   }
 
