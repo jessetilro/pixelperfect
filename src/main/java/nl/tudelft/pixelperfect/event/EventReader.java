@@ -33,7 +33,6 @@ public final class EventReader {
     if (instance == null) {
       synchronized (EventReader.class) {
         instance = new EventReader();
-        instance.readFromFile(Constants.EVENT_DATA_FILE);
       }
     }
     return instance;
@@ -41,6 +40,7 @@ public final class EventReader {
 
   private EventReader() {
     id = 1;
+    readFromFile(Constants.EVENT_DATA_FILE);
   }
 
   /**

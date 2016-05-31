@@ -14,7 +14,6 @@ import java.util.Random;
  */
 public class EventBuilder {
 
-  private EventTypes type;
   private EventFactory factory;
   private Collection<EventParameter> parameters;
   private Random random;
@@ -34,8 +33,7 @@ public class EventBuilder {
    *          The type of Event to be created.
    */
   public void setType(EventTypes type) {
-    this.type = type;
-    // For efficiency reasons.
+    // For efficiency reasons storing the factory instead of type.
     this.factory = type.getFactory();
   }
 
