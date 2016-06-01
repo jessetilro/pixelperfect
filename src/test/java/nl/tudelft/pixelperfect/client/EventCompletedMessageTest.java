@@ -3,6 +3,7 @@ package nl.tudelft.pixelperfect.client;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -17,7 +17,7 @@ import org.junit.Test;
 
 import com.jme3.network.Server;
 
-import nl.tudelft.pixelperfect.client.EventsMessage;
+import nl.tudelft.pixelperfect.client.message.EventsMessage;
 import nl.tudelft.pixelperfect.event.type.AsteroidImpactEvent;
 import nl.tudelft.pixelperfect.event.type.FireOutbreakEvent;
 import nl.tudelft.pixelperfect.game.Spaceship;

@@ -10,13 +10,14 @@ import com.jme3.network.Server;
 import com.jme3.network.serializing.Serializer;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
+
 import jmevr.app.VRApplication;
 import nl.tudelft.pixelperfect.audio.AudioPlayer;
 import nl.tudelft.pixelperfect.client.ConnectListener;
-import nl.tudelft.pixelperfect.client.EventCompletedMessage;
-import nl.tudelft.pixelperfect.client.EventsMessage;
-import nl.tudelft.pixelperfect.client.RoleChosenMessage;
 import nl.tudelft.pixelperfect.client.ServerListener;
+import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
+import nl.tudelft.pixelperfect.client.message.EventsMessage;
+import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gamestates.GameState;
 import nl.tudelft.pixelperfect.gamestates.StartState;
