@@ -19,11 +19,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-
-
 /**
  * Class to test PlayState.
  *
+ * @author David Alderliesten
  * @author Wouter Zirkzee
  */
 @SuppressWarnings("PMD")
@@ -35,6 +34,7 @@ public class PlayStateTest extends GameStateTest {
   private EventScheduler mockScheduler;
   private Spaceship mockSpaceship;
   private DebugHeadsUpDisplay mockHeadsUp;
+  private Settings mockSettings;
 
   /**
    * Setup the classes for testing.
@@ -50,21 +50,35 @@ public class PlayStateTest extends GameStateTest {
     mockGame.setScheduler(mockScheduler);
     mockGame.setSpaceship(mockSpaceship);
     mockGame.setHeadsUpDisplay(mockHeadsUp);
+    mockSettings = Settings.getInstance();
     testState = new PlayState(mockGame);
   }
 
   /**
-   * Test update function.
+   * Test update function with debug enabled.
    */
   @Test
   public void testUpdate() {
+    mockSettings.isDebugOn();
+    
     testState.update(1f);
     verify(mockScheduler).update(1f);
     verify(mockSpaceship).update(anyFloat());
+    verify(mockHeadsUp).updateHud();
+  }
 
-    if (Settings.getIsDebug()) {
-      verify(mockHeadsUp).updateHud();
-    }
+  /**
+   * Test update function without debug enabled.
+   */
+  @Test
+  public void testUpdateWithoutDebug() {
+    mockSettings.isDebugOff();
+    
+    testState.update(1f);
+    verify(mockScheduler).update(1f);
+    verify(mockSpaceship).update(anyFloat());
+    
+    verify(mockHeadsUp, Mockito.times(0)).updateHud();
   }
 
   /**
