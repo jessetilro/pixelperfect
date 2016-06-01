@@ -1,8 +1,9 @@
 package nl.tudelft.pixelperfect.gamestates;
 
-import nl.tudelft.pixelperfect.Game;
 import org.junit.Before;
 import org.junit.Test;
+
+import nl.tudelft.pixelperfect.game.Game;
 
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;

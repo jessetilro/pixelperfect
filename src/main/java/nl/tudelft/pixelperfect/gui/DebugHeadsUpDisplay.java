@@ -5,9 +5,9 @@ import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
 import com.jme3.scene.Node;
 
-import nl.tudelft.pixelperfect.Constants;
-import nl.tudelft.pixelperfect.Spaceship;
 import nl.tudelft.pixelperfect.event.Event;
+import nl.tudelft.pixelperfect.game.Constants;
+import nl.tudelft.pixelperfect.game.Spaceship;
 
 import java.util.ArrayList;
 

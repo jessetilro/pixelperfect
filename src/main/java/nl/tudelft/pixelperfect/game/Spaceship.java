@@ -1,4 +1,4 @@
-package nl.tudelft.pixelperfect;
+package nl.tudelft.pixelperfect.game;
 
 import com.jme3.network.HostedConnection;
 
