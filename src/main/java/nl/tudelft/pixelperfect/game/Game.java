@@ -107,7 +107,7 @@ public class Game extends VRApplication {
     scene.createMap();
 
     audioPlayer = new AudioPlayer(this);
-    // TODO load acutal sounds
+    // TODO load actual sounds
     String[] names = {};
     String[] locations = {};
     audioPlayer.loadSounds(names, locations);

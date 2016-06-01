@@ -3,10 +3,10 @@ package nl.tudelft.pixelperfect.gamestates;
 import com.jme3.scene.Spatial;
 import jmevr.app.VRApplication;
 
-import nl.tudelft.pixelperfect.game.Game;
-import nl.tudelft.pixelperfect.game.Spaceship;
-import nl.tudelft.pixelperfect.game.Constants;
 import nl.tudelft.pixelperfect.event.EventScheduler;
+import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.game.Settings;
+import nl.tudelft.pixelperfect.game.Spaceship;
 import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
 
 /**
@@ -49,7 +49,7 @@ public class PlayState extends GameState {
     spaceship.update(tpf);
 
     // If debug mode is enabled, activate the debug update.
-    if (Constants.isDebug) {
+    if (Settings.getIsDebug()) {
       debugDisplay.updateHud();
     } else {
       debugDisplay.clearHud();
@@ -76,7 +76,7 @@ public class PlayState extends GameState {
       observer.rotate(0, -0.75f * tpf, 0);
     }
     if (game.isDebugTrigger()) {
-      Constants.isDebug = !Constants.isDebug;
+      Settings.flipIsDebug();
     }
   }
 

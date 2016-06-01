@@ -1,23 +1,25 @@
 package nl.tudelft.pixelperfect.gamestates;
 
-import com.jme3.scene.Spatial;
-
-import nl.tudelft.pixelperfect.game.Game;
-import nl.tudelft.pixelperfect.game.Spaceship;
-import nl.tudelft.pixelperfect.game.Constants;
-import nl.tudelft.pixelperfect.event.EventScheduler;
-import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mockito;
-
 import static org.junit.Assert.assertSame;
 import static org.mockito.Matchers.anyFloat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
+
+import com.jme3.scene.Spatial;
+
+import nl.tudelft.pixelperfect.event.EventScheduler;
+import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.game.Settings;
+import nl.tudelft.pixelperfect.game.Spaceship;
+import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mockito;
+
+
 
 /**
  * Class to test PlayState.
@@ -60,7 +62,7 @@ public class PlayStateTest extends GameStateTest {
     verify(mockScheduler).update(1f);
     verify(mockSpaceship).update(anyFloat());
 
-    if (Constants.isDebug) {
+    if (Settings.getIsDebug()) {
       verify(mockHeadsUp).updateHud();
     }
   }
