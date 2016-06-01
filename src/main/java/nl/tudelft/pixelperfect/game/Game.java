@@ -1,7 +1,5 @@
 package nl.tudelft.pixelperfect.game;
 
-import java.io.IOException;
-
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
@@ -13,6 +11,7 @@ import com.jme3.network.serializing.Serializer;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import jmevr.app.VRApplication;
+import nl.tudelft.pixelperfect.audio.AudioPlayer;
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.EventsMessage;
@@ -21,7 +20,9 @@ import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gamestates.GameState;
 import nl.tudelft.pixelperfect.gamestates.StartState;
-import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
+import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
+
+import java.io.IOException;
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
@@ -39,6 +40,7 @@ public class Game extends VRApplication {
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private Server server;
+  private AudioPlayer audioPlayer;
 
   private Spatial observer;
 
@@ -47,10 +49,11 @@ public class Game extends VRApplication {
   private boolean rotateLeft;
   private boolean rotateRight;
   private boolean startKey;
+  private boolean debugKey;
 
   private Scene scene;
 
-  private GameHeadsUpDisplay gameHud;
+  private DebugHeadsUpDisplay gameHud;
 
   private GameState gameState;
 
@@ -103,6 +106,12 @@ public class Game extends VRApplication {
     scene = new Scene(this);
     scene.createMap();
 
+    audioPlayer = new AudioPlayer(this);
+    // TODO load acutal sounds
+    String[] names = {};
+    String[] locations = {};
+    audioPlayer.loadSounds(names, locations);
+
     initNetwork();
 
     spaceship = new Spaceship();
@@ -112,7 +121,7 @@ public class Game extends VRApplication {
     scheduler.subscribe(spaceship.getLog());
     scheduler.start();
 
-    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
+    gameHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
 
     gameState = new StartState(this);
   }
@@ -147,9 +156,9 @@ public class Game extends VRApplication {
   @SuppressWarnings({ "checkstyle:methodlength", "PMD" })
   private void initInputs() {
     InputManager inputManager = getInputManager();
-    int[] keyTriggers = {KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A,
-        KeyInput.KEY_D, KeyInput.KEY_P};
-    String[] mappings = {"forward", "back", "left", "right", "start"};
+    int[] keyTriggers = { KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A, KeyInput.KEY_D,
+        KeyInput.KEY_P, KeyInput.KEY_0 };
+    String[] mappings = { "forward", "back", "left", "right", "start", "debug" };
     for (int i = 0; i < keyTriggers.length; i++) {
       inputManager.addMapping(mappings[i], new KeyTrigger(keyTriggers[i]));
     }
@@ -166,6 +175,8 @@ public class Game extends VRApplication {
           rotateRight = keyPressed;
         } else if (name.equals("start")) {
           startKey = keyPressed;
+        } else if (name.equals("debug")) {
+          debugKey = keyPressed;
         }
       }
     };
@@ -247,11 +258,20 @@ public class Game extends VRApplication {
   }
 
   /**
+   * Getter for the debugKey.
+   * 
+   * @return debugKey
+   */
+  public boolean isDebugTrigger() {
+    return debugKey;
+  }
+
+  /**
    * Getter for gameHud.
    *
    * @return gameHud
    */
-  public GameHeadsUpDisplay getGameHud() {
+  public DebugHeadsUpDisplay getGameHud() {
     return gameHud;
   }
 
@@ -268,9 +288,9 @@ public class Game extends VRApplication {
    * Setter for headsUpDisplay.
    *
    * @param headsUpDisplay
-   *                HeadsUpDisplay to be set.
+   *          HeadsUpDisplay to be set.
    */
-  public void setHeadsUpDisplay(GameHeadsUpDisplay headsUpDisplay) {
+  public void setHeadsUpDisplay(DebugHeadsUpDisplay headsUpDisplay) {
     this.gameHud = headsUpDisplay;
   }
 
@@ -278,7 +298,7 @@ public class Game extends VRApplication {
    * Setter for observer.
    *
    * @param observer
-   *                Observer to be set.
+   *          Observer to be set.
    */
   public void setGameObserver(Spatial observer) {
     this.observer = observer;
@@ -288,7 +308,7 @@ public class Game extends VRApplication {
    * Setter for scheduler.
    *
    * @param scheduler
-   *                Scheduler to be set.
+   *          Scheduler to be set.
    */
   public void setScheduler(EventScheduler scheduler) {
     this.scheduler = scheduler;
@@ -298,7 +318,7 @@ public class Game extends VRApplication {
    * Setter for spaceship.
    *
    * @param spaceship
-   *                Spaceship to be set.
+   *          Spaceship to be set.
    */
   public void setSpaceship(Spaceship spaceship) {
     this.spaceship = spaceship;

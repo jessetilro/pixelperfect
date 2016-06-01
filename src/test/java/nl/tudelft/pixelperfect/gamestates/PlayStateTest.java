@@ -2,10 +2,12 @@ package nl.tudelft.pixelperfect.gamestates;
 
 import com.jme3.scene.Spatial;
 
-import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Spaceship;
-import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
+import nl.tudelft.pixelperfect.game.Constants;
+import nl.tudelft.pixelperfect.event.EventScheduler;
+import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -30,7 +32,7 @@ public class PlayStateTest extends GameStateTest {
   private Spatial mockObserver;
   private EventScheduler mockScheduler;
   private Spaceship mockSpaceship;
-  private GameHeadsUpDisplay mockHeadsUp;
+  private DebugHeadsUpDisplay mockHeadsUp;
 
   /**
    * Setup the classes for testing.
@@ -41,7 +43,7 @@ public class PlayStateTest extends GameStateTest {
     mockScheduler = mock(EventScheduler.class);
     mockObserver = mock(Spatial.class);
     mockSpaceship = mock(Spaceship.class);
-    mockHeadsUp = mock(GameHeadsUpDisplay.class);
+    mockHeadsUp = mock(DebugHeadsUpDisplay.class);
     mockGame.setGameObserver(mockObserver);
     mockGame.setScheduler(mockScheduler);
     mockGame.setSpaceship(mockSpaceship);
@@ -57,7 +59,10 @@ public class PlayStateTest extends GameStateTest {
     testState.update(1f);
     verify(mockScheduler).update(1f);
     verify(mockSpaceship).update(anyFloat());
-    verify(mockHeadsUp).updateHud();
+
+    if (Constants.isDebug) {
+      verify(mockHeadsUp).updateHud();
+    }
   }
 
   /**

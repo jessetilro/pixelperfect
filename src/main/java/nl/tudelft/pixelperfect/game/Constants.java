@@ -27,11 +27,14 @@ public final class Constants {
   public static final int GUI_TIME_WIDTH_OFFSET = 400;
   public static final int GUI_TIME_HEIGHT_OFFSET = 0;
 
-  // Gui text for the in-game HUd.
-  public static final String NO_EVENTS_LOG_TEXT = "Everything looks clear, cap'n!";
+  // Gui text for the in-game HUD.
+  public static final String NO_EVENTS_LOG_TEXT = "No events currently active.";
   public static final String SHIP_HEALTH_LABEL = "Health: ";
   public static final String SHIP_SCORE_LABEL = "Score: ";
   public static final String SHIP_TIME_LABEL = "Time: ";
+  
+  // Boolean variables to dictate debug and alternative modes.
+  public static boolean isDebug = false;
 
   // Target intensity for the Event Scheduler.
   public static final double EVENT_SCHEDULER_INTENSITY_MIN = 0.125;

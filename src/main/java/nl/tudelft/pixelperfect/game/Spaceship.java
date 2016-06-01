@@ -1,8 +1,5 @@
 package nl.tudelft.pixelperfect.game;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import com.jme3.network.HostedConnection;
 
 import nl.tudelft.pixelperfect.event.EventListener;
@@ -11,6 +8,9 @@ import nl.tudelft.pixelperfect.player.CrewPlayer;
 import nl.tudelft.pixelperfect.player.Player;
 import nl.tudelft.pixelperfect.route.Route;
 import nl.tudelft.pixelperfect.route.RouteGenerator;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * The spaceship the players are controlling and guiding along a given route through space.

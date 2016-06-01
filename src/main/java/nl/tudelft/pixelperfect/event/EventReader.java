@@ -1,15 +1,15 @@
 package nl.tudelft.pixelperfect.event;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import nl.tudelft.pixelperfect.game.Constants;
 
@@ -68,7 +68,7 @@ public final class EventReader {
       JSONTokener tokener = new JSONTokener(stream);
       data = new JSONArray(tokener);
       return true;
-    } catch (FileNotFoundException e) {
+    } catch (FileNotFoundException error) {
       return false;
     }
   }
