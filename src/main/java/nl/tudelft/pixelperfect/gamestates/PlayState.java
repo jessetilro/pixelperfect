@@ -75,8 +75,10 @@ public class PlayState extends GameState {
     if (game.isRotateRight()) {
       observer.rotate(0, -0.75f * tpf, 0);
     }
-    if (game.isDebugTrigger()) {
-      Settings.flipIsDebug();
+    if (game.isDebugOnTrigger()) {
+      Settings.isDebugOn();
+    } else if (game.isDebugOffTrigger()) {
+      Settings.isDebugOff();
     }
   }
 

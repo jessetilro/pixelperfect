@@ -41,10 +41,17 @@ public final class Settings {
   }
 
   /**
-   * Flips the isDebug state to the opposite state of the boolean.
+   * Flips the isDebug state to the on state of the boolean.
    */
-  public static void flipIsDebug() {
-    isDebug = !isDebug;
+  public static void isDebugOn() {
+    isDebug = true;
+  }
+  
+  /**
+   * Flips the isDebug state to the on state of the boolean.
+   */
+  public static void isDebugOff() {
+    isDebug = false;
   }
 
 }
