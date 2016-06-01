@@ -182,9 +182,8 @@ public abstract class Event {
    */
   public String toDebugString() {
     StringBuilder sb = new StringBuilder();
-    Collection<String> components = Arrays
-        .asList(new String[] { summary, " (", getTimeLeft(System.currentTimeMillis()),
-            "), Param: (", parameters.toString() + ")" });
+    Collection<String> components = Arrays.asList(new String[] { summary, " (",
+        getTimeLeft(System.currentTimeMillis()), "), Param: (", parameters.toDebugString() + ")" });
     for (String component : components) {
       sb.append(component);
     }

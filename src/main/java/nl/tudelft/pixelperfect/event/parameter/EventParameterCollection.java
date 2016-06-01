@@ -1,14 +1,15 @@
 package nl.tudelft.pixelperfect.event.parameter;
 
+import com.jme3.network.serializing.Serializable;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.jme3.network.serializing.Serializable;
-
 /**
  * Class aggregating the parameters (key / value pairs) for an Event.
  * 
+ * @author David Alderliesten
  * @author Jesse Tilro
  *
  */
@@ -70,6 +71,23 @@ public class EventParameterCollection {
       sb.append(and);
       sb.append(param.toString());
       and = " and ";
+    }
+    return sb.toString();
+  }
+
+  /**
+   * Generate a debug string representation for the parameters.
+   * 
+   * @return the debug string.
+   */
+  public String toDebugString() {
+    StringBuilder sb = new StringBuilder();
+    if (map.isEmpty()) {
+      sb.append("None");
+    } else {
+      for (EventParameter param : map.values()) {
+        sb.append(param.toString());
+      }      
     }
     return sb.toString();
   }
