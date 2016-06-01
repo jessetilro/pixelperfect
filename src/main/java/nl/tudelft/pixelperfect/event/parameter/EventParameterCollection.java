@@ -87,7 +87,7 @@ public class EventParameterCollection {
     } else {
       for (EventParameter param : map.values()) {
         sb.append(param.getNumberValue());
-        sb.append(",");
+        sb.append(',');
       }      
     }
     return sb.toString();
