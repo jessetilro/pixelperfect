@@ -1,8 +1,11 @@
 package nl.tudelft.pixelperfect.event;
 
+import java.util.Arrays;
 import java.util.Collection;
 
-import nl.tudelft.pixelperfect.Spaceship;
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
+import nl.tudelft.pixelperfect.event.parameter.EventParameterCollection;
+import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
  * A class for storing and defining events, called upon by the event scheduler.
@@ -155,5 +158,20 @@ public abstract class Event {
    */
   public boolean validateParameters(Collection<EventParameter> collection) {
     return parameters.validate(collection);
+  }
+
+  /**
+   * Generate a String representation of this Event and its parameters.
+   * 
+   * @return A String representation of this Event and its parameters.
+   */
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    Collection<String> components = Arrays.asList(new String[] { summary, ": ", description,
+        " Take note of the following details: ", parameters.toString(), "." });
+    for (String component : components) {
+      sb.append(component);
+    }
+    return sb.toString();
   }
 }

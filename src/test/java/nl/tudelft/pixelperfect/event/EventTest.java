@@ -10,7 +10,8 @@ import java.util.Collection;
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.tudelft.pixelperfect.Spaceship;
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
+import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
  * Class for testing the Event class. Suppressing some PMD warnings since it is ok for a test suite
@@ -25,20 +26,30 @@ public abstract class EventTest {
 
   private Event toTest;
 
+  private String summary;
+  private String description;
+
   /**
    * Setting up the Event class for the test.
    */
   @Before
   public void initialize() {
-    toTest = createEvent();
+    summary = "Test Event";
+    description = "Test Description.";
+    toTest = createEvent(summary, description);
   }
 
   /**
-   * Factory method for testing.
+   * Factory method for creating a test object.
    * 
-   * @return class to be tested.
+   * @param summary
+   *          The summary of the Event.
+   * @param description
+   *          The description of the Event.
+   * 
+   * @return A test object.
    */
-  public abstract Event createEvent();
+  public abstract Event createEvent(String summary, String description);
 
   /**
    * Testing the getId method.
@@ -53,7 +64,7 @@ public abstract class EventTest {
    */
   @Test
   public void testGetSummary() {
-    assertEquals(toTest.getSummary(), "TestEvent");
+    assertEquals(summary, toTest.getSummary());
   }
 
   /**
@@ -61,7 +72,7 @@ public abstract class EventTest {
    */
   @Test
   public void testGetDescription() {
-    assertEquals(toTest.getDescription(), "An Event to test the Class.");
+    assertEquals(description, toTest.getDescription());
   }
 
   /**
@@ -132,5 +143,14 @@ public abstract class EventTest {
     Collection<EventParameter> collection = new ArrayList<EventParameter>();
     collection.add(new EventParameter("test", 42));
     assertFalse(toTest.validateParameters(collection));
+  }
+
+  /**
+   * The toString method should generate a correct String representation of the Event.
+   */
+  @Test
+  public void testToStringNoParameters() {
+    assertEquals("Test Event: Test Description. Take note of the following details: .",
+        toTest.toString());
   }
 }

@@ -6,7 +6,7 @@ import com.jme3.network.Message;
 import com.jme3.network.MessageListener;
 import com.jme3.network.Server;
 
-import nl.tudelft.pixelperfect.Game;
+import nl.tudelft.pixelperfect.game.Game;
 
 /**
  * Listener for the Game's server, which handles incoming messages.
