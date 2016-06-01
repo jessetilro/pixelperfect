@@ -11,7 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import nl.tudelft.pixelperfect.Constants;
+import nl.tudelft.pixelperfect.game.Constants;
 
 /**
  * Reads the parameters of the different types of events from the file system or a given String.

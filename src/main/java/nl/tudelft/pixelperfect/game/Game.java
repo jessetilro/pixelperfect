@@ -1,4 +1,4 @@
-package nl.tudelft.pixelperfect;
+package nl.tudelft.pixelperfect.game;
 
 import java.io.IOException;
 

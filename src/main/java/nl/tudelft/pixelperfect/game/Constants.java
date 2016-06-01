@@ -1,4 +1,4 @@
-package nl.tudelft.pixelperfect;
+package nl.tudelft.pixelperfect.game;
 
 /**
  * A data class for storing game-wide items that can all be altered in a single sweep.

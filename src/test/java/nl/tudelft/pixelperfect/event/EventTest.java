@@ -10,8 +10,8 @@ import java.util.Collection;
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.tudelft.pixelperfect.Spaceship;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
+import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
  * Class for testing the Event class. Suppressing some PMD warnings since it is ok for a test suite

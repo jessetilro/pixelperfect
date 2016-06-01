@@ -1,4 +1,4 @@
-package nl.tudelft.pixelperfect;
+package nl.tudelft.pixelperfect.game;
 
 import java.util.ArrayList;
 import com.jme3.font.BitmapFont;

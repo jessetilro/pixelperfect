@@ -5,9 +5,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.tudelft.pixelperfect.Constants;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventReader;
+import nl.tudelft.pixelperfect.game.Constants;
 
 /**
  * Test Suite for the EventFactory class.

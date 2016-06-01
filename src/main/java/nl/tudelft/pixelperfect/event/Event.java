@@ -3,9 +3,9 @@ package nl.tudelft.pixelperfect.event;
 import java.util.Arrays;
 import java.util.Collection;
 
-import nl.tudelft.pixelperfect.Spaceship;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.parameter.EventParameterCollection;
+import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
  * A class for storing and defining events, called upon by the event scheduler.
