@@ -3,7 +3,7 @@ package nl.tudelft.pixelperfect.client.message;
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
 
-import nl.tudelft.pixelperfect.Roles;
+import nl.tudelft.pixelperfect.game.Roles;
 
 /**
  * Whenever a role is chosen, the other crew players cannot choose the role. Therefor this message

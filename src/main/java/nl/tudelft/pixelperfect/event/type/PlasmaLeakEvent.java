@@ -1,19 +1,18 @@
-package nl.tudelft.pixelperfect.event;
+package nl.tudelft.pixelperfect.event.type;
 
-
-import nl.tudelft.pixelperfect.Scene;
+import nl.tudelft.pixelperfect.event.Event;
 
 /**
- * A type of event, imposing the problem of a hostile alien spaceship.
+ * A type of event, imposing the problem of a plasma leak.
  * 
  * @author Wouter Zirkzee
  * 
  */
 
-public class HostileShipEvent extends Event {
+public class PlasmaLeakEvent extends Event {
 
   /**
-   * Constructor for HostileShipEvent event.
+   * Constructor for PlasmaLeakEvent event.
    *
    * @param id
    *          The desired id.
@@ -28,19 +27,8 @@ public class HostileShipEvent extends Event {
    * @param damage
    *          The damage done to the ship on even failure.
    */
-  public HostileShipEvent(int id, String summary, String description, long timestamp, long duration,
+  public PlasmaLeakEvent(int id, String summary, String description, long timestamp, long duration,
       double damage) {
     super(id, summary, description, timestamp, duration, damage);
-  }
-
-
-  /**
-   * Show a specific notification for this event.
-   * 
-   * @param scene
-   *          Scene to be mutated.
-   */
-  public void notification(Scene scene) {
-    // TODO
   }
 }

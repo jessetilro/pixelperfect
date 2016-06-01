@@ -2,9 +2,9 @@ package nl.tudelft.pixelperfect.gamestates;
 
 import com.jme3.scene.Spatial;
 
-import nl.tudelft.pixelperfect.Constants;
-import nl.tudelft.pixelperfect.Game;
-import nl.tudelft.pixelperfect.Spaceship;
+import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.game.Spaceship;
+import nl.tudelft.pixelperfect.game.Constants;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
 

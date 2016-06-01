@@ -1,4 +1,6 @@
-package nl.tudelft.pixelperfect.event;
+package nl.tudelft.pixelperfect.event.type;
+
+import nl.tudelft.pixelperfect.event.EventTest;
 
 /**
  * Tesing the PlasmaLeakEvent class.
@@ -15,7 +17,7 @@ public class PlasmaLeakEventTest extends EventTest {
    * @return PlasmaLeakEvent class
    */
   @Override
-  public PlasmaLeakEvent createEvent() {
-    return new PlasmaLeakEvent(1, "TestEvent", "An Event to test the Class.", 42, 42, 99.42);
+  public PlasmaLeakEvent createEvent(String summary, String description) {
+    return new PlasmaLeakEvent(1, summary, description, 42, 42, 99.42);
   }
 }

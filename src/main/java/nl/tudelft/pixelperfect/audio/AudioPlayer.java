@@ -3,7 +3,7 @@ package nl.tudelft.pixelperfect.audio;
 import com.jme3.audio.AudioData;
 import com.jme3.audio.AudioNode;
 import com.jme3.audio.AudioSource;
-import nl.tudelft.pixelperfect.Game;
+import nl.tudelft.pixelperfect.game.Game;
 
 import java.util.HashMap;
 

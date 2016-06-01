@@ -1,4 +1,4 @@
-package nl.tudelft.pixelperfect;
+package nl.tudelft.pixelperfect.game;
 
 /**
  * Enums representing the roles in the game.

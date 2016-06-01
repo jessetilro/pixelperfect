@@ -17,11 +17,11 @@ import com.jme3.network.Message;
 import com.jme3.network.Server;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import nl.tudelft.pixelperfect.Game;
-import nl.tudelft.pixelperfect.Spaceship;
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.EventLog;
+import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
  * Test Suite for the ServerListener class.

@@ -19,6 +19,7 @@ import com.jme3.network.HostedConnection;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import nl.tudelft.pixelperfect.event.EventListener;
 import nl.tudelft.pixelperfect.event.EventLog;
+import nl.tudelft.pixelperfect.game.Spaceship;
 import nl.tudelft.pixelperfect.player.Player;
 import nl.tudelft.pixelperfect.route.Route;
 

@@ -4,7 +4,7 @@ import com.jme3.network.ConnectionListener;
 import com.jme3.network.HostedConnection;
 import com.jme3.network.Server;
 
-import nl.tudelft.pixelperfect.Game;
+import nl.tudelft.pixelperfect.game.Game;
 
 /**
  * The class listens to any ongoing connectivity between the server and client.
