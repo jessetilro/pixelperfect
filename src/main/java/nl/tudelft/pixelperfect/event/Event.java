@@ -106,7 +106,7 @@ public abstract class Event {
    * @return The time remaining.
    */
   public String getTimeLeft(long currentTime) {
-    return "" + (((this.timestamp + this.duration) - currentTime) / 1000);
+    return Long.toString((((this.timestamp + this.duration) - currentTime) / 1000));
   }
 
   /**
