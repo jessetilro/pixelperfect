@@ -3,7 +3,7 @@ package nl.tudelft.pixelperfect.event;
 import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.Spaceship;
-import nl.tudelft.pixelperfect.client.EventsMessage;
+import nl.tudelft.pixelperfect.client.message.EventsMessage;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,7 @@
 package nl.tudelft.pixelperfect.client;
 
 import static org.junit.Assert.assertNull;
+import nl.tudelft.pixelperfect.client.message.EventsMessage;
 
 import org.junit.Before;
 

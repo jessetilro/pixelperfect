@@ -18,7 +18,7 @@ import org.junit.Test;
 import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.Spaceship;
-import nl.tudelft.pixelperfect.client.EventsMessage;
+import nl.tudelft.pixelperfect.client.message.EventsMessage;
 
 /**
  * Test Suite for the EventLog class.

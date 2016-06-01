@@ -7,6 +7,8 @@ import com.jme3.network.MessageListener;
 import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.Game;
+import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
+import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 
 /**
  * Listener for the Game's server, which handles incoming messages.
