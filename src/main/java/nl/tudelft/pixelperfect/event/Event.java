@@ -106,7 +106,7 @@ public abstract class Event {
    * @return The time remaining.
    */
   public String getTimeLeft(long currentTime) {
-    return "" + ((this.timestamp + this.duration) - currentTime);
+    return "" + (((this.timestamp + this.duration) - currentTime) / 1000);
   }
 
   /**
@@ -182,8 +182,9 @@ public abstract class Event {
    */
   public String toDebugString() {
     StringBuilder sb = new StringBuilder();
-    Collection<String> components = Arrays.asList(new String[] { summary, " (",
-        getTimeLeft(System.currentTimeMillis()), ", Param: (", parameters.toString() + ")" });
+    Collection<String> components = Arrays
+        .asList(new String[] { summary, " (", getTimeLeft(System.currentTimeMillis()),
+            "), Param: (", parameters.toString() + ")" });
     for (String component : components) {
       sb.append(component);
     }
