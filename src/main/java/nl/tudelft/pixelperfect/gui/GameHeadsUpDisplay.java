@@ -75,7 +75,8 @@ public class GameHeadsUpDisplay {
     shipHealth = new BitmapText(hudFont, true);
     shipHealth.setLocalScale(Constants.GUI_HEALTH_TEXT_SIZE_SCALE);
     shipHealth.setColor(ColorRGBA.Red);
-    shipHealth.setLocalTranslation(screenWidth, screenHeight, 0);
+    shipHealth.setLocalTranslation(screenWidth - Constants.GUI_HEALTH_WIDTH_OFFSET, screenHeight,
+        0);
 
     // Init for the score text, including font loading and text setting.
     teamScore = new BitmapText(hudFont, true);

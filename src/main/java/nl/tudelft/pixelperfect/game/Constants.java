@@ -38,7 +38,7 @@ public final class Constants {
   public static final int GUI_LOG_WIDTH_OFFSET = 0;
   public static final int GUI_LOG_HEIGHT_OFFSET = 0;
 
-  public static final int GUI_HEALTH_WIDTH_OFFSET = 0;
+  public static final int GUI_HEALTH_WIDTH_OFFSET = 1700;
   public static final int GUI_HEALTH_HEIGHT_OFFSET = 0;
   public static final int GUI_HEALTH_TEXT_SIZE_SCALE = 2;
 
