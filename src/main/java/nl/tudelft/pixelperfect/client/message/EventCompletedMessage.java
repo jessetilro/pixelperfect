@@ -2,6 +2,9 @@ package nl.tudelft.pixelperfect.client.message;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
@@ -18,7 +21,7 @@ import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 public class EventCompletedMessage extends AbstractMessage {
   private int completed;
   private String label;
-  private Collection<EventParameter> parameters;
+  private Map<String, Integer> parameters;
 
   /**
    * The EventCompletedMessage constructor.
@@ -38,7 +41,7 @@ public class EventCompletedMessage extends AbstractMessage {
   public EventCompletedMessage(String label, int completed) {
     this.label = label;
     this.completed = completed;
-    this.parameters = new ArrayList<EventParameter>();
+    this.parameters = new HashMap<String, Integer>();
   }
 
   /**
@@ -65,17 +68,22 @@ public class EventCompletedMessage extends AbstractMessage {
    * @param parameters
    *          The submitted parameters.
    */
-  public void setParameters(Collection<EventParameter> parameters) {
+  public void setParameters(Map<String, Integer> parameters) {
     this.parameters = parameters;
   }
 
   /**
-   * Get the submitted parameters.
+   * Get the submitted parameters in the form of a collection of EventParameters.
    * 
    * @return The submitted parameters.
    */
   public Collection<EventParameter> getParameters() {
-    return parameters;
+    Set<Map.Entry<String, Integer>> entries = parameters.entrySet();
+    Collection<EventParameter> params = new ArrayList<EventParameter>();
+    for (Map.Entry<String, Integer> entry : entries) {
+      params.add(new EventParameter(entry.getKey(), entry.getValue()));
+    }
+    return params;
   }
 
 }
