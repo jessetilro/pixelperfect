@@ -35,7 +35,7 @@ public class AsteroidImpactEventFactory extends EventFactory {
   public Collection<EventParameter> createParameters() {
     Collection<EventParameter> collection = new ArrayList<EventParameter>();
     Random random = new Random();    
-    collection.add(new EventParameter("Asteroid Impact", random.nextInt(2)));
+    collection.add(new EventParameter("locationDamageImpact", random.nextInt(2)));
     return collection;
   }
 

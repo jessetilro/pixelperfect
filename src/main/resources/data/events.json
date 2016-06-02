@@ -24,7 +24,13 @@
     "summary": "Asteroid Impact",
     "description": "Get to work, the ship has been hit by an Asteroid!",
     "duration": 30000,
-    "damage": 10
+    "damage": 10,
+    "parameters": [
+      {
+      	"key": "locationDamageImpact",
+      	"summary": "The location where asteroids hit the ship."      
+      }    
+    ]
   },
   {
     "type": 3,
