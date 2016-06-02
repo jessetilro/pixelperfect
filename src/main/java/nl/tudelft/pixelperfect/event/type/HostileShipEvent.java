@@ -31,4 +31,9 @@ public class HostileShipEvent extends Event {
       double damage) {
     super(id, summary, description, timestamp, duration, damage);
   }
+
+  @Override
+  public EventTypes getType() {
+    return EventTypes.HOSTILE_SHIP;
+  }
 }

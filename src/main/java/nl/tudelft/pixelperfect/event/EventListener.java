@@ -6,6 +6,7 @@ import java.util.Collection;
 import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
+import nl.tudelft.pixelperfect.event.type.EventTypes;
 
 /**
  * Interface for classes that can subscribe themselves to an EventScheduler.
@@ -37,14 +38,15 @@ public interface EventListener {
   void update();
 
   /**
-   * Removes a completed event from the list before it is expired.
+   * Removes a completed event from the list before it is expired, after validating whether there is
+   * such an Event with the specified type and parameters.
    * 
-   * @param id
-   *          The id used to find the event in the log.
+   * @param type
+   *          The type of Event completed.
    * @param parameters
    *          The submitted parameters.
    */
-  void complete(int id, Collection<EventParameter> parameters);
+  void complete(EventTypes type, Collection<EventParameter> parameters);
 
   /**
    * Get all the events that are in the log.

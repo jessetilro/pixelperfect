@@ -4,10 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyDouble;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
@@ -17,9 +15,9 @@ import org.junit.Test;
 
 import com.jme3.network.Server;
 
-import nl.tudelft.pixelperfect.client.message.EventsMessage;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.AsteroidImpactEvent;
+import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.event.type.FireOutbreakEvent;
 import nl.tudelft.pixelperfect.game.Spaceship;
 
@@ -74,17 +72,6 @@ public class EventLogTest extends EventListenerTest {
   }
 
   /**
-   * Tests to see if the server.broadcast() method is called once.
-   * 
-   */
-  @Test
-  public void testServerVerify() {
-    Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
-    object.notify(evt1);
-    verify(mockedServer, times(1)).broadcast((EventsMessage) anyObject());
-  }
-
-  /**
    * Checks the complete method of an existing event in the log.
    * 
    */
@@ -92,7 +79,7 @@ public class EventLogTest extends EventListenerTest {
   public void testCompleteExisting() {
     Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
     object.getEvents().add(evt1);
-    object.complete(0, new ArrayList<EventParameter>());
+    object.complete(EventTypes.FIRE_OUTBREAK, new ArrayList<EventParameter>());
     assertEquals(0, object.getEvents().size());
   }
 
@@ -104,7 +91,7 @@ public class EventLogTest extends EventListenerTest {
   public void testCompleteMissing() {
     Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
     object.getEvents().add(evt1);
-    object.complete(1, new ArrayList<EventParameter>());
+    object.complete(EventTypes.ASTEROID_IMPACT, new ArrayList<EventParameter>());
     assertEquals(1, object.getEvents().size());
   }
 

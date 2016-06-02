@@ -31,4 +31,9 @@ public class CoffeeBoostEvent extends Event {
       double damage) {
     super(id, summary, description, timestamp, duration, damage);
   }
+
+  @Override
+  public EventTypes getType() {
+    return EventTypes.COFFEE_BOOST;
+  }
 }

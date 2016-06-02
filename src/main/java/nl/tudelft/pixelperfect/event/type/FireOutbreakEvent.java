@@ -30,4 +30,9 @@ public class FireOutbreakEvent extends Event {
       long duration, double damage) {
     super(id, summary, description, timestamp, duration, damage);
   }
+
+  @Override
+  public EventTypes getType() {
+    return EventTypes.FIRE_OUTBREAK;
+  }
 }
