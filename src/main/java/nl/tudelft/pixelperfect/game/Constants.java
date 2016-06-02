@@ -4,17 +4,18 @@ package nl.tudelft.pixelperfect.game;
  * A data class for storing game-wide items that can all be altered in a single sweep.
  * 
  * @author David Alderliesten
+ * @author Jesse Tilro
  *
  */
 public final class Constants {
 
   /**
-   * Empty private constructor, since this is a utility class.
+   * Empty private constructor, since this is a data/utility class.
    */
   private Constants() {
   }
 
-  // Gui-styling related constants for the in-game debug HUD.
+  // Positioning related constants for the in-game debug HUD.
   public static final int DEBUG_LOG_WIDTH_OFFSET = 150;
   public static final int DEBUG_LOG_HEIGHT_OFFSET = 50;
 
@@ -27,11 +28,21 @@ public final class Constants {
   public static final int DEBUG_TIME_WIDTH_OFFSET = 400;
   public static final int DEBUG_TIME_HEIGHT_OFFSET = 0;
 
-  // Gui text for the in-game debug HUD.
+  // Text constants for the in-game debug HUD.
   public static final String DEBUG_NO_EVENTS_LOG_TEXT = "No events currently active";
   public static final String DEBUG_SHIP_HEALTH_LABEL = "Health: ";
   public static final String DEBUG_SHIP_SCORE_LABEL = "Score: ";
   public static final String DEBUG_SHIP_TIME_LABEL = "Time: ";
+
+  // Positioning related constants for the in-game HUD.
+  public static final int GUI_LOG_WIDTH_OFFSET = 0;
+  public static final int GUI_LOG_HEIGHT_OFFSET = 0;
+
+  public static final int GUI_HEALTH_WIDTH_OFFSET = 0;
+  public static final int GUI_HEALTH_HEIGHT_OFFSET = 0;
+
+  public static final int GUI_SCORE_WIDTH_OFFSET = 0;
+  public static final int GUI_SCORE_HEIGHT_OFFSET = 0;
 
   // Target intensity for the Event Scheduler.
   public static final double EVENT_SCHEDULER_INTENSITY_MIN = 0.125;

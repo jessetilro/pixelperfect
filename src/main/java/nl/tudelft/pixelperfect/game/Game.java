@@ -22,6 +22,7 @@ import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gamestates.GameState;
 import nl.tudelft.pixelperfect.gamestates.StartState;
 import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
+import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
 import java.io.IOException;
 
@@ -55,7 +56,8 @@ public class Game extends VRApplication {
 
   private Scene scene;
 
-  private DebugHeadsUpDisplay gameHud;
+  private DebugHeadsUpDisplay debugHud;
+  private GameHeadsUpDisplay gameHud;
 
   private GameState gameState;
 
@@ -123,7 +125,8 @@ public class Game extends VRApplication {
     scheduler.subscribe(spaceship.getLog());
     scheduler.start();
 
-    gameHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
+    debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
+    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 900, 900, spaceship);
 
     gameState = new StartState(this);
   }
@@ -285,7 +288,7 @@ public class Game extends VRApplication {
    * @return gameHud
    */
   public DebugHeadsUpDisplay getGameHud() {
-    return gameHud;
+    return debugHud;
   }
 
   /**
@@ -304,7 +307,7 @@ public class Game extends VRApplication {
    *          HeadsUpDisplay to be set.
    */
   public void setHeadsUpDisplay(DebugHeadsUpDisplay headsUpDisplay) {
-    this.gameHud = headsUpDisplay;
+    this.debugHud = headsUpDisplay;
   }
 
   /**
