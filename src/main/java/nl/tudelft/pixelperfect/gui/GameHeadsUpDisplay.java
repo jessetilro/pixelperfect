@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.jme3.asset.AssetManager;
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
+import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Node;
 
 import nl.tudelft.pixelperfect.event.Event;
@@ -72,12 +73,14 @@ public class GameHeadsUpDisplay {
 
     // Init for the health text, including font loading and text setting.
     shipHealth = new BitmapText(hudFont, true);
-    shipHealth.setLocalScale(10);
+    shipHealth.setLocalScale(Constants.GUI_HEALTH_TEXT_SIZE_SCALE);
+    shipHealth.setColor(ColorRGBA.Red);
     shipHealth.setLocalTranslation(screenWidth, screenHeight, 0);
 
     // Init for the score text, including font loading and text setting.
     teamScore = new BitmapText(hudFont, true);
-    teamScore.setLocalScale(10);
+    teamScore.setLocalScale(Constants.GUI_SCORE_TEXT_SIZE_SCALE);
+    teamScore.setColor(ColorRGBA.Green);
     teamScore.setLocalTranslation(screenWidth, screenHeight, 0);
 
     // Add the generated bitmaps to the gui node view.

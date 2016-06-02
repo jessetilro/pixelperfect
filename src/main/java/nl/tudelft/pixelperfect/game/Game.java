@@ -126,7 +126,7 @@ public class Game extends VRApplication {
     scheduler.start();
 
     debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
-    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 900, 900, spaceship);
+    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 1800, 1050, spaceship);
 
     gameState = new StartState(this);
   }
@@ -272,7 +272,7 @@ public class Game extends VRApplication {
   public boolean isDebugOnTrigger() {
     return debugKeyOn;
   }
-  
+
   /**
    * Getter for the debugKey deactivator.
    * 
@@ -283,12 +283,21 @@ public class Game extends VRApplication {
   }
 
   /**
-   * Getter for gameHud.
+   * Getter for the debugHud.
    *
+   * @return debugHud
+   */
+  public DebugHeadsUpDisplay getDebugHud() {
+    return debugHud;
+  }
+
+  /**
+   * Getter for the gameHud.
+   * 
    * @return gameHud
    */
-  public DebugHeadsUpDisplay getGameHud() {
-    return debugHud;
+  public GameHeadsUpDisplay getGameHud() {
+    return gameHud;
   }
 
   /**

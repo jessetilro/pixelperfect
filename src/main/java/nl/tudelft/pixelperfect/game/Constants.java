@@ -34,15 +34,17 @@ public final class Constants {
   public static final String DEBUG_SHIP_SCORE_LABEL = "Score: ";
   public static final String DEBUG_SHIP_TIME_LABEL = "Time: ";
 
-  // Positioning related constants for the in-game HUD.
+  // Positioning and scaling related constants for the in-game HUD.
   public static final int GUI_LOG_WIDTH_OFFSET = 0;
   public static final int GUI_LOG_HEIGHT_OFFSET = 0;
 
   public static final int GUI_HEALTH_WIDTH_OFFSET = 0;
   public static final int GUI_HEALTH_HEIGHT_OFFSET = 0;
+  public static final int GUI_HEALTH_TEXT_SIZE_SCALE = 2;
 
   public static final int GUI_SCORE_WIDTH_OFFSET = 0;
   public static final int GUI_SCORE_HEIGHT_OFFSET = 0;
+  public static final int GUI_SCORE_TEXT_SIZE_SCALE = 2;
 
   // Target intensity for the Event Scheduler.
   public static final double EVENT_SCHEDULER_INTENSITY_MIN = 0.125;
