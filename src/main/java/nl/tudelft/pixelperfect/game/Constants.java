@@ -35,8 +35,8 @@ public final class Constants {
   public static final String DEBUG_SHIP_TIME_LABEL = "Time: ";
 
   // Positioning and scaling related constants for the in-game HUD.
-  public static final int GUI_LOG_WIDTH_OFFSET = 500;
-  public static final int GUI_LOG_HEIGHT_OFFSET = 150;
+  public static final int GUI_LOG_WIDTH_OFFSET = 925;
+  public static final int GUI_LOG_HEIGHT_OFFSET = 0;
 
   public static final int GUI_HEALTH_WIDTH_OFFSET = 1700;
   

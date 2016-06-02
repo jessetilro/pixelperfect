@@ -1,7 +1,5 @@
 package nl.tudelft.pixelperfect.gui;
 
-import java.util.ArrayList;
-
 import com.jme3.asset.AssetManager;
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
@@ -11,6 +9,8 @@ import com.jme3.scene.Node;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.game.Constants;
 import nl.tudelft.pixelperfect.game.Spaceship;
+
+import java.util.ArrayList;
 
 /**
  * Class responsible for the display, refreshing, and functionality of the heads-up display (HUD)
@@ -101,6 +101,7 @@ public class GameHeadsUpDisplay {
     shipHealth.setText("" + spaceship.getHealth());
     teamScore.setText("" + spaceship.getScore());
     
+    // Array lists to store the events.
     ArrayList<Event> currentEventsArray = spaceship.getLog().getEvents();
     ArrayList<String> currentEventsToDisplay = new ArrayList<String>();
 
@@ -109,9 +110,9 @@ public class GameHeadsUpDisplay {
       currentEventsToDisplay.add(current.toDebugString());
     }
 
-    // Update the captain's log.
+    // Update the active event log.
     if (currentEventsToDisplay.isEmpty()) {
-      currentEvents.setText(Constants.DEBUG_NO_EVENTS_LOG_TEXT);
+      currentEvents.setText("");
     } else {
       currentEvents.setText(currentEventsToDisplay.toString());
     }
