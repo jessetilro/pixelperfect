@@ -32,7 +32,7 @@ public final class Constants {
   public static final String SHIP_HEALTH_LABEL = "Health: ";
   public static final String SHIP_SCORE_LABEL = "Score: ";
   public static final String SHIP_TIME_LABEL = "Time: ";
-  
+
   // Boolean variables to dictate debug and alternative modes.
   public static boolean isDebug = false;
 

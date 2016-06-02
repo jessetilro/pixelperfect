@@ -41,6 +41,8 @@ public interface EventListener {
    * 
    * @param id
    *          The id used to find the event in the log.
+   * @param parameters
+   *          The submitted parameters.
    */
   void complete(int id, Collection<EventParameter> parameters);
 

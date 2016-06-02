@@ -119,6 +119,8 @@ public class EventLog implements EventListener {
    * 
    * @param id
    *          The id used to find the event in the log.
+   * @param parameters
+   *          The submitted parameters.
    */
   public synchronized void complete(int id, Collection<EventParameter> parameters) {
     Event event = getById(id);
