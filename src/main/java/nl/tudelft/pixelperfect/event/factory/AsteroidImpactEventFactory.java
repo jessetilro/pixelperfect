@@ -2,6 +2,7 @@ package nl.tudelft.pixelperfect.event.factory;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 
 import nl.tudelft.pixelperfect.event.EventReader;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
@@ -33,6 +34,8 @@ public class AsteroidImpactEventFactory extends EventFactory {
   @Override
   public Collection<EventParameter> createParameters() {
     Collection<EventParameter> collection = new ArrayList<EventParameter>();
+    Random random = new Random();    
+    collection.add(new EventParameter("Asteroid Impact", random.nextInt(2)));
     return collection;
   }
 
