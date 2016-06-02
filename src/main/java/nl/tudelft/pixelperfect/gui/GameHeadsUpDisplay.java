@@ -109,9 +109,14 @@ public class GameHeadsUpDisplay {
       currentEvents.setText("");
     } else {
       String toDisplay = "";
+      ArrayList<String> preventCopy = new ArrayList<String>();
 
+      // Loop through all the events to display them in the HUD.
       for (Event current : currentEventsArray) {
-        toDisplay = toDisplay + current.getDescription() + "\n";
+        if (!preventCopy.contains(current.getSummary())) {
+          toDisplay = toDisplay + current.getDescription() + "\n";
+          preventCopy.add(current.getSummary());
+        }
       }
 
       currentEvents.setText(toDisplay);
