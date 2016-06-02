@@ -24,15 +24,11 @@
     "summary": "Asteroid Impact",
     "description": "Get to work, the ship has been hit by an Asteroid!",
     "duration": 30000,
-    "damage": 10
+    "damage": 10,
     "parameters": [
       {
-      	"key": "energyShield",
-      	"summary": "The asteroids hit the energy shield of the ship."      
-      },
-      {
-      	"key": "hyperdrive",
-      	"summary": "The asteroids disabled the hyperdrive."
+      	"key": "locationDamageImpact",
+      	"summary": "The location where asteroids hit the ship."      
       }    
     ]
   },
