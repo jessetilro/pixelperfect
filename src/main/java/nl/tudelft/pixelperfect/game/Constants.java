@@ -15,23 +15,23 @@ public final class Constants {
   }
 
   // Gui-styling related constants for the in-game debug HUD.
-  public static final int GUI_LOG_WIDTH_OFFSET = 150;
-  public static final int GUI_LOG_HEIGHT_OFFSET = 50;
+  public static final int DEBUG_LOG_WIDTH_OFFSET = 150;
+  public static final int DEBUG_LOG_HEIGHT_OFFSET = 50;
 
-  public static final int GUI_HEALTH_WIDTH_OFFSET = 300;
-  public static final int GUI_HEALTH_HEIGHT_OFFSET = 100;
+  public static final int DEBUG_HEALTH_WIDTH_OFFSET = 300;
+  public static final int DEBUG_HEALTH_HEIGHT_OFFSET = 100;
 
-  public static final int GUI_SCORE_WIDTH_OFFSET = 400;
-  public static final int GUI_SCORE_HEIGHT_OFFSET = 150;
+  public static final int DEBUG_SCORE_WIDTH_OFFSET = 400;
+  public static final int DEBUG_SCORE_HEIGHT_OFFSET = 150;
 
-  public static final int GUI_TIME_WIDTH_OFFSET = 400;
-  public static final int GUI_TIME_HEIGHT_OFFSET = 0;
+  public static final int DEBUG_TIME_WIDTH_OFFSET = 400;
+  public static final int DEBUG_TIME_HEIGHT_OFFSET = 0;
 
   // Gui text for the in-game debug HUD.
-  public static final String NO_EVENTS_LOG_TEXT = "No events currently active.";
-  public static final String SHIP_HEALTH_LABEL = "Health: ";
-  public static final String SHIP_SCORE_LABEL = "Score: ";
-  public static final String SHIP_TIME_LABEL = "Time: ";
+  public static final String DEBUG_NO_EVENTS_LOG_TEXT = "No events currently active";
+  public static final String DEBUG_SHIP_HEALTH_LABEL = "Health: ";
+  public static final String DEBUG_SHIP_SCORE_LABEL = "Score: ";
+  public static final String DEBUG_SHIP_TIME_LABEL = "Time: ";
 
   // Target intensity for the Event Scheduler.
   public static final double EVENT_SCHEDULER_INTENSITY_MIN = 0.125;
