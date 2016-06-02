@@ -310,13 +310,23 @@ public class Game extends VRApplication {
   }
 
   /**
-   * Setter for headsUpDisplay.
+   * Setter for debugDisplay.
    *
-   * @param headsUpDisplay
-   *          HeadsUpDisplay to be set.
+   * @param debugDisplay
+   *          debugDisplay to be set.
    */
-  public void setHeadsUpDisplay(DebugHeadsUpDisplay headsUpDisplay) {
-    this.debugHud = headsUpDisplay;
+  public void setDebugDisplay(DebugHeadsUpDisplay debugDisplay) {
+    this.debugHud = debugDisplay;
+  }
+
+  /**
+   * Setter for the gameDisplay.
+   * 
+   * @param passedDisplay
+   *          gameDisplay to be set.
+   */
+  public void setHeadsUpDisplay(GameHeadsUpDisplay passedDisplay) {
+    this.gameHud = passedDisplay;
   }
 
   /**

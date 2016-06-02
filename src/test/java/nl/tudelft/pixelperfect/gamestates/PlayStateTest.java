@@ -14,6 +14,7 @@ import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Settings;
 import nl.tudelft.pixelperfect.game.Spaceship;
 import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
+import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +34,8 @@ public class PlayStateTest extends GameStateTest {
   private Spatial mockObserver;
   private EventScheduler mockScheduler;
   private Spaceship mockSpaceship;
-  private DebugHeadsUpDisplay mockHeadsUp;
+  private DebugHeadsUpDisplay mockDebugUp;
+  private GameHeadsUpDisplay mockHeadsUp;
   private Settings testSettings;
 
   /**
@@ -45,11 +47,13 @@ public class PlayStateTest extends GameStateTest {
     mockScheduler = mock(EventScheduler.class);
     mockObserver = mock(Spatial.class);
     mockSpaceship = mock(Spaceship.class);
-    mockHeadsUp = mock(DebugHeadsUpDisplay.class);
+    mockDebugUp = mock(DebugHeadsUpDisplay.class);
+    mockHeadsUp = mock(GameHeadsUpDisplay.class);
     mockGame.setGameObserver(mockObserver);
     mockGame.setScheduler(mockScheduler);
     mockGame.setSpaceship(mockSpaceship);
     mockGame.setHeadsUpDisplay(mockHeadsUp);
+    mockGame.setDebugDisplay(mockDebugUp);
     testSettings = Settings.getInstance();
     testState = new PlayState(mockGame);
   }
@@ -60,11 +64,12 @@ public class PlayStateTest extends GameStateTest {
   @Test
   public void testUpdate() {
     testSettings.setIsDebug(true);
-    
+
     testState.update(1f);
     verify(mockScheduler).update(1f);
     verify(mockSpaceship).update(anyFloat());
     verify(mockHeadsUp).updateHud();
+    verify(mockDebugUp).updateHud();
   }
 
   /**
@@ -73,12 +78,13 @@ public class PlayStateTest extends GameStateTest {
   @Test
   public void testUpdateWithoutDebug() {
     testSettings.setIsDebug(false);
-    
+
     testState.update(1f);
     verify(mockScheduler).update(1f);
     verify(mockSpaceship).update(anyFloat());
-    
-    verify(mockHeadsUp, Mockito.times(0)).updateHud();
+    verify(mockHeadsUp).updateHud();
+
+    verify(mockDebugUp, Mockito.times(0)).updateHud();
   }
 
   /**
