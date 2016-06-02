@@ -18,6 +18,7 @@ import org.junit.Test;
 import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.client.message.EventsMessage;
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.AsteroidImpactEvent;
 import nl.tudelft.pixelperfect.event.type.FireOutbreakEvent;
 import nl.tudelft.pixelperfect.game.Spaceship;
@@ -91,7 +92,7 @@ public class EventLogTest extends EventListenerTest {
   public void testCompleteExisting() {
     Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
     object.getEvents().add(evt1);
-    object.complete(0);
+    object.complete(0, new ArrayList<EventParameter>());
     assertEquals(0, object.getEvents().size());
   }
 
@@ -103,7 +104,7 @@ public class EventLogTest extends EventListenerTest {
   public void testCompleteMissing() {
     Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
     object.getEvents().add(evt1);
-    object.complete(1);
+    object.complete(1, new ArrayList<EventParameter>());
     assertEquals(1, object.getEvents().size());
   }
 

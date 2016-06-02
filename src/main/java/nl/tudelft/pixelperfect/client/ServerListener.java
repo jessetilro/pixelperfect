@@ -8,6 +8,7 @@ import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.game.Game;
 
 /**
@@ -46,7 +47,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
    * Uses the server of the game to broadcast messages that has come in here.
    * 
    * @param server
-   *          , the server of the game.
+   *          The server of the game.
    */
   public synchronized void setServer(Server server) {
     this.server = server;
@@ -63,9 +64,14 @@ public class ServerListener implements MessageListener<HostedConnection> {
    */
   public synchronized void messageReceived(HostedConnection source, Message message) {
     if (message instanceof EventCompletedMessage) {
-      EventCompletedMessage eve = (EventCompletedMessage) message;
-      System.out.println("Received a completed event: " + eve.getLabel());
-      app.getSpaceship().getLog().complete(eve.getCompletedEvent());
+      EventCompletedMessage completedMessage = (EventCompletedMessage) message;
+      System.out.println("Received a completed event: " + completedMessage.getLabel());
+      for (EventParameter param : completedMessage.getParameters()) {
+        System.out.print("Parameter of completed Event: ");
+        System.out.println(param.toString());
+      }
+      app.getSpaceship().getLog().complete(completedMessage.getCompletedEvent(),
+          completedMessage.getParameters());
     } else if (message instanceof RoleChosenMessage) {
       server.broadcast(Filters.notEqualTo(source), message);
     }
