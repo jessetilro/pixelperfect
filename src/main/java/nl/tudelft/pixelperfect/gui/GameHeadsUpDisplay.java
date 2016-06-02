@@ -97,8 +97,23 @@ public class GameHeadsUpDisplay {
    * remaining time and health, and other HUD elements.
    */
   public void updateHud() {
-    // Update the ship's health, team score, and time left indicators.
+    // Update the ship's health and team score indicators.
     shipHealth.setText("" + spaceship.getHealth());
     teamScore.setText("" + spaceship.getScore());
+    
+    ArrayList<Event> currentEventsArray = spaceship.getLog().getEvents();
+    ArrayList<String> currentEventsToDisplay = new ArrayList<String>();
+
+    // Fetch all event times for updates and display.
+    for (Event current : currentEventsArray) {
+      currentEventsToDisplay.add(current.toDebugString());
+    }
+
+    // Update the captain's log.
+    if (currentEventsToDisplay.isEmpty()) {
+      currentEvents.setText(Constants.DEBUG_NO_EVENTS_LOG_TEXT);
+    } else {
+      currentEvents.setText(currentEventsToDisplay.toString());
+    }
   }
 }
