@@ -33,7 +33,7 @@ public class DebugHeadsUpDisplay {
   private BitmapText timeLeft;
 
   /**
-   * Constructor for the heads-up display for in-game utilization.
+   * Constructor for the debug heads-up display for in-game utilization.
    * 
    * @param passedMan
    *          the passed assetmanager.
