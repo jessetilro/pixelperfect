@@ -1,11 +1,11 @@
 package nl.tudelft.pixelperfect.event;
 
-import java.util.Arrays;
-import java.util.Collection;
-
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.parameter.EventParameterCollection;
 import nl.tudelft.pixelperfect.game.Spaceship;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 /**
  * A class for storing and defining events, called upon by the event scheduler.
@@ -105,8 +105,8 @@ public abstract class Event {
    * 
    * @return The time remaining.
    */
-  public Long getTimeLeft(long currentTime) {
-    return ((this.timestamp + this.duration) - currentTime);
+  public String getTimeLeft(long currentTime) {
+    return Long.toString((((this.timestamp + this.duration) - currentTime) / 1000));
   }
 
   /**
@@ -169,6 +169,21 @@ public abstract class Event {
     StringBuilder sb = new StringBuilder();
     Collection<String> components = Arrays.asList(new String[] { summary, ": ", description,
         " Take note of the following details: ", parameters.toString(), "." });
+    for (String component : components) {
+      sb.append(component);
+    }
+    return sb.toString();
+  }
+
+  /**
+   * Generate a debug string with only timing and parameters.
+   * 
+   * @return debug string.
+   */
+  public String toDebugString() {
+    StringBuilder sb = new StringBuilder();
+    Collection<String> components = Arrays.asList(new String[] { summary, " (",
+        getTimeLeft(System.currentTimeMillis()), "), Param: (", parameters.toDebugString() + ")" });
     for (String component : components) {
       sb.append(component);
     }

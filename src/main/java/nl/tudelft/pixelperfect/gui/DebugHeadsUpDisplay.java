@@ -12,7 +12,8 @@ import nl.tudelft.pixelperfect.game.Spaceship;
 import java.util.ArrayList;
 
 /**
- * Class that displays relevant information in the heads-up display during the gameplay.
+ * Class that displays relevant information in the heads-up display during the gameplay when the
+ * debug mode has been activated.
  * 
  * @author David Alderliesten
  *
@@ -107,8 +108,7 @@ public class DebugHeadsUpDisplay {
 
     // Fetch all event times for updates and display.
     for (Event current : currentEvents) {
-      currentEventsToDisplay.add(current.getSummary() + " ("
-          + current.getTimeLeft(System.currentTimeMillis()) / 1000 + ")");
+      currentEventsToDisplay.add(current.toDebugString());
     }
 
     // Update the captain's log.
