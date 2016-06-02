@@ -42,7 +42,7 @@ public class Game extends VRApplication {
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private Server server;
-  private AudioPlayer audioPlayer;
+  //private AudioPlayer audioPlayer;
 
   private Spatial observer;
 
@@ -110,7 +110,7 @@ public class Game extends VRApplication {
     scene = new Scene(this);
     scene.createMap();
 
-    audioPlayer = new AudioPlayer(this);
+    //audioPlayer = new AudioPlayer(this);
     // String[] names = {};
     // String[] locations = {};
     // audioPlayer.loadSounds(names, locations);
