@@ -1,11 +1,14 @@
 package nl.tudelft.pixelperfect.event.parameter;
 
+import com.jme3.network.serializing.Serializable;
+
 /**
  * Enumeration of possible specific values for an EventParameter.
  * 
  * @author Jesse Tilro
  *
  */
+@Serializable
 public enum EventParameterValues {
   GENERIC {
     @Override

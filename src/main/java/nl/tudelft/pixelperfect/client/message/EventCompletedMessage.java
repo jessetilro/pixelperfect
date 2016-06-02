@@ -1,18 +1,23 @@
 package nl.tudelft.pixelperfect.client.message;
 
+import java.util.Collection;
+
 import com.jme3.network.AbstractMessage;
 import com.jme3.network.serializing.Serializable;
 
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 
 /**
  * The EventCompletedMessage sends a message to the Server to tell that an event was completed.
  *
  * @author Floris Doolaard
+ * @author Jesse Tilro
  */
 @Serializable
 public class EventCompletedMessage extends AbstractMessage {
   private int completed;
   private String label;
+  private Collection<EventParameter> parameters;
 
   /**
    * The EventCompletedMessage constructor.
@@ -24,14 +29,16 @@ public class EventCompletedMessage extends AbstractMessage {
   /**
    * The constructor with a specific Event completed.
    * 
-   * @param completed , a completed Event.
-   * @param label , a name as a String.
+   * @param completed
+   *          A completed Event.
+   * @param label
+   *          A name as a String.
    */
   public EventCompletedMessage(String label, int completed) {
     this.label = label;
     this.completed = completed;
   }
-  
+
   /**
    * Gets the Event that was completed.
    * 
@@ -40,11 +47,11 @@ public class EventCompletedMessage extends AbstractMessage {
   public int getCompletedEvent() {
     return completed;
   }
-  
+
   /**
    * Retrieves the label of the completed event.
    * 
-   * @return label , a String.
+   * @return label A String.
    */
   public String getLabel() {
     return label;
