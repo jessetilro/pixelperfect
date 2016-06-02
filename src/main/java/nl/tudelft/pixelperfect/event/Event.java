@@ -1,11 +1,12 @@
 package nl.tudelft.pixelperfect.event;
 
-import nl.tudelft.pixelperfect.event.parameter.EventParameter;
-import nl.tudelft.pixelperfect.event.parameter.EventParameterCollection;
-import nl.tudelft.pixelperfect.game.Spaceship;
-
 import java.util.Arrays;
 import java.util.Collection;
+
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
+import nl.tudelft.pixelperfect.event.parameter.EventParameterCollection;
+import nl.tudelft.pixelperfect.event.type.EventTypes;
+import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
  * A class for storing and defining events, called upon by the event scheduler.
@@ -51,6 +52,13 @@ public abstract class Event {
     this.damage = damage;
     this.parameters = new EventParameterCollection();
   }
+
+  /**
+   * Get the type of this Event.
+   * 
+   * @return The EventType.
+   */
+  public abstract EventTypes getType();
 
   /**
    * Getter for the event id.

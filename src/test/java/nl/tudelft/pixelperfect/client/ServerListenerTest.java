@@ -71,17 +71,11 @@ public class ServerListenerTest {
     Spaceship mockedShip = mock(Spaceship.class);
     EventLog mockedLog = mock(EventLog.class);
 
-    // Stubbing
-    when(mockedMessage.getLabel()).thenReturn("Fire Event");
-
     // Execution
     when(mockedGame.getSpaceship()).thenReturn(mockedShip);
     when(mockedShip.getLog()).thenReturn(mockedLog);
 
     object.messageReceived(mockedSource, mockedMessage);
-
-    // Verification
-    verify(mockedMessage).getLabel();
   }
 
   /**

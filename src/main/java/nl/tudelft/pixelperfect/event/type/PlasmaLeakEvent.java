@@ -31,4 +31,9 @@ public class PlasmaLeakEvent extends Event {
       double damage) {
     super(id, summary, description, timestamp, duration, damage);
   }
+
+  @Override
+  public EventTypes getType() {
+    return EventTypes.PLASMA_LEAK;
+  }
 }

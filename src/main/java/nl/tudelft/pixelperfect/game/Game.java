@@ -1,5 +1,7 @@
 package nl.tudelft.pixelperfect.game;
 
+import java.io.IOException;
+
 import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
@@ -16,15 +18,12 @@ import nl.tudelft.pixelperfect.audio.AudioPlayer;
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
-import nl.tudelft.pixelperfect.client.message.EventsMessage;
 import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gamestates.GameState;
 import nl.tudelft.pixelperfect.gamestates.StartState;
 import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
-
-import java.io.IOException;
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
@@ -137,14 +136,12 @@ public class Game extends VRApplication {
     try {
       server = Network.createServer(6143);
       Serializer.registerClass(EventCompletedMessage.class);
-      Serializer.registerClass(EventsMessage.class);
       Serializer.registerClass(RoleChosenMessage.class);
       server.start();
       ServerListener listen = new ServerListener();
       listen.setGame(this);
       listen.setServer(server);
       server.addMessageListener(listen, EventCompletedMessage.class);
-      server.addMessageListener(listen, EventsMessage.class);
       server.addMessageListener(listen, RoleChosenMessage.class);
       ConnectListener connect = new ConnectListener();
       connect.setGame(this);

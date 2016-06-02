@@ -31,4 +31,9 @@ public class AsteroidImpactEvent extends Event {
       long duration, double damage) {
     super(id, summary, description, timestamp, duration, damage);
   }
+
+  @Override
+  public EventTypes getType() {
+    return EventTypes.ASTEROID_IMPACT;
+  }
 }

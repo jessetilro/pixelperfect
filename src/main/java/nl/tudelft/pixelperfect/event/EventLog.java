@@ -5,8 +5,8 @@ import java.util.Collection;
 
 import com.jme3.network.Server;
 
-import nl.tudelft.pixelperfect.client.message.EventsMessage;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
+import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
@@ -70,6 +70,24 @@ public class EventLog implements EventListener {
   }
 
   /**
+   * Get all Event of a specific type from the log.
+   * 
+   * @param type
+   *          The type of Event to look for.
+   * 
+   * @return A collection of Events with the given type.
+   */
+  private Collection<Event> getByType(EventTypes type) {
+    Collection<Event> result = new ArrayList<Event>();
+    for (Event event : events) {
+      if (event.getType() == type) {
+        result.add(event);
+      }
+    }
+    return result;
+  }
+
+  /**
    * Get the spaceship the EvenLog relates to.
    * 
    * @return the log's spaceship.
@@ -88,9 +106,6 @@ public class EventLog implements EventListener {
     events.add(event);
     System.out.println("The ship received a new event: " + event.getDescription());
     String type = event.getClass().getSimpleName();
-    EventsMessage message = new EventsMessage(event.getId(), type, event.getTimestamp(),
-        event.getDuration());
-    server.broadcast(message);
   }
 
   /**
@@ -115,32 +130,34 @@ public class EventLog implements EventListener {
   }
 
   /**
-   * Removes a completed event from the list before it is expired.
+   * Try to complete an Event in the log that matches a given type and parameters.
    * 
-   * @param id
-   *          The id used to find the event in the log.
+   * @param type
+   *          The type of the Event to be completed.
    * @param parameters
-   *          The submitted parameters.
+   *          The parameters the Event should have.
+   * 
+   * @return
    */
-  public synchronized void complete(int id, Collection<EventParameter> parameters) {
-    Event event = getById(id);
-    if (event != null) {
+  public synchronized void complete(EventTypes type, Collection<EventParameter> parameters) {
+    Collection<Event> candidates = getByType(type);
+    for (Event event : candidates) {
       if (event.validateParameters(parameters)) {
         discard(event);
         spaceship.updateScore(10);
         System.out.println("Event " + event.getId() + " solved!");
-      } else {
-        System.out.println("Event " + event.getId() + " not solved, wrong parameters...");
+        return;
       }
-      return;
     }
 
-    // For now hardcoded
-    System.out.println("You pressed wrong button, DAMAGE will be done to the ship.");
-    spaceship.updateHealth(-10);
-    // Manual Testing
-    System.out.println("New ship HEALTH: " + spaceship.getHealth());
+    if (candidates.size() > 0) {
+      System.out
+          .println("Wrong task performed: there is no active Event of type " + type.toString());
+    } else {
+      System.out.println("Wrong task performed: wrong parameters entered");
+    }
 
+    spaceship.updateHealth(-10);
   }
 
   /**

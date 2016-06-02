@@ -1,12 +1,15 @@
 package nl.tudelft.pixelperfect.client;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
 
 /**
  * Test case for the EventCompletedMessage class.
@@ -17,37 +20,41 @@ import org.junit.Test;
 public class EventCompletedMessageTest {
 
   private EventCompletedMessage object;
+  private Map<String, Integer> map;
 
   /**
    * Set up a test object.
    */
   @Before
   public void init() {
-    object = new EventCompletedMessage("test", 0);
+    object = new EventCompletedMessage(2);
+    map = new HashMap<String, Integer>();
+    map.put("test", 42);
+    object.setParameters(map);
   }
 
   /**
-   * We can also construct a HelloMessage without a message.
+   * We can also construct a EventCompletedMessage without any attributes.
    */
   @Test
   public void testEmptyConstructor() {
     EventCompletedMessage obj = new EventCompletedMessage();
-    assertThat(obj.getCompletedEvent(), is(0));
+    assertThat(obj.getType(), is(0));
   }
 
   /**
-   * When calling the temporary getCompletedEvent method we expect to retrieve the original message.
+   * When calling the getType method we expect to retrieve the original type.
    */
   @Test
-  public void testGetCompletedEvent() {
-    assertThat(object.getCompletedEvent(), is(0));
+  public void testGetType() {
+    assertThat(object.getType(), is(2));
   }
-  
+
   /**
-   * Testing the getLabel method.
+   * When calling the getParameters method we expect to retrieve the original parameters.
    */
   @Test
-  public void testGetLabel() {
-    assertEquals("test", object.getLabel());
+  public void testGetParameters() {
+    assertThat(object.getParameters().get("test"), is(42));
   }
 }
