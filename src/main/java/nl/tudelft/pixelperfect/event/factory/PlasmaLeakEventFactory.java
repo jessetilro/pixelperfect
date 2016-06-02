@@ -2,6 +2,7 @@ package nl.tudelft.pixelperfect.event.factory;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventReader;
@@ -34,6 +35,8 @@ public class PlasmaLeakEventFactory extends EventFactory {
   @Override
   public Collection<EventParameter> createParameters() {
     Collection<EventParameter> collection = new ArrayList<EventParameter>();
+    Random random = new Random();
+    collection.add(new EventParameter("sector", random.nextInt(4)));
     return collection;
   }
 
