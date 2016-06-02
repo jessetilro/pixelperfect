@@ -49,7 +49,7 @@ public class PlayState extends GameState {
     spaceship.update(tpf);
 
     // If debug mode is enabled, activate the debug update.
-    if (Settings.getIsDebug()) {
+    if (Settings.isDebug()) {
       debugDisplay.updateHud();
     } else {
       debugDisplay.clearHud();

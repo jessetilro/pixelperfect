@@ -36,7 +36,7 @@ public final class Settings {
    * 
    * @return isDebug
    */
-  public static boolean getIsDebug() {
+  public static boolean isDebug() {
     return isDebug;
   }
 
