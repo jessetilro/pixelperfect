@@ -5,6 +5,7 @@ import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
 import com.jme3.scene.Node;
 
+import nl.tudelft.pixelperfect.game.Constants;
 import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
@@ -59,7 +60,25 @@ public class GameHeadsUpDisplay {
    * guiNodes.
    */
   private void setupFont() {
+    // Loading the font stored in the jme default manager.
+    hudFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
 
+    // Init for the log text, including font loading and text setting.
+    currentEvents = new BitmapText(hudFont, true);
+    currentEvents.setLocalTranslation(screenWidth, screenHeight, 0);
+
+    // Init for the health text, including font loading and text setting.
+    shipHealth = new BitmapText(hudFont, true);
+    shipHealth.setLocalTranslation(screenWidth, screenHeight, 0);
+
+    // Init for the score text, including font loading and text setting.
+    teamScore = new BitmapText(hudFont, true);
+    teamScore.setLocalTranslation(screenWidth, screenHeight, 0);
+
+    // Add the generated bitmaps to the gui node view.
+    guiNodes.attachChild(currentEvents);
+    guiNodes.attachChild(shipHealth);
+    guiNodes.attachChild(teamScore);
   }
 
 }
