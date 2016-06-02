@@ -22,6 +22,7 @@ import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gamestates.GameState;
 import nl.tudelft.pixelperfect.gamestates.StartState;
 import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
+import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
 import java.io.IOException;
 
@@ -41,7 +42,7 @@ public class Game extends VRApplication {
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private Server server;
-  private AudioPlayer audioPlayer;
+  //private AudioPlayer audioPlayer;
 
   private Spatial observer;
 
@@ -55,7 +56,8 @@ public class Game extends VRApplication {
 
   private Scene scene;
 
-  private DebugHeadsUpDisplay gameHud;
+  private DebugHeadsUpDisplay debugHud;
+  private GameHeadsUpDisplay gameHud;
 
   private GameState gameState;
 
@@ -108,11 +110,10 @@ public class Game extends VRApplication {
     scene = new Scene(this);
     scene.createMap();
 
-    audioPlayer = new AudioPlayer(this);
-    // TODO load actual sounds
-    String[] names = {};
-    String[] locations = {};
-    audioPlayer.loadSounds(names, locations);
+    //audioPlayer = new AudioPlayer(this);
+    // String[] names = {};
+    // String[] locations = {};
+    // audioPlayer.loadSounds(names, locations);
 
     initNetwork();
 
@@ -123,7 +124,8 @@ public class Game extends VRApplication {
     scheduler.subscribe(spaceship.getLog());
     scheduler.start();
 
-    gameHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
+    debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
+    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 1800, 1000, spaceship);
 
     gameState = new StartState(this);
   }
@@ -269,7 +271,7 @@ public class Game extends VRApplication {
   public boolean isDebugOnTrigger() {
     return debugKeyOn;
   }
-  
+
   /**
    * Getter for the debugKey deactivator.
    * 
@@ -280,11 +282,20 @@ public class Game extends VRApplication {
   }
 
   /**
-   * Getter for gameHud.
+   * Getter for the debugHud.
    *
+   * @return debugHud
+   */
+  public DebugHeadsUpDisplay getDebugHud() {
+    return debugHud;
+  }
+
+  /**
+   * Getter for the gameHud.
+   * 
    * @return gameHud
    */
-  public DebugHeadsUpDisplay getGameHud() {
+  public GameHeadsUpDisplay getGameHud() {
     return gameHud;
   }
 
@@ -298,13 +309,23 @@ public class Game extends VRApplication {
   }
 
   /**
-   * Setter for headsUpDisplay.
+   * Setter for debugDisplay.
    *
-   * @param headsUpDisplay
-   *          HeadsUpDisplay to be set.
+   * @param debugDisplay
+   *          debugDisplay to be set.
    */
-  public void setHeadsUpDisplay(DebugHeadsUpDisplay headsUpDisplay) {
-    this.gameHud = headsUpDisplay;
+  public void setDebugDisplay(DebugHeadsUpDisplay debugDisplay) {
+    this.debugHud = debugDisplay;
+  }
+
+  /**
+   * Setter for the gameDisplay.
+   * 
+   * @param passedDisplay
+   *          gameDisplay to be set.
+   */
+  public void setHeadsUpDisplay(GameHeadsUpDisplay passedDisplay) {
+    this.gameHud = passedDisplay;
   }
 
   /**

@@ -8,6 +8,7 @@ import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Settings;
 import nl.tudelft.pixelperfect.game.Spaceship;
 import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
+import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
 /**
  * State for when you are playing the game.
@@ -20,6 +21,7 @@ public class PlayState extends GameState {
   private Spatial observer;
   private Spaceship spaceship;
   private DebugHeadsUpDisplay debugDisplay;
+  private GameHeadsUpDisplay gameDisplay;
   private EventScheduler scheduler;
 
   /**
@@ -32,7 +34,8 @@ public class PlayState extends GameState {
     super(game);
     observer = game.getGameObserver();
     spaceship = game.getSpaceship();
-    debugDisplay = game.getGameHud();
+    debugDisplay = game.getDebugHud();
+    gameDisplay = game.getGameHud();
     scheduler = game.getScheduler();
   }
 
@@ -47,6 +50,9 @@ public class PlayState extends GameState {
 
     scheduler.update(tpf);
     spaceship.update(tpf);
+    
+    // Refresh the game HUD.
+    gameDisplay.updateHud();
 
     // If debug mode is enabled, activate the debug update.
     if (Settings.isDebug()) {

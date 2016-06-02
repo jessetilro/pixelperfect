@@ -33,7 +33,7 @@ public class DebugHeadsUpDisplay {
   private BitmapText timeLeft;
 
   /**
-   * Constructor for the heads-up display for in-game utilization.
+   * Constructor for the debug heads-up display for in-game utilization.
    * 
    * @param passedMan
    *          the passed assetmanager.
@@ -59,7 +59,7 @@ public class DebugHeadsUpDisplay {
   }
 
   /**
-   * Sets-up text display for the in-game HUD, along with all of its elements.
+   * Sets-up text display for the in-game debug HUD, along with all of its elements.
    */
   private void setupTextDisplay() {
     // Set-up the bitmap text needed for HUD display.
@@ -73,7 +73,7 @@ public class DebugHeadsUpDisplay {
   }
 
   /**
-   * Set-up the bitmap associations for the HUD text.
+   * Set-up the bitmap associations for the debug HUD text.
    */
   private void setUpBitmapText() {
     // Loading the font stored in the jme default manager.
@@ -81,26 +81,26 @@ public class DebugHeadsUpDisplay {
 
     // Init for the log text, including font loading and text setting.
     captainLog = new BitmapText(hudFont, true);
-    captainLog.setLocalTranslation(screenWidth - Constants.GUI_LOG_WIDTH_OFFSET,
-        screenHeight - Constants.GUI_LOG_HEIGHT_OFFSET, 0);
+    captainLog.setLocalTranslation(screenWidth - Constants.DEBUG_LOG_WIDTH_OFFSET,
+        screenHeight - Constants.DEBUG_LOG_HEIGHT_OFFSET, 0);
 
     // Init for the HUD text, including font loading and text setting.
     shipHealth = new BitmapText(hudFont, true);
-    shipHealth.setLocalTranslation(screenWidth + 150 - Constants.GUI_HEALTH_WIDTH_OFFSET,
-        screenHeight - Constants.GUI_HEALTH_HEIGHT_OFFSET, 0);
+    shipHealth.setLocalTranslation(screenWidth + 150 - Constants.DEBUG_HEALTH_WIDTH_OFFSET,
+        screenHeight - Constants.DEBUG_HEALTH_HEIGHT_OFFSET, 0);
 
     teamScore = new BitmapText(hudFont, true);
-    teamScore.setLocalTranslation(screenWidth + 250 - Constants.GUI_SCORE_WIDTH_OFFSET,
-        screenHeight - Constants.GUI_SCORE_HEIGHT_OFFSET, 0);
+    teamScore.setLocalTranslation(screenWidth + 250 - Constants.DEBUG_SCORE_WIDTH_OFFSET,
+        screenHeight - Constants.DEBUG_SCORE_HEIGHT_OFFSET, 0);
 
     timeLeft = new BitmapText(hudFont, true);
-    timeLeft.setLocalTranslation(screenWidth + 250 - Constants.GUI_TIME_WIDTH_OFFSET,
-        screenHeight - Constants.GUI_TIME_HEIGHT_OFFSET, 0);
+    timeLeft.setLocalTranslation(screenWidth + 250 - Constants.DEBUG_TIME_WIDTH_OFFSET,
+        screenHeight - Constants.DEBUG_TIME_HEIGHT_OFFSET, 0);
   }
 
   /**
-   * Method responsible for the updating of the hud text and displaying the events, along with their
-   * remaining time and health, and other HUD elements.
+   * Method responsible for the updating of the debug hud text and displaying the events, along with
+   * their remaining time and health, and other HUD elements.
    */
   public void updateHud() {
     ArrayList<Event> currentEvents = spaceship.getLog().getEvents();
@@ -113,19 +113,19 @@ public class DebugHeadsUpDisplay {
 
     // Update the captain's log.
     if (currentEventsToDisplay.isEmpty()) {
-      captainLog.setText(Constants.NO_EVENTS_LOG_TEXT);
+      captainLog.setText(Constants.DEBUG_NO_EVENTS_LOG_TEXT);
     } else {
       captainLog.setText(currentEventsToDisplay.toString());
     }
 
     // Update the ship's health, team score, and time left indicators.
-    shipHealth.setText(Constants.SHIP_HEALTH_LABEL + spaceship.getHealth());
-    teamScore.setText(Constants.SHIP_SCORE_LABEL + spaceship.getScore());
-    timeLeft.setText(Constants.SHIP_TIME_LABEL + spaceship.getTimer());
+    shipHealth.setText(Constants.DEBUG_SHIP_HEALTH_LABEL + spaceship.getHealth());
+    teamScore.setText(Constants.DEBUG_SHIP_SCORE_LABEL + spaceship.getScore());
+    timeLeft.setText(Constants.DEBUG_SHIP_TIME_LABEL + spaceship.getTimer());
   }
 
   /**
-   * Clears the debug display after de-activation.
+   * Clears the debug display after de-activation of the debug mode.
    */
   public void clearHud() {
     captainLog.setText("");
