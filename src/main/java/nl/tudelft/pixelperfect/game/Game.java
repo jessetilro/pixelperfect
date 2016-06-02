@@ -126,7 +126,7 @@ public class Game extends VRApplication {
     scheduler.start();
 
     debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
-    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 1800, 1050, spaceship);
+    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 1800, 1000, spaceship);
 
     gameState = new StartState(this);
   }
