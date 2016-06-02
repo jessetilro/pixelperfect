@@ -67,20 +67,20 @@ public class GameHeadsUpDisplay {
     // Loading the font stored in the jme default manager.
     hudFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
 
-    // Init for the log text, including font loading and text setting.
+    // Initializer for the log text, including font loading and text setting.
     currentEvents = new BitmapText(hudFont, true);
     currentEvents.setColor(ColorRGBA.LightGray);
-    currentEvents.setLocalTranslation(screenWidth - Constants.GUI_LOG_WIDTH_OFFSET,
-        screenHeight - Constants.GUI_LOG_HEIGHT_OFFSET, 0);
+    currentEvents.setLocalTranslation(screenWidth - Constants.GUI_LOG_WIDTH_OFFSET, screenHeight,
+        0);
 
-    // Init for the health text, including font loading and text setting.
+    // Initializer for the health text, including font loading and text setting.
     shipHealth = new BitmapText(hudFont, true);
     shipHealth.setLocalScale(Constants.GUI_HEALTH_TEXT_SIZE_SCALE);
     shipHealth.setColor(ColorRGBA.Red);
     shipHealth.setLocalTranslation(screenWidth - Constants.GUI_HEALTH_WIDTH_OFFSET, screenHeight,
         0);
 
-    // Init for the score text, including font loading and text setting.
+    // Initializer for the score text, including font loading and text setting.
     teamScore = new BitmapText(hudFont, true);
     teamScore.setLocalScale(Constants.GUI_SCORE_TEXT_SIZE_SCALE);
     teamScore.setColor(ColorRGBA.Green);
@@ -100,21 +100,21 @@ public class GameHeadsUpDisplay {
     // Update the ship's health and team score indicators.
     shipHealth.setText("" + spaceship.getHealth());
     teamScore.setText("" + spaceship.getScore());
-    
+
     // Array lists to store the events.
     ArrayList<Event> currentEventsArray = spaceship.getLog().getEvents();
-    ArrayList<String> currentEventsToDisplay = new ArrayList<String>();
-
-    // Fetch all event times for updates and display.
-    for (Event current : currentEventsArray) {
-      currentEventsToDisplay.add(current.toDebugString());
-    }
 
     // Update the active event log.
-    if (currentEventsToDisplay.isEmpty()) {
+    if (currentEventsArray.isEmpty()) {
       currentEvents.setText("");
     } else {
-      currentEvents.setText(currentEventsToDisplay.toString());
+      String toDisplay = "";
+
+      for (Event current : currentEventsArray) {
+        toDisplay = toDisplay + current.getDescription() + "\n";
+      }
+
+      currentEvents.setText(toDisplay);
     }
   }
 }
