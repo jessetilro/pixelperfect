@@ -69,7 +69,9 @@ public class GameHeadsUpDisplay {
 
     // Init for the log text, including font loading and text setting.
     currentEvents = new BitmapText(hudFont, true);
-    currentEvents.setLocalTranslation(screenWidth, screenHeight, 0);
+    currentEvents.setColor(ColorRGBA.LightGray);
+    currentEvents.setLocalTranslation(screenWidth - Constants.GUI_LOG_WIDTH_OFFSET,
+        screenHeight - Constants.GUI_LOG_HEIGHT_OFFSET, 0);
 
     // Init for the health text, including font loading and text setting.
     shipHealth = new BitmapText(hudFont, true);
