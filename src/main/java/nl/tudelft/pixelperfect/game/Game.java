@@ -50,7 +50,8 @@ public class Game extends VRApplication {
   private boolean rotateLeft;
   private boolean rotateRight;
   private boolean startKey;
-  private boolean debugKey;
+  private boolean debugKeyOn;
+  private boolean debugKeyOff;
 
   private Scene scene;
 
@@ -108,7 +109,7 @@ public class Game extends VRApplication {
     scene.createMap();
 
     audioPlayer = new AudioPlayer(this);
-    // TODO load acutal sounds
+    // TODO load actual sounds
     String[] names = {};
     String[] locations = {};
     audioPlayer.loadSounds(names, locations);
@@ -158,8 +159,8 @@ public class Game extends VRApplication {
   private void initInputs() {
     InputManager inputManager = getInputManager();
     int[] keyTriggers = { KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A, KeyInput.KEY_D,
-        KeyInput.KEY_P, KeyInput.KEY_0 };
-    String[] mappings = { "forward", "back", "left", "right", "start", "debug" };
+        KeyInput.KEY_P, KeyInput.KEY_0, KeyInput.KEY_1 };
+    String[] mappings = { "forward", "back", "left", "right", "start", "debugOn", "debugOff" };
     for (int i = 0; i < keyTriggers.length; i++) {
       inputManager.addMapping(mappings[i], new KeyTrigger(keyTriggers[i]));
     }
@@ -176,8 +177,10 @@ public class Game extends VRApplication {
           rotateRight = keyPressed;
         } else if (name.equals("start")) {
           startKey = keyPressed;
-        } else if (name.equals("debug")) {
-          debugKey = keyPressed;
+        } else if (name.equals("debugOn")) {
+          debugKeyOn = keyPressed;
+        } else if (name.equals("debugOff")) {
+          debugKeyOff = keyPressed;
         }
       }
     };
@@ -259,12 +262,21 @@ public class Game extends VRApplication {
   }
 
   /**
-   * Getter for the debugKey.
+   * Getter for the debugKey activator.
    * 
-   * @return debugKey
+   * @return debugKeyOn
    */
-  public boolean isDebugTrigger() {
-    return debugKey;
+  public boolean isDebugOnTrigger() {
+    return debugKeyOn;
+  }
+  
+  /**
+   * Getter for the debugKey deactivator.
+   * 
+   * @return debugKeyOff
+   */
+  public boolean isDebugOffTrigger() {
+    return debugKeyOff;
   }
 
   /**

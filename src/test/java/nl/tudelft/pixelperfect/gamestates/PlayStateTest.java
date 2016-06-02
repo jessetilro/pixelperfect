@@ -1,17 +1,5 @@
 package nl.tudelft.pixelperfect.gamestates;
 
-import com.jme3.scene.Spatial;
-
-import nl.tudelft.pixelperfect.game.Game;
-import nl.tudelft.pixelperfect.game.Spaceship;
-import nl.tudelft.pixelperfect.game.Constants;
-import nl.tudelft.pixelperfect.event.EventScheduler;
-import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mockito;
-
 import static org.junit.Assert.assertSame;
 import static org.mockito.Matchers.anyFloat;
 import static org.mockito.Mockito.mock;
@@ -19,9 +7,22 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+import com.jme3.scene.Spatial;
+
+import nl.tudelft.pixelperfect.event.EventScheduler;
+import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.game.Settings;
+import nl.tudelft.pixelperfect.game.Spaceship;
+import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mockito;
+
 /**
  * Class to test PlayState.
  *
+ * @author David Alderliesten
  * @author Wouter Zirkzee
  */
 @SuppressWarnings("PMD")
@@ -33,6 +34,7 @@ public class PlayStateTest extends GameStateTest {
   private EventScheduler mockScheduler;
   private Spaceship mockSpaceship;
   private DebugHeadsUpDisplay mockHeadsUp;
+  private Settings testSettings;
 
   /**
    * Setup the classes for testing.
@@ -48,21 +50,35 @@ public class PlayStateTest extends GameStateTest {
     mockGame.setScheduler(mockScheduler);
     mockGame.setSpaceship(mockSpaceship);
     mockGame.setHeadsUpDisplay(mockHeadsUp);
+    testSettings = Settings.getInstance();
     testState = new PlayState(mockGame);
   }
 
   /**
-   * Test update function.
+   * Test update function with debug enabled.
    */
   @Test
   public void testUpdate() {
+    testSettings.setIsDebug(true);
+    
     testState.update(1f);
     verify(mockScheduler).update(1f);
     verify(mockSpaceship).update(anyFloat());
+    verify(mockHeadsUp).updateHud();
+  }
 
-    if (Constants.isDebug) {
-      verify(mockHeadsUp).updateHud();
-    }
+  /**
+   * Test update function without debug enabled.
+   */
+  @Test
+  public void testUpdateWithoutDebug() {
+    testSettings.setIsDebug(false);
+    
+    testState.update(1f);
+    verify(mockScheduler).update(1f);
+    verify(mockSpaceship).update(anyFloat());
+    
+    verify(mockHeadsUp, Mockito.times(0)).updateHud();
   }
 
   /**

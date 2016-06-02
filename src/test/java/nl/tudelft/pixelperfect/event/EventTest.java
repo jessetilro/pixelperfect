@@ -119,7 +119,7 @@ public abstract class EventTest {
    */
   @Test
   public void testGetTimeLeft() {
-    assertEquals(4, toTest.getTimeLeft(80L), 0.0);
+    assertEquals("0", toTest.getTimeLeft(80L));
   }
 
   /**
