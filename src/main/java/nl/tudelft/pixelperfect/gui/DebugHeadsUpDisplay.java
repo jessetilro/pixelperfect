@@ -59,7 +59,7 @@ public class DebugHeadsUpDisplay {
   }
 
   /**
-   * Sets-up text display for the in-game HUD, along with all of its elements.
+   * Sets-up text display for the in-game debug HUD, along with all of its elements.
    */
   private void setupTextDisplay() {
     // Set-up the bitmap text needed for HUD display.
@@ -73,7 +73,7 @@ public class DebugHeadsUpDisplay {
   }
 
   /**
-   * Set-up the bitmap associations for the HUD text.
+   * Set-up the bitmap associations for the debug HUD text.
    */
   private void setUpBitmapText() {
     // Loading the font stored in the jme default manager.
@@ -99,8 +99,8 @@ public class DebugHeadsUpDisplay {
   }
 
   /**
-   * Method responsible for the updating of the hud text and displaying the events, along with their
-   * remaining time and health, and other HUD elements.
+   * Method responsible for the updating of the debug hud text and displaying the events, along with
+   * their remaining time and health, and other HUD elements.
    */
   public void updateHud() {
     ArrayList<Event> currentEvents = spaceship.getLog().getEvents();

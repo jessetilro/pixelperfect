@@ -1,10 +1,13 @@
 package nl.tudelft.pixelperfect.gui;
 
+import java.util.ArrayList;
+
 import com.jme3.asset.AssetManager;
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
 import com.jme3.scene.Node;
 
+import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.game.Constants;
 import nl.tudelft.pixelperfect.game.Spaceship;
 
@@ -69,10 +72,12 @@ public class GameHeadsUpDisplay {
 
     // Init for the health text, including font loading and text setting.
     shipHealth = new BitmapText(hudFont, true);
+    shipHealth.setLocalScale(10);
     shipHealth.setLocalTranslation(screenWidth, screenHeight, 0);
 
     // Init for the score text, including font loading and text setting.
     teamScore = new BitmapText(hudFont, true);
+    teamScore.setLocalScale(10);
     teamScore.setLocalTranslation(screenWidth, screenHeight, 0);
 
     // Add the generated bitmaps to the gui node view.
@@ -81,4 +86,13 @@ public class GameHeadsUpDisplay {
     guiNodes.attachChild(teamScore);
   }
 
+  /**
+   * Method responsible for the updating of the hud text and displaying the events, along with their
+   * remaining time and health, and other HUD elements.
+   */
+  public void updateHud() {
+    // Update the ship's health, team score, and time left indicators.
+    shipHealth.setText("" + spaceship.getHealth());
+    teamScore.setText("" + spaceship.getScore());
+  }
 }
