@@ -64,13 +64,14 @@ public class ServerListener implements MessageListener<HostedConnection> {
    */
   public synchronized void messageReceived(HostedConnection source, Message message) {
     if (message instanceof EventCompletedMessage) {
-      EventCompletedMessage event = (EventCompletedMessage) message;
-      System.out.println("Received a completed event: " + event.getLabel());
-      for (EventParameter param : event.getParameters()) {
+      EventCompletedMessage completedMessage = (EventCompletedMessage) message;
+      System.out.println("Received a completed event: " + completedMessage.getLabel());
+      for (EventParameter param : completedMessage.getParameters()) {
         System.out.print("Parameter of completed Event: ");
         System.out.println(param.toString());
       }
-      app.getSpaceship().getLog().complete(event.getCompletedEvent());
+      app.getSpaceship().getLog().complete(completedMessage.getCompletedEvent(),
+          completedMessage.getParameters());
     } else if (message instanceof RoleChosenMessage) {
       server.broadcast(Filters.notEqualTo(source), message);
     }

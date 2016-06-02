@@ -1,8 +1,11 @@
 package nl.tudelft.pixelperfect.event;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import com.jme3.network.Server;
 
-import java.util.ArrayList;
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 
 /**
  * Interface for classes that can subscribe themselves to an EventScheduler.
@@ -39,7 +42,7 @@ public interface EventListener {
    * @param id
    *          The id used to find the event in the log.
    */
-  void complete(int id);
+  void complete(int id, Collection<EventParameter> parameters);
 
   /**
    * Get all the events that are in the log.
