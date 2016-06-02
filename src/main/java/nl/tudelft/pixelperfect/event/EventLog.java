@@ -1,11 +1,13 @@
 package nl.tudelft.pixelperfect.event;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.client.message.EventsMessage;
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.game.Spaceship;
-
-import java.util.ArrayList;
 
 /**
  * The captain's log of events, which should be subscribed to the event schedulers in the game.
@@ -30,16 +32,17 @@ public class EventLog implements EventListener {
     this.events = new ArrayList<Event>();
     this.spaceship = spaceship;
   }
-  
+
   /**
    * Sets the server for reference purposes.
    * 
-   * @param server The server.
+   * @param server
+   *          The server.
    */
   public synchronized void setServer(Server server) {
     this.server = server;
   }
-  
+
   /**
    * Get the current log of events.
    * 
@@ -47,6 +50,23 @@ public class EventLog implements EventListener {
    */
   public ArrayList<Event> getEvents() {
     return this.events;
+  }
+
+  /**
+   * Get an Event by its numeric identifier.
+   * 
+   * @param id
+   *          The identifier.
+   * @return The Event.
+   */
+  private Event getById(int id) {
+    for (int t = 0; t < events.size(); t++) {
+      Event event = events.get(t);
+      if (event.getId() == id) {
+        return event;
+      }
+    }
+    return null;
   }
 
   /**
@@ -68,8 +88,8 @@ public class EventLog implements EventListener {
     events.add(event);
     System.out.println("The ship received a new event: " + event.getDescription());
     String type = event.getClass().getSimpleName();
-    EventsMessage message = 
-        new EventsMessage(event.getId(), type, event.getTimestamp(), event.getDuration());
+    EventsMessage message = new EventsMessage(event.getId(), type, event.getTimestamp(),
+        event.getDuration());
     server.broadcast(message);
   }
 
@@ -93,26 +113,32 @@ public class EventLog implements EventListener {
     events = log;
     update();
   }
-  
+
   /**
    * Removes a completed event from the list before it is expired.
-   *  
-   * @param identity 
-   *           The id used to find the event in the log.
+   * 
+   * @param id
+   *          The id used to find the event in the log.
    */
-  public synchronized void complete(int identity) {
-    for (int t = 0; t < events.size(); t++) {
-      if (events.get(t).getId() == identity) {
-        events.remove(t);
+  public synchronized void complete(int id, Collection<EventParameter> parameters) {
+    Event event = getById(id);
+    if (event != null) {
+      if (event.validateParameters(parameters)) {
+        discard(event);
         spaceship.updateScore(10);
-        return;
+        System.out.println("Event " + event.getId() + " solved!");
+      } else {
+        System.out.println("Event " + event.getId() + " not solved, wrong parameters...");
       }
+      return;
     }
-    //For now hardcoded
+
+    // For now hardcoded
     System.out.println("You pressed wrong button, DAMAGE will be done to the ship.");
     spaceship.updateHealth(-10);
-    //Manual Testing
+    // Manual Testing
     System.out.println("New ship HEALTH: " + spaceship.getHealth());
+
   }
 
   /**

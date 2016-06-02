@@ -6,7 +6,6 @@ import java.util.Collection;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventReader;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
-import nl.tudelft.pixelperfect.event.parameter.EventParameterValues;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.event.type.HostileShipEvent;
 
@@ -35,10 +34,7 @@ public class HostileShipEventFactory extends EventFactory {
   @Override
   public Collection<EventParameter> createParameters() {
     Collection<EventParameter> collection = new ArrayList<EventParameter>();
-    collection.add(new EventParameter("positionX", 1));
-    collection.add(new EventParameter("positionY", 2));
-    collection
-        .add(new EventParameter("armor", EventParameterValues.HOSTILE_SHIP_ARMOR_ENERGY_SHIELD));
+    collection.add(new EventParameter("testParam", 42));
     return collection;
   }
 
