@@ -34,7 +34,7 @@ public class PlayStateTest extends GameStateTest {
   private EventScheduler mockScheduler;
   private Spaceship mockSpaceship;
   private DebugHeadsUpDisplay mockHeadsUp;
-  private Settings mockSettings;
+  private Settings testSettings;
 
   /**
    * Setup the classes for testing.
@@ -50,7 +50,7 @@ public class PlayStateTest extends GameStateTest {
     mockGame.setScheduler(mockScheduler);
     mockGame.setSpaceship(mockSpaceship);
     mockGame.setHeadsUpDisplay(mockHeadsUp);
-    mockSettings = Settings.getInstance();
+    testSettings = Settings.getInstance();
     testState = new PlayState(mockGame);
   }
 
@@ -59,7 +59,7 @@ public class PlayStateTest extends GameStateTest {
    */
   @Test
   public void testUpdate() {
-    mockSettings.setIsDebug(true);
+    testSettings.setIsDebug(true);
     
     testState.update(1f);
     verify(mockScheduler).update(1f);
@@ -72,7 +72,7 @@ public class PlayStateTest extends GameStateTest {
    */
   @Test
   public void testUpdateWithoutDebug() {
-    mockSettings.setIsDebug(false);
+    testSettings.setIsDebug(false);
     
     testState.update(1f);
     verify(mockScheduler).update(1f);
