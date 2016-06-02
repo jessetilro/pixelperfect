@@ -59,7 +59,7 @@ public class PlayStateTest extends GameStateTest {
    */
   @Test
   public void testUpdate() {
-    mockSettings.isDebugOn();
+    mockSettings.setIsDebug(true);
     
     testState.update(1f);
     verify(mockScheduler).update(1f);
@@ -72,7 +72,7 @@ public class PlayStateTest extends GameStateTest {
    */
   @Test
   public void testUpdateWithoutDebug() {
-    mockSettings.isDebugOff();
+    mockSettings.setIsDebug(false);
     
     testState.update(1f);
     verify(mockScheduler).update(1f);

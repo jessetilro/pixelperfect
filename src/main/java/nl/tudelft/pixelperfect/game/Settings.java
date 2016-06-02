@@ -41,17 +41,13 @@ public final class Settings {
   }
 
   /**
-   * Flips the isDebug state to the on state of the boolean.
+   * Set the isDebug settings to the passed boolean value.
+   * 
+   * @param passed
+   *          the desired boolean value
    */
-  public static void isDebugOn() {
-    isDebug = true;
-  }
-  
-  /**
-   * Flips the isDebug state to the on state of the boolean.
-   */
-  public static void isDebugOff() {
-    isDebug = false;
+  public static void setIsDebug(boolean passed) {
+    isDebug = passed;
   }
 
 }
