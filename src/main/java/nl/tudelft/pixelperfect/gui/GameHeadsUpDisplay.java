@@ -108,18 +108,18 @@ public class GameHeadsUpDisplay {
     if (currentEventsArray.isEmpty()) {
       currentEvents.setText("");
     } else {
-      String toDisplay = "";
+      StringBuilder toDisplay = new StringBuilder();
       ArrayList<String> preventCopy = new ArrayList<String>();
 
       // Loop through all the events to display them in the HUD.
       for (Event current : currentEventsArray) {
         if (!preventCopy.contains(current.getSummary())) {
-          toDisplay = toDisplay + current.getDescription() + "\n";
+          toDisplay.append(current.getDescription() + "\n");
           preventCopy.add(current.getSummary());
         }
       }
 
-      currentEvents.setText(toDisplay);
+      currentEvents.setText(toDisplay.toString());
     }
   }
 }
