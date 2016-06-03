@@ -106,7 +106,7 @@ public class EventLog implements EventListener {
    * @param parameters
    *          The parameters the Event should have.
    * 
-   * @return
+   * 
    */
   public synchronized void complete(EventTypes type, Collection<EventParameter> parameters) {
     Collection<Event> candidates = getByType(type);

@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
+import nl.tudelft.pixelperfect.event.type.CoffeeBoostEvent;
 import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
@@ -91,6 +92,23 @@ public abstract class EventTest {
   @Test
   public void testIsExpiredTrue() {
     assertTrue(toTest.isExpired(85));
+  }
+  
+  @Test
+  public void getDebugString() {
+    assertEquals(
+        "Test Event (" + toTest.getTimeLeft(System.currentTimeMillis()) + "), Param: (None)",
+        toTest.toDebugString());
+  }
+  
+  @Test
+  public void testGetDuration() {
+    assertEquals(42,toTest.getDuration(), 0.0);
+  }
+  
+  @Test
+  public void testGetTimestamp() {
+    assertEquals(42,toTest.getTimestamp(), 0.0);
   }
 
   /**
