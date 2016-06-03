@@ -106,7 +106,8 @@ public class Scene {
     torusMat.setTexture("ColorMap", metal2);
     torusGeo.setMaterial(torusMat);
 
-    torusGeo.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.HALF_PI, new Vector3f(1, 0, 0)));
+    torusGeo.setLocalRotation(new Quaternion().fromAngleAxis(
+            FastMath.HALF_PI, new Vector3f(1, 0, 0)));
     app.getRootNode().attachChild(torusGeo);
   }
 }
