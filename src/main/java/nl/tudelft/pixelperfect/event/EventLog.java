@@ -35,7 +35,7 @@ public class EventLog implements EventListener {
    * 
    * @return the list of events.
    */
-  public ArrayList<Event> getEvents() {
+  public synchronized ArrayList<Event> getEvents() {
     return this.events;
   }
 
@@ -47,7 +47,7 @@ public class EventLog implements EventListener {
    * 
    * @return A collection of Events with the given type.
    */
-  private Collection<Event> getByType(EventTypes type) {
+  private synchronized Collection<Event> getByType(EventTypes type) {
     Collection<Event> result = new ArrayList<Event>();
     for (Event event : events) {
       if (event.getType() == type) {
@@ -74,8 +74,7 @@ public class EventLog implements EventListener {
    */
   public synchronized void notify(Event event) {
     events.add(event);
-    System.out.println("The ship received a new event: " + event.getDescription());
-    String type = event.getClass().getSimpleName();
+    System.out.println("The ship received a new event: " + event.getSummary());
   }
 
   /**
