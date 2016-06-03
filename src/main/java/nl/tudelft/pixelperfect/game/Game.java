@@ -27,6 +27,8 @@ import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
  * 
+ * Suppressing the too many fields PMD warning because we will refactor this class next iteration.
+ * 
  * @author David Alderliesten
  * @author Floris Doolaard
  * @author Dmitry Malarev
@@ -34,6 +36,7 @@ import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
  * @author Wouter Zirkzee
  *
  */
+@SuppressWarnings("PMD.TooManyFields")
 public class Game extends VRApplication {
 
   private static Game appGame;
