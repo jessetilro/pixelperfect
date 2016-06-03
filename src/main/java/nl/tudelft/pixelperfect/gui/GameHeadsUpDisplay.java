@@ -113,9 +113,9 @@ public class GameHeadsUpDisplay {
 
       // Loop through all the events to display them in the HUD.
       for (Event current : currentEventsArray) {
-        if (!preventCopy.contains(current.getSummary())) {
-          toDisplay.append(current.getDescription()).append('\n');
-          preventCopy.add(current.getSummary());
+        if (!preventCopy.contains(current.getDescription())) {
+          toDisplay.append(current.toString()).append('\n');
+          preventCopy.add(current.getDescription());
         }
       }
 
