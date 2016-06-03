@@ -1,30 +1,71 @@
 [
   {
+    "type": 0,
+    "summary": "Fire Outbreak",
+    "description": "Alert! Faulty wiring caused a fire!",
+    "duration": 30000,
+    "damage": 10,
+    "parameters" : [
+      {
+      "key": "approach",
+      "summary": "The approach required for fighting the fire"
+      }
+    ]
+  },
+  {
     "type": 1,
-    "summary": "Asteroid Field",
-    "description": "Watch out, you are approaching an asteroid field!",
-    "duration": 8000,
-    "damage": 10
+    "summary": "Plasma Leak",
+    "description": "Plasma pressure is dropping, there must be a leak!",
+    "duration": 30000,
+    "damage": 10,
+    "parameters" : [
+      {
+      "key": "sector",
+      "summary": "The sector of the ship that needs repairs"
+      }
+    ]
   },
   {
     "type": 2,
-    "summary": "Fire Outbreak",
-    "description": "Alert! Faulty wiring caused a fire!",
-    "duration": 8000,
-    "damage": 10
+    "summary": "Asteroid Impact",
+    "description": "Get to work, the ship has been hit by an Asteroid!",
+    "duration": 30000,
+    "damage": 10,
+    "parameters": [
+      {
+      	"key": "locationDamageImpact",
+      	"summary": "The location where asteroids hit the ship."      
+      }    
+    ]
   },
   {
     "type": 3,
     "summary": "Hostile Ship",
     "description": "A hostile spaceship is near, prepare to defend yourself!",
-    "duration": 8000,
-    "damage": 10
+    "duration": 30000,
+    "damage": 10,
+    "parameters": [
+      {
+        "key": "positionX",
+        "summary": "The x-coordinate of the ship's position"
+      },
+      {
+        "key": "positionY",
+        "summary": "The x-coordinate of the ship's position"
+      },
+      {
+        "key": "armor",
+        "summary": "The ship's type of armor"
+      }
+
+    ]
   },
   {
     "type": 4,
-    "summary": "Plasma Leak",
-    "description": "Plasma pressure is dropping, there must be a leak!",
-    "duration": 8000,
+    "summary": "Coffee Boost",
+    "description": "Give me fuel, given me fire, give me that which I desire!",
+    "duration": 30000,
     "damage": 10
   }
+
 ]

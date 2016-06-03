@@ -1,13 +1,17 @@
 package nl.tudelft.pixelperfect.event;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONTokener;
+import nl.tudelft.pixelperfect.game.Constants;
 
 /**
  * Reads the parameters of the different types of events from the file system or a given String.
@@ -19,7 +23,7 @@ import org.json.JSONTokener;
 public final class EventReader {
 
   private static volatile EventReader instance;
-
+  private int id;
   private JSONArray data;
 
   /**
@@ -37,6 +41,8 @@ public final class EventReader {
   }
 
   private EventReader() {
+    id = 1;
+    readFromFile(Constants.EVENT_DATA_FILE);
   }
 
   /**
@@ -62,7 +68,7 @@ public final class EventReader {
       JSONTokener tokener = new JSONTokener(stream);
       data = new JSONArray(tokener);
       return true;
-    } catch (FileNotFoundException e) {
+    } catch (FileNotFoundException error) {
       return false;
     }
   }
@@ -172,6 +178,45 @@ public final class EventReader {
       return obj.getDouble("damage");
     }
     return 0;
+  }
+
+  /**
+   * Get a map of associations between parameter keys and their summary for a specific type of
+   * Event.
+   * 
+   * @param type
+   *          The numeric Event Type identifier.
+   * @return A Map of parameter key / summary associations.
+   */
+  public Map<String, String> getParameters(int type) {
+    Map<String, String> map = new HashMap<String, String>();
+    JSONObject obj = getByType(type);
+    if (obj != null) {
+      JSONArray parameters = obj.optJSONArray("parameters");
+      if (parameters != null) {
+        int index = 0;
+        while (index >= 0) {
+          JSONObject object = parameters.optJSONObject(index);
+          if (object != null) {
+            map.put(object.getString("key"), object.getString("summary"));
+            ++index;
+          } else {
+            index = -1;
+          }
+        }
+      }
+    }
+    return map;
+  }
+
+  /**
+   * Since this is a Singleton, it is the perfect place to keep track of the unique numeric
+   * identifier for Events.
+   * 
+   * @return The next Event id.
+   */
+  public int getNextId() {
+    return id++;
   }
 
 }

@@ -1,11 +1,13 @@
 package nl.tudelft.pixelperfect.client;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
-import static org.mockito.Matchers.anyObject;
+
+import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,9 +19,11 @@ import com.jme3.network.Message;
 import com.jme3.network.Server;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import nl.tudelft.pixelperfect.Game;
-import nl.tudelft.pixelperfect.Spaceship;
+import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
+import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.EventLog;
+import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
  * Test Suite for the ServerListener class.
@@ -69,17 +73,11 @@ public class ServerListenerTest {
     Spaceship mockedShip = mock(Spaceship.class);
     EventLog mockedLog = mock(EventLog.class);
 
-    // Stubbing
-    when(mockedMessage.getLabel()).thenReturn("Fire Event");
-
-    // Execution    
+    // Execution
     when(mockedGame.getSpaceship()).thenReturn(mockedShip);
     when(mockedShip.getLog()).thenReturn(mockedLog);
-    
-    object.messageReceived(mockedSource, mockedMessage);
 
-    // Verification
-    verify(mockedMessage).getLabel();
+    object.messageReceived(mockedSource, mockedMessage);
   }
 
   /**
@@ -101,28 +99,26 @@ public class ServerListenerTest {
   }
   
   /**
-   * When the ServerListener receives an CompletedEventMessage, it should do something with it.
+   * Tests what the Listener does if an event with parameters is sent.
+   * 
    */
   @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
   @Test
-  public void testCompletedEventMessageReceived() {
-    // Fixtures
-    
-    EventCompletedMessage mockedMessage = mock(EventCompletedMessage.class);
+  public void testEventCompletedParameters() {
     Spaceship mockedShip = mock(Spaceship.class);
-    EventLog mockedLog = mock(EventLog.class);
+    final EventLog mockedLog = mock(EventLog.class);
     
-    // Stubbing
-    when(mockedMessage.getLabel()).thenReturn("Fire Event");
+    final HostedConnection mockedSource = mock(HostedConnection.class);
+    EventCompletedMessage message = new EventCompletedMessage(2);
+    HashMap<String, Integer> map = new HashMap<String, Integer>();
+    map.put("test", 42);
+    message.setParameters(map);
+    
     when(mockedGame.getSpaceship()).thenReturn(mockedShip);
     when(mockedShip.getLog()).thenReturn(mockedLog);
     
-
-    // Execution
-    object.messageReceived(mockedSource, mockedMessage);
-
-    // Verification
-    verify(mockedLog).complete(0);
+    object.messageReceived(mockedSource, message);
+    
   }
 
   /**
@@ -134,7 +130,7 @@ public class ServerListenerTest {
   public void testRoleChosenMessage() {
     RoleChosenMessage message = mock(RoleChosenMessage.class);
     object.messageReceived(mockedSource, message);
-    verify(mockServer).broadcast((Filter<? super HostedConnection>) anyObject(), 
+    verify(mockServer).broadcast((Filter<? super HostedConnection>) anyObject(),
         (Message) anyObject());
   }
 }

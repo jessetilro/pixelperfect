@@ -1,7 +1,12 @@
 package nl.tudelft.pixelperfect.event;
 
-import nl.tudelft.pixelperfect.Scene;
-import nl.tudelft.pixelperfect.Spaceship;
+import java.util.Arrays;
+import java.util.Collection;
+
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
+import nl.tudelft.pixelperfect.event.parameter.EventParameterCollection;
+import nl.tudelft.pixelperfect.event.type.EventTypes;
+import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
  * A class for storing and defining events, called upon by the event scheduler.
@@ -17,6 +22,7 @@ public abstract class Event {
   private long timestamp;
   private long duration;
   private double damage;
+  private EventParameterCollection parameters;
 
   /**
    * Constructor for the event class, taking parameters for the type of event, a summary of the
@@ -44,7 +50,15 @@ public abstract class Event {
     this.timestamp = timestamp;
     this.duration = duration;
     this.damage = damage;
+    this.parameters = new EventParameterCollection();
   }
+
+  /**
+   * Get the type of this Event.
+   * 
+   * @return The EventType.
+   */
+  public abstract EventTypes getType();
 
   /**
    * Getter for the event id.
@@ -99,8 +113,8 @@ public abstract class Event {
    * 
    * @return The time remaining.
    */
-  public Long getTimeLeft(long currentTime) {
-    return ((this.timestamp + this.duration) - currentTime);
+  public String getTimeLeft(long currentTime) {
+    return Long.toString((((this.timestamp + this.duration) - currentTime) / 1000));
   }
 
   /**
@@ -134,10 +148,53 @@ public abstract class Event {
   }
 
   /**
-   * Allow events to render notifications to the players.
-   *
-   * @param scene
-   *          The scene in which the notification must appear.
+   * Update this Event's parameter collection to consist of the parameters in the given collection.
+   * 
+   * @param collection
+   *          A Collection of EventParameters.
    */
-  public abstract void notification(Scene scene);
+  public void setParameters(Collection<EventParameter> collection) {
+    parameters = new EventParameterCollection(collection);
+  }
+
+  /**
+   * Check whether the given collection of parameters matches this Event's parameters.
+   * 
+   * @param collection
+   *          A Collection of EventParameters.
+   * @return Whether the parameters are valid.
+   */
+  public boolean validateParameters(Collection<EventParameter> collection) {
+    return parameters.validate(collection);
+  }
+
+  /**
+   * Generate a String representation of this Event and its parameters.
+   * 
+   * @return A String representation of this Event and its parameters.
+   */
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    Collection<String> components = Arrays.asList(new String[] { summary, ": ", description,
+        " Take note of the following details: ", parameters.toString(), "." });
+    for (String component : components) {
+      sb.append(component);
+    }
+    return sb.toString();
+  }
+
+  /**
+   * Generate a debug string with only timing and parameters.
+   * 
+   * @return debug string.
+   */
+  public String toDebugString() {
+    StringBuilder sb = new StringBuilder();
+    Collection<String> components = Arrays.asList(new String[] { summary, " (",
+        getTimeLeft(System.currentTimeMillis()), "), Param: (", parameters.toDebugString() + ")" });
+    for (String component : components) {
+      sb.append(component);
+    }
+    return sb.toString();
+  }
 }

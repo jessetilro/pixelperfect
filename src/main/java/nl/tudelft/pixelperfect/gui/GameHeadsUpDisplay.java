@@ -1,18 +1,21 @@
 package nl.tudelft.pixelperfect.gui;
 
+import java.util.ArrayList;
+
 import com.jme3.asset.AssetManager;
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
+import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Node;
 
-import nl.tudelft.pixelperfect.Constants;
-import nl.tudelft.pixelperfect.Spaceship;
 import nl.tudelft.pixelperfect.event.Event;
-
-import java.util.ArrayList;
+import nl.tudelft.pixelperfect.game.Constants;
+import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
- * Class that displays relevant information in the heads-up display during the gameplay.
+ * Class responsible for the display, refreshing, and functionality of the heads-up display (HUD)
+ * that is displayed during the active gameplay for the Client. Score and Ship health are displayed
+ * constantly, and the current events are shown when they arise.
  * 
  * @author David Alderliesten
  *
@@ -26,13 +29,12 @@ public class GameHeadsUpDisplay {
   private int screenHeight;
 
   private BitmapFont hudFont;
-  private BitmapText captainLog;
+  private BitmapText currentEvents;
   private BitmapText shipHealth;
   private BitmapText teamScore;
-  private BitmapText timeLeft;
 
   /**
-   * Constructor for the heads-up display for in-game utiliztion.
+   * Constructor for the heads-up display for in-game utilization and display.
    * 
    * @param passedMan
    *          the passed assetmanager.
@@ -43,7 +45,7 @@ public class GameHeadsUpDisplay {
    * @param passedHi
    *          the passed screen height.
    * @param passedShip
-   *          the passed Sapceship instance.
+   *          the passed Spaceship instance.
    */
   public GameHeadsUpDisplay(AssetManager passedMan, Node passedGuiNode, int passedWid, int passedHi,
       Spaceship passedShip) {
@@ -53,48 +55,41 @@ public class GameHeadsUpDisplay {
     this.screenHeight = passedHi;
     this.spaceship = passedShip;
 
-    // Sets-up the text display using the private method.
-    setupTextDisplay();
+    // Setting-up the fonts required for the Bitmap display.
+    setupFont();
   }
 
   /**
-   * Sets-up text display for the in-game HUD, along with all of its elements.
+   * Private class responsible for setting-up the bitmap fonts and attaching the HUD elements to the
+   * guiNodes.
    */
-  private void setupTextDisplay() {
-    // Set-up the bitmap text needed for HUD display.
-    setUpBitmapText();
-
-    // Add the generated bitmaps to the gui node view.
-    guiNodes.attachChild(captainLog);
-    guiNodes.attachChild(shipHealth);
-    guiNodes.attachChild(teamScore);
-    guiNodes.attachChild(timeLeft);
-  }
-
-  /**
-   * Set-up the bitmap associations for the HUD text.
-   */
-  private void setUpBitmapText() {
+  private void setupFont() {
     // Loading the font stored in the jme default manager.
     hudFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
 
-    // Init for the log text, including font loading and text setting.
-    captainLog = new BitmapText(hudFont, true);
-    captainLog.setLocalTranslation(screenWidth - Constants.GUI_LOG_WIDTH_OFFSET,
-        screenHeight - Constants.GUI_LOG_HEIGHT_OFFSET, 0);
+    // Initializer for the log text, including font loading and text setting.
+    currentEvents = new BitmapText(hudFont, true);
+    currentEvents.setColor(ColorRGBA.LightGray);
+    currentEvents.setLocalTranslation(screenWidth - Constants.GUI_LOG_WIDTH_OFFSET, screenHeight,
+        0);
 
-    // Init for the HUD text, including font loading and text setting.
+    // Initializer for the health text, including font loading and text setting.
     shipHealth = new BitmapText(hudFont, true);
-    shipHealth.setLocalTranslation(screenWidth + 150 - Constants.GUI_HEALTH_WIDTH_OFFSET,
-        screenHeight - Constants.GUI_HEALTH_HEIGHT_OFFSET, 0);
+    shipHealth.setLocalScale(Constants.GUI_HEALTH_TEXT_SIZE_SCALE);
+    shipHealth.setColor(ColorRGBA.Red);
+    shipHealth.setLocalTranslation(screenWidth - Constants.GUI_HEALTH_WIDTH_OFFSET, screenHeight,
+        0);
 
+    // Initializer for the score text, including font loading and text setting.
     teamScore = new BitmapText(hudFont, true);
-    teamScore.setLocalTranslation(screenWidth + 250 - Constants.GUI_SCORE_WIDTH_OFFSET,
-        screenHeight - Constants.GUI_SCORE_HEIGHT_OFFSET, 0);
+    teamScore.setLocalScale(Constants.GUI_SCORE_TEXT_SIZE_SCALE);
+    teamScore.setColor(ColorRGBA.Green);
+    teamScore.setLocalTranslation(screenWidth, screenHeight, 0);
 
-    timeLeft = new BitmapText(hudFont, true);
-    timeLeft.setLocalTranslation(screenWidth + 250 - Constants.GUI_TIME_WIDTH_OFFSET,
-        screenHeight - Constants.GUI_TIME_HEIGHT_OFFSET, 0);
+    // Add the generated bitmaps to the gui node view.
+    guiNodes.attachChild(currentEvents);
+    guiNodes.attachChild(shipHealth);
+    guiNodes.attachChild(teamScore);
   }
 
   /**
@@ -102,26 +97,29 @@ public class GameHeadsUpDisplay {
    * remaining time and health, and other HUD elements.
    */
   public void updateHud() {
-    ArrayList<Event> currentEvents = spaceship.getLog().getEvents();
-    ArrayList<String> currentEventsToDisplay = new ArrayList<String>();
+    // Update the ship's health and team score indicators.
+    shipHealth.setText("" + spaceship.getHealth());
+    teamScore.setText("" + spaceship.getScore());
 
-    // Fetch all event times for updates and display.
-    for (Event current : currentEvents) {
-      currentEventsToDisplay.add(current.getSummary() + " ("
-          + current.getTimeLeft(System.currentTimeMillis()) / 1000 + ")");
-    }
+    // Array lists to store the events.
+    ArrayList<Event> currentEventsArray = spaceship.getLog().getEvents();
 
-    // Update the captain's log.
-    if (currentEventsToDisplay.isEmpty()) {
-      captainLog.setText(Constants.NO_EVENTS_LOG_TEXT);
+    // Update the active event log.
+    if (currentEventsArray.isEmpty()) {
+      currentEvents.setText("");
     } else {
-      captainLog.setText(currentEventsToDisplay.toString());
+      StringBuilder toDisplay = new StringBuilder();
+      ArrayList<String> preventCopy = new ArrayList<String>();
+
+      // Loop through all the events to display them in the HUD.
+      for (Event current : currentEventsArray) {
+        if (!preventCopy.contains(current.getDescription())) {
+          toDisplay.append(current.toString()).append('\n');
+          preventCopy.add(current.getDescription());
+        }
+      }
+
+      currentEvents.setText(toDisplay.toString());
     }
-
-    // Update the ship's health, team score, and time left indicators.
-    shipHealth.setText(Constants.SHIP_HEALTH_LABEL + spaceship.getHealth());
-    teamScore.setText(Constants.SHIP_SCORE_LABEL + spaceship.getScore());
-    timeLeft.setText(Constants.SHIP_TIME_LABEL + spaceship.getTimer());
   }
-
 }
