@@ -14,7 +14,6 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
 import jmevr.app.VRApplication;
-import nl.tudelft.pixelperfect.audio.AudioPlayer;
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
@@ -28,6 +27,8 @@ import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 /**
  * Main class representing an active Game process and creating the JMonkey Environment.
  * 
+ * Suppressing the too many fields PMD warning because we will refactor this class next iteration.
+ * 
  * @author David Alderliesten
  * @author Floris Doolaard
  * @author Dmitry Malarev
@@ -35,13 +36,14 @@ import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
  * @author Wouter Zirkzee
  *
  */
+@SuppressWarnings("PMD.TooManyFields")
 public class Game extends VRApplication {
 
   private static Game appGame;
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private Server server;
-  //private AudioPlayer audioPlayer;
+  // private AudioPlayer audioPlayer;
 
   private Spatial observer;
 
@@ -109,15 +111,9 @@ public class Game extends VRApplication {
     scene = new Scene(this);
     scene.createMap();
 
-    //audioPlayer = new AudioPlayer(this);
-    // String[] names = {};
-    // String[] locations = {};
-    // audioPlayer.loadSounds(names, locations);
-
     initNetwork();
 
     spaceship = new Spaceship();
-    spaceship.getLog().setServer(server);
     scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY_MIN,
         Constants.EVENT_SCHEDULER_INTENSITY_MAX);
     scheduler.subscribe(spaceship.getLog());

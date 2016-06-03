@@ -1,5 +1,7 @@
 package nl.tudelft.pixelperfect.gui;
 
+import java.util.ArrayList;
+
 import com.jme3.asset.AssetManager;
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
@@ -9,8 +11,6 @@ import com.jme3.scene.Node;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.game.Constants;
 import nl.tudelft.pixelperfect.game.Spaceship;
-
-import java.util.ArrayList;
 
 /**
  * Class responsible for the display, refreshing, and functionality of the heads-up display (HUD)
@@ -114,7 +114,7 @@ public class GameHeadsUpDisplay {
       // Loop through all the events to display them in the HUD.
       for (Event current : currentEventsArray) {
         if (!preventCopy.contains(current.getSummary())) {
-          toDisplay.append(current.getDescription() + "\n");
+          toDisplay.append(current.getDescription()).append('\n');
           preventCopy.add(current.getSummary());
         }
       }
