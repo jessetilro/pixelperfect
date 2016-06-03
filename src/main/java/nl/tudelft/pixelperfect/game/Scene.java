@@ -42,7 +42,33 @@ public class Scene {
    * Method that contains all objects for the scene.
    */
   public void createMap() {
-    Dome dome = new Dome(new Vector3f(0,0,0), 10, 10, 10, true);
+    createDashboard();
+    createWindow();
+    createBoxObject(new Box(10, 10, 0.01f), new Vector3f(0, 0, 0),
+            "Textures/rusting_metal.JPG");
+    createBoxObject(new Box(2, 4, 0.01f), new Vector3f(0, 4, 0),
+             "Textures/metal_door.JPG");
+    createBoxObject(new Box(10, 0.01f, 10), new Vector3f(0, 0, 0),
+            "Textures/wood.JPG");
+  }
+
+  private void createBoxObject(Box box, Vector3f translation,
+                               String textureLocation){
+    Box newBox = box;
+    Geometry geometry = new Geometry("Box", newBox);
+    Material material = new Material(app.getAssetManager(), basicMat);
+    Texture texture = app.getAssetManager().loadTexture(textureLocation);
+
+    material.setTexture(colorMapStr, texture);
+    geometry.setMaterial(material);
+
+    geometry.setLocalTranslation(translation);
+
+    app.getRootNode().attachChild(geometry);
+  }
+
+  private void createWindow() {
+    Dome dome = new Dome(new Vector3f(0, 0, 0), 10, 10, 10, true);
     Geometry domeGeo = new Geometry("Dome", dome);
     Material domeMat = new Material(app.getAssetManager(), basicMat);
     Texture glass_wire = app.getAssetManager().loadTexture("Textures/Sky/Bright/spheremap.png");
@@ -54,42 +80,9 @@ public class Scene {
     domeGeo.setQueueBucket(RenderQueue.Bucket.Transparent);
     domeGeo.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.HALF_PI, new Vector3f(1, 0, 0)));
     app.getRootNode().attachChild(domeGeo);
+  }
 
-
-    Box backwall = new Box(10, 10, 0.01f);
-    Geometry backWallGeo = new Geometry("backwall", backwall);
-    Material backWallMat = new Material(app.getAssetManager(), basicMat);
-    Texture metal_rust = app.getAssetManager().loadTexture("Textures/rusting_metal.JPG");
-
-    backWallMat.setTexture(colorMapStr, metal_rust);
-    backWallGeo.setMaterial(backWallMat);
-
-    app.getRootNode().attachChild(backWallGeo);
-
-
-    Box door = new Box(2, 4, 0.01f);
-    Geometry doorGeo = new Geometry("door", door);
-    Material doorMat = new Material(app.getAssetManager(), basicMat);
-    Texture doorTexture = app.getAssetManager().loadTexture("Textures/metal_door.JPG");
-
-    doorMat.setTexture(colorMapStr, doorTexture);
-    doorGeo.setMaterial(doorMat);
-
-    doorGeo.setLocalTranslation(new Vector3f(0, 4, 0));
-    app.getRootNode().attachChild(doorGeo);
-
-
-    Box floor = new Box(10, 0.01f, 10);
-    Geometry floorGeo = new Geometry("Pane", floor);
-    Material floorMat = new Material(app.getAssetManager(), basicMat);
-    Texture wood = app.getAssetManager().loadTexture("Textures/wood.JPG");
-
-    floorMat.setTexture("ColorMap", wood);
-    floorGeo.setMaterial(floorMat);
-
-    app.getRootNode().attachChild(floorGeo);
-
-
+  private void createDashboard() {
     Torus torus = new Torus(10, 10, 2, 10);
     Geometry torusGeo = new Geometry("Torus", torus);
     Material torusMat = new Material(app.getAssetManager(), basicMat);
