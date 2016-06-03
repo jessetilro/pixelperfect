@@ -174,5 +174,23 @@ public class EventParameterCollectionTest {
     String expected = "The Question is Number 42 and The Answer is Number 42";
     assertEquals(expected, object.toString());
   }
+  
+  /**
+   * Tests the Debug String method in the case there are no parameters.
+   * 
+   */
+  @Test
+  public void testDebugStringEmpty() {
+    assertEquals("None", parametersEmpty.toDebugString());
+  }
+  
+  /**
+   * Tests the Debug String method in the case there are parameters.
+   * 
+   */
+  @Test
+  public void testDebugString() {
+    assertEquals("42,", parameters.toDebugString());
+  }
 
 }

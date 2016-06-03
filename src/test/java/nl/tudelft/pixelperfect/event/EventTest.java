@@ -7,12 +7,13 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
+import nl.tudelft.pixelperfect.game.Spaceship;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.tudelft.pixelperfect.event.parameter.EventParameter;
-import nl.tudelft.pixelperfect.event.type.CoffeeBoostEvent;
-import nl.tudelft.pixelperfect.game.Spaceship;
+
 
 /**
  * Class for testing the Event class. Suppressing some PMD warnings since it is ok for a test suite
@@ -94,6 +95,10 @@ public abstract class EventTest {
     assertTrue(toTest.isExpired(85));
   }
   
+  /**
+   * Tests the debug string creation method.
+   * 
+   */
   @Test
   public void getDebugString() {
     assertEquals(
@@ -101,14 +106,22 @@ public abstract class EventTest {
         toTest.toDebugString());
   }
   
+  /**
+   * Tests the getDuration method.
+   * 
+   */
   @Test
   public void testGetDuration() {
-    assertEquals(42,toTest.getDuration(), 0.0);
+    assertEquals(42, toTest.getDuration(), 0.0);
   }
   
+  /**
+   * Tests the getTimestamp method.
+   * 
+   */
   @Test
   public void testGetTimestamp() {
-    assertEquals(42,toTest.getTimestamp(), 0.0);
+    assertEquals(42, toTest.getTimestamp(), 0.0);
   }
 
   /**
