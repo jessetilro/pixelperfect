@@ -22,8 +22,6 @@ public class Scene {
 
   private Game app;
   private String basicMat;
-  private String lightingMat;
-  private final String colorStr = "Color";
   private final String colorMapStr = "ColorMap";
 
   /**
@@ -35,7 +33,6 @@ public class Scene {
   public Scene(Game game) {
     app = game;
     basicMat = "Common/MatDefs/Misc/Unshaded.j3md";
-    lightingMat = "Common/MatDefs/Light/Lighting.j3md";
   }
 
   /**
@@ -63,7 +60,7 @@ public class Scene {
    *          Texture of the box.
      */
   private void createBoxObject(Box box, Vector3f translation,
-                               String textureLocation){
+                               String textureLocation) {
     Box newBox = box;
     Geometry geometry = new Geometry("Box", newBox);
     Material material = new Material(app.getAssetManager(), basicMat);
@@ -84,14 +81,16 @@ public class Scene {
     Dome dome = new Dome(new Vector3f(0, 0, 0), 10, 10, 10, true);
     Geometry domeGeo = new Geometry("Dome", dome);
     Material domeMat = new Material(app.getAssetManager(), basicMat);
-    Texture glass_wire = app.getAssetManager().loadTexture("Textures/Sky/Bright/spheremap.png");
+    Texture window = app.getAssetManager().loadTexture("Textures/Sky/Bright/spheremap.png");
 
-    domeMat.setTexture(colorMapStr, glass_wire);
+    domeMat.setTexture(colorMapStr, window);
     domeGeo.setMaterial(domeMat);
 
-    domeMat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+    domeMat.getAdditionalRenderState().setBlendMode(
+            RenderState.BlendMode.Alpha);
     domeGeo.setQueueBucket(RenderQueue.Bucket.Transparent);
-    domeGeo.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.HALF_PI, new Vector3f(1, 0, 0)));
+    domeGeo.setLocalRotation(new Quaternion().fromAngleAxis(
+            FastMath.HALF_PI, new Vector3f(1, 0, 0)));
     app.getRootNode().attachChild(domeGeo);
   }
 
