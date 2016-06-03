@@ -9,6 +9,8 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
+import com.jme3.scene.shape.Cylinder;
+import com.jme3.scene.shape.Dome;
 
 import java.util.ArrayList;
 
@@ -40,20 +42,36 @@ public class Scene {
    * Method that contains all objects for the scene.
    */
   public void createMap() {
-    drawDashboard();
+    Dome dome = new Dome(new Vector3f(0,0,0), 10, 10, 10);
+    Material material = new Material(app.getAssetManager(), basicMat);
+    material.setColor("Color", ColorRGBA.Blue);
+    Geometry geometry = new Geometry("Dome", dome);
+    geometry.setMaterial(material);
+
+//    app.getRootNode().attachChild(geometry);
+//
+    Cylinder cylinder = new Cylinder(10, 10, 10, 1, true);
+    Geometry geometry1 = new Geometry("cylinder", cylinder);
+    geometry1.setMaterial(material);
+    geometry1.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.HALF_PI, new Vector3f(1, 0, 0)));
+    app.getRootNode().attachChild(geometry1);
+
+
+
+//    drawDashboard();
     // floor
     drawPane(new Vector3f(0f, 0f, 0f), ColorRGBA.Yellow, new Quaternion());
-    // walls
+//    // walls
     drawPane(new Vector3f(-8, 7, 0), ColorRGBA.Orange,
         new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1)));
-    drawPane(new Vector3f(8, 7, 0), ColorRGBA.Orange,
-        new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1)));
-    drawPane(new Vector3f(0, 7, -8), ColorRGBA.Green,
-        new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(1, 0, 0)));
-    drawPane(new Vector3f(0, 7, 8), ColorRGBA.Green,
-        new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(1, 0, 0)));
-    drawTimer();
-    addButton(new Vector3f(0, 1, 7), 2, 2);
+//    drawPane(new Vector3f(8, 7, 0), ColorRGBA.Orange,
+//        new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+//    drawPane(new Vector3f(0, 7, -8), ColorRGBA.Green,
+//        new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(1, 0, 0)));
+//    drawPane(new Vector3f(0, 7, 8), ColorRGBA.Green,
+//        new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(1, 0, 0)));
+//    drawTimer();
+//    addButton(new Vector3f(0, 1, 7), 2, 2);
   }
 
   /**

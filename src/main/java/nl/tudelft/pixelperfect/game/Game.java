@@ -6,13 +6,18 @@ import com.jme3.input.InputManager;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
+import com.jme3.material.Material;
+import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.network.Network;
 import com.jme3.network.Server;
 import com.jme3.network.serializing.Serializer;
+import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
+import com.jme3.scene.shape.Dome;
+import com.jme3.util.SkyFactory;
 import jmevr.app.VRApplication;
 import nl.tudelft.pixelperfect.audio.AudioPlayer;
 import nl.tudelft.pixelperfect.client.ConnectListener;
@@ -108,6 +113,8 @@ public class Game extends VRApplication {
 
     scene = new Scene(this);
     scene.createMap();
+
+
 
     //audioPlayer = new AudioPlayer(this);
     // String[] names = {};
