@@ -17,7 +17,13 @@
     "summary": "Plasma Leak",
     "description": "Plasma pressure is dropping, there must be a leak!",
     "duration": 30000,
-    "damage": 10
+    "damage": 10,
+    "parameters" : [
+      {
+      "key": "sector",
+      "summary": "The sector of the ship that needs repairs"
+      }
+    ]
   },
   {
     "type": 2,
