@@ -7,6 +7,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+import java.util.HashMap;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -94,6 +96,29 @@ public class ServerListenerTest {
 
     // Verification
     verifyNoMoreInteractions(mockedMessage);
+  }
+  
+  /**
+   * Tests what the Listener does if an event with parameters is sent.
+   * 
+   */
+  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
+  @Test
+  public void testEventCompletedParameters() {
+    Spaceship mockedShip = mock(Spaceship.class);
+    final EventLog mockedLog = mock(EventLog.class);
+    
+    final HostedConnection mockedSource = mock(HostedConnection.class);
+    EventCompletedMessage message = new EventCompletedMessage(2);
+    HashMap<String, Integer> map = new HashMap<String, Integer>();
+    map.put("test", 42);
+    message.setParameters(map);
+    
+    when(mockedGame.getSpaceship()).thenReturn(mockedShip);
+    when(mockedShip.getLog()).thenReturn(mockedLog);
+    
+    object.messageReceived(mockedSource, message);
+    
   }
 
   /**

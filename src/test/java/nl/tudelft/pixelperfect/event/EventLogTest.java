@@ -9,16 +9,16 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.AsteroidImpactEvent;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.event.type.FireOutbreakEvent;
+import nl.tudelft.pixelperfect.event.type.PlasmaLeakEvent;
 import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
@@ -32,7 +32,6 @@ import nl.tudelft.pixelperfect.game.Spaceship;
 public class EventLogTest extends EventListenerTest {
   private EventLog object;
   private Spaceship mockedSpaceship;
-  private Server mockedServer;
 
   /**
    * Setting test object and mocked dependencies.
@@ -40,9 +39,7 @@ public class EventLogTest extends EventListenerTest {
   @Before
   public void initialise() {
     mockedSpaceship = mock(Spaceship.class);
-    mockedServer = mock(Server.class);
     object = new EventLog(mockedSpaceship);
-    object.setServer(mockedServer);
   }
 
   /**
@@ -106,6 +103,22 @@ public class EventLogTest extends EventListenerTest {
     object.discard(evt1);
     assertFalse(object.getEvents().contains(evt1));
     verify(mockedSpaceship, never()).updateHealth(anyDouble());
+  }
+  
+  /**
+   * Tests the complete method if the parameters don't match.
+   * 
+   */
+  @Test
+  public void testCompleteNoParam() {
+    PlasmaLeakEvent evt1 = new PlasmaLeakEvent(0, "Whale", "Shark", 0, 2323432, 50);
+    Collection<EventParameter> collection = new ArrayList<EventParameter>();
+    collection.add(new EventParameter("sector", 4));
+    evt1.setParameters(collection);
+    object.notify(evt1);
+    object.complete(EventTypes.PLASMA_LEAK, new ArrayList<EventParameter>());
+    assertEquals(1, object.getEvents().size());
+    
   }
 
   /**

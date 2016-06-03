@@ -3,8 +3,6 @@ package nl.tudelft.pixelperfect.event;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.jme3.network.Server;
-
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.game.Spaceship;
@@ -20,7 +18,6 @@ public class EventLog implements EventListener {
 
   private ArrayList<Event> events;
   private Spaceship spaceship;
-  private Server server;
 
   /**
    * Construct a new EventLog instance.
@@ -34,39 +31,12 @@ public class EventLog implements EventListener {
   }
 
   /**
-   * Sets the server for reference purposes.
-   * 
-   * @param server
-   *          The server.
-   */
-  public synchronized void setServer(Server server) {
-    this.server = server;
-  }
-
-  /**
    * Get the current log of events.
    * 
    * @return the list of events.
    */
-  public ArrayList<Event> getEvents() {
+  public synchronized ArrayList<Event> getEvents() {
     return this.events;
-  }
-
-  /**
-   * Get an Event by its numeric identifier.
-   * 
-   * @param id
-   *          The identifier.
-   * @return The Event.
-   */
-  private Event getById(int id) {
-    for (int t = 0; t < events.size(); t++) {
-      Event event = events.get(t);
-      if (event.getId() == id) {
-        return event;
-      }
-    }
-    return null;
   }
 
   /**
@@ -77,7 +47,7 @@ public class EventLog implements EventListener {
    * 
    * @return A collection of Events with the given type.
    */
-  private Collection<Event> getByType(EventTypes type) {
+  private synchronized Collection<Event> getByType(EventTypes type) {
     Collection<Event> result = new ArrayList<Event>();
     for (Event event : events) {
       if (event.getType() == type) {
@@ -104,8 +74,7 @@ public class EventLog implements EventListener {
    */
   public synchronized void notify(Event event) {
     events.add(event);
-    System.out.println("The ship received a new event: " + event.getDescription());
-    String type = event.getClass().getSimpleName();
+    System.out.println("The ship received a new event: " + event.getSummary());
   }
 
   /**
@@ -137,7 +106,7 @@ public class EventLog implements EventListener {
    * @param parameters
    *          The parameters the Event should have.
    * 
-   * @return
+   * 
    */
   public synchronized void complete(EventTypes type, Collection<EventParameter> parameters) {
     Collection<Event> candidates = getByType(type);
@@ -151,10 +120,10 @@ public class EventLog implements EventListener {
     }
 
     if (candidates.size() > 0) {
+      System.out.println("Wrong task performed: wrong parameters entered");
+    } else {
       System.out
           .println("Wrong task performed: there is no active Event of type " + type.toString());
-    } else {
-      System.out.println("Wrong task performed: wrong parameters entered");
     }
 
     spaceship.updateHealth(-10);

@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 
 import com.jme3.scene.Spatial;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Settings;
@@ -26,6 +27,7 @@ import org.mockito.Mockito;
  * @author David Alderliesten
  * @author Wouter Zirkzee
  */
+@SuppressFBWarnings("URF_UNREAD_FIELD")
 @SuppressWarnings("PMD")
 public class PlayStateTest extends GameStateTest {
 

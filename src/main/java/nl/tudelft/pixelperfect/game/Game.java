@@ -26,8 +26,14 @@ import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
 /**
+<<<<<<< HEAD
  * Main class representing an active Game process and creating the JMonkey Environment.
  *
+=======
+ * Main class representing an active Game process and creating the JMonkey Environment. Suppressing
+ * the too many fields PMD warning because we will refactor this class next iteration.
+ * 
+>>>>>>> de0cd0a94891d510e5e7fda36b1d539ceac7ea92
  * @author David Alderliesten
  * @author Floris Doolaard
  * @author Dmitry Malarev
@@ -35,6 +41,7 @@ import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
  * @author Wouter Zirkzee
  *
  */
+@SuppressWarnings("PMD.TooManyFields")
 public class Game extends VRApplication {
 
   private static Game appGame;
@@ -42,9 +49,7 @@ public class Game extends VRApplication {
   private EventScheduler scheduler;
   private Server server;
   private AudioPlayer audioPlayer;
-
   private Spatial observer;
-
   private boolean moveForward;
   private boolean moveBackwards;
   private boolean rotateLeft;
@@ -109,6 +114,7 @@ public class Game extends VRApplication {
     scene = new Scene(this);
     scene.createMap();
 
+
     audioPlayer = new AudioPlayer(this);
     String[] names = {};
     String[] locations = {};
@@ -117,7 +123,6 @@ public class Game extends VRApplication {
     initNetwork();
 
     spaceship = new Spaceship();
-    spaceship.getLog().setServer(server);
     scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY_MIN,
             Constants.EVENT_SCHEDULER_INTENSITY_MAX);
     scheduler.subscribe(spaceship.getLog());

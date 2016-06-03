@@ -76,6 +76,12 @@ public class ServerListener implements MessageListener<HostedConnection> {
     }
   }
 
+  /**
+   * Process a received EventCompletedMessage.
+   * 
+   * @param message
+   *          A received EventCompletedMessage.
+   */
   public synchronized void processEventCompletedMessage(EventCompletedMessage message) {
     EventTypes type = getType(message);
     Collection<EventParameter> parameters = getParameters(message);

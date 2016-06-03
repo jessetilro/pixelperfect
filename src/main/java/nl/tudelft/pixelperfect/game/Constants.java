@@ -27,15 +27,23 @@ public final class Constants {
 
   public static final int DEBUG_TIME_WIDTH_OFFSET = 400;
   public static final int DEBUG_TIME_HEIGHT_OFFSET = 0;
+  
+  public static final int DEBUG_CONNECTED_WIDTH_OFFSET = 400;
+  public static final int DEBUG_CONNECTED_HEIGHT_OFFSET = -50;
+  
+  public static final int DEBUG_IP_WIDTH_OFFSET = 400;
+  public static final int DEBUG_IP_HEIGHT_OFFSET = -100;
 
   // Text constants for the in-game debug HUD.
   public static final String DEBUG_NO_EVENTS_LOG_TEXT = "No events currently active";
   public static final String DEBUG_SHIP_HEALTH_LABEL = "Health: ";
   public static final String DEBUG_SHIP_SCORE_LABEL = "Score: ";
   public static final String DEBUG_SHIP_TIME_LABEL = "Time: ";
+  public static final String DEBUG_CONNECTED_LABEL = "Players Connected: ";
+  public static final String DEBUG_IP_LABEL = "Connection Address: ";
 
   // Positioning and scaling related constants for the in-game HUD.
-  public static final int GUI_LOG_WIDTH_OFFSET = 1000;
+  public static final int GUI_LOG_WIDTH_OFFSET = 1350;
   public static final int GUI_HEALTH_WIDTH_OFFSET = 1700;
   
   public static final int GUI_HEALTH_TEXT_SIZE_SCALE = 2;

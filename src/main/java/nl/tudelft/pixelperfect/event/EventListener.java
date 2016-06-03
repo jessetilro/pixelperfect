@@ -3,8 +3,6 @@ package nl.tudelft.pixelperfect.event;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.jme3.network.Server;
-
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
 
@@ -54,12 +52,4 @@ public interface EventListener {
    * @return All events in the log.
    */
   ArrayList<Event> getEvents();
-
-  /**
-   * Sets the server for reference purposes.
-   * 
-   * @param server
-   *          The server.
-   */
-  void setServer(Server server);
 }
