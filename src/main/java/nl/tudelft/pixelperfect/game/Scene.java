@@ -1,10 +1,7 @@
 package nl.tudelft.pixelperfect.game;
 
-import com.jme3.font.BitmapFont;
-import com.jme3.font.BitmapText;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
-import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
@@ -12,17 +9,14 @@ import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
 import com.jme3.scene.shape.Dome;
-import com.jme3.scene.shape.StripBox;
 import com.jme3.scene.shape.Torus;
 import com.jme3.texture.Texture;
 
-import java.util.ArrayList;
-
 /**
  * Class for drawing objects in the game.
- * 
+ *
  * @author Wouter Zirkzee
- * 
+ *
  */
 public class Scene {
 
@@ -34,7 +28,7 @@ public class Scene {
 
   /**
    * Constructor for Scene.
-   * 
+   *
    * @param game
    *          The game for which a Scene is built.
    */
@@ -60,7 +54,7 @@ public class Scene {
     domeGeo.setQueueBucket(RenderQueue.Bucket.Transparent);
     domeGeo.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.HALF_PI, new Vector3f(1, 0, 0)));
     app.getRootNode().attachChild(domeGeo);
-//
+
 
     Box backwall = new Box(10, 10, 0.01f);
     Geometry backWallGeo = new Geometry("backwall", backwall);
@@ -88,9 +82,9 @@ public class Scene {
     Box floor = new Box(10, 0.01f, 10);
     Geometry floorGeo = new Geometry("Pane", floor);
     Material floorMat = new Material(app.getAssetManager(), basicMat);
-    Texture metal = app.getAssetManager().loadTexture("Textures/wood.JPG");
+    Texture wood = app.getAssetManager().loadTexture("Textures/wood.JPG");
 
-    floorMat.setTexture("ColorMap", metal);
+    floorMat.setTexture("ColorMap", wood);
     floorGeo.setMaterial(floorMat);
 
     app.getRootNode().attachChild(floorGeo);
