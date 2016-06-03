@@ -22,7 +22,6 @@ public class Scene {
 
   private Game app;
   private String basicMat;
-  private final String colorMapStr = "ColorMap";
 
   /**
    * Constructor for Scene.
@@ -66,7 +65,7 @@ public class Scene {
     Material material = new Material(app.getAssetManager(), basicMat);
     Texture texture = app.getAssetManager().loadTexture(textureLocation);
 
-    material.setTexture(colorMapStr, texture);
+    material.setTexture("ColorMap", texture);
     geometry.setMaterial(material);
 
     geometry.setLocalTranslation(translation);
@@ -83,7 +82,7 @@ public class Scene {
     Material domeMat = new Material(app.getAssetManager(), basicMat);
     Texture window = app.getAssetManager().loadTexture("Textures/Sky/Bright/spheremap.png");
 
-    domeMat.setTexture(colorMapStr, window);
+    domeMat.setTexture("ColorMap", window);
     domeGeo.setMaterial(domeMat);
 
     domeMat.getAdditionalRenderState().setBlendMode(
