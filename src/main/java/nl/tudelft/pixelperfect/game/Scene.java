@@ -2,7 +2,6 @@ package nl.tudelft.pixelperfect.game;
 
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
-import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
@@ -11,13 +10,10 @@ import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
-import com.jme3.scene.shape.Cylinder;
 import com.jme3.scene.shape.Dome;
+import com.jme3.scene.shape.Torus;
 import com.jme3.texture.Texture;
-import com.jme3.util.SkyFactory;
-import org.lwjgl.system.libffi.Closure;
 
 import java.util.ArrayList;
 
@@ -32,7 +28,6 @@ public class Scene {
   private Game app;
   private String basicMat;
   private String lightingMat;
-  private String texturedMat;
   private String colorStr = "Color";
   private ArrayList<Geometry> buttons = new ArrayList<Geometry>();
 
@@ -53,14 +48,10 @@ public class Scene {
    * Method that contains all objects for the scene.
    */
   public void createMap() {
-    Spatial sky = SkyFactory.createSky(
-        app.getAssetManager(), "Textures/Sky/Bright/spheremap.png", SkyFactory.EnvMapType.EquirectMap);
-    app.getRootNode().attachChild(sky);
-
     Dome dome = new Dome(new Vector3f(0,0,0), 10, 10, 10, true);
     Geometry domeGeo = new Geometry("Dome", dome);
     Material domeMat = new Material(app.getAssetManager(), basicMat);
-    Texture glass_wire = app.getAssetManager().loadTexture("Textures/glass_wire.JPG");
+    Texture glass_wire = app.getAssetManager().loadTexture("Textures/Sky/Bright/spheremap.png");
 
     domeMat.setTexture("ColorMap", glass_wire);
     domeGeo.setMaterial(domeMat);
@@ -69,7 +60,7 @@ public class Scene {
     domeGeo.setQueueBucket(RenderQueue.Bucket.Transparent);
     domeGeo.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.HALF_PI, new Vector3f(1, 0, 0)));
     app.getRootNode().attachChild(domeGeo);
-
+//
 
     Box backwall = new Box(10, 10, 0.01f);
     Geometry backWallGeo = new Geometry("backwall", backwall);
@@ -94,15 +85,27 @@ public class Scene {
     app.getRootNode().attachChild(doorGeo);
 
 
-    Box pane = new Box(10, 0.01f, 10);
-    Geometry geometry3 = new Geometry("Pane", pane);
-    Material material2 = new Material(app.getAssetManager(), basicMat);
-    Texture metal = app.getAssetManager().loadTexture("Textures/metal_crosshatch.JPG");
+    Box floor = new Box(10, 0.01f, 10);
+    Geometry floorGeo = new Geometry("Pane", floor);
+    Material floorMat = new Material(app.getAssetManager(), basicMat);
+    Texture metal = app.getAssetManager().loadTexture("Textures/wood.JPG");
 
-    material2.setTexture("ColorMap", metal);
-    geometry3.setMaterial(material2);
+    floorMat.setTexture("ColorMap", metal);
+    floorGeo.setMaterial(floorMat);
 
-    app.getRootNode().attachChild(geometry3);
+    app.getRootNode().attachChild(floorGeo);
+
+
+    Torus torus = new Torus(10, 10, 2, 10);
+    Geometry torusGeo = new Geometry("Torus", torus);
+    Material torusMat = new Material(app.getAssetManager(), basicMat);
+    Texture metal2 = app.getAssetManager().loadTexture("Textures/metal.JPG");
+
+    torusMat.setTexture("ColorMap", metal2);
+    torusGeo.setMaterial(torusMat);
+
+    torusGeo.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.HALF_PI, new Vector3f(1, 0, 0)));
+    app.getRootNode().attachChild(torusGeo);
 
 //    drawDashboard();
 //     floor

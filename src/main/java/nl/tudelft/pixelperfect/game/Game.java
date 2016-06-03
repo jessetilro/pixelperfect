@@ -94,7 +94,7 @@ public class Game extends VRApplication {
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.NO_GUI, false);
 
     // Set frustum distances here before app starts.
-    appGame.preconfigureFrustrumNearFar(0.1f, 512f);
+//    appGame.preconfigureFrustrumNearFar(0.1f, 512f);
 
     appGame.start();
   }
