@@ -151,10 +151,10 @@ public class EventLog implements EventListener {
     }
 
     if (candidates.size() > 0) {
+      System.out.println("Wrong task performed: wrong parameters entered");
+    } else {
       System.out
           .println("Wrong task performed: there is no active Event of type " + type.toString());
-    } else {
-      System.out.println("Wrong task performed: wrong parameters entered");
     }
 
     spaceship.updateHealth(-10);
