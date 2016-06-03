@@ -9,6 +9,7 @@ import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.game.Constants;
 import nl.tudelft.pixelperfect.game.Spaceship;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 
 /**
@@ -32,6 +33,7 @@ public class DebugHeadsUpDisplay {
   private BitmapText teamScore;
   private BitmapText timeLeft;
   private BitmapText playersConnected;
+  private BitmapText localAddress;
 
   /**
    * Constructor for the debug heads-up display for in-game utilization.
@@ -72,6 +74,7 @@ public class DebugHeadsUpDisplay {
     guiNodes.attachChild(teamScore);
     guiNodes.attachChild(timeLeft);
     guiNodes.attachChild(playersConnected);
+    guiNodes.attachChild(localAddress);
   }
 
   /**
@@ -102,6 +105,10 @@ public class DebugHeadsUpDisplay {
     playersConnected = new BitmapText(hudFont, true);
     playersConnected.setLocalTranslation(screenWidth + 250 - Constants.DEBUG_CONNECTED_WIDTH_OFFSET,
         screenHeight - Constants.DEBUG_CONNECTED_HEIGHT_OFFSET, 0);
+
+    localAddress = new BitmapText(hudFont, true);
+    localAddress.setLocalTranslation(screenWidth + 250 - Constants.DEBUG_IP_WIDTH_OFFSET,
+        screenHeight - Constants.DEBUG_IP_HEIGHT_OFFSET, 0);
   }
 
   /**
@@ -129,6 +136,14 @@ public class DebugHeadsUpDisplay {
     teamScore.setText(Constants.DEBUG_SHIP_SCORE_LABEL + spaceship.getScore());
     timeLeft.setText(Constants.DEBUG_SHIP_TIME_LABEL + spaceship.getTimer());
     playersConnected.setText(Constants.DEBUG_CONNECTED_LABEL + spaceship.getCrew().size());
+
+    // Printing the server local IP address.
+    try {
+      localAddress.setText(Constants.DEBUG_IP_LABEL + InetAddress.getLocalHost());
+    } catch (Exception error) {
+      // Printing the IP error if it occurs.
+      System.out.println(error);
+    }
   }
 
   /**
@@ -140,6 +155,7 @@ public class DebugHeadsUpDisplay {
     teamScore.setText("");
     timeLeft.setText("");
     playersConnected.setText("");
+    localAddress.setText("");
   }
 
 }
