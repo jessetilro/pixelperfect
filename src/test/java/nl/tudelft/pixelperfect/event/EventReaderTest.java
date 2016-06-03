@@ -7,6 +7,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Map;
+
 import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
@@ -78,14 +80,6 @@ public class EventReaderTest {
   }
 
   /**
-   * When data is queried before anything was read, it should yield no data whatsoever.
-   */
-  @Test
-  public void testNoReadingBeforeQuery() {
-    assertFalse(object.has(1));
-  }
-
-  /**
    * When calling the getSummary method, it should return the correct summary of the Event type with
    * the specified type identifier.
    */
@@ -151,6 +145,28 @@ public class EventReaderTest {
   public void testGetDurationInvalid() {
     object.readFromFile(fileGood);
     assertEquals(0, object.getDuration(-1));
+  }
+
+  /**
+   * When getting a map of key / summary associations for the parameters of a specific type of
+   * Event, it should yield the correct map.
+   */
+  @Test
+  public void testGetParameters() {
+    object.readFromFile(fileGood);
+    Map<String, String> result = object.getParameters(1);
+    assertEquals("The color of the banana.", result.get("color"));
+  }
+  
+  /**
+   * When getting a map of key / summary associations for the parameters of a specific type of
+   * Event that were not defined for that type, it should yield an empty map.
+   */
+  @Test
+  public void testGetParametersNotDefined() {
+    object.readFromFile(fileGood);
+    Map<String, String> result = object.getParameters(2);
+    assertEquals(0, result.size());
   }
 
 }

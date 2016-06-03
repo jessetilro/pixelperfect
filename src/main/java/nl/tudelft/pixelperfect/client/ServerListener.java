@@ -1,12 +1,20 @@
 package nl.tudelft.pixelperfect.client;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+
 import com.jme3.network.Filters;
 import com.jme3.network.HostedConnection;
 import com.jme3.network.Message;
 import com.jme3.network.MessageListener;
 import com.jme3.network.Server;
 
-import nl.tudelft.pixelperfect.Game;
+import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
+import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
+import nl.tudelft.pixelperfect.event.type.EventTypes;
+import nl.tudelft.pixelperfect.game.Game;
 
 /**
  * Listener for the Game's server, which handles incoming messages.
@@ -44,7 +52,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
    * Uses the server of the game to broadcast messages that has come in here.
    * 
    * @param server
-   *          , the server of the game.
+   *          The server of the game.
    */
   public synchronized void setServer(Server server) {
     this.server = server;
@@ -61,11 +69,52 @@ public class ServerListener implements MessageListener<HostedConnection> {
    */
   public synchronized void messageReceived(HostedConnection source, Message message) {
     if (message instanceof EventCompletedMessage) {
-      EventCompletedMessage eve = (EventCompletedMessage) message;
-      System.out.println("Received a completed event: " + eve.getLabel());
-      app.getSpaceship().getLog().complete(eve.getCompletedEvent());
+      EventCompletedMessage completedMessage = (EventCompletedMessage) message;
+      processEventCompletedMessage(completedMessage);
     } else if (message instanceof RoleChosenMessage) {
       server.broadcast(Filters.notEqualTo(source), message);
     }
+  }
+
+  /**
+   * Process a received EventCompletedMessage.
+   * 
+   * @param message
+   *          A received EventCompletedMessage.
+   */
+  public synchronized void processEventCompletedMessage(EventCompletedMessage message) {
+    EventTypes type = getType(message);
+    Collection<EventParameter> parameters = getParameters(message);
+    System.out.println("Received a completed event: " + type.toString());
+    app.getSpaceship().getLog().complete(type, parameters);
+  }
+
+  /**
+   * Convert type attribute of message from serializable to more abstract.
+   * 
+   * @param The
+   *          message to extract the attribute from.
+   * 
+   * @return An Event Type.
+   */
+  private EventTypes getType(EventCompletedMessage message) {
+    return EventTypes.values()[message.getType()];
+  }
+
+  /**
+   * Convert parameters attribute of message from serializable to more abstract.
+   * 
+   * @param message
+   *          The message to extract the attribute from.
+   * 
+   * @return A collection of EventParameters.
+   */
+  private Collection<EventParameter> getParameters(EventCompletedMessage message) {
+    Map<String, Integer> structureFrom = message.getParameters();
+    Collection<EventParameter> structureTo = new ArrayList<EventParameter>();
+    for (Map.Entry<String, Integer> param : structureFrom.entrySet()) {
+      structureTo.add(new EventParameter(param.getKey(), param.getValue()));
+    }
+    return structureTo;
   }
 }

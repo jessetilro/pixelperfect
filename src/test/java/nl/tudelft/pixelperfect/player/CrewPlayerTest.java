@@ -2,10 +2,11 @@ package nl.tudelft.pixelperfect.player;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import nl.tudelft.pixelperfect.Spaceship;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import nl.tudelft.pixelperfect.game.Spaceship;
 /**
  * Test Suite for the CrewPlayer class.
  * 

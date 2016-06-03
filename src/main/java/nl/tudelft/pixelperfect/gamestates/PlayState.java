@@ -2,34 +2,40 @@ package nl.tudelft.pixelperfect.gamestates;
 
 import com.jme3.scene.Spatial;
 import jmevr.app.VRApplication;
-import nl.tudelft.pixelperfect.Game;
-import nl.tudelft.pixelperfect.Spaceship;
+
 import nl.tudelft.pixelperfect.event.EventScheduler;
+import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.game.Settings;
+import nl.tudelft.pixelperfect.game.Spaceship;
+import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
 /**
  * State for when you are playing the game.
  *
+ * @author David Alderliesten
  * @author Wouter Zirkzee
  */
 public class PlayState extends GameState {
 
   private Spatial observer;
   private Spaceship spaceship;
-  private GameHeadsUpDisplay headsUpDisplay;
+  private DebugHeadsUpDisplay debugDisplay;
+  private GameHeadsUpDisplay gameDisplay;
   private EventScheduler scheduler;
 
   /**
    * Constructor for PlayState.
    *
    * @param game
-   *            Game for which it controlls the state.
+   *          Game for which it controlls the state.
    */
   public PlayState(Game game) {
     super(game);
     observer = game.getGameObserver();
     spaceship = game.getSpaceship();
-    headsUpDisplay = game.getGameHud();
+    debugDisplay = game.getDebugHud();
+    gameDisplay = game.getGameHud();
     scheduler = game.getScheduler();
   }
 
@@ -44,16 +50,23 @@ public class PlayState extends GameState {
 
     scheduler.update(tpf);
     spaceship.update(tpf);
+    
+    // Refresh the game HUD.
+    gameDisplay.updateHud();
 
-    // Update the in-game heads up display.
-    headsUpDisplay.updateHud();
+    // If debug mode is enabled, activate the debug update.
+    if (Settings.isDebug()) {
+      debugDisplay.updateHud();
+    } else {
+      debugDisplay.clearHud();
+    }
   }
 
   /**
    * Method to check for movement.
    *
    * @param tpf
-   *           Time since last check.
+   *          Time since last check.
    */
   public void updateMovement(float tpf) {
     if (game.isMoveForward()) {
@@ -68,13 +81,17 @@ public class PlayState extends GameState {
     if (game.isRotateRight()) {
       observer.rotate(0, -0.75f * tpf, 0);
     }
+    if (game.isDebugOnTrigger()) {
+      Settings.setIsDebug(true);
+    } else if (game.isDebugOffTrigger()) {
+      Settings.setIsDebug(false);
+    }
   }
 
   /**
    * Method to update the state.
    *
-   * @return
-   *        new state.
+   * @return new state.
    */
   public GameState handleState() {
     if (spaceship.isVictorious()) {

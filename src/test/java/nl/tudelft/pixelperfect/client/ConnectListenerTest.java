@@ -14,8 +14,8 @@ import org.junit.Test;
 import com.jme3.network.HostedConnection;
 import com.jme3.network.Server;
 
-import nl.tudelft.pixelperfect.Game;
-import nl.tudelft.pixelperfect.Spaceship;
+import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
  * Test Suite for the ConnectListener class.

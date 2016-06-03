@@ -1,6 +1,6 @@
 package nl.tudelft.pixelperfect.gamestates;
 
-import nl.tudelft.pixelperfect.Game;
+import nl.tudelft.pixelperfect.game.Game;
 
 /**
  * Abstract class for the other GameStates.
