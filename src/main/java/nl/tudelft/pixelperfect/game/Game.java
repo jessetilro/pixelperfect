@@ -108,15 +108,9 @@ public class Game extends VRApplication {
     scene = new Scene(this);
     scene.createMap();
 
-    // audioPlayer = new AudioPlayer(this);
-    // String[] names = {};
-    // String[] locations = {};
-    // audioPlayer.loadSounds(names, locations);
-
     initNetwork();
 
     spaceship = new Spaceship();
-    spaceship.getLog().setServer(server);
     scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY_MIN,
         Constants.EVENT_SCHEDULER_INTENSITY_MAX);
     scheduler.subscribe(spaceship.getLog());

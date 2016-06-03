@@ -3,8 +3,6 @@ package nl.tudelft.pixelperfect.event;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.jme3.network.Server;
-
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.game.Spaceship;
@@ -20,7 +18,6 @@ public class EventLog implements EventListener {
 
   private ArrayList<Event> events;
   private Spaceship spaceship;
-  private Server server;
 
   /**
    * Construct a new EventLog instance.
@@ -34,39 +31,12 @@ public class EventLog implements EventListener {
   }
 
   /**
-   * Sets the server for reference purposes.
-   * 
-   * @param server
-   *          The server.
-   */
-  public synchronized void setServer(Server server) {
-    this.server = server;
-  }
-
-  /**
    * Get the current log of events.
    * 
    * @return the list of events.
    */
   public ArrayList<Event> getEvents() {
     return this.events;
-  }
-
-  /**
-   * Get an Event by its numeric identifier.
-   * 
-   * @param id
-   *          The identifier.
-   * @return The Event.
-   */
-  private Event getById(int id) {
-    for (int t = 0; t < events.size(); t++) {
-      Event event = events.get(t);
-      if (event.getId() == id) {
-        return event;
-      }
-    }
-    return null;
   }
 
   /**
