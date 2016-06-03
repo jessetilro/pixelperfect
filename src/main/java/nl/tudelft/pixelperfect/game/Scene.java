@@ -52,6 +52,16 @@ public class Scene {
             "Textures/wood.JPG");
   }
 
+  /**
+   * Create a box object.
+   *
+   * @param box
+   *          New box with the dimensions of the box.
+   * @param translation
+   *          Translation of the box.
+   * @param textureLocation
+   *          Texture of the box.
+     */
   private void createBoxObject(Box box, Vector3f translation,
                                String textureLocation){
     Box newBox = box;
@@ -67,6 +77,9 @@ public class Scene {
     app.getRootNode().attachChild(geometry);
   }
 
+  /**
+   * Create the windows of the spaceship.
+   */
   private void createWindow() {
     Dome dome = new Dome(new Vector3f(0, 0, 0), 10, 10, 10, true);
     Geometry domeGeo = new Geometry("Dome", dome);
@@ -82,6 +95,9 @@ public class Scene {
     app.getRootNode().attachChild(domeGeo);
   }
 
+  /**
+   * Create the dashboard of the cockpit.
+   */
   private void createDashboard() {
     Torus torus = new Torus(10, 10, 2, 10);
     Geometry torusGeo = new Geometry("Torus", torus);
