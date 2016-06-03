@@ -3,14 +3,19 @@ package nl.tudelft.pixelperfect.game;
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
 import com.jme3.material.Material;
+import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 import com.jme3.scene.shape.Cylinder;
 import com.jme3.scene.shape.Dome;
+import com.jme3.texture.Texture;
+import com.jme3.util.SkyFactory;
 
 import java.util.ArrayList;
 
@@ -42,28 +47,50 @@ public class Scene {
    * Method that contains all objects for the scene.
    */
   public void createMap() {
-    Dome dome = new Dome(new Vector3f(0,0,0), 10, 10, 10);
-    Material material = new Material(app.getAssetManager(), basicMat);
-    material.setColor("Color", ColorRGBA.Blue);
-    Geometry geometry = new Geometry("Dome", dome);
-    geometry.setMaterial(material);
+    Spatial sky = SkyFactory.createSky(
+        app.getAssetManager(), "Textures/Sky/Bright/spheremap.png", SkyFactory.EnvMapType.EquirectMap);
+    app.getRootNode().attachChild(sky);
 
-//    app.getRootNode().attachChild(geometry);
+    Dome dome = new Dome(new Vector3f(0,0,0), 10, 10, 10, true);
+    Geometry domeGeo = new Geometry("Dome", dome);
+    
+    Material material = new Material(app.getAssetManager(), basicMat);
+    material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+    domeGeo.setQueueBucket(RenderQueue.Bucket.Transparent);
+    Texture glass_wire = app.getAssetManager().loadTexture("Textures/glass_wire.JPG");
+    material.setTexture("ColorMap", glass_wire);
+    domeGeo.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.HALF_PI, new Vector3f(1, 0, 0)));
+    domeGeo.setMaterial(material);
+
+    app.getRootNode().attachChild(domeGeo);
 //
-    Cylinder cylinder = new Cylinder(10, 10, 10, 1, true);
+    Box cylinder = new Box(10, 10, 0.01f);
+    Material materia1l = new Material(app.getAssetManager(), basicMat);
+
+    Texture metal_rust = app.getAssetManager().loadTexture("Textures/rusting_metal.JPG");
+    materia1l.setTexture("ColorMap", metal_rust);
     Geometry geometry1 = new Geometry("cylinder", cylinder);
-    geometry1.setMaterial(material);
-    geometry1.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.HALF_PI, new Vector3f(1, 0, 0)));
+    geometry1.setMaterial(materia1l);
+
     app.getRootNode().attachChild(geometry1);
 
 
+    Box pane = new Box(10, 0.01f, 10);
+    Geometry geometry3 = new Geometry("Pane", pane);
+    Material material2 = new Material(app.getAssetManager(), basicMat);
+    Texture metal = app.getAssetManager().loadTexture("Textures/metal_crosshatch.JPG");
+    material2.setTexture("ColorMap", metal);
+    geometry3.setMaterial(material2);
+
+    app.getRootNode().attachChild(geometry3);
+
 
 //    drawDashboard();
-    // floor
-    drawPane(new Vector3f(0f, 0f, 0f), ColorRGBA.Yellow, new Quaternion());
+//     floor
+//    drawPane(new Vector3f(0f, 0f, 0f), ColorRGBA.Yellow, new Quaternion());
 //    // walls
-    drawPane(new Vector3f(-8, 7, 0), ColorRGBA.Orange,
-        new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1)));
+//    drawPane(new Vector3f(-8, 7, 0), ColorRGBA.Orange,
+//        new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1)));
 //    drawPane(new Vector3f(8, 7, 0), ColorRGBA.Orange,
 //        new Quaternion().fromAngleAxis(90 * FastMath.DEG_TO_RAD, new Vector3f(0, 0, 1)));
 //    drawPane(new Vector3f(0, 7, -8), ColorRGBA.Green,
