@@ -2,6 +2,7 @@ package nl.tudelft.pixelperfect.game;
 
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
+import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
@@ -16,6 +17,7 @@ import com.jme3.scene.shape.Cylinder;
 import com.jme3.scene.shape.Dome;
 import com.jme3.texture.Texture;
 import com.jme3.util.SkyFactory;
+import org.lwjgl.system.libffi.Closure;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,8 @@ public class Scene {
 
   private Game app;
   private String basicMat;
+  private String lightingMat;
+  private String texturedMat;
   private String colorStr = "Color";
   private ArrayList<Geometry> buttons = new ArrayList<Geometry>();
 
@@ -40,7 +44,9 @@ public class Scene {
    */
   public Scene(Game game) {
     app = game;
-    basicMat = "jmevr/shaders/Unshaded.j3md";
+//    basicMat = "jmevr/shaders/Unshaded.j3md";
+    basicMat = "Common/MatDefs/Misc/Unshaded.j3md";
+    lightingMat = "Common/MatDefs/Light/Lighting.j3md";
   }
 
   /**
@@ -53,37 +59,50 @@ public class Scene {
 
     Dome dome = new Dome(new Vector3f(0,0,0), 10, 10, 10, true);
     Geometry domeGeo = new Geometry("Dome", dome);
-    
-    Material material = new Material(app.getAssetManager(), basicMat);
-    material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
-    domeGeo.setQueueBucket(RenderQueue.Bucket.Transparent);
+    Material domeMat = new Material(app.getAssetManager(), basicMat);
     Texture glass_wire = app.getAssetManager().loadTexture("Textures/glass_wire.JPG");
-    material.setTexture("ColorMap", glass_wire);
+
+    domeMat.setTexture("ColorMap", glass_wire);
+    domeGeo.setMaterial(domeMat);
+
+    domeMat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+    domeGeo.setQueueBucket(RenderQueue.Bucket.Transparent);
     domeGeo.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.HALF_PI, new Vector3f(1, 0, 0)));
-    domeGeo.setMaterial(material);
-
     app.getRootNode().attachChild(domeGeo);
-//
-    Box cylinder = new Box(10, 10, 0.01f);
-    Material materia1l = new Material(app.getAssetManager(), basicMat);
 
+
+    Box backwall = new Box(10, 10, 0.01f);
+    Geometry backWallGeo = new Geometry("backwall", backwall);
+    Material backWallMat = new Material(app.getAssetManager(), basicMat);
     Texture metal_rust = app.getAssetManager().loadTexture("Textures/rusting_metal.JPG");
-    materia1l.setTexture("ColorMap", metal_rust);
-    Geometry geometry1 = new Geometry("cylinder", cylinder);
-    geometry1.setMaterial(materia1l);
 
-    app.getRootNode().attachChild(geometry1);
+    backWallMat.setTexture("ColorMap", metal_rust);
+    backWallGeo.setMaterial(backWallMat);
+
+    app.getRootNode().attachChild(backWallGeo);
+
+
+    Box door = new Box(2, 4, 0.01f);
+    Geometry doorGeo = new Geometry("door", door);
+    Material doorMat = new Material(app.getAssetManager(), basicMat);
+    Texture doorTexture = app.getAssetManager().loadTexture("Textures/metal_door.JPG");
+
+    doorMat.setTexture("ColorMap", doorTexture);
+    doorGeo.setMaterial(doorMat);
+
+    doorGeo.setLocalTranslation(new Vector3f(0, 4, 0));
+    app.getRootNode().attachChild(doorGeo);
 
 
     Box pane = new Box(10, 0.01f, 10);
     Geometry geometry3 = new Geometry("Pane", pane);
     Material material2 = new Material(app.getAssetManager(), basicMat);
     Texture metal = app.getAssetManager().loadTexture("Textures/metal_crosshatch.JPG");
+
     material2.setTexture("ColorMap", metal);
     geometry3.setMaterial(material2);
 
     app.getRootNode().attachChild(geometry3);
-
 
 //    drawDashboard();
 //     floor
