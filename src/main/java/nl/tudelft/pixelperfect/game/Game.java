@@ -26,14 +26,9 @@ import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
 /**
-<<<<<<< HEAD
- * Main class representing an active Game process and creating the JMonkey Environment.
- *
-=======
  * Main class representing an active Game process and creating the JMonkey Environment. Suppressing
  * the too many fields PMD warning because we will refactor this class next iteration.
  * 
->>>>>>> de0cd0a94891d510e5e7fda36b1d539ceac7ea92
  * @author David Alderliesten
  * @author Floris Doolaard
  * @author Dmitry Malarev
@@ -114,7 +109,6 @@ public class Game extends VRApplication {
     scene = new Scene(this);
     scene.createMap();
 
-
     audioPlayer = new AudioPlayer(this);
     String[] names = {};
     String[] locations = {};
@@ -124,7 +118,7 @@ public class Game extends VRApplication {
 
     spaceship = new Spaceship();
     scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY_MIN,
-            Constants.EVENT_SCHEDULER_INTENSITY_MAX);
+        Constants.EVENT_SCHEDULER_INTENSITY_MAX);
     scheduler.subscribe(spaceship.getLog());
     scheduler.start();
 
@@ -163,7 +157,7 @@ public class Game extends VRApplication {
   private void initInputs() {
     InputManager inputManager = getInputManager();
     int[] keyTriggers = { KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A, KeyInput.KEY_D,
-            KeyInput.KEY_P, KeyInput.KEY_0, KeyInput.KEY_1 };
+        KeyInput.KEY_P, KeyInput.KEY_0, KeyInput.KEY_1 };
     String[] mappings = { "forward", "back", "left", "right", "start", "debugOn", "debugOff" };
     for (int i = 0; i < keyTriggers.length; i++) {
       inputManager.addMapping(mappings[i], new KeyTrigger(keyTriggers[i]));
