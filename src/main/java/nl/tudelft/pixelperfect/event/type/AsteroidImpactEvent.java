@@ -54,8 +54,8 @@ public class AsteroidImpactEvent extends Event {
   @Override
   public void notification(Game game, Scene scene) {
     Material buttonMat = new Material(game.getAssetManager(), "jmevr/shaders/Unshaded.j3md");
-    int parameter = getParameters().getMap().values().iterator().next().getNumberValue();
-    Geometry button = scene.getAstroidEventObjects().get(parameter);
+    Geometry button = scene.getAstroidEventObjects().get(
+        getParameters().get("locationDamageImpact").getNumberValue());
 
     if ((((int) game.getSpaceship().getTimer() % 2) == 0)
         && !isExpired(System.currentTimeMillis() + 2000)) {

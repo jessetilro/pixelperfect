@@ -47,14 +47,12 @@ public class HostileShipEvent extends Event {
 
   @Override
   public void notification(Game game, Scene scene) {
-    Material buttonMat = new Material(game.getAssetManager(), "jmevr/shaders/Unshaded.j3md");
-    Iterator parameterIterator = getParameters().getMap().values().iterator();
     int xParam = getParameters().get("positionX").getNumberValue();
     int yParam = getParameters().get("positionY").getNumberValue();
     int armorParam = getParameters().get("armor").getNumberValue();
 //    Geometry button = scene.getHostileEventObjects().get()
 
-   scene.getHostileEventObjects().get(0).
+//   scene.getHostileEventObjects().get(0).
     game.getAudioPlayer().playSound("HostileEvent", false);
   }
 }
