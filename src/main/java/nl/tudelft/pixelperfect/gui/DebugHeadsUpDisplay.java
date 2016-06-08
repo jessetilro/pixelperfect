@@ -86,29 +86,28 @@ public class DebugHeadsUpDisplay {
 
     // Init for the log text, including font loading and text setting.
     captainLog = new BitmapText(hudFont, true);
-    captainLog.setLocalTranslation(screenWidth - Constants.DEBUG_LOG_WIDTH_OFFSET,
-        screenHeight - Constants.DEBUG_LOG_HEIGHT_OFFSET, 0);
+    captainLog.setLocalTranslation(screenWidth, screenHeight - Constants.DEBUG_LOG_HEIGHT_OFFSET,
+        0);
 
     // Init for the HUD text, including font loading and text setting.
     shipHealth = new BitmapText(hudFont, true);
-    shipHealth.setLocalTranslation(screenWidth + 150 - Constants.DEBUG_HEALTH_WIDTH_OFFSET,
-        screenHeight - Constants.DEBUG_HEALTH_HEIGHT_OFFSET, 0);
+    shipHealth.setLocalTranslation(screenWidth, screenHeight - Constants.DEBUG_HEALTH_HEIGHT_OFFSET,
+        0);
 
     teamScore = new BitmapText(hudFont, true);
-    teamScore.setLocalTranslation(screenWidth + 250 - Constants.DEBUG_SCORE_WIDTH_OFFSET,
-        screenHeight - Constants.DEBUG_SCORE_HEIGHT_OFFSET, 0);
+    teamScore.setLocalTranslation(screenWidth, screenHeight - Constants.DEBUG_SCORE_HEIGHT_OFFSET,
+        0);
 
     timeLeft = new BitmapText(hudFont, true);
-    timeLeft.setLocalTranslation(screenWidth + 250 - Constants.DEBUG_TIME_WIDTH_OFFSET,
-        screenHeight - Constants.DEBUG_TIME_HEIGHT_OFFSET, 0);
+    timeLeft.setLocalTranslation(screenWidth, screenHeight - Constants.DEBUG_TIME_HEIGHT_OFFSET, 0);
 
     playersConnected = new BitmapText(hudFont, true);
-    playersConnected.setLocalTranslation(screenWidth + 250 - Constants.DEBUG_CONNECTED_WIDTH_OFFSET,
+    playersConnected.setLocalTranslation(screenWidth,
         screenHeight - Constants.DEBUG_CONNECTED_HEIGHT_OFFSET, 0);
 
     localAddress = new BitmapText(hudFont, true);
-    localAddress.setLocalTranslation(screenWidth + 250 - Constants.DEBUG_IP_WIDTH_OFFSET,
-        screenHeight - Constants.DEBUG_IP_HEIGHT_OFFSET, 0);
+    localAddress.setLocalTranslation(screenWidth, screenHeight - Constants.DEBUG_IP_HEIGHT_OFFSET,
+        0);
   }
 
   /**
