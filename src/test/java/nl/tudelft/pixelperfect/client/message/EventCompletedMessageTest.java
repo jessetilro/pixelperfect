@@ -9,7 +9,6 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
 
 /**
  * Test case for the EventCompletedMessage class.

@@ -152,11 +152,11 @@ public class Game extends VRApplication {
       except.printStackTrace();
     }
   }
-  
+
   /**
    * Tells the clients to start the game.
    */
-  public static void startGame(){
+  public static void startGame() {
     server.broadcast(new NewGameMessage());
   }
 
