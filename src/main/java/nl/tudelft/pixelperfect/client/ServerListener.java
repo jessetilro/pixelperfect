@@ -29,7 +29,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
 
   private Game app;
   private Server server;
-  private ArrayList<Roles> roles;
+  private ArrayList<Roles> roles = new ArrayList<Roles>();
 
   /**
    * Sets the game whose server to listen for.
