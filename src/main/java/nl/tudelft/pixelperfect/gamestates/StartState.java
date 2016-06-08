@@ -38,6 +38,20 @@ public class StartState extends GameState {
   }
 
   /**
+   * Fuction to start the game on start game selection.
+   */
+  public void onStartGameSelect() {
+    new PlayState(game);
+  }
+
+  /**
+   * Function to quit the game on exit game selection.
+   */
+  public void onExitGameSelect() {
+    System.exit(0);
+  }
+
+  /**
    * Method to update the state.
    *
    * @return new state.
