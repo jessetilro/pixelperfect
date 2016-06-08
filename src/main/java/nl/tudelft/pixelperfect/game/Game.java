@@ -123,8 +123,8 @@ public class Game extends VRApplication {
     scheduler.subscribe(spaceship.getLog());
     scheduler.start();
 
-    debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode, 0,
-        VRGuiManager.getCanvasSize().getY(), spaceship);
+    debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode,
+        Constants.DEBUG_ELEMENTS_WIDTH_OFFSET, VRGuiManager.getCanvasSize().getY(), spaceship);
     gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode,
         VRGuiManager.getCanvasSize().getX(), VRGuiManager.getCanvasSize().getY(), spaceship);
 
