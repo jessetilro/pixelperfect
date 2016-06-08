@@ -19,8 +19,8 @@ public class MainMenuDisplay {
 
   private AssetManager assetManager;
   private Node guiNodes;
-  private int screenWidth;
-  private int screenHeight;
+  private float screenWidth;
+  private float screenHeight;
 
   private BitmapFont menuFont;
   private BitmapText startGameText;
@@ -33,16 +33,16 @@ public class MainMenuDisplay {
    *          the assetManager.
    * @param passedGuiNode
    *          the GUI node manager.
-   * @param passedWid
+   * @param width
    *          the screen width.
-   * @param passedHi
+   * @param height
    *          the screen height.
    */
-  public MainMenuDisplay(AssetManager passedMan, Node passedGuiNode, int passedWid, int passedHi) {
+  public MainMenuDisplay(AssetManager passedMan, Node passedGuiNode, float width, float height) {
     this.assetManager = passedMan;
     this.guiNodes = passedGuiNode;
-    this.screenWidth = passedWid;
-    this.screenHeight = passedHi;
+    this.screenWidth = width;
+    this.screenHeight = height;
 
     // Instantiate the elements and text required for the main menu.
     setupElements();
@@ -59,6 +59,7 @@ public class MainMenuDisplay {
     startGameText = new BitmapText(menuFont, true);
     startGameText.setColor(ColorRGBA.White);
     startGameText.setBox(new Rectangle(0, 0, 2, 2));
+    startGameText.setAlignment(BitmapFont.Align.Center);
     startGameText.setLocalTranslation(screenWidth / 2,
         (screenHeight / 2) - Constants.MAIN_MENU_START_HEIGHT_OFFSET, 0);
 
@@ -66,6 +67,7 @@ public class MainMenuDisplay {
     exitGameText = new BitmapText(menuFont, true);
     exitGameText.setColor(ColorRGBA.White);
     exitGameText.setBox(new Rectangle(0, 0, 2, 2));
+    exitGameText.setAlignment(BitmapFont.Align.Center);
     exitGameText.setLocalTranslation(screenWidth / 2,
         (screenHeight / 2) - Constants.MAIN_MENU_EXIT_HEIGHT_OFFSET, 0);
   }

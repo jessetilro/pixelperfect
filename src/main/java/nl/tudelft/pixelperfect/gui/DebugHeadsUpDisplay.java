@@ -24,8 +24,8 @@ public class DebugHeadsUpDisplay {
 
   private AssetManager assetManager;
   private Node guiNodes;
-  private int screenWidth;
-  private int screenHeight;
+  private float screenWidth;
+  private float screenHeight;
 
   private BitmapFont hudFont;
   private BitmapText captainLog;
@@ -42,19 +42,19 @@ public class DebugHeadsUpDisplay {
    *          the passed assetmanager.
    * @param passedGuiNode
    *          the passed gui node.
-   * @param passedWid
+   * @param width
    *          the passed screen width.
-   * @param passedHi
+   * @param height
    *          the passed screen height.
    * @param passedShip
    *          the passed Spaceship instance.
    */
-  public DebugHeadsUpDisplay(AssetManager passedMan, Node passedGuiNode, int passedWid,
-      int passedHi, Spaceship passedShip) {
+  public DebugHeadsUpDisplay(AssetManager passedMan, Node passedGuiNode, float width, float height,
+      Spaceship passedShip) {
     this.assetManager = passedMan;
     this.guiNodes = passedGuiNode;
-    this.screenWidth = passedWid;
-    this.screenHeight = passedHi;
+    this.screenWidth = width;
+    this.screenHeight = height;
     this.spaceship = passedShip;
 
     // Sets-up the text display using the private method.

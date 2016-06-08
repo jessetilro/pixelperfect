@@ -1,6 +1,7 @@
 package nl.tudelft.pixelperfect.gamestates;
 
 import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.gui.MainMenuDisplay;
 
 /**
  * First state that the game loads.
@@ -10,6 +11,8 @@ import nl.tudelft.pixelperfect.game.Game;
  */
 public class StartState extends GameState {
 
+  private MainMenuDisplay menuInstance;
+
   /**
    * Constructor for StartState.
    *
@@ -18,6 +21,9 @@ public class StartState extends GameState {
    */
   public StartState(Game game) {
     super(game);
+
+    menuInstance = new MainMenuDisplay(game.getAssetManager(), game.getGuiNode(),
+        game.getViewPortX(), game.getViewPortY());
   }
 
   /**

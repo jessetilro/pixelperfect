@@ -25,8 +25,8 @@ public class GameHeadsUpDisplay {
 
   private AssetManager assetManager;
   private Node guiNodes;
-  private int screenWidth;
-  private int screenHeight;
+  private float screenWidth;
+  private float screenHeight;
 
   private BitmapFont hudFont;
   private BitmapText currentEvents;
@@ -40,19 +40,19 @@ public class GameHeadsUpDisplay {
    *          the passed assetmanager.
    * @param passedGuiNode
    *          the passed gui node.
-   * @param passedWid
+   * @param width
    *          the passed screen width.
-   * @param passedHi
+   * @param height
    *          the passed screen height.
    * @param passedShip
    *          the passed Spaceship instance.
    */
-  public GameHeadsUpDisplay(AssetManager passedMan, Node passedGuiNode, int passedWid, int passedHi,
+  public GameHeadsUpDisplay(AssetManager passedMan, Node passedGuiNode, float width, float height,
       Spaceship passedShip) {
     this.assetManager = passedMan;
     this.guiNodes = passedGuiNode;
-    this.screenWidth = passedWid;
-    this.screenHeight = passedHi;
+    this.screenWidth = width;
+    this.screenHeight = height;
     this.spaceship = passedShip;
 
     // Setting-up the fonts required for the Bitmap display.
