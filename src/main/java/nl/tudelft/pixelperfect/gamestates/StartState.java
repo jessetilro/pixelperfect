@@ -21,13 +21,13 @@ public class StartState extends GameState {
   }
 
   /**
-   * Method that to update in this state.
+   * Method that handles updating in this state.
    *
    * @param tpf
    *          Time since last frame.
    */
   public void update(float tpf) {
-    // render mainmenu or something
+    // render mainmenu
   }
 
   /**
@@ -41,5 +41,5 @@ public class StartState extends GameState {
     }
     return this;
   }
-  
+
 }
