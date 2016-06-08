@@ -43,6 +43,11 @@ public class Game extends VRApplication {
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private Server server;
+
+  public AudioPlayer getAudioPlayer() {
+    return audioPlayer;
+  }
+
   private AudioPlayer audioPlayer;
   private Spatial observer;
   private boolean moveForward;
@@ -52,6 +57,10 @@ public class Game extends VRApplication {
   private boolean startKey;
   private boolean debugKeyOn;
   private boolean debugKeyOff;
+
+  public Scene getScene() {
+    return scene;
+  }
 
   private Scene scene;
 
@@ -89,7 +98,7 @@ public class Game extends VRApplication {
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.NO_GUI, false);
 
     // Set frustum distances here before app starts.
-    appGame.preconfigureFrustrumNearFar(0.1f, 512f);
+//    appGame.preconfigureFrustrumNearFar(0.1f, 512f);
 
     appGame.start();
   }
@@ -100,7 +109,7 @@ public class Game extends VRApplication {
   @Override
   public void simpleInitApp() {
     observer = new Node("observer");
-    observer.setLocalTranslation(new Vector3f(0.0f, 2.0f, 0.0f));
+    observer.setLocalTranslation(new Vector3f(0.0f, 2.0f, 4.0f));
     VRApplication.setObserver(observer);
     rootNode.attachChild(observer);
 
@@ -110,8 +119,8 @@ public class Game extends VRApplication {
     scene.createMap();
 
     audioPlayer = new AudioPlayer(this);
-    String[] names = {};
-    String[] locations = {};
+    String[] names = {"CoffeeEvent", "AsteroidEvent", "FireEvent", "HostileEvent", "PlasmaEvent"};
+    String[] locations = {"bubbling1.wav", "explosion_x.wav", "explosion_x.wav", "sonar_x.wav", "glass_shatter_c.wav"};
     audioPlayer.loadSounds(names, locations);
 
     initNetwork();

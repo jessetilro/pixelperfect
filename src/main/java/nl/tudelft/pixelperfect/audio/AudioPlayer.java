@@ -42,7 +42,7 @@ public class AudioPlayer {
     if (name.length == location.length) {
       for (int i = 0; i < name.length; i++) {
         AudioNode audioNode = new AudioNode(mainApp.getAssetManager(),
-            location[i], AudioData.DataType.Buffer);
+            "Sounds/" + location[i], AudioData.DataType.Buffer);
         sounds.put(name[i], audioNode);
       }
     }
