@@ -9,6 +9,7 @@ import nl.tudelft.pixelperfect.game.Game;
  * @author Wouter Zirkzee
  */
 public class StartState extends GameState {
+  
 
   /**
    * Constructor for StartState.
@@ -39,6 +40,7 @@ public class StartState extends GameState {
    */
   public GameState handleState() {
     if (game.isStartKey()) {
+      Game.startGame();
       return new PlayState(game);
     }
     return this;
