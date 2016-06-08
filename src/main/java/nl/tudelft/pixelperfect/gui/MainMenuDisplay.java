@@ -59,7 +59,6 @@ public class MainMenuDisplay {
     startGameText = new BitmapText(menuFont, true);
     startGameText.setColor(ColorRGBA.White);
     startGameText.setLocalScale(Constants.MAIN_MENU_TEXT_SCALING);
-    startGameText.setAlignment(BitmapFont.Align.Center);
     startGameText.setLocalTranslation(screenWidth / 2,
         (screenHeight / 2) - Constants.MAIN_MENU_START_HEIGHT_OFFSET, 0);
 
@@ -67,7 +66,6 @@ public class MainMenuDisplay {
     exitGameText = new BitmapText(menuFont, true);
     exitGameText.setColor(ColorRGBA.White);
     exitGameText.setLocalScale(Constants.MAIN_MENU_TEXT_SCALING);
-    exitGameText.setAlignment(BitmapFont.Align.Center);
     exitGameText.setLocalTranslation(screenWidth / 2,
         (screenHeight / 2) - Constants.MAIN_MENU_EXIT_HEIGHT_OFFSET, 0);
 
