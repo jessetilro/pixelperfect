@@ -59,7 +59,6 @@ public class MainMenuDisplay {
     startGameText = new BitmapText(menuFont, true);
     startGameText.setColor(ColorRGBA.White);
     startGameText.setLocalScale(Constants.MAIN_MENU_TEXT_SCALING);
-    startGameText.setBox(new Rectangle(0, 0, 2, 2));
     startGameText.setAlignment(BitmapFont.Align.Center);
     startGameText.setLocalTranslation(screenWidth / 2,
         (screenHeight / 2) - Constants.MAIN_MENU_START_HEIGHT_OFFSET, 0);
@@ -68,7 +67,6 @@ public class MainMenuDisplay {
     exitGameText = new BitmapText(menuFont, true);
     exitGameText.setColor(ColorRGBA.White);
     exitGameText.setLocalScale(Constants.MAIN_MENU_TEXT_SCALING);
-    exitGameText.setBox(new Rectangle(0, 0, 2, 2));
     exitGameText.setAlignment(BitmapFont.Align.Center);
     exitGameText.setLocalTranslation(screenWidth / 2,
         (screenHeight / 2) - Constants.MAIN_MENU_EXIT_HEIGHT_OFFSET, 0);
@@ -76,6 +74,14 @@ public class MainMenuDisplay {
     // Add the generated bitmaps to the gui node view.
     guiNodes.attachChild(startGameText);
     guiNodes.attachChild(exitGameText);
+  }
+
+  /**
+   * Renders and updates the menu.
+   */
+  public void updateMenu() {
+    startGameText.setText(Constants.MAIN_MENU_START_BUTTON_TEXT);
+    exitGameText.setText(Constants.MAIN_MENU_EXIT_BUTTON_TEXT);
   }
 
 }

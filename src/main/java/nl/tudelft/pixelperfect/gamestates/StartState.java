@@ -22,6 +22,7 @@ public class StartState extends GameState {
   public StartState(Game game) {
     super(game);
 
+    // Creating the main menu buttons and text.
     menuInstance = new MainMenuDisplay(game.getAssetManager(), game.getGuiNode(),
         game.getViewPortX(), game.getViewPortY());
   }
@@ -33,7 +34,7 @@ public class StartState extends GameState {
    *          Time since last frame.
    */
   public void update(float tpf) {
-    // render mainmenu
+    menuInstance.updateMenu();
   }
 
   /**

@@ -21,6 +21,10 @@ public final class Constants {
 
   public static final int MAIN_MENU_TEXT_SCALING = 3;
 
+  // Text constants for the main menu.
+  public static final String MAIN_MENU_START_BUTTON_TEXT = "Start Game";
+  public static final String MAIN_MENU_EXIT_BUTTON_TEXT = "Exit Game";
+
   // Positioning related constants for the in-game debug HUD.
   public static final int DEBUG_LOG_HEIGHT_OFFSET = 300;
   public static final int DEBUG_HEALTH_HEIGHT_OFFSET = 350;
