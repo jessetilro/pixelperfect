@@ -34,11 +34,11 @@ public class Scene {
   private ArrayList<Geometry> fireEventObjects;
   private ArrayList<Geometry> coffeeEventObjects;
 
-  public ArrayList<BitmapText> getHostileEventObjects() {
-    return hostileEventObjects;
+  public BitmapText getHostileEventText() {
+    return hostileEventText;
   }
 
-  private ArrayList<BitmapText> hostileEventObjects;
+  private BitmapText hostileEventText;
 
   public ArrayList<Geometry> getFireEventObjects() {
     return fireEventObjects;
@@ -77,17 +77,7 @@ public class Scene {
         new Vector3f(1, 0, 0), 2, 2);
     plasmaEventObjects = addTubes(new Vector3f(-6, 0, 0.5f), FastMath.HALF_PI,
         new Vector3f(1, 0, 0), 4);
-    app.getGuiNode().detachAllChildren();
-
-    BitmapText hostileEventText = new BitmapText(
-        app.getAssetManager().loadFont("Interface/Fonts/Default.fnt"), false);
-    hostileEventText.setColor(ColorRGBA.White);
-    hostileEventText.setLocalTranslation(0, 4, 4);
-    hostileEventText.setSize(20f);
-    hostileEventText.setText("TestTest");
-    app.getGuiNode().attachChild(hostileEventText);
-//    hostileEventObjects.add(hostileEventText);
-
+    createHostileRadar();
   }
 
   /**
@@ -99,20 +89,20 @@ public class Scene {
    *          Translation of the box.
    * @param textureLocation
    *          Texture of the box.
-     */
-  private void createBoxObject(Box box, Vector3f translation,
-                               String textureLocation) {
+   */
+  private Box createBoxObject(Box box, Vector3f translation,
+                              String textureLocation) {
     Box newBox = box;
     Geometry geometry = new Geometry("Box", newBox);
     Material material = new Material(app.getAssetManager(), basicMat);
     Texture texture = app.getAssetManager().loadTexture(textureLocation);
-
     material.setTexture("ColorMap", texture);
     geometry.setMaterial(material);
-
     geometry.setLocalTranslation(translation);
 
     app.getRootNode().attachChild(geometry);
+
+    return newBox;
   }
 
   /**
@@ -204,6 +194,19 @@ public class Scene {
       app.getRootNode().attachChild(pipe);
     }
     return pipes;
+  }
+
+  private void createHostileRadar() {
+    createBoxObject(new Box(2, 2, 0.1f), new Vector3f(0, 3, 7.1f), "Textures/radar.jpg");
+    hostileEventText = new BitmapText(
+        app.getAssetManager().loadFont("Interface/Fonts/Default.fnt"), false);
+    hostileEventText.setColor(ColorRGBA.Green);
+    hostileEventText.setLocalTranslation(1, 4, 7);
+    hostileEventText.setSize(.5f);
+    hostileEventText.setLocalRotation(
+        new Quaternion().fromAngleAxis(180 * FastMath.DEG_TO_RAD, new Vector3f(0, 1, 0)));
+    hostileEventText.setText("x:\n" + "y:\n" + "");
+    app.getRootNode().attachChild(hostileEventText);
   }
 
   public ArrayList<Geometry> getPlasmaEventObjects() {

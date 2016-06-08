@@ -1,16 +1,10 @@
 package nl.tudelft.pixelperfect.event.type;
 
-import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
-import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
-import com.jme3.scene.Geometry;
 import nl.tudelft.pixelperfect.event.Event;
-import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Scene;
 
-import java.util.Iterator;
 
 /**
  * A type of event, imposing the problem of a hostile alien spaceship.
@@ -49,11 +43,11 @@ public class HostileShipEvent extends Event {
 
   @Override
   public void notification(Game game, Scene scene) {
-//    int xParam = getParameters().get("positionX").getNumberValue();
-//    int yParam = getParameters().get("positionY").getNumberValue();
-//    int armorParam = getParameters().get("armor").getNumberValue();
-//    BitmapText textfield = scene.getHostileEventObjects().get(0);
-//    textfield.setText("x: " + xParam + ", y: " + yParam);
+    int xParam = getParameters().get("positionX").getNumberValue();
+    int yParam = getParameters().get("positionY").getNumberValue();
+    int armorParam = getParameters().get("armor").getNumberValue();
+    BitmapText textfield = scene.getHostileEventText();
+    textfield.setText("x: " + xParam + "\ny: " + yParam + "\n" + armorParam);
 
 
     game.getAudioPlayer().playSound("HostileEvent", false);

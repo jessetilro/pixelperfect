@@ -54,6 +54,6 @@ public class FireOutbreakEvent extends Event {
       buttonMat.setColor("Color", ColorRGBA.Red);
     }
 //    button.setMaterial(buttonMat);
-    game.getAudioPlayer().playSound("FireEvent", false);
+//    game.getAudioPlayer().playSound("FireEvent", false);
   }
 }

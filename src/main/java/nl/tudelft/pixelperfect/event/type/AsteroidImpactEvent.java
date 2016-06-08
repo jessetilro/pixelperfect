@@ -65,6 +65,6 @@ public class AsteroidImpactEvent extends Event {
 
     }
     button.setMaterial(buttonMat);
-    game.getAudioPlayer().playSound("AsteroidEvent", false);
+//    game.getAudioPlayer().playSound("AsteroidEvent", false);
   }
 }

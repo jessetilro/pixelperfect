@@ -98,7 +98,7 @@ public class Game extends VRApplication {
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.NO_GUI, false);
 
     // Set frustum distances here before app starts.
-//    appGame.preconfigureFrustrumNearFar(0.1f, 512f);
+    appGame.preconfigureFrustrumNearFar(0.1f, 512f);
 
     appGame.start();
   }
@@ -120,7 +120,7 @@ public class Game extends VRApplication {
 
     audioPlayer = new AudioPlayer(this);
     String[] names = {"CoffeeEvent", "AsteroidEvent", "FireEvent", "HostileEvent", "PlasmaEvent"};
-    String[] locations = {"bubbling1.wav", "explosion_x.wav", "explosion_x.wav", "sonar_x.wav", "glass_shatter_c.wav"};
+    String[] locations = {"bubbling1.wav", "explosion_x.wav", "explosion_x.wav", "sonar_x.wav", "bubbling1.wav"};
     audioPlayer.loadSounds(names, locations);
 
     initNetwork();

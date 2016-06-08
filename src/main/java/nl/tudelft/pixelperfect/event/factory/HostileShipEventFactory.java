@@ -34,7 +34,9 @@ public class HostileShipEventFactory extends EventFactory {
   @Override
   public Collection<EventParameter> createParameters() {
     Collection<EventParameter> collection = new ArrayList<EventParameter>();
-    collection.add(new EventParameter("testParam", 42));
+    collection.add(new EventParameter("positionX", 42));
+    collection.add(new EventParameter("positionY", 42));
+    collection.add(new EventParameter("armor", 42));
     return collection;
   }
 

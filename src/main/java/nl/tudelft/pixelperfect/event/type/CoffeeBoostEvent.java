@@ -54,6 +54,6 @@ public class CoffeeBoostEvent extends Event {
       buttonMat.setColor("Color", ColorRGBA.Red);
     }
     button.setMaterial(buttonMat);
-    game.getAudioPlayer().playSound("CoffeeEvent", false);
+//    game.getAudioPlayer().playSound("CoffeeEvent", false);
   }
 }
