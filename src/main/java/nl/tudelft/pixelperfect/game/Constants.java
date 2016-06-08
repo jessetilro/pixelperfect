@@ -15,6 +15,10 @@ public final class Constants {
   private Constants() {
   }
 
+  // Position related constants for the main menu.
+  public static final int MAIN_MENU_START_HEIGHT_OFFSET = -150;
+  public static final int MAIN_MENU_EXIT_HEIGHT_OFFSET = 150;
+
   // Positioning related constants for the in-game debug HUD.
   public static final int DEBUG_LOG_HEIGHT_OFFSET = 300;
   public static final int DEBUG_HEALTH_HEIGHT_OFFSET = 350;
