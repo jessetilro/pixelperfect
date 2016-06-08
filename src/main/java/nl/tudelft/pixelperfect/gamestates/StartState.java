@@ -1,11 +1,11 @@
 package nl.tudelft.pixelperfect.gamestates;
 
-
 import nl.tudelft.pixelperfect.game.Game;
 
 /**
  * First state that the game loads.
- *
+ * 
+ * @author David Alderliesten
  * @author Wouter Zirkzee
  */
 public class StartState extends GameState {
@@ -14,12 +14,11 @@ public class StartState extends GameState {
    * Constructor for StartState.
    *
    * @param game
-   *            Game for which it controlls the state.
+   *          Game for which it controls the state.
    */
   public StartState(Game game) {
     super(game);
   }
-
 
   /**
    * Method that to update in this state.
@@ -28,14 +27,13 @@ public class StartState extends GameState {
    *          Time since last frame.
    */
   public void update(float tpf) {
-    //render mainmenu or something
+    // render mainmenu or something
   }
 
   /**
    * Method to update the state.
    *
-   * @return
-   *        new state.
+   * @return new state.
    */
   public GameState handleState() {
     if (game.isStartKey()) {
@@ -43,4 +41,5 @@ public class StartState extends GameState {
     }
     return this;
   }
+  
 }
