@@ -44,6 +44,7 @@ public class StartState extends GameState {
    */
   public GameState handleState() {
     if (game.isStartKey()) {
+      menuInstance.clearMenu();
       return new PlayState(game);
     }
     return this;

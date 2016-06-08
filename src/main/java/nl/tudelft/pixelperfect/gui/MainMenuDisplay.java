@@ -82,4 +82,12 @@ public class MainMenuDisplay {
     exitGameText.setText(Constants.MAIN_MENU_EXIT_BUTTON_TEXT);
   }
 
+  /**
+   * Clears and removes the main menu elements.
+   */
+  public void clearMenu() {
+    startGameText.setText("");
+    exitGameText.setText("");
+  }
+
 }
