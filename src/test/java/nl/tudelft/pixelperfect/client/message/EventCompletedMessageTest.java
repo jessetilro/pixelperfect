@@ -1,4 +1,4 @@
-package nl.tudelft.pixelperfect.client;
+package nl.tudelft.pixelperfect.client.message;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
