@@ -60,7 +60,7 @@ public class PlasmaLeakEvent extends Event {
         && !isExpired(System.currentTimeMillis() + 2000)) {
       buttonMat.setColor("Color", ColorRGBA.Black);
     } else {
-      buttonMat.setColor("Color", ColorRGBA.Red);
+      buttonMat.setColor("Color", ColorRGBA.Blue);
 
     }
     button.setMaterial(buttonMat);

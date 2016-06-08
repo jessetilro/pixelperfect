@@ -4,8 +4,11 @@ import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Geometry;
 import nl.tudelft.pixelperfect.event.Event;
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Scene;
+
+import java.util.Iterator;
 
 /**
  * A type of event, imposing the problem of a hostile alien spaceship.
@@ -45,17 +48,13 @@ public class HostileShipEvent extends Event {
   @Override
   public void notification(Game game, Scene scene) {
     Material buttonMat = new Material(game.getAssetManager(), "jmevr/shaders/Unshaded.j3md");
-    int parameter = getParameters().getMap().values().iterator().next().getNumberValue();
-    Geometry button = scene.getFireEventObjects().get(parameter);
+    Iterator parameterIterator = getParameters().getMap().values().iterator();
+    int xParam = getParameters().get("positionX").getNumberValue();
+    int yParam = getParameters().get("positionY").getNumberValue();
+    int armorParam = getParameters().get("armor").getNumberValue();
+//    Geometry button = scene.getHostileEventObjects().get()
 
-    if ((((int) game.getSpaceship().getTimer() % 2) == 0)
-        && !isExpired(System.currentTimeMillis() + 2000)) {
-      buttonMat.setColor("Color", ColorRGBA.Black);
-    } else {
-      buttonMat.setColor("Color", ColorRGBA.Red);
-
-    }
-    button.setMaterial(buttonMat);
+   scene.getHostileEventObjects().get(0).
     game.getAudioPlayer().playSound("HostileEvent", false);
   }
 }

@@ -1,5 +1,6 @@
 package nl.tudelft.pixelperfect.game;
 
+import com.jme3.font.BitmapFont;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
@@ -10,6 +11,7 @@ import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.shape.Box;
+import com.jme3.scene.shape.Cylinder;
 import com.jme3.scene.shape.Dome;
 import com.jme3.scene.shape.Torus;
 import com.jme3.texture.Texture;
@@ -28,12 +30,19 @@ public class Scene {
   private String basicMat;
   private ArrayList<Geometry> plasmaEventObjects;
   private ArrayList<Geometry> astroidEventObjects;
+  private ArrayList<Geometry> fireEventObjects;
+
+  public ArrayList<BitmapFont> getHostileEventObjects() {
+    return hostileEventObjects;
+  }
+
+  private ArrayList<BitmapFont> hostileEventObjects;
 
   public ArrayList<Geometry> getFireEventObjects() {
     return fireEventObjects;
   }
 
-  private ArrayList<Geometry> fireEventObjects;
+
   /**
    * Constructor for Scene.
    *
@@ -58,11 +67,13 @@ public class Scene {
     createBoxObject(new Box(10, 0.01f, 10), new Vector3f(0, 0, 0),
             "Textures/wood.JPG");
 
-    plasmaEventObjects = addButtons(new Vector3f(0, 1, 8), 0, new Vector3f(0, 1, 0), 3, 1);
+//    plasmaEventObjects = addButtons(new Vector3f(0, 1, 8), 0, new Vector3f(0, 1, 0), 3, 1);
     astroidEventObjects = addButtons(new Vector3f(0, 1, 7.9f), .8f * FastMath.HALF_PI,
         new Vector3f(0, 1, 0), 2, 1);
     fireEventObjects = addButtons(new Vector3f(4, 0, -6), FastMath.HALF_PI,
         new Vector3f(1, 0, 0), 2, 2);
+    plasmaEventObjects = addTubes(new Vector3f(-6, 0, 0.5f), FastMath.HALF_PI,
+        new Vector3f(1, 0, 0), 4);
 
   }
 
@@ -138,7 +149,8 @@ public class Scene {
    * @param row
    *          Amount of collums of buttons.
    */
-  private ArrayList<Geometry> addButtons(Vector3f location, float rotation, Vector3f rotationAxis, int col, int row) {
+  private ArrayList<Geometry> addButtons(Vector3f location, float rotation,
+                                         Vector3f rotationAxis, int col, int row) {
     ArrayList<Geometry> buttons = new ArrayList<Geometry>();
     Node pivot = new Node("pivot");
     float distance = 1f;
@@ -153,8 +165,6 @@ public class Scene {
         button.setLocalTranslation(new Vector3f(location.getX() + x * distance, location.getY(),
             location.getZ() + z * distance));
         pivot.attachChild(button);
-
-
         buttons.add(button);
       }
     }
@@ -164,30 +174,23 @@ public class Scene {
     return buttons;
   }
 
-  private ArrayList<Geometry> addTubes(Vector3f location, float rotation, Vector3f rotationAxis, int col, int row) {
-    ArrayList<Geometry> buttons = new ArrayList<Geometry>();
-    Node pivot = new Node("pivot");
+  private ArrayList<Geometry> addTubes(Vector3f location, float rotation, Vector3f rotationAxis, int row) {
+    ArrayList<Geometry> pipes = new ArrayList<Geometry>();
     float distance = 1f;
-    for (int x = 0; x < col; x++) {
-      for (int z = 0; z < row; z++) {
-        Box box = new Box(1f, 1f, 1f);
-        Geometry pipe = new Geometry("Box", box);
-        pipe.setLocalScale(0.2f);
-        Material pipeMat = new Material(app.getAssetManager(), basicMat);
-        pipeMat.setColor("Color", ColorRGBA.Red);
-        pipe.setMaterial(pipeMat);
-        pipe.setLocalTranslation(new Vector3f(location.getX() + x * distance, location.getY(),
-            location.getZ() + z * distance));
-        pivot.attachChild(pipe);
-
-
-        buttons.add(pipe);
-      }
+    for (int x = 0; x < row; x++) {
+      Cylinder cylinder = new Cylinder(20, 20, 0.2f, 20);
+      Geometry pipe = new Geometry("Cyclinder", cylinder);
+      Material pipeMat = new Material(app.getAssetManager(), basicMat);
+      pipeMat.setColor("Color", ColorRGBA.Blue);
+      pipe.setMaterial(pipeMat);
+      pipe.setLocalRotation(new Quaternion().fromAngleAxis(
+          rotation, rotationAxis));
+      pipe.setLocalTranslation(new Vector3f(location.getX()  + x * distance, location.getY(),
+          location.getZ()));
+      pipes.add(pipe);
+      app.getRootNode().attachChild(pipe);
     }
-    pivot.rotate(new Quaternion().fromAngleAxis(
-        rotation, rotationAxis));
-    app.getRootNode().attachChild(pivot);
-    return buttons;
+    return pipes;
   }
 
   public ArrayList<Geometry> getPlasmaEventObjects() {

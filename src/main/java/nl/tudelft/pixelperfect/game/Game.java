@@ -109,7 +109,7 @@ public class Game extends VRApplication {
   @Override
   public void simpleInitApp() {
     observer = new Node("observer");
-    observer.setLocalTranslation(new Vector3f(0.0f, 2.0f, 4.0f));
+    observer.setLocalTranslation(new Vector3f(0.0f, 5.0f, 4.0f));
     VRApplication.setObserver(observer);
     rootNode.attachChild(observer);
 
