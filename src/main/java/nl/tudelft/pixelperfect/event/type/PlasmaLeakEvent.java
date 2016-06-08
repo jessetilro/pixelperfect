@@ -53,7 +53,7 @@ public class PlasmaLeakEvent extends Event {
   @Override
   public void notification(Game game, Scene scene) {
     Material buttonMat = new Material(game.getAssetManager(), "jmevr/shaders/Unshaded.j3md");
-    Geometry button = scene.getAstroidEventObjects().get(
+    Geometry button = scene.getPlasmaEventObjects().get(
         getParameters().get("sector").getNumberValue());
 
     if ((((int) game.getSpaceship().getTimer() % 2) == 0)

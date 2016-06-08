@@ -1,6 +1,7 @@
 package nl.tudelft.pixelperfect.game;
 
 import com.jme3.font.BitmapFont;
+import com.jme3.font.BitmapText;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
@@ -31,12 +32,13 @@ public class Scene {
   private ArrayList<Geometry> plasmaEventObjects;
   private ArrayList<Geometry> astroidEventObjects;
   private ArrayList<Geometry> fireEventObjects;
+  private ArrayList<Geometry> coffeeEventObjects;
 
-  public ArrayList<BitmapFont> getHostileEventObjects() {
+  public ArrayList<BitmapText> getHostileEventObjects() {
     return hostileEventObjects;
   }
 
-  private ArrayList<BitmapFont> hostileEventObjects;
+  private ArrayList<BitmapText> hostileEventObjects;
 
   public ArrayList<Geometry> getFireEventObjects() {
     return fireEventObjects;
@@ -67,13 +69,24 @@ public class Scene {
     createBoxObject(new Box(10, 0.01f, 10), new Vector3f(0, 0, 0),
             "Textures/wood.JPG");
 
-//    plasmaEventObjects = addButtons(new Vector3f(0, 1, 8), 0, new Vector3f(0, 1, 0), 3, 1);
-    astroidEventObjects = addButtons(new Vector3f(0, 1, 7.9f), .8f * FastMath.HALF_PI,
+    coffeeEventObjects = addButtons(new Vector3f(0, 1, 7.9f), -.5f * FastMath.HALF_PI,
+        new Vector3f(0, 1, 0), 1, 1);
+    astroidEventObjects = addButtons(new Vector3f(0, 1, 7.9f), .5f * FastMath.HALF_PI,
         new Vector3f(0, 1, 0), 2, 1);
     fireEventObjects = addButtons(new Vector3f(4, 0, -6), FastMath.HALF_PI,
         new Vector3f(1, 0, 0), 2, 2);
     plasmaEventObjects = addTubes(new Vector3f(-6, 0, 0.5f), FastMath.HALF_PI,
         new Vector3f(1, 0, 0), 4);
+    app.getGuiNode().detachAllChildren();
+
+    BitmapText hostileEventText = new BitmapText(
+        app.getAssetManager().loadFont("Interface/Fonts/Default.fnt"), false);
+    hostileEventText.setColor(ColorRGBA.White);
+    hostileEventText.setLocalTranslation(0, 4, 4);
+    hostileEventText.setSize(20f);
+    hostileEventText.setText("TestTest");
+    app.getGuiNode().attachChild(hostileEventText);
+//    hostileEventObjects.add(hostileEventText);
 
   }
 
@@ -199,5 +212,9 @@ public class Scene {
 
   public ArrayList<Geometry> getAstroidEventObjects() {
     return astroidEventObjects;
+  }
+
+  public ArrayList<Geometry> getCoffeeEventObjects() {
+    return coffeeEventObjects;
   }
 }

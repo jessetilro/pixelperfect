@@ -1,5 +1,7 @@
 package nl.tudelft.pixelperfect.event.type;
 
+import com.jme3.font.BitmapFont;
+import com.jme3.font.BitmapText;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Geometry;
@@ -47,12 +49,13 @@ public class HostileShipEvent extends Event {
 
   @Override
   public void notification(Game game, Scene scene) {
-    int xParam = getParameters().get("positionX").getNumberValue();
-    int yParam = getParameters().get("positionY").getNumberValue();
-    int armorParam = getParameters().get("armor").getNumberValue();
-//    Geometry button = scene.getHostileEventObjects().get()
+//    int xParam = getParameters().get("positionX").getNumberValue();
+//    int yParam = getParameters().get("positionY").getNumberValue();
+//    int armorParam = getParameters().get("armor").getNumberValue();
+//    BitmapText textfield = scene.getHostileEventObjects().get(0);
+//    textfield.setText("x: " + xParam + ", y: " + yParam);
 
-//   scene.getHostileEventObjects().get(0).
+
     game.getAudioPlayer().playSound("HostileEvent", false);
   }
 }
