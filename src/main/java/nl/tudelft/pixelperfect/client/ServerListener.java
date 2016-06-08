@@ -15,6 +15,7 @@ import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.game.Roles;
 
 /**
  * Listener for the Game's server, which handles incoming messages.
@@ -28,6 +29,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
 
   private Game app;
   private Server server;
+  private ArrayList<Roles> roles;
 
   /**
    * Sets the game whose server to listen for.
@@ -72,7 +74,17 @@ public class ServerListener implements MessageListener<HostedConnection> {
       EventCompletedMessage completedMessage = (EventCompletedMessage) message;
       processEventCompletedMessage(completedMessage);
     } else if (message instanceof RoleChosenMessage) {
-      server.broadcast(Filters.notEqualTo(source), message);
+      RoleChosenMessage retrieved = (RoleChosenMessage) message;
+      if (retrieved.isEmpty()) {
+        for (Roles role : roles) {
+          server.broadcast(Filters.equalTo(source), new RoleChosenMessage("initial roles chosen",
+              role));
+        }
+      } else {
+        roles.add(retrieved.getRole());
+        server.broadcast(Filters.notEqualTo(source), message);
+      }
+
     }
   }
 
