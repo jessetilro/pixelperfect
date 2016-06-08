@@ -22,7 +22,7 @@ public final class Constants {
   public static final int DEBUG_TIME_HEIGHT_OFFSET = 450;
   public static final int DEBUG_CONNECTED_HEIGHT_OFFSET = 500;
   public static final int DEBUG_IP_HEIGHT_OFFSET = 550;
-  
+
   public static final int DEBUG_ELEMENTS_WIDTH_OFFSET = 10;
 
   // Text constants for the in-game debug HUD.
@@ -34,8 +34,8 @@ public final class Constants {
   public static final String DEBUG_IP_LABEL = "Connection Address: ";
 
   // Positioning and scaling related constants for the in-game HUD.
-  public static final int GUI_LOG_WIDTH_OFFSET = 1350;
-  public static final int GUI_HEALTH_WIDTH_OFFSET = 1700;
+  public static final int GUI_ELEMENTS_WIDTH_OFFSET = 50;
+  public static final int GUI_ELEMENTS_HEIGHT_OFFSET = 20;
 
   public static final int GUI_HEALTH_TEXT_SIZE_SCALE = 2;
   public static final int GUI_SCORE_TEXT_SIZE_SCALE = 2;

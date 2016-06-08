@@ -124,7 +124,8 @@ public class Game extends VRApplication {
 
     debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode,
         Constants.DEBUG_ELEMENTS_WIDTH_OFFSET, this.getCamera().getHeight(), spaceship);
-    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 1800, 1000, spaceship);
+    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, this.getCamera().getWidth(),
+        this.getCamera().getHeight(), spaceship);
 
     gameState = new StartState(this);
   }

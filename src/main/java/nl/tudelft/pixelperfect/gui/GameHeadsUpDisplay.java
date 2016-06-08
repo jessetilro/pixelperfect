@@ -64,27 +64,28 @@ public class GameHeadsUpDisplay {
    * guiNodes.
    */
   private void setupFont() {
-    // Loading the font stored in the jme default manager.
+    // Loading the font stored in the javamonkeyengine's default manager.
     hudFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
 
     // Initializer for the log text, including font loading and text setting.
     currentEvents = new BitmapText(hudFont, true);
     currentEvents.setColor(ColorRGBA.LightGray);
-    currentEvents.setLocalTranslation(screenWidth - Constants.GUI_LOG_WIDTH_OFFSET, screenHeight,
-        0);
+    currentEvents.setLocalTranslation(screenWidth / 4,
+        screenHeight - Constants.GUI_ELEMENTS_HEIGHT_OFFSET, 0);
 
     // Initializer for the health text, including font loading and text setting.
     shipHealth = new BitmapText(hudFont, true);
     shipHealth.setLocalScale(Constants.GUI_HEALTH_TEXT_SIZE_SCALE);
     shipHealth.setColor(ColorRGBA.Red);
-    shipHealth.setLocalTranslation(screenWidth - Constants.GUI_HEALTH_WIDTH_OFFSET, screenHeight,
-        0);
+    shipHealth.setLocalTranslation(Constants.GUI_ELEMENTS_WIDTH_OFFSET,
+        screenHeight - Constants.GUI_ELEMENTS_HEIGHT_OFFSET, 0);
 
     // Initializer for the score text, including font loading and text setting.
     teamScore = new BitmapText(hudFont, true);
     teamScore.setLocalScale(Constants.GUI_SCORE_TEXT_SIZE_SCALE);
     teamScore.setColor(ColorRGBA.Green);
-    teamScore.setLocalTranslation(screenWidth, screenHeight, 0);
+    teamScore.setLocalTranslation(screenWidth - Constants.GUI_ELEMENTS_WIDTH_OFFSET,
+        screenHeight - Constants.GUI_ELEMENTS_HEIGHT_OFFSET, 0);
 
     // Add the generated bitmaps to the gui node view.
     guiNodes.attachChild(currentEvents);
