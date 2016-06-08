@@ -27,7 +27,7 @@ public final class Constants {
   public static final int DEBUG_CONNECTED_HEIGHT_OFFSET = 500;
   public static final int DEBUG_IP_HEIGHT_OFFSET = 550;
 
-  public static final int DEBUG_ELEMENTS_WIDTH_OFFSET = 10;
+  public static final int DEBUG_ELEMENTS_WIDTH_OFFSET = 100;
 
   // Text constants for the in-game debug HUD.
   public static final String DEBUG_NO_EVENTS_LOG_TEXT = "No events currently active";
