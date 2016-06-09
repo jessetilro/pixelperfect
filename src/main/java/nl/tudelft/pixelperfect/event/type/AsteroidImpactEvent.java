@@ -42,7 +42,7 @@ public class AsteroidImpactEvent extends Event {
     return EventTypes.ASTEROID_IMPACT;
   }
 
-
+  private boolean notifiedFlag = false;
   /**
    * Allow events to render notifications to the players.
    *
@@ -65,6 +65,10 @@ public class AsteroidImpactEvent extends Event {
 
     }
     button.setMaterial(buttonMat);
-//    game.getAudioPlayer().playSound("AsteroidEvent", false);
+
+    if (!notifiedFlag) {
+      notifiedFlag = true;
+      game.getAudioPlayer().playSound("AsteroidEvent", false);
+    }
   }
 }

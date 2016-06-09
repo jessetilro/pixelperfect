@@ -42,6 +42,8 @@ public class PlasmaLeakEvent extends Event {
     return EventTypes.PLASMA_LEAK;
   }
 
+
+  private boolean notifiedFlag = false;
   /**
    * Allow events to render notifications to the players.
    *
@@ -64,6 +66,11 @@ public class PlasmaLeakEvent extends Event {
 
     }
     button.setMaterial(buttonMat);
-    game.getAudioPlayer().playSound("PlasmaEvent", false);
+
+
+    if (!notifiedFlag) {
+      notifiedFlag = true;
+      game.getAudioPlayer().playSound("PlasmaEvent", false);
+    }
   }
 }

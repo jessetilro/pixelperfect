@@ -33,17 +33,8 @@ public class Scene {
   private ArrayList<Geometry> astroidEventObjects;
   private ArrayList<Geometry> fireEventObjects;
   private ArrayList<Geometry> coffeeEventObjects;
-
-  public BitmapText getHostileEventText() {
-    return hostileEventText;
-  }
-
   private BitmapText hostileEventText;
-
-  public ArrayList<Geometry> getFireEventObjects() {
-    return fireEventObjects;
-  }
-
+  private BitmapFont font;
 
   /**
    * Constructor for Scene.
@@ -54,6 +45,7 @@ public class Scene {
   public Scene(Game game) {
     app = game;
     basicMat = "Common/MatDefs/Misc/Unshaded.j3md";
+    font = app.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
   }
 
   /**
@@ -90,8 +82,7 @@ public class Scene {
    * @param textureLocation
    *          Texture of the box.
    */
-  private Box createBoxObject(Box box, Vector3f translation,
-                              String textureLocation) {
+  private Box createBoxObject(Box box, Vector3f translation, String textureLocation) {
     Box newBox = box;
     Geometry geometry = new Geometry("Box", newBox);
     Material material = new Material(app.getAssetManager(), basicMat);
@@ -198,8 +189,7 @@ public class Scene {
 
   private void createHostileRadar() {
     createBoxObject(new Box(2, 2, 0.1f), new Vector3f(0, 3, 7.1f), "Textures/radar.jpg");
-    hostileEventText = new BitmapText(
-        app.getAssetManager().loadFont("Interface/Fonts/Default.fnt"), false);
+    hostileEventText = new BitmapText(font, false);
     hostileEventText.setColor(ColorRGBA.Green);
     hostileEventText.setLocalTranslation(1, 4, 7);
     hostileEventText.setSize(.5f);
@@ -220,4 +210,13 @@ public class Scene {
   public ArrayList<Geometry> getCoffeeEventObjects() {
     return coffeeEventObjects;
   }
+
+  public BitmapText getHostileEventText() {
+    return hostileEventText;
+  }
+
+  public ArrayList<Geometry> getFireEventObjects() {
+    return fireEventObjects;
+  }
+
 }

@@ -120,7 +120,7 @@ public class Game extends VRApplication {
 
     audioPlayer = new AudioPlayer(this);
     String[] names = {"CoffeeEvent", "AsteroidEvent", "FireEvent", "HostileEvent", "PlasmaEvent"};
-    String[] locations = {"bubbling1.wav", "explosion_x.wav", "explosion_x.wav", "sonar_x.wav", "bubbling1.wav"};
+    String[] locations = {"yawn.wav", "impact.wav", "fire_alarm.wav", "sonar_x.wav", "bubbling1.wav"};
     audioPlayer.loadSounds(names, locations);
 
     initNetwork();
