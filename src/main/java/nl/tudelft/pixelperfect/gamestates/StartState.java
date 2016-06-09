@@ -21,6 +21,7 @@ public class StartState extends GameState {
    */
   public StartState(Game game) {
     super(game);
+    game.start();
 
     // Creating the main menu buttons and text.
     menuInstance = new MainMenuDisplay(game.getAssetManager(), game.getGuiNode(),
@@ -35,20 +36,6 @@ public class StartState extends GameState {
    */
   public void update(float tpf) {
     menuInstance.updateMenu();
-  }
-
-  /**
-   * Fuction to start the game on start game selection.
-   */
-  public void onStartGameSelect() {
-    new PlayState(game);
-  }
-
-  /**
-   * Function to quit the game on exit game selection.
-   */
-  public void onExitGameSelect() {
-    System.exit(0);
   }
 
   /**
