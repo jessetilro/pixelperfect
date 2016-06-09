@@ -34,7 +34,7 @@ public class StartState extends GameState {
    *          Time since last frame.
    */
   public void update(float tpf) {
-    menuInstance.updateMenu();
+    // Not required at this time.
   }
 
   /**

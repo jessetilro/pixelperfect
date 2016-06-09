@@ -146,7 +146,9 @@ public class DebugHeadsUpDisplay {
   }
 
   /**
-   * Clears the debug display after de-activation of the debug mode.
+   * Clears the debug display after de-activation of the debug mode. The strings are only cleared
+   * instead of detached due to the ability to re-start the debug mode, which causes issues if
+   * re-initialized.
    */
   public void clearHud() {
     captainLog.setText("");

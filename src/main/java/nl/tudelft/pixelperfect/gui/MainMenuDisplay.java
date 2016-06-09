@@ -69,25 +69,21 @@ public class MainMenuDisplay {
     exitGameText.setLocalTranslation(screenWidth / 2,
         (screenHeight / 2) - Constants.MAIN_MENU_EXIT_HEIGHT_OFFSET, 0);
 
+    // Append the text required for the menu.
+    startGameText.setText(Constants.MAIN_MENU_START_BUTTON_TEXT);
+    exitGameText.setText(Constants.MAIN_MENU_EXIT_BUTTON_TEXT);
+
     // Add the generated bitmaps to the gui node view.
     guiNodes.attachChild(startGameText);
     guiNodes.attachChild(exitGameText);
   }
 
   /**
-   * Renders and updates the menu.
-   */
-  public void updateMenu() {
-    startGameText.setText(Constants.MAIN_MENU_START_BUTTON_TEXT);
-    exitGameText.setText(Constants.MAIN_MENU_EXIT_BUTTON_TEXT);
-  }
-
-  /**
    * Clears and removes the main menu elements.
    */
   public void clearMenu() {
-    startGameText.setText("");
-    exitGameText.setText("");
+    guiNodes.detachChild(startGameText);
+    guiNodes.detachChild(exitGameText);
   }
 
 }
