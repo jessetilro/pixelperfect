@@ -1,4 +1,4 @@
-package nl.tudelft.pixelperfect.client;
+package nl.tudelft.pixelperfect.client.message;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -9,7 +9,6 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
 
 /**
  * Test case for the EventCompletedMessage class.

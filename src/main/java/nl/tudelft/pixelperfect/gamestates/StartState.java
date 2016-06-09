@@ -10,6 +10,7 @@ import nl.tudelft.pixelperfect.gui.MainMenuDisplay;
  * @author Wouter Zirkzee
  */
 public class StartState extends GameState {
+  
 
   private MainMenuDisplay menuInstance;
 
@@ -44,6 +45,7 @@ public class StartState extends GameState {
    */
   public GameState handleState() {
     if (game.isStartKey()) {
+      Game.startGame();
       menuInstance.clearMenu();
       return new PlayState(game);
     }
