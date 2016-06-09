@@ -143,6 +143,22 @@ public class Scene {
    * @param row
    *          Amount of collums of buttons.
    */
+
+  /**
+   * Render a group of small buttons.
+   *
+   * @param location
+   *            Location of the top left button.
+   * @param rotation
+   *            Rotation of the tubes.
+   * @param rotationAxis
+   *            Axis around which to rotate.
+   * @param col
+   *            Amount of rows of buttons.
+   * @param row
+   *            Amount of collums of buttons.
+   * @return ArrayList containing the buttons.
+   */
   private ArrayList<Geometry> addButtons(Vector3f location, float rotation,
                                          Vector3f rotationAxis, int col, int row) {
     ArrayList<Geometry> buttons = new ArrayList<Geometry>();
@@ -168,6 +184,19 @@ public class Scene {
     return buttons;
   }
 
+  /**
+   * Create a group of tubes.
+   *
+   * @param location
+   *            Location of the tubes.
+   * @param rotation
+   *            Rotation of the tubes.
+   * @param rotationAxis
+   *            Axis around which to rotate.
+   * @param row
+   *            Amount of rows of pipes.
+   * @return  Arraylist containing the pipes.
+   */
   private ArrayList<Geometry> addTubes(Vector3f location, float rotation, Vector3f rotationAxis, int row) {
     ArrayList<Geometry> pipes = new ArrayList<Geometry>();
     float distance = 1f;
@@ -187,6 +216,9 @@ public class Scene {
     return pipes;
   }
 
+  /**
+   * Create the radar and a BitmmapText to display information.
+   */
   private void createHostileRadar() {
     createBoxObject(new Box(2, 2, 0.1f), new Vector3f(0, 3, 7.1f), "Textures/radar.jpg");
     hostileEventText = new BitmapText(font, false);
@@ -199,22 +231,42 @@ public class Scene {
     app.getRootNode().attachChild(hostileEventText);
   }
 
+  /**
+   * Get the objects for the plasma objects.
+   * @return Arraylist containing the objects.
+   */
   public ArrayList<Geometry> getPlasmaEventObjects() {
     return plasmaEventObjects;
   }
 
+  /**
+   * Get the objects for the Asteroid objects.
+   * @return Arraylist containing the objects.
+   */
   public ArrayList<Geometry> getAstroidEventObjects() {
     return astroidEventObjects;
   }
 
+  /**
+   * Get the objects for the Coffee objects.
+   * @return Arraylist containing the objects.
+   */
   public ArrayList<Geometry> getCoffeeEventObjects() {
     return coffeeEventObjects;
   }
 
+  /**
+   * Get the BitmapText for the Hostile events.
+   * @return BitmapText
+   */
   public BitmapText getHostileEventText() {
     return hostileEventText;
   }
 
+  /**
+   * Get the objects for the Fire objects.
+   * @return Arraylist containing the objects.
+   */
   public ArrayList<Geometry> getFireEventObjects() {
     return fireEventObjects;
   }

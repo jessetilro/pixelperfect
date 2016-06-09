@@ -43,13 +43,9 @@ public class Game extends VRApplication {
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private Server server;
-
-  public AudioPlayer getAudioPlayer() {
-    return audioPlayer;
-  }
-
   private AudioPlayer audioPlayer;
   private Spatial observer;
+
   private boolean moveForward;
   private boolean moveBackwards;
   private boolean rotateLeft;
@@ -57,10 +53,6 @@ public class Game extends VRApplication {
   private boolean startKey;
   private boolean debugKeyOn;
   private boolean debugKeyOff;
-
-  public Scene getScene() {
-    return scene;
-  }
 
   private Scene scene;
 
@@ -120,7 +112,8 @@ public class Game extends VRApplication {
 
     audioPlayer = new AudioPlayer(this);
     String[] names = {"CoffeeEvent", "AsteroidEvent", "FireEvent", "HostileEvent", "PlasmaEvent"};
-    String[] locations = {"yawn.wav", "impact.wav", "fire_alarm.wav", "sonar_x.wav", "bubbling1.wav"};
+    String[] locations = {"yawn.wav", "impact.wav", "fire_alarm.wav", "sonar_x.wav",
+        "bubbling1.wav"};
     audioPlayer.loadSounds(names, locations);
 
     initNetwork();
@@ -361,5 +354,23 @@ public class Game extends VRApplication {
    */
   public void setSpaceship(Spaceship spaceship) {
     this.spaceship = spaceship;
+  }
+
+  /**
+   * Getter for the audio player.
+   *
+   * @return audio player
+   */
+  public AudioPlayer getAudioPlayer() {
+    return audioPlayer;
+  }
+
+  /**
+   * Getter for the scene.
+   *
+   * @return scene
+   */
+  public Scene getScene() {
+    return scene;
   }
 }

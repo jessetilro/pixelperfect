@@ -16,10 +16,6 @@ import java.util.Map;
 @Serializable
 public class EventParameterCollection {
 
-  public Map<String, EventParameter> getMap() {
-    return map;
-  }
-
   private Map<String, EventParameter> map;
 
   /**

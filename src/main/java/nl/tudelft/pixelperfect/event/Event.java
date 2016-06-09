@@ -24,11 +24,6 @@ public abstract class Event {
   private long timestamp;
   private long duration;
   private double damage;
-
-  public EventParameterCollection getParameters() {
-    return parameters;
-  }
-
   private EventParameterCollection parameters;
 
   /**
@@ -215,4 +210,12 @@ public abstract class Event {
    */
   public abstract void notification(Game game, Scene scene);
 
+  /**
+   * Get parameters for this event.
+   *
+   * @return EventParamterCollection containing parameters.
+   */
+  public EventParameterCollection getParameters() {
+    return parameters;
+  }
 }
