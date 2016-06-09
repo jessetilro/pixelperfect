@@ -14,6 +14,7 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
 import jmevr.app.VRApplication;
+import jmevr.util.VRGuiManager;
 import nl.tudelft.pixelperfect.audio.AudioPlayer;
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.ServerListener;
@@ -123,8 +124,10 @@ public class Game extends VRApplication {
     scheduler.subscribe(spaceship.getLog());
     scheduler.start();
 
-    debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
-    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 1800, 1000, spaceship);
+    debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode,
+        Constants.DEBUG_ELEMENTS_WIDTH_OFFSET, VRGuiManager.getCanvasSize().getY(), spaceship);
+    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode,
+        VRGuiManager.getCanvasSize().getX(), VRGuiManager.getCanvasSize().getY(), spaceship);
 
     gameState = new StartState(this);
   }
@@ -362,5 +365,23 @@ public class Game extends VRApplication {
    */
   public void setSpaceship(Spaceship spaceship) {
     this.spaceship = spaceship;
+  }
+
+  /**
+   * Returns the size of the x viewport for VR.
+   * 
+   * @return viewport width.
+   */
+  public float getViewPortX() {
+    return VRGuiManager.getCanvasSize().getX();
+  }
+
+  /**
+   * Returns the size of the y viewport for VR.
+   * 
+   * @return viewport height.
+   */
+  public float getViewPortY() {
+    return VRGuiManager.getCanvasSize().getY();
   }
 }

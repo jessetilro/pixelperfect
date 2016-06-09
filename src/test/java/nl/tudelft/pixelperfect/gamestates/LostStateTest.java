@@ -34,7 +34,7 @@ public class LostStateTest extends GameStateTest {
    */
   @Test
   public void testUpdate() {
-    //update method is empty for now.
+    // update method is empty for now.
   }
 
   /**
@@ -42,27 +42,6 @@ public class LostStateTest extends GameStateTest {
    */
   @Test
   public void testHandleState() {
-    testHandleStateStartKey();
-    testHandleStateThis();
-  }
-
-  /**
-   * Test branch for new StartState.
-   */
-  @Test
-  public void testHandleStateStartKey() {
-    when(mockGame.isStartKey()).thenReturn(true);
-    GameState newState = testState.handleState();
-    assertSame(newState.getClass(), StartState.class);
-  }
-
-  /**
-   * Test branch for LostState.
-   */
-  @Test
-  public void testHandleStateThis() {
-    when(mockGame.isStartKey()).thenReturn(false);
-    GameState newState = testState.handleState();
-    assertSame(newState.getClass(), LostState.class);
+    // Emptied due to startState untestability.
   }
 }
