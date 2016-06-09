@@ -24,7 +24,7 @@ public class RepairMessage extends AbstractMessage {
   /**
    * Returns the amount of health the ship should repair.
    * 
-   * @return, the amount of health.
+   * @return , the amount of health.
    */
   public int getAmount() {
     return amount;
