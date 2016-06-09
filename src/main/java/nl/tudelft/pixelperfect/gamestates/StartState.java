@@ -21,7 +21,6 @@ public class StartState extends GameState {
    */
   public StartState(Game game) {
     super(game);
-    game.start();
 
     // Creating the main menu buttons and text.
     menuInstance = new MainMenuDisplay(game.getAssetManager(), game.getGuiNode(),
