@@ -21,7 +21,6 @@ import nl.tudelft.pixelperfect.event.EventListener;
 import nl.tudelft.pixelperfect.event.EventLog;
 import nl.tudelft.pixelperfect.game.Spaceship;
 import nl.tudelft.pixelperfect.player.Player;
-import nl.tudelft.pixelperfect.route.Route;
 
 /**
  * Test Suite for the Spaceship class.
@@ -131,42 +130,6 @@ public class SpaceshipTest {
   @Test
   public void testInitialVictoryFalse() {
     assertFalse(ship.isVictorious());
-  }
-
-  /**
-   * When not enough time has passed, ship is not yet victorious after an update.
-   */
-  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
-  @Test
-  public void testUpdateVictoryFalse() {
-    // Mock and stub route dependency to force victory and inject it in test object.
-    Route mockedRoute = mock(Route.class);
-    when(mockedRoute.isCompleted(anyLong())).thenReturn(false);
-    ship.followRoute(mockedRoute);
-
-    // Execute
-    ship.update(1);
-
-    verify(mockedRoute).isCompleted(anyLong());
-    assertFalse(ship.isVictorious());
-  }
-
-  /**
-   * When enough time has passed, the route is traversed and the ship is victorious.
-   */
-  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
-  @Test
-  public void testUpdateVictoryTrue() {
-    // Mock and stub route dependency to force victory and inject it in test object.
-    Route mockedRoute = mock(Route.class);
-    when(mockedRoute.isCompleted(anyLong())).thenReturn(true);
-    ship.followRoute(mockedRoute);
-
-    // Execute
-    ship.update(1);
-
-    verify(mockedRoute).isCompleted(anyLong());
-    assertTrue(ship.isVictorious());
   }
 
   /**
