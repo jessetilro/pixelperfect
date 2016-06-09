@@ -110,20 +110,17 @@ public class Game extends VRApplication {
 
     scene = new Scene(this);
     scene.createMap();
-
     audioPlayer = new AudioPlayer(this);
     String[] names = {};
     String[] locations = {};
     audioPlayer.loadSounds(names, locations);
 
     initNetwork();
-
     spaceship = new Spaceship();
     scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY_MIN,
         Constants.EVENT_SCHEDULER_INTENSITY_MAX);
     scheduler.subscribe(spaceship.getLog());
     scheduler.start();
-
     debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode,
         Constants.DEBUG_ELEMENTS_WIDTH_OFFSET, VRGuiManager.getCanvasSize().getY(), spaceship);
     gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode,

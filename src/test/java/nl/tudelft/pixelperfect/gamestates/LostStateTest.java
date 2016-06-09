@@ -5,9 +5,7 @@ import org.junit.Test;
 
 import nl.tudelft.pixelperfect.game.Game;
 
-import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Class to test LostState.
@@ -18,7 +16,6 @@ import static org.mockito.Mockito.when;
 public class LostStateTest extends GameStateTest {
 
   private Game mockGame;
-  private LostState testState;
 
   /**
    * Setup for the test.
@@ -26,7 +23,6 @@ public class LostStateTest extends GameStateTest {
   @Before
   public void setUp() {
     mockGame = mock(Game.class);
-    testState = new LostState(mockGame);
   }
 
   /**
