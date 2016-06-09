@@ -6,8 +6,6 @@ import nl.tudelft.pixelperfect.event.EventListener;
 import nl.tudelft.pixelperfect.event.EventLog;
 import nl.tudelft.pixelperfect.player.CrewPlayer;
 import nl.tudelft.pixelperfect.player.Player;
-import nl.tudelft.pixelperfect.route.Route;
-import nl.tudelft.pixelperfect.route.RouteGenerator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,7 +23,6 @@ public class Spaceship {
 
   private int score;
   private double health;
-  private Route route;
   private EventListener log;
   private float timer;
   private boolean victorious;
@@ -38,8 +35,6 @@ public class Spaceship {
     this.score = 0;
     this.health = STARTING_HEALTH;
     this.victorious = false;
-    RouteGenerator rg = RouteGenerator.getInstance();
-    this.route = rg.generateRoute();
     this.log = new EventLog(this);
     this.timer = 0;
     this.crew = new ArrayList<Player>();
@@ -71,16 +66,6 @@ public class Spaceship {
    */
   public ArrayList<Player> getCrew() {
     return crew;
-  }
-
-  /**
-   * Let the ship pursue a given Route.
-   * 
-   * @param route
-   *          The route the ship must follow.
-   */
-  public void followRoute(Route route) {
-    this.route = route;
   }
 
   /**
@@ -160,9 +145,6 @@ public class Spaceship {
   public void update(float tpf) {
     this.timer += tpf;
     long now = System.currentTimeMillis();
-    if (route.isCompleted(now)) {
-      this.victorious = true;
-    }
     log.update();
   }
 
