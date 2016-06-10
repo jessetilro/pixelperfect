@@ -197,7 +197,8 @@ public class Scene {
    *            Amount of rows of pipes.
    * @return  Arraylist containing the pipes.
    */
-  private ArrayList<Geometry> addTubes(Vector3f location, float rotation, Vector3f rotationAxis, int row) {
+  private ArrayList<Geometry> addTubes(Vector3f location, float rotation,
+                                       Vector3f rotationAxis, int row) {
     ArrayList<Geometry> pipes = new ArrayList<Geometry>();
     float distance = 1f;
     for (int x = 0; x < row; x++) {

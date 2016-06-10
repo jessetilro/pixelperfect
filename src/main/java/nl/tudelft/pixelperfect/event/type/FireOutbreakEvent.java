@@ -45,16 +45,17 @@ public class FireOutbreakEvent extends Event {
   @Override
   public void notification(Game game, Scene scene) {
     Material buttonMat = new Material(game.getAssetManager(), "jmevr/shaders/Unshaded.j3md");
+    //TODO use parameterized version when fire actually has parameters
 //    Geometry button = scene.getFireEventObjects().get(
 //        getParameters().get("approach").getNumberValue());
-
+    Geometry button = scene.getFireEventObjects().get(0);
     if ((((int) game.getSpaceship().getTimer() % 2) == 0)
         && !isExpired(System.currentTimeMillis() + 2000)) {
       buttonMat.setColor("Color", ColorRGBA.Yellow);
     } else {
       buttonMat.setColor("Color", ColorRGBA.Red);
     }
-//    button.setMaterial(buttonMat);
+    button.setMaterial(buttonMat);
     if (!notifiedFlag) {
       notifiedFlag = true;
       game.getAudioPlayer().playSound("FireEvent", false);
