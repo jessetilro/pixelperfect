@@ -11,10 +11,12 @@ import com.jme3.network.MessageListener;
 import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
+import nl.tudelft.pixelperfect.client.message.RepairMessage;
 import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.game.Roles;
 
 /**
  * Listener for the Game's server, which handles incoming messages.
@@ -28,6 +30,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
 
   private Game app;
   private Server server;
+  private ArrayList<Roles> roles = new ArrayList<Roles>();
 
   /**
    * Sets the game whose server to listen for.
@@ -72,8 +75,30 @@ public class ServerListener implements MessageListener<HostedConnection> {
       EventCompletedMessage completedMessage = (EventCompletedMessage) message;
       processEventCompletedMessage(completedMessage);
     } else if (message instanceof RoleChosenMessage) {
-      server.broadcast(Filters.notEqualTo(source), message);
+      RoleChosenMessage retrieved = (RoleChosenMessage) message;
+      if (retrieved.isEmpty()) {
+        for (Roles role : roles) {
+          server.broadcast(Filters.equalTo(source), new RoleChosenMessage("initial roles chosen",
+              role));
+        }
+      } else {
+        roles.add(retrieved.getRole());
+        server.broadcast(Filters.notEqualTo(source), message);
+      }
+    } else if (message instanceof RepairMessage) {
+      RepairMessage repairMessage = (RepairMessage) message;
+      processRepairs(repairMessage);
     }
+  }
+  
+  /**
+   * Process a recieved RepairMessage.
+   * 
+   * @param message , The received RepairMessage.
+   */
+  public synchronized void processRepairs(RepairMessage message) {
+    System.out.println("Activating repairs.");
+    app.getSpaceship().updateHealth(message.getAmount());
   }
 
   /**

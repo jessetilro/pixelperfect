@@ -6,11 +6,13 @@ import java.util.Collection;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.parameter.EventParameterCollection;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
+import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.game.Scene;
 import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
  * A class for storing and defining events, called upon by the event scheduler.
- * 
+ *
  * @author David Alderliesten
  * @author Jesse Tilro
  *
@@ -28,7 +30,7 @@ public abstract class Event {
    * Constructor for the event class, taking parameters for the type of event, a summary of the
    * event/name, a description of the event, a timestamp to start, a duration, and a damage if the
    * event is failed.
-   * 
+   *
    * @param id
    *          The unique id of the event.
    * @param summary
@@ -43,7 +45,7 @@ public abstract class Event {
    *          The damage done to the ship on even failure.
    */
   public Event(int id, String summary, String description, long timestamp, long duration,
-      double damage) {
+               double damage) {
     this.id = id;
     this.summary = summary;
     this.description = description;
@@ -55,14 +57,14 @@ public abstract class Event {
 
   /**
    * Get the type of this Event.
-   * 
+   *
    * @return The EventType.
    */
   public abstract EventTypes getType();
 
   /**
    * Getter for the event id.
-   * 
+   *
    * @return The id of event.
    */
   public int getId() {
@@ -71,7 +73,7 @@ public abstract class Event {
 
   /**
    * Getter for the event summary/name.
-   * 
+   *
    * @return Summary/name of the event.
    */
   public String getSummary() {
@@ -80,7 +82,7 @@ public abstract class Event {
 
   /**
    * Get the description of the event.
-   * 
+   *
    * @return Description of event.
    */
   public String getDescription() {
@@ -89,7 +91,7 @@ public abstract class Event {
 
   /**
    * Get the timestamp of the event.
-   * 
+   *
    * @return Timestamp of event.
    */
   public Long getTimestamp() {
@@ -98,7 +100,7 @@ public abstract class Event {
 
   /**
    * Get the duration of the event.
-   * 
+   *
    * @return Duration of event.
    */
   public Long getDuration() {
@@ -107,10 +109,10 @@ public abstract class Event {
 
   /**
    * Get the time remaining of the event.
-   * 
+   *
    * @param currentTime
    *          the current time.
-   * 
+   *
    * @return The time remaining.
    */
   public String getTimeLeft(long currentTime) {
@@ -119,7 +121,7 @@ public abstract class Event {
 
   /**
    * Check whether the event is expired at a given moment in time.
-   * 
+   *
    * @param time
    *          The moment in time at which to check the expiration.
    * @return Whether the event is expired.
@@ -130,7 +132,7 @@ public abstract class Event {
 
   /**
    * Apply damage to a given Spaceship.
-   * 
+   *
    * @param spaceship
    *          The Spaceship to apply damage to.
    */
@@ -140,7 +142,7 @@ public abstract class Event {
 
   /**
    * Get the damage that will be done to the ship in the case of event failure.
-   * 
+   *
    * @return The event's damage value.
    */
   public double getDamage() {
@@ -149,7 +151,7 @@ public abstract class Event {
 
   /**
    * Update this Event's parameter collection to consist of the parameters in the given collection.
-   * 
+   *
    * @param collection
    *          A Collection of EventParameters.
    */
@@ -159,7 +161,7 @@ public abstract class Event {
 
   /**
    * Check whether the given collection of parameters matches this Event's parameters.
-   * 
+   *
    * @param collection
    *          A Collection of EventParameters.
    * @return Whether the parameters are valid.
@@ -170,7 +172,7 @@ public abstract class Event {
 
   /**
    * Generate a String representation of this Event and its parameters.
-   * 
+   *
    * @return A String representation of this Event and its parameters.
    */
   public String toString() {
@@ -185,7 +187,7 @@ public abstract class Event {
 
   /**
    * Generate a debug string with only timing and parameters.
-   * 
+   *
    * @return debug string.
    */
   public String toDebugString() {
@@ -196,5 +198,24 @@ public abstract class Event {
       sb.append(component);
     }
     return sb.toString();
+  }
+
+  /**
+   * Allow events to render notifications to the players.
+   *
+   * @param game
+   *            The current game.
+   * @param scene
+   *          The scene in which the notification must appear.
+   */
+  public abstract void notification(Game game, Scene scene);
+
+  /**
+   * Get parameters for this event.
+   *
+   * @return EventParamterCollection containing parameters.
+   */
+  public EventParameterCollection getParameters() {
+    return parameters;
   }
 }

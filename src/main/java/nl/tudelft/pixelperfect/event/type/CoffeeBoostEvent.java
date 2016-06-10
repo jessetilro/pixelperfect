@@ -1,6 +1,11 @@
 package nl.tudelft.pixelperfect.event.type;
 
+import com.jme3.material.Material;
+import com.jme3.math.ColorRGBA;
+import com.jme3.scene.Geometry;
 import nl.tudelft.pixelperfect.event.Event;
+import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.game.Scene;
 
 /**
  * A type of event, imposing the problem of a lack of caffeine.
@@ -35,5 +40,25 @@ public class CoffeeBoostEvent extends Event {
   @Override
   public EventTypes getType() {
     return EventTypes.COFFEE_BOOST;
+  }
+
+  private boolean notifiedFlag = false;
+  @Override
+  public void notification(Game game, Scene scene) {
+    Material buttonMat = new Material(game.getAssetManager(), "jmevr/shaders/Unshaded.j3md");
+    Geometry button = scene.getCoffeeEventObjects().get(0);
+
+    if (!notifiedFlag) {
+      notifiedFlag = true;
+      game.getAudioPlayer().playSound("CoffeeEvent", false);
+    }
+    if ((((int) game.getSpaceship().getTimer() % 2) == 0)
+        && !isExpired(System.currentTimeMillis() + 2000)) {
+      buttonMat.setColor("Color", ColorRGBA.Yellow);
+    } else {
+      buttonMat.setColor("Color", ColorRGBA.Red);
+    }
+    button.setMaterial(buttonMat);
+
   }
 }

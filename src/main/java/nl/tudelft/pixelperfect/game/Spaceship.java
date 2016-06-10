@@ -91,6 +91,9 @@ public class Spaceship {
    */
   public void updateHealth(double delta) {
     this.health += delta;
+    if (this.health > 100) {
+      this.health = 100;
+    }
     if (this.health < 0) {
       this.health = 0;
     }
