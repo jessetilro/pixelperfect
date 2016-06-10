@@ -2,6 +2,7 @@ package nl.tudelft.pixelperfect.event.factory;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventReader;
@@ -33,11 +34,11 @@ public class HostileShipEventFactory extends EventFactory {
 
   @Override
   public Collection<EventParameter> createParameters() {
+    Random random = new Random();
     Collection<EventParameter> collection = new ArrayList<EventParameter>();
-    collection.add(new EventParameter("positionX", 42));
-    collection.add(new EventParameter("positionY", 42));
-    collection.add(new EventParameter("armor", 42));
+    collection.add(new EventParameter("positionX", 1 + random.nextInt(100)));
+    collection.add(new EventParameter("positionY", 1 + random.nextInt(100)));
+    collection.add(new EventParameter("armor", random.nextInt(3)));
     return collection;
   }
-
 }

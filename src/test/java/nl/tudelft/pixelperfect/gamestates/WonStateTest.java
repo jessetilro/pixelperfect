@@ -34,7 +34,7 @@ public class WonStateTest extends GameStateTest {
    */
   @Test
   public void testUpdate() {
-    //update method is empty for now
+    // update method is empty for now
   }
 
   /**
@@ -42,21 +42,11 @@ public class WonStateTest extends GameStateTest {
    */
   @Test
   public void testHandleState() {
-    handleStateStartKey();
     handleStateThis();
   }
 
   /**
-   * Test that you go to StartState when startkey is pressed.
-   */
-  private void handleStateStartKey() {
-    when(mockGame.isStartKey()).thenReturn(true);
-    GameState newState = testState.handleState();
-    assertSame(newState.getClass(), StartState.class);
-  }
-
-  /**
-   * Test that you stay in WonState if key is not pressed.
+   * Test that you stay in WonState when the startkey is not pressed.
    */
   private void handleStateThis() {
     when(mockGame.isStartKey()).thenReturn(false);

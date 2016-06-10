@@ -2,6 +2,7 @@ package nl.tudelft.pixelperfect.client;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -20,6 +21,7 @@ import com.jme3.network.Server;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
+import nl.tudelft.pixelperfect.client.message.RepairMessage;
 import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.EventLog;
 import nl.tudelft.pixelperfect.game.Game;
@@ -132,5 +134,19 @@ public class ServerListenerTest {
     object.messageReceived(mockedSource, message);
     verify(mockServer).broadcast((Filter<? super HostedConnection>) anyObject(),
         (Message) anyObject());
+  }
+  
+  /**
+   * When the Server recieves a RepairMessage, it should update the ship's health.
+   * 
+   */
+  @Test
+  public void testRepairMessage() {
+    Spaceship mockedShip = mock(Spaceship.class);
+    when(mockedGame.getSpaceship()).thenReturn(mockedShip);
+    RepairMessage message = mock(RepairMessage.class);
+    object.messageReceived(mockedSource, message);
+    verify(mockedShip).updateHealth(anyDouble());
+    
   }
 }

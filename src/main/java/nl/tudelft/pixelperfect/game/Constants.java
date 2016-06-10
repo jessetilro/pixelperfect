@@ -15,24 +15,25 @@ public final class Constants {
   private Constants() {
   }
 
+  // Position related constants for the main menu.
+  public static final int MAIN_MENU_START_HEIGHT_OFFSET = -150;
+  public static final int MAIN_MENU_EXIT_HEIGHT_OFFSET = 150;
+
+  public static final int MAIN_MENU_TEXT_SCALING = 3;
+
+  // Text constants for the main menu.
+  public static final String MAIN_MENU_START_BUTTON_TEXT = "Start Game";
+  public static final String MAIN_MENU_EXIT_BUTTON_TEXT = "Exit Game";
+
   // Positioning related constants for the in-game debug HUD.
-  public static final int DEBUG_LOG_WIDTH_OFFSET = 150;
-  public static final int DEBUG_LOG_HEIGHT_OFFSET = 50;
+  public static final int DEBUG_LOG_HEIGHT_OFFSET = 300;
+  public static final int DEBUG_HEALTH_HEIGHT_OFFSET = 350;
+  public static final int DEBUG_SCORE_HEIGHT_OFFSET = 400;
+  public static final int DEBUG_TIME_HEIGHT_OFFSET = 450;
+  public static final int DEBUG_CONNECTED_HEIGHT_OFFSET = 500;
+  public static final int DEBUG_IP_HEIGHT_OFFSET = 550;
 
-  public static final int DEBUG_HEALTH_WIDTH_OFFSET = 300;
-  public static final int DEBUG_HEALTH_HEIGHT_OFFSET = 100;
-
-  public static final int DEBUG_SCORE_WIDTH_OFFSET = 400;
-  public static final int DEBUG_SCORE_HEIGHT_OFFSET = 150;
-
-  public static final int DEBUG_TIME_WIDTH_OFFSET = 400;
-  public static final int DEBUG_TIME_HEIGHT_OFFSET = 0;
-  
-  public static final int DEBUG_CONNECTED_WIDTH_OFFSET = 400;
-  public static final int DEBUG_CONNECTED_HEIGHT_OFFSET = -50;
-  
-  public static final int DEBUG_IP_WIDTH_OFFSET = 400;
-  public static final int DEBUG_IP_HEIGHT_OFFSET = -100;
+  public static final int DEBUG_ELEMENTS_WIDTH_OFFSET = 100;
 
   // Text constants for the in-game debug HUD.
   public static final String DEBUG_NO_EVENTS_LOG_TEXT = "No events currently active";
@@ -43,9 +44,9 @@ public final class Constants {
   public static final String DEBUG_IP_LABEL = "Connection Address: ";
 
   // Positioning and scaling related constants for the in-game HUD.
-  public static final int GUI_LOG_WIDTH_OFFSET = 1350;
-  public static final int GUI_HEALTH_WIDTH_OFFSET = 1700;
-  
+  public static final int GUI_ELEMENTS_WIDTH_OFFSET = 50;
+  public static final int GUI_ELEMENTS_HEIGHT_OFFSET = 20;
+
   public static final int GUI_HEALTH_TEXT_SIZE_SCALE = 2;
   public static final int GUI_SCORE_TEXT_SIZE_SCALE = 2;
 
