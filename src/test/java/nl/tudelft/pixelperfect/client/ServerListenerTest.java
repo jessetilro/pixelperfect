@@ -5,6 +5,7 @@ import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
@@ -63,6 +64,7 @@ public class ServerListenerTest {
   public void testGetGame() {
     assertEquals(mockedGame, object.getGame());
   }
+  
 
   /**
    * When the ServerListener receives a Message, it should do something with its contents.
@@ -133,6 +135,33 @@ public class ServerListenerTest {
     RoleChosenMessage message = mock(RoleChosenMessage.class);
     object.messageReceived(mockedSource, message);
     verify(mockServer).broadcast((Filter<? super HostedConnection>) anyObject(),
+        (Message) anyObject());
+  }
+  
+  /**
+   * Tests what would happen if an empty RoleChosenMessage is recieved.
+   * 
+   */
+  @SuppressWarnings("unchecked")
+  @Test
+  public void testRoleChosenMessageEmpty() {
+    RoleChosenMessage message = new RoleChosenMessage();
+    object.messageReceived(mockedSource, message);
+    verifyNoMoreInteractions(mockServer);
+  }
+  
+  /**
+   * Testing what would happen if there is an empty RoleChosenMessage following a filled one.
+   * 
+   */
+  @SuppressWarnings("unchecked")
+  @Test
+  public void testTwoRoleChosenMessages() {
+    RoleChosenMessage message = new RoleChosenMessage();
+    RoleChosenMessage first = mock(RoleChosenMessage.class);
+    object.messageReceived(mockedSource, first);
+    object.messageReceived(mockedSource, message);
+    verify(mockServer, times(2)).broadcast((Filter<? super HostedConnection>) anyObject(),
         (Message) anyObject());
   }
   
