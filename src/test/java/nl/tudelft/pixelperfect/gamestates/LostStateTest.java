@@ -3,10 +3,6 @@ package nl.tudelft.pixelperfect.gamestates;
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.tudelft.pixelperfect.game.Game;
-
-import static org.mockito.Mockito.mock;
-
 /**
  * Class to test LostState.
  *
@@ -15,14 +11,12 @@ import static org.mockito.Mockito.mock;
 @SuppressWarnings("PMD")
 public class LostStateTest extends GameStateTest {
 
-  private Game mockGame;
-
   /**
    * Setup for the test.
    */
   @Before
   public void setUp() {
-    mockGame = mock(Game.class);
+    // Lost State method is empty for now.
   }
 
   /**
@@ -30,7 +24,7 @@ public class LostStateTest extends GameStateTest {
    */
   @Test
   public void testUpdate() {
-    // update method is empty for now.
+    // Update method is empty for now.
   }
 
   /**
