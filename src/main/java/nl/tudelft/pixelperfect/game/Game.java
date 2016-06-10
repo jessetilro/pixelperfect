@@ -14,11 +14,13 @@ import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 
 import jmevr.app.VRApplication;
+import jmevr.util.VRGuiManager;
 import nl.tudelft.pixelperfect.audio.AudioPlayer;
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.message.RepairMessage;
+import nl.tudelft.pixelperfect.client.message.NewGameMessage;
 import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gamestates.GameState;
@@ -43,7 +45,7 @@ public class Game extends VRApplication {
   private static Game appGame;
   private Spaceship spaceship;
   private EventScheduler scheduler;
-  private Server server;
+  private static Server server;
   private AudioPlayer audioPlayer;
   private Spatial observer;
   private boolean moveForward;
@@ -109,22 +111,21 @@ public class Game extends VRApplication {
 
     scene = new Scene(this);
     scene.createMap();
-
     audioPlayer = new AudioPlayer(this);
     String[] names = {};
     String[] locations = {};
     audioPlayer.loadSounds(names, locations);
 
     initNetwork();
-
     spaceship = new Spaceship();
     scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY_MIN,
         Constants.EVENT_SCHEDULER_INTENSITY_MAX);
     scheduler.subscribe(spaceship.getLog());
     scheduler.start();
-
-    debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode, 200, 200, spaceship);
-    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, 1800, 1000, spaceship);
+    debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode,
+        Constants.DEBUG_ELEMENTS_WIDTH_OFFSET, VRGuiManager.getCanvasSize().getY(), spaceship);
+    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode,
+        VRGuiManager.getCanvasSize().getX(), VRGuiManager.getCanvasSize().getY(), spaceship);
 
     gameState = new StartState(this);
   }
@@ -138,6 +139,7 @@ public class Game extends VRApplication {
       Serializer.registerClass(EventCompletedMessage.class);
       Serializer.registerClass(RoleChosenMessage.class);
       Serializer.registerClass(RepairMessage.class);
+      Serializer.registerClass(NewGameMessage.class);
       server.start();
       ServerListener listen = new ServerListener();
       listen.setGame(this);
@@ -145,12 +147,20 @@ public class Game extends VRApplication {
       server.addMessageListener(listen, EventCompletedMessage.class);
       server.addMessageListener(listen, RoleChosenMessage.class);
       server.addMessageListener(listen, RepairMessage.class);
+      server.addMessageListener(listen, NewGameMessage.class);
       ConnectListener connect = new ConnectListener();
       connect.setGame(this);
       server.addConnectionListener(connect);
     } catch (IOException except) {
       except.printStackTrace();
     }
+  }
+
+  /**
+   * Tells the clients to start the game.
+   */
+  public static void startGame() {
+    server.broadcast(new NewGameMessage());
   }
 
   /**
@@ -355,5 +365,23 @@ public class Game extends VRApplication {
    */
   public void setSpaceship(Spaceship spaceship) {
     this.spaceship = spaceship;
+  }
+
+  /**
+   * Returns the size of the x viewport for VR.
+   * 
+   * @return viewport width.
+   */
+  public float getViewPortX() {
+    return VRGuiManager.getCanvasSize().getX();
+  }
+
+  /**
+   * Returns the size of the y viewport for VR.
+   * 
+   * @return viewport height.
+   */
+  public float getViewPortY() {
+    return VRGuiManager.getCanvasSize().getY();
   }
 }

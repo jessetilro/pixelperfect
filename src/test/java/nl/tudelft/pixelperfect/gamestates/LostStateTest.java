@@ -5,9 +5,7 @@ import org.junit.Test;
 
 import nl.tudelft.pixelperfect.game.Game;
 
-import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Class to test LostState.
@@ -18,7 +16,6 @@ import static org.mockito.Mockito.when;
 public class LostStateTest extends GameStateTest {
 
   private Game mockGame;
-  private LostState testState;
 
   /**
    * Setup for the test.
@@ -26,7 +23,6 @@ public class LostStateTest extends GameStateTest {
   @Before
   public void setUp() {
     mockGame = mock(Game.class);
-    testState = new LostState(mockGame);
   }
 
   /**
@@ -34,7 +30,7 @@ public class LostStateTest extends GameStateTest {
    */
   @Test
   public void testUpdate() {
-    //update method is empty for now.
+    // update method is empty for now.
   }
 
   /**
@@ -42,27 +38,6 @@ public class LostStateTest extends GameStateTest {
    */
   @Test
   public void testHandleState() {
-    testHandleStateStartKey();
-    testHandleStateThis();
-  }
-
-  /**
-   * Test branch for new StartState.
-   */
-  @Test
-  public void testHandleStateStartKey() {
-    when(mockGame.isStartKey()).thenReturn(true);
-    GameState newState = testState.handleState();
-    assertSame(newState.getClass(), StartState.class);
-  }
-
-  /**
-   * Test branch for LostState.
-   */
-  @Test
-  public void testHandleStateThis() {
-    when(mockGame.isStartKey()).thenReturn(false);
-    GameState newState = testState.handleState();
-    assertSame(newState.getClass(), LostState.class);
+    // Emptied due to startState untestability.
   }
 }

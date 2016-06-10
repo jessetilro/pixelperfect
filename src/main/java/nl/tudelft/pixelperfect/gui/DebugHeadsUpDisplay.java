@@ -24,8 +24,8 @@ public class DebugHeadsUpDisplay {
 
   private AssetManager assetManager;
   private Node guiNodes;
-  private int screenWidth;
-  private int screenHeight;
+  private float screenWidth;
+  private float screenHeight;
 
   private BitmapFont hudFont;
   private BitmapText captainLog;
@@ -42,19 +42,19 @@ public class DebugHeadsUpDisplay {
    *          the passed assetmanager.
    * @param passedGuiNode
    *          the passed gui node.
-   * @param passedWid
+   * @param width
    *          the passed screen width.
-   * @param passedHi
+   * @param height
    *          the passed screen height.
    * @param passedShip
    *          the passed Spaceship instance.
    */
-  public DebugHeadsUpDisplay(AssetManager passedMan, Node passedGuiNode, int passedWid,
-      int passedHi, Spaceship passedShip) {
+  public DebugHeadsUpDisplay(AssetManager passedMan, Node passedGuiNode, float width, float height,
+      Spaceship passedShip) {
     this.assetManager = passedMan;
     this.guiNodes = passedGuiNode;
-    this.screenWidth = passedWid;
-    this.screenHeight = passedHi;
+    this.screenWidth = width;
+    this.screenHeight = height;
     this.spaceship = passedShip;
 
     // Sets-up the text display using the private method.
@@ -86,29 +86,28 @@ public class DebugHeadsUpDisplay {
 
     // Init for the log text, including font loading and text setting.
     captainLog = new BitmapText(hudFont, true);
-    captainLog.setLocalTranslation(screenWidth - Constants.DEBUG_LOG_WIDTH_OFFSET,
-        screenHeight - Constants.DEBUG_LOG_HEIGHT_OFFSET, 0);
+    captainLog.setLocalTranslation(screenWidth, screenHeight - Constants.DEBUG_LOG_HEIGHT_OFFSET,
+        0);
 
     // Init for the HUD text, including font loading and text setting.
     shipHealth = new BitmapText(hudFont, true);
-    shipHealth.setLocalTranslation(screenWidth + 150 - Constants.DEBUG_HEALTH_WIDTH_OFFSET,
-        screenHeight - Constants.DEBUG_HEALTH_HEIGHT_OFFSET, 0);
+    shipHealth.setLocalTranslation(screenWidth, screenHeight - Constants.DEBUG_HEALTH_HEIGHT_OFFSET,
+        0);
 
     teamScore = new BitmapText(hudFont, true);
-    teamScore.setLocalTranslation(screenWidth + 250 - Constants.DEBUG_SCORE_WIDTH_OFFSET,
-        screenHeight - Constants.DEBUG_SCORE_HEIGHT_OFFSET, 0);
+    teamScore.setLocalTranslation(screenWidth, screenHeight - Constants.DEBUG_SCORE_HEIGHT_OFFSET,
+        0);
 
     timeLeft = new BitmapText(hudFont, true);
-    timeLeft.setLocalTranslation(screenWidth + 250 - Constants.DEBUG_TIME_WIDTH_OFFSET,
-        screenHeight - Constants.DEBUG_TIME_HEIGHT_OFFSET, 0);
+    timeLeft.setLocalTranslation(screenWidth, screenHeight - Constants.DEBUG_TIME_HEIGHT_OFFSET, 0);
 
     playersConnected = new BitmapText(hudFont, true);
-    playersConnected.setLocalTranslation(screenWidth + 250 - Constants.DEBUG_CONNECTED_WIDTH_OFFSET,
+    playersConnected.setLocalTranslation(screenWidth,
         screenHeight - Constants.DEBUG_CONNECTED_HEIGHT_OFFSET, 0);
 
     localAddress = new BitmapText(hudFont, true);
-    localAddress.setLocalTranslation(screenWidth + 250 - Constants.DEBUG_IP_WIDTH_OFFSET,
-        screenHeight - Constants.DEBUG_IP_HEIGHT_OFFSET, 0);
+    localAddress.setLocalTranslation(screenWidth, screenHeight - Constants.DEBUG_IP_HEIGHT_OFFSET,
+        0);
   }
 
   /**
@@ -147,7 +146,9 @@ public class DebugHeadsUpDisplay {
   }
 
   /**
-   * Clears the debug display after de-activation of the debug mode.
+   * Clears the debug display after de-activation of the debug mode. The strings are only cleared
+   * instead of detached due to the ability to re-start the debug mode, which causes issues if
+   * re-initialized.
    */
   public void clearHud() {
     captainLog.setText("");
