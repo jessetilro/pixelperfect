@@ -71,7 +71,7 @@ public class EventParameter {
    * 
    * @return A number value.
    */
-  protected int getNumberValue() {
+  public int getNumberValue() {
     return numberValue;
   }
 

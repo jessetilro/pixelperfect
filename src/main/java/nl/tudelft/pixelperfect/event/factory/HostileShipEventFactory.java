@@ -41,5 +41,4 @@ public class HostileShipEventFactory extends EventFactory {
     collection.add(new EventParameter("armor", random.nextInt(3)));
     return collection;
   }
-
 }

@@ -4,12 +4,13 @@ import static org.junit.Assert.assertSame;
 import static org.mockito.Matchers.anyFloat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import com.jme3.scene.Spatial;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import nl.tudelft.pixelperfect.event.EventLog;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Settings;
@@ -66,6 +67,7 @@ public class PlayStateTest extends GameStateTest {
   @Test
   public void testUpdate() {
     testSettings.setIsDebug(true);
+    when(mockSpaceship.getLog()).thenReturn(new EventLog(mockSpaceship));
 
     testState.update(1f);
     verify(mockScheduler).update(1f);
@@ -80,6 +82,7 @@ public class PlayStateTest extends GameStateTest {
   @Test
   public void testUpdateWithoutDebug() {
     testSettings.setIsDebug(false);
+    when(mockSpaceship.getLog()).thenReturn(new EventLog(mockSpaceship));
 
     testState.update(1f);
     verify(mockScheduler).update(1f);

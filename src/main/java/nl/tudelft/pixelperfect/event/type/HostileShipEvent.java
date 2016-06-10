@@ -1,6 +1,10 @@
 package nl.tudelft.pixelperfect.event.type;
 
+import com.jme3.font.BitmapText;
 import nl.tudelft.pixelperfect.event.Event;
+import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.game.Scene;
+
 
 /**
  * A type of event, imposing the problem of a hostile alien spaceship.
@@ -35,5 +39,21 @@ public class HostileShipEvent extends Event {
   @Override
   public EventTypes getType() {
     return EventTypes.HOSTILE_SHIP;
+  }
+
+  private boolean notifiedFlag = false;
+  @Override
+  public void notification(Game game, Scene scene) {
+    int xParam = getParameters().get("positionX").getNumberValue();
+    int yParam = getParameters().get("positionY").getNumberValue();
+    int armorParam = getParameters().get("armor").getNumberValue();
+    BitmapText textfield = scene.getHostileEventText();
+    textfield.setText("x: " + xParam + "\ny: " + yParam + "\n" + armorParam);
+
+
+    if (!notifiedFlag) {
+      notifiedFlag = true;
+      game.getAudioPlayer().playSound("HostileEvent", false);
+    }
   }
 }
