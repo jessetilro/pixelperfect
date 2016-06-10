@@ -11,6 +11,7 @@ import com.jme3.network.MessageListener;
 import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
+import nl.tudelft.pixelperfect.client.message.RepairMessage;
 import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
@@ -84,8 +85,20 @@ public class ServerListener implements MessageListener<HostedConnection> {
         roles.add(retrieved.getRole());
         server.broadcast(Filters.notEqualTo(source), message);
       }
-
+    } else if (message instanceof RepairMessage) {
+      RepairMessage repairMessage = (RepairMessage) message;
+      processRepairs(repairMessage);
     }
+  }
+  
+  /**
+   * Process a recieved RepairMessage.
+   * 
+   * @param message , The received RepairMessage.
+   */
+  public synchronized void processRepairs(RepairMessage message) {
+    System.out.println("Activating repairs.");
+    app.getSpaceship().updateHealth(message.getAmount());
   }
 
   /**
