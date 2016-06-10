@@ -76,14 +76,14 @@ public class ServerListener implements MessageListener<HostedConnection> {
       processEventCompletedMessage(completedMessage);
     } else if (message instanceof RoleChosenMessage) {
       RoleChosenMessage retrieved = (RoleChosenMessage) message;
-      if (retrieved.isEmpty()) {
-        for (Roles role : roles) {
-          server.broadcast(Filters.equalTo(source), new RoleChosenMessage("initial roles chosen",
-              role));
-        }
+      Roles roleChosen = retrieved.getRole();
+      if (roles.contains(roleChosen)) {
+        server.broadcast(Filters.equalTo(source), new RoleChosenMessage(roleChosen, false));
+        System.out.println("Role " + roleChosen.toString() + " requested, denied.");
       } else {
-        roles.add(retrieved.getRole());
-        server.broadcast(Filters.notEqualTo(source), message);
+        roles.add(roleChosen);
+        server.broadcast(Filters.equalTo(source), new RoleChosenMessage(roleChosen, true));
+        System.out.println("Role " + roleChosen.toString() + " requested, granted.");
       }
     } else if (message instanceof RepairMessage) {
       RepairMessage repairMessage = (RepairMessage) message;
