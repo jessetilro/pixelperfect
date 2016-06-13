@@ -1,0 +1,11 @@
+Material Dark Chrome : Common/MatDefs/Light/Lighting.j3md {
+     MaterialParameters {
+        Ambient : 0 0 0 1
+        Diffuse : 0.3 0.3 0.3 1
+        Specular : 0.6 0.6 0.6 1
+        UseMaterialColors : true
+        Shininess : 96.0
+     }
+    AdditionalRenderState {
+    }
+}

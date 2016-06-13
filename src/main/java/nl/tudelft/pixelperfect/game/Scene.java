@@ -2,6 +2,10 @@ package nl.tudelft.pixelperfect.game;
 
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
+import com.jme3.light.DirectionalLight;
+import com.jme3.light.Light;
+import com.jme3.light.PointLight;
+import com.jme3.light.SpotLight;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
@@ -11,6 +15,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 import com.jme3.scene.shape.Cylinder;
 import com.jme3.scene.shape.Dome;
@@ -34,7 +39,6 @@ public class Scene {
   private ArrayList<Geometry> fireEventObjects;
   private ArrayList<Geometry> coffeeEventObjects;
   private BitmapText hostileEventText;
-  private BitmapFont font;
 
   /**
    * Constructor for Scene.
@@ -45,22 +49,22 @@ public class Scene {
   public Scene(Game game) {
     app = game;
     basicMat = "Common/MatDefs/Misc/Unshaded.j3md";
-    font = app.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
+
   }
 
   /**
    * Method that contains all objects for the scene.
    */
   public void createMap() {
-    createDashboard();
-    createWindow();
-    createBoxObject(new Box(10, 10, 0.01f), new Vector3f(0, 0, 0),
-            "Textures/rusting_metal.JPG");
-    createBoxObject(new Box(2, 4, 0.01f), new Vector3f(0, 4, 0),
-             "Textures/metal_door.JPG");
-    createBoxObject(new Box(10, 0.01f, 10), new Vector3f(0, 0, 0),
-            "Textures/wood.JPG");
-
+//    createDashboard();
+//    createWindow();
+//    createBoxObject(new Box(10, 10, 0.01f), new Vector3f(0, 0, 0),
+//            "Textures/rusting_metal.JPG");
+//    createBoxObject(new Box(2, 4, 0.01f), new Vector3f(0, 4, 0),
+//             "Textures/metal_door.JPG");
+//    createBoxObject(new Box(10, 0.01f, 10), new Vector3f(0, 0, 0),
+//            "Textures/wood.JPG");
+//
     coffeeEventObjects = addButtons(new Vector3f(0, 1, 7.9f), -.5f * FastMath.HALF_PI,
         new Vector3f(0, 1, 0), 1, 1);
     astroidEventObjects = addButtons(new Vector3f(0, 1, 7.9f), .5f * FastMath.HALF_PI,
@@ -70,6 +74,10 @@ public class Scene {
     plasmaEventObjects = addTubes(new Vector3f(-6, 0, 0.5f), FastMath.HALF_PI,
         new Vector3f(1, 0, 0), 4);
     createHostileRadar();
+    Spatial spaceship = app.getAssetManager().loadModel("Models/spaceship/spaceship_no_light.j3o");
+    Light light = new PointLight(new Vector3f(0, 1, 0));
+    app.getRootNode().addLight(light);
+    app.getRootNode().attachChild(spaceship);
   }
 
   /**
@@ -95,43 +103,43 @@ public class Scene {
 
     return newBox;
   }
-
-  /**
-   * Create the windows of the spaceship.
-   */
-  private void createWindow() {
-    Dome dome = new Dome(new Vector3f(0, 0, 0), 10, 10, 10, true);
-    Geometry domeGeo = new Geometry("Dome", dome);
-    Material domeMat = new Material(app.getAssetManager(), basicMat);
-    Texture window = app.getAssetManager().loadTexture("Textures/Sky/Bright/spheremap.png");
-
-    domeMat.setTexture("ColorMap", window);
-    domeGeo.setMaterial(domeMat);
-
-    domeMat.getAdditionalRenderState().setBlendMode(
-            RenderState.BlendMode.Alpha);
-    domeGeo.setQueueBucket(RenderQueue.Bucket.Transparent);
-    domeGeo.setLocalRotation(new Quaternion().fromAngleAxis(
-            FastMath.HALF_PI, new Vector3f(1, 0, 0)));
-    app.getRootNode().attachChild(domeGeo);
-  }
-
-  /**
-   * Create the dashboard of the cockpit.
-   */
-  private void createDashboard() {
-    Torus torus = new Torus(10, 10, 2, 10);
-    Geometry torusGeo = new Geometry("Torus", torus);
-    Material torusMat = new Material(app.getAssetManager(), basicMat);
-    Texture metal2 = app.getAssetManager().loadTexture("Textures/metal.JPG");
-
-    torusMat.setTexture("ColorMap", metal2);
-    torusGeo.setMaterial(torusMat);
-
-    torusGeo.setLocalRotation(new Quaternion().fromAngleAxis(
-            FastMath.HALF_PI, new Vector3f(1, 0, 0)));
-    app.getRootNode().attachChild(torusGeo);
-  }
+//
+//  /**
+//   * Create the windows of the spaceship.
+//   */
+//  private void createWindow() {
+//    Dome dome = new Dome(new Vector3f(0, 0, 0), 10, 10, 10, true);
+//    Geometry domeGeo = new Geometry("Dome", dome);
+//    Material domeMat = new Material(app.getAssetManager(), basicMat);
+//    Texture window = app.getAssetManager().loadTexture("Textures/Sky/Bright/spheremap.png");
+//
+//    domeMat.setTexture("ColorMap", window);
+//    domeGeo.setMaterial(domeMat);
+//
+//    domeMat.getAdditionalRenderState().setBlendMode(
+//            RenderState.BlendMode.Alpha);
+//    domeGeo.setQueueBucket(RenderQueue.Bucket.Transparent);
+//    domeGeo.setLocalRotation(new Quaternion().fromAngleAxis(
+//            FastMath.HALF_PI, new Vector3f(1, 0, 0)));
+//    app.getRootNode().attachChild(domeGeo);
+//  }
+//
+//  /**
+//   * Create the dashboard of the cockpit.
+//   */
+//  private void createDashboard() {
+//    Torus torus = new Torus(10, 10, 2, 10);
+//    Geometry torusGeo = new Geometry("Torus", torus);
+//    Material torusMat = new Material(app.getAssetManager(), basicMat);
+//    Texture metal2 = app.getAssetManager().loadTexture("Textures/metal.JPG");
+//
+//    torusMat.setTexture("ColorMap", metal2);
+//    torusGeo.setMaterial(torusMat);
+//
+//    torusGeo.setLocalRotation(new Quaternion().fromAngleAxis(
+//            FastMath.HALF_PI, new Vector3f(1, 0, 0)));
+//    app.getRootNode().attachChild(torusGeo);
+//  }
 
   /**
    * Render a group of small buttons.
@@ -221,7 +229,8 @@ public class Scene {
    * Create the radar and a BitmmapText to display information.
    */
   private void createHostileRadar() {
-    createBoxObject(new Box(2, 2, 0.1f), new Vector3f(0, 3, 7.1f), "Textures/radar.jpg");
+    createBoxObject(new Box(0.8f, 0.8f, 0.01f), new Vector3f(0, 4.7f, 9.5f), "Textures/radar.jpg");
+    BitmapFont font = app.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
     hostileEventText = new BitmapText(font, false);
     hostileEventText.setColor(ColorRGBA.Green);
     hostileEventText.setLocalTranslation(1, 4, 7);
