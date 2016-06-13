@@ -29,7 +29,6 @@ public class GameHeadsUpDisplay {
   private float screenHeight;
 
   private BitmapFont hudFont;
-  private BitmapText currentEvents;
   private BitmapText shipHealth;
   private BitmapText teamScore;
 
@@ -56,31 +55,20 @@ public class GameHeadsUpDisplay {
     this.spaceship = passedShip;
 
     // Setting-up the fonts required for the Bitmap display.
-    setupFont();
+    setupElements();
   }
 
   /**
    * Private class responsible for setting-up the bitmap fonts and attaching the HUD elements to the
    * guiNodes.
    */
-  private void setupFont() {
+  private void setupElements() {
     // Loading the font stored in the javamonkeyengine's default manager.
     hudFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
-
-    // Initializer for the log text, including font loading and text setting.
-    currentEvents = new BitmapText(hudFont, true);
-    currentEvents.setColor(ColorRGBA.LightGray);
-    currentEvents.setLocalTranslation(screenWidth / 4,
-        screenHeight - Constants.GUI_ELEMENTS_HEIGHT_OFFSET, 0);
 
     // Attaching the elements and preparing them.
     attachHealth();
     attachScore();
-
-    // Add the generated bitmaps to the gui node view.
-    guiNodes.attachChild(currentEvents);
-    guiNodes.attachChild(shipHealth);
-    guiNodes.attachChild(teamScore);
   }
 
   /**
@@ -92,6 +80,8 @@ public class GameHeadsUpDisplay {
     shipHealth.setColor(ColorRGBA.Red);
     shipHealth.setLocalTranslation(Constants.GUI_ELEMENTS_WIDTH_OFFSET,
         screenHeight - Constants.GUI_ELEMENTS_HEIGHT_OFFSET, 0);
+
+    guiNodes.attachChild(shipHealth);
   }
 
   /**
@@ -103,6 +93,8 @@ public class GameHeadsUpDisplay {
     teamScore.setColor(ColorRGBA.Green);
     teamScore.setLocalTranslation(screenWidth - Constants.GUI_ELEMENTS_WIDTH_OFFSET,
         screenHeight - Constants.GUI_ELEMENTS_HEIGHT_OFFSET, 0);
+
+    guiNodes.attachChild(teamScore);
   }
 
   /**
@@ -113,27 +105,6 @@ public class GameHeadsUpDisplay {
     // Update the ship's health and team score indicators.
     shipHealth.setText("" + spaceship.getHealth());
     teamScore.setText("" + spaceship.getScore());
-
-    // Array lists to store the events.
-    ArrayList<Event> currentEventsArray = spaceship.getLog().getEvents();
-
-    // Update the active event log.
-    if (currentEventsArray.isEmpty()) {
-      currentEvents.setText("");
-    } else {
-      StringBuilder toDisplay = new StringBuilder();
-      ArrayList<String> preventCopy = new ArrayList<String>();
-
-      // Loop through all the events to display them in the HUD.
-      for (Event current : currentEventsArray) {
-        if (!preventCopy.contains(current.getDescription())) {
-          toDisplay.append(current.toString()).append('\n');
-          preventCopy.add(current.getDescription());
-        }
-      }
-
-      currentEvents.setText(toDisplay.toString());
-    }
   }
 
   /**
@@ -141,7 +112,6 @@ public class GameHeadsUpDisplay {
    * game is done and reset.
    */
   public void clearHud() {
-    guiNodes.detachChild(currentEvents);
     guiNodes.detachChild(shipHealth);
     guiNodes.detachChild(teamScore);
   }
