@@ -1,8 +1,5 @@
 package nl.tudelft.pixelperfect.event.type;
 
-import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
-import com.jme3.scene.Geometry;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Scene;
@@ -44,18 +41,14 @@ public class FireOutbreakEvent extends Event {
   private boolean notifiedFlag = false;
   @Override
   public void notification(Game game, Scene scene) {
-    Material buttonMat = new Material(game.getAssetManager(), "jmevr/shaders/Unshaded.j3md");
     //TODO use parameterized version when fire actually has parameters
-//    Geometry button = scene.getFireEventObjects().get(
-//        getParameters().get("approach").getNumberValue());
-    Geometry button = scene.getFireEventObjects().get(0);
     if ((((int) game.getSpaceship().getTimer() % 2) == 0)
         && !isExpired(System.currentTimeMillis() + 2000)) {
-      buttonMat.setColor("Color", ColorRGBA.Yellow);
-    } else {
-      buttonMat.setColor("Color", ColorRGBA.Red);
+      scene.getFireEventLabel().setText("FIRE WARNING: ACTIVE");
     }
-    button.setMaterial(buttonMat);
+    else {
+      scene.getFireEventLabel().setText("FIRE WARNING");
+    }
     if (!notifiedFlag) {
       notifiedFlag = true;
       game.getAudioPlayer().playSound("FireEvent", false);

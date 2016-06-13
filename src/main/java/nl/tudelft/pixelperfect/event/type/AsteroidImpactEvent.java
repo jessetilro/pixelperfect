@@ -53,18 +53,16 @@ public class AsteroidImpactEvent extends Event {
    */
   @Override
   public void notification(Game game, Scene scene) {
-    Material buttonMat = new Material(game.getAssetManager(), "jmevr/shaders/Unshaded.j3md");
-    Geometry button = scene.getAstroidEventObjects().get(
-        getParameters().get("locationDamageImpact").getNumberValue());
-
     if ((((int) game.getSpaceship().getTimer() % 2) == 0)
         && !isExpired(System.currentTimeMillis() + 2000)) {
-      buttonMat.setColor("Color", ColorRGBA.Black);
+      scene.getAsteroidEventLabel().setText("ASTEROID DAMAGE: "
+              + String.valueOf(getParameters().get("locationDamageImpact").getNumberValue())
+      );
     } else {
-      buttonMat.setColor("Color", ColorRGBA.Red);
+      scene.getAsteroidEventLabel().setText("ASTEROID:");
+
 
     }
-    button.setMaterial(buttonMat);
 
     if (!notifiedFlag) {
       notifiedFlag = true;

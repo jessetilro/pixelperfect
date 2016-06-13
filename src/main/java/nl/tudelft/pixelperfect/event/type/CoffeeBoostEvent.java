@@ -45,20 +45,17 @@ public class CoffeeBoostEvent extends Event {
   private boolean notifiedFlag = false;
   @Override
   public void notification(Game game, Scene scene) {
-    Material buttonMat = new Material(game.getAssetManager(), "jmevr/shaders/Unshaded.j3md");
-    Geometry button = scene.getCoffeeEventObjects().get(0);
-
     if (!notifiedFlag) {
       notifiedFlag = true;
       game.getAudioPlayer().playSound("CoffeeEvent", false);
+
+      if ((((int) game.getSpaceship().getTimer() % 2) == 0)
+              && !isExpired(System.currentTimeMillis() + 2000)) {
+        scene.light.setColor(ColorRGBA.Brown);
+      } else {
+        scene.light.setColor(ColorRGBA.White);
+      }
     }
-    if ((((int) game.getSpaceship().getTimer() % 2) == 0)
-        && !isExpired(System.currentTimeMillis() + 2000)) {
-      buttonMat.setColor("Color", ColorRGBA.Yellow);
-    } else {
-      buttonMat.setColor("Color", ColorRGBA.Red);
-    }
-    button.setMaterial(buttonMat);
 
   }
 }
