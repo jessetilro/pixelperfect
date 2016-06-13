@@ -9,9 +9,9 @@ import nl.tudelft.pixelperfect.game.Scene;
 
 /**
  * A type of event, imposing the problem of a plasma leak.
- * 
+ *
  * @author Wouter Zirkzee
- * 
+ *
  */
 
 public class PlasmaLeakEvent extends Event {
@@ -54,19 +54,8 @@ public class PlasmaLeakEvent extends Event {
    */
   @Override
   public void notification(Game game, Scene scene) {
-    Material buttonMat = new Material(game.getAssetManager(), "jmevr/shaders/Unshaded.j3md");
-    Geometry button = scene.getPlasmaEventObjects().get(
-        getParameters().get("sector").getNumberValue());
-
-    if ((((int) game.getSpaceship().getTimer() % 2) == 0)
-        && !isExpired(System.currentTimeMillis() + 2000)) {
-      buttonMat.setColor("Color", ColorRGBA.Black);
-    } else {
-      buttonMat.setColor("Color", ColorRGBA.Blue);
-
-    }
-    button.setMaterial(buttonMat);
-
+    scene.getPlasmaEventlabel().setText("Plasma leak in "
+        + getParameters().get("sector").getNumberValue());
 
     if (!notifiedFlag) {
       notifiedFlag = true;

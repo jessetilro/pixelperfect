@@ -53,16 +53,8 @@ public class AsteroidImpactEvent extends Event {
    */
   @Override
   public void notification(Game game, Scene scene) {
-    if ((((int) game.getSpaceship().getTimer() % 2) == 0)
-        && !isExpired(System.currentTimeMillis() + 2000)) {
-      scene.getAsteroidEventLabel().setText("ASTEROID DAMAGE: "
-              + String.valueOf(getParameters().get("locationDamageImpact").getNumberValue())
-      );
-    } else {
-      scene.getAsteroidEventLabel().setText("ASTEROID:");
-
-
-    }
+    scene.getAsteroidEventLabel().setText("ASTEROID DAMAGE: "
+        + String.valueOf(getParameters().get("locationDamageImpact").getNumberValue()));
 
     if (!notifiedFlag) {
       notifiedFlag = true;

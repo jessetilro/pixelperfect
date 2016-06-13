@@ -49,13 +49,13 @@ public class CoffeeBoostEvent extends Event {
       notifiedFlag = true;
       game.getAudioPlayer().playSound("CoffeeEvent", false);
 
-      if ((((int) game.getSpaceship().getTimer() % 2) == 0)
-              && !isExpired(System.currentTimeMillis() + 2000)) {
-        scene.light.setColor(ColorRGBA.Brown);
-      } else {
-        scene.light.setColor(ColorRGBA.White);
-      }
-    }
 
+    }
+    if ((((int) game.getSpaceship().getTimer() % 2) == 0)
+        && !isExpired(System.currentTimeMillis() + 2000)) {
+      scene.light.setColor(ColorRGBA.Brown);
+    } else {
+      scene.light.setColor(ColorRGBA.White);
+    }
   }
 }

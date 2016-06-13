@@ -55,6 +55,12 @@ public class Scene {
 
   private BitmapText fireEventLabel;
 
+  public BitmapText getPlasmaEventlabel() {
+    return plasmaEventlabel;
+  }
+
+  private BitmapText plasmaEventlabel;
+
 
   /**
    * Constructor for Scene.
@@ -78,40 +84,48 @@ public class Scene {
             new Quaternion().fromAngleAxis(FastMath.HALF_PI, YAXIS));
 
     plasmaEventObjects = addTubes(new Vector3f(0, 4, -4), FastMath.PI / 2, YAXIS, 4);
-//    createLabel(new Vector3f())
+    plasmaEventlabel = createLabel(new Vector3f(-7, 2.5f, -21), "PLASMA LEAK", .2f, ColorRGBA.Black,
+        new Quaternion());
+
+
 
     hostileEventText = createLabel(new Vector3f(-1, 1f, 12f), "x: \ny: \n", .2f, ColorRGBA.Green,
             new Quaternion().fromAngleAxis(FastMath.PI, YAXIS));
 //    hostileEventText.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.PI / 4, XAXIS));
     Spatial spaceship = app.getAssetManager().loadModel("Models/spaceship/spaceship_no_light.j3o");
     spaceship.scale(2f);
+    Spatial pipes = app.getAssetManager().loadModel("Models/Pipe/Pipe.j3o");
+    pipes.scale(0.04f);
+    pipes.setLocalTranslation(-8, 5, -22);
+    pipes.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.PI * 0.3f, YAXIS));
+    app.getRootNode().attachChild(pipes);
     app.getRootNode().addLight(light);
     app.getRootNode().attachChild(spaceship);
   }
 
-  /**
-   * Create a box object.
-   *
-   * @param box
-   *          New box with the dimensions of the box.
-   * @param translation
-   *          Translation of the box.
-   * @param textureLocation
-   *          Texture of the box.
-   */
-  private Box createBoxObject(Box box, Vector3f translation, String textureLocation) {
-    Box newBox = box;
-    Geometry geometry = new Geometry("Box", newBox);
-    Material material = new Material(app.getAssetManager(), basicMat);
-    Texture texture = app.getAssetManager().loadTexture(textureLocation);
-    material.setTexture("ColorMap", texture);
-    geometry.setMaterial(material);
-    geometry.setLocalTranslation(translation);
-
-    app.getRootNode().attachChild(geometry);
-
-    return newBox;
-  }
+//  /**
+//   * Create a box object.
+//   *
+//   * @param box
+//   *          New box with the dimensions of the box.
+//   * @param translation
+//   *          Translation of the box.
+//   * @param textureLocation
+//   *          Texture of the box.
+//   */
+//  private Box createBoxObject(Box box, Vector3f translation, String textureLocation) {
+//    Box newBox = box;
+//    Geometry geometry = new Geometry("Box", newBox);
+//    Material material = new Material(app.getAssetManager(), basicMat);
+//    Texture texture = app.getAssetManager().loadTexture(textureLocation);
+//    material.setTexture("ColorMap", texture);
+//    geometry.setMaterial(material);
+//    geometry.setLocalTranslation(translation);
+//
+//    app.getRootNode().attachChild(geometry);
+//
+//    return newBox;
+//  }
 //
 //  /**
 //   * Create the windows of the spaceship.
@@ -150,21 +164,21 @@ public class Scene {
 //    app.getRootNode().attachChild(torusGeo);
 //  }
 
-  /**
-   * Render a group of small buttons.
-   *
-   * @param location
-   *            Location of the top left button.
-   * @param rotation
-   *            Rotation of the tubes.
-   * @param rotationAxis
-   *            Axis around which to rotate.
-   * @param col
-   *            Amount of rows of buttons.
-   * @param row
-   *            Amount of collums of buttons.
-   * @return ArrayList containing the buttons.
-   */
+//  /**
+//   * Render a group of small buttons.
+//   *
+//   * @param location
+//   *            Location of the top left button.
+//   * @param rotation
+//   *            Rotation of the tubes.
+//   * @param rotationAxis
+//   *            Axis around which to rotate.
+//   * @param col
+//   *            Amount of rows of buttons.
+//   * @param row
+//   *            Amount of collums of buttons.
+//   * @return ArrayList containing the buttons.
+//   */
 //  private ArrayList<Geometry> addButtons(Vector3f location, float rotation,
 //                                         Vector3f rotationAxis, int col, int row) {
 //    ArrayList<Geometry> buttons = new ArrayList<Geometry>();

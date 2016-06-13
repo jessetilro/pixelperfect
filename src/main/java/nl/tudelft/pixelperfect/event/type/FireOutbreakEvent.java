@@ -42,13 +42,7 @@ public class FireOutbreakEvent extends Event {
   @Override
   public void notification(Game game, Scene scene) {
     //TODO use parameterized version when fire actually has parameters
-    if ((((int) game.getSpaceship().getTimer() % 2) == 0)
-        && !isExpired(System.currentTimeMillis() + 2000)) {
       scene.getFireEventLabel().setText("FIRE WARNING: ACTIVE");
-    }
-    else {
-      scene.getFireEventLabel().setText("FIRE WARNING");
-    }
     if (!notifiedFlag) {
       notifiedFlag = true;
       game.getAudioPlayer().playSound("FireEvent", false);
