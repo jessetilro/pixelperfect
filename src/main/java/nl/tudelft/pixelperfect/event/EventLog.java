@@ -12,6 +12,7 @@ import nl.tudelft.pixelperfect.game.Spaceship;
  * 
  * @author David Alderliesten
  * @author Jesse Tilro
+ * @author Wouter Zirkzee
  *
  */
 public class EventLog implements EventListener {
@@ -145,5 +146,20 @@ public class EventLog implements EventListener {
       event.applyDamage(spaceship);
       discard(event);
     }
+  }
+
+  /**
+   * Get first event of specified type.
+   * @param type
+   *            type to find.
+   * @return event of given type
+   */
+  public Event getFirst(EventTypes type) {
+    for (Event event: events) {
+      if (event.getType().equals(type)) {
+        return event;
+      }
+    }
+    return null;
   }
 }

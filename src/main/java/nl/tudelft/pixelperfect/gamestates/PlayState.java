@@ -5,6 +5,7 @@ import jmevr.app.VRApplication;
 
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventScheduler;
+import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Settings;
 import nl.tudelft.pixelperfect.game.Spaceship;
@@ -64,8 +65,11 @@ public class PlayState extends GameState {
       debugDisplay.clearHud();
     }
 
-    for (Event event: spaceship.getLog().getEvents()) {
-      event.notification(game, game.getScene());
+    for (EventTypes eventType : EventTypes.values()) {
+      Event event = spaceship.getLog().getFirst(eventType);
+      if (event != null) {
+        event.notification(game, game.getScene());
+      }
     }
   }
 
