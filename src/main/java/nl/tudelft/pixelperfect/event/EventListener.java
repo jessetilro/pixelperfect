@@ -10,6 +10,7 @@ import nl.tudelft.pixelperfect.event.type.EventTypes;
  * Interface for classes that can subscribe themselves to an EventScheduler.
  * 
  * @author Jesse Tilro
+ * @author Wouter Zirkzee
  *
  */
 public interface EventListener {
@@ -45,6 +46,15 @@ public interface EventListener {
    *          The submitted parameters.
    */
   void complete(EventTypes type, Collection<EventParameter> parameters);
+
+
+  /**
+   * Get first event of specified type.
+   * @param type
+   *            type to find.
+   * @return event of given type
+   */
+  Event getFirst(EventTypes type);
 
   /**
    * Get all the events that are in the log.
