@@ -26,6 +26,7 @@ import nl.tudelft.pixelperfect.game.Spaceship;
  * 
  * @author David Alderliesten
  * @author Jesse Tilro
+ * @author Wouter Zirkzee
  *
  */
 @SuppressWarnings("PMD")
@@ -160,5 +161,39 @@ public class EventLogTest extends EventListenerTest {
     assertFalse(log.contains(evt1));
     assertTrue(log.contains(evt2));
     verify(mockedSpaceship).updateHealth(-50);
+  }
+
+  /**
+   * Test that the method actually gets the first object
+   */
+  @Test
+  public void testGetFirst() {
+    Event evt1 = new FireOutbreakEvent(0, "Mango", "Pineapple", 0, 0, 50);
+    Event evt2 = new FireOutbreakEvent(1, "Pear", "Kiwi Fruit", System.currentTimeMillis(),
+        99999999, 50);
+    ArrayList<Event> events = object.getEvents();
+    events.add(evt1);
+    events.add(evt2);
+
+    Event testEvent = object.getFirst(EventTypes.FIRE_OUTBREAK);
+
+    assertEquals(testEvent, evt1);
+  }
+
+  /**
+   * Test that the method returns null when the type is not in the log.
+   */
+  @Test
+  public void testGetFirstNull() {
+    Event evt1 = new FireOutbreakEvent(0, "Mango", "Pineapple", 0, 0, 50);
+    Event evt2 = new FireOutbreakEvent(1, "Pear", "Kiwi Fruit", System.currentTimeMillis(),
+        99999999, 50);
+    ArrayList<Event> events = object.getEvents();
+    events.add(evt1);
+    events.add(evt2);
+
+    Event testEvent = object.getFirst(EventTypes.ASTEROID_IMPACT);
+
+    assertEquals(testEvent, null);
   }
 }

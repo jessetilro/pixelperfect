@@ -86,9 +86,14 @@ public class EventParameterCollection {
       sb.append("None");
     } else {
       for (EventParameter param : map.values()) {
-        sb.append(param.getNumberValue());
-        sb.append(',');
-      }      
+        if (!param.getValue().equals("") && !param.getValue().equals("Generic")) {
+          if (sb.length() == 0) {
+            sb.append(param.getValue());
+          } else {
+            sb.append(",").append(" ").append(param.getValue());
+          }
+        }
+      }
     }
     return sb.toString();
   }
