@@ -14,7 +14,7 @@ public class EventParameter {
 
   private String key;
   private String summary;
-  private EventParameterValues value;
+  private String value;
   private int numberValue;
 
   /**
@@ -26,7 +26,7 @@ public class EventParameter {
    * @param value
    *          The specific value of the parameter.
    */
-  public EventParameter(String key, EventParameterValues value) {
+  public EventParameter(String key, String value) {
     this.key = key;
     this.value = value;
     this.numberValue = 0;
@@ -43,7 +43,7 @@ public class EventParameter {
    */
   public EventParameter(String key, int numberValue) {
     this.key = key;
-    this.value = EventParameterValues.GENERIC;
+    this.value = "Generic";
     this.numberValue = numberValue;
     this.summary = "";
   }
@@ -63,7 +63,7 @@ public class EventParameter {
    * @return A boolean.
    */
   public boolean isGeneric() {
-    return (value == EventParameterValues.GENERIC);
+    return (value == "Generic");
   }
 
   /**
@@ -80,8 +80,17 @@ public class EventParameter {
    * 
    * @return A specific value.
    */
-  protected EventParameterValues getValue() {
+  protected String getValue() {
     return value;
+  }
+  
+  /**
+   * Sets the value of the parameter.
+   * 
+   * @param value the value to be set.
+   */
+  public void setValue(String value) {
+    this.value = value;
   }
 
   /**
@@ -101,9 +110,11 @@ public class EventParameter {
    */
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append(summary).append(" is ").append(value.toString());
+    sb.append(summary).append(" is ");
     if (isGeneric()) {
-      sb.append(' ').append(Integer.toString(numberValue));
+      sb.append(numberValue);
+    } else {
+      sb.append(value);
     }
     return sb.toString();
   }
@@ -144,7 +155,7 @@ public class EventParameter {
     for (char ch : key.toCharArray()) {
       result = prime * result + (int) ch;
     }
-    result = prime * result + value.ordinal();
+    result = prime * result + summary.length();
     result = prime * result + numberValue;
     return result;
   }

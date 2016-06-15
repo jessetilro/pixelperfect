@@ -1,6 +1,5 @@
 package nl.tudelft.pixelperfect.gamestates;
 
-import static org.mockito.Mockito.mock;
 
 /**
  * Class for testing the start state class.

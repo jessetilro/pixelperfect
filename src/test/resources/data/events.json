@@ -8,7 +8,17 @@
       "parameters": [
         {
           "key": "color",
-          "summary": "The color of the banana."
+          "summary": "The color of the banana.",
+          "values": [
+            {
+                "value": 0,
+                "description": "Yellow"
+            },
+            {
+                "value": 1,
+                "description": "Green"
+            }
+           ]
         }
       ]
     },

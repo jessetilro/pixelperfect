@@ -168,5 +168,34 @@ public class EventReaderTest {
     Map<String, String> result = object.getParameters(2);
     assertEquals(0, result.size());
   }
+  
+  /**
+   * Testing the values of a parameter to return the right description.
+   */
+  @Test
+  public void testGetParameterValue() {
+    object.readFromFile(fileGood);
+    assertEquals("Green", object.getParameterValue(1, 0, 1));
+  }
+  
+  /**
+   * When asking for a value that is not around, it should return an empty string.
+   */
+  @Test
+  public void testGetParameterValueNull() {
+    object.readFromFile(fileGood);
+    assertEquals("", object.getParameterValue(1, 0, 2));
+  }
+  
+  /**
+   * When getting a map of key / summary associations for the parameters of a specific type of
+   * Event that were not defined for that type, it should yield an empty map.
+   */
+  @Test
+  public void testGetParametersValueNotDefined() {
+    object.readFromFile(fileGood);
+    Map<String, String> result = object.getParameters(2);
+    assertEquals(0, result.size());
+  }
 
 }

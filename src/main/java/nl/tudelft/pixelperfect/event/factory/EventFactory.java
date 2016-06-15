@@ -58,16 +58,18 @@ public abstract class EventFactory {
 
   /**
    * Uses the createParameters method to create parameters for the type of Event this factory
-   * produces, and subsequently provides the created parameters with summaries read from the data
-   * file.
+   * produces, and subsequently provides the created parameters with values read from the data file.
    * 
-   * @return A random collection of summarized parameters.
+   * @return A random collection of valued parameters.
    */
-  public Collection<EventParameter> createSummarizedParameters() {
+  public Collection<EventParameter> createParametersValues() {
     Collection<EventParameter> parameters = createParameters();
     Map<String, String> summaries = reader.getParameters(getType().ordinal());
+    int index = 0;
     for (EventParameter param : parameters) {
       param.setSummary(summaries.get(param.getKey()));
+      param.setValue(reader.getParameterValue(getType().ordinal(), index, param.getNumberValue()));
+      index++;
     }
     return parameters;
   }
