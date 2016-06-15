@@ -232,12 +232,13 @@ public final class EventReader {
             JSONObject object = parameters.optJSONObject(index);
             if (object != null) {
               JSONArray values = object.optJSONArray("values");
-              if (values.optJSONObject(value) != null) {
-                return values.optJSONObject(value).getString("description");
+              if (values != null) {
+                if (values.optJSONObject(value) != null) {
+                  return values.optJSONObject(value).getString("description");
+                }
               }
-            } else {
-              return "";
             }
+            return "";
           }
           index++;
         }
