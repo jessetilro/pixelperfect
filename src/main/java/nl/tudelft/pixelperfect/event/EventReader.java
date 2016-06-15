@@ -232,10 +232,8 @@ public final class EventReader {
             JSONObject object = parameters.optJSONObject(index);
             if (object != null) {
               JSONArray values = object.optJSONArray("values");
-              if (values != null) {
-                if (values.optJSONObject(value) != null) {
-                  return values.optJSONObject(value).getString("description");
-                }
+              if (values != null && values.optJSONObject(value) != null) {
+                return values.optJSONObject(value).getString("description");
               }
             }
             return "";
@@ -246,6 +244,8 @@ public final class EventReader {
     }
     return "";
   }
+  
+  
 
   /**
    * Since this is a Singleton, it is the perfect place to keep track of the unique numeric
