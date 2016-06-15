@@ -101,15 +101,15 @@
         "values": [
         	{
         		"value": 0,
-        		"description": "Energy Shield"
+        		"description": "Purple Energy Shield"
         	},
         	{
         		"value": 1,
-        		"description": "Graphene Armor"
+        		"description": "Green Graphene Armor"
         	},
         	{
         		"value": 2,
-        		"description": "Titanium Armor"
+        		"description": "Red Titanium Armor"
         	}
         ]
       }

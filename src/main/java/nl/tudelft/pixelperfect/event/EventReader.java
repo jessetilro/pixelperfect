@@ -226,23 +226,36 @@ public final class EventReader {
     if (obj != null) {
       JSONArray parameters = obj.optJSONArray("parameters");
       if (parameters != null) {
-        int index = 0;
-        while (index >= 0) {
-          if (index == parameter) {
-            JSONObject object = parameters.optJSONObject(index);
-            if (object != null) {
-              JSONArray values = object.optJSONArray("values");
-              if (values != null) {
-                if (values.optJSONObject(value) != null) {
-                  return values.optJSONObject(value).getString("description");
-                }
-              }
-            }
-            return "";
+        return getJsonValues(parameters, parameter, value);
+      }
+    }
+    return "";
+  }
+
+  /**
+   * Retrieving a value string from a JSONArray.
+   * 
+   * @param parameters
+   *          , the list of paramaters.
+   * @param parameter
+   *          , the parameter we want to look at.
+   * @param value
+   *          , the value number indicating the value we want to retrieve.
+   * @return a value in form of a String.
+   */
+  public String getJsonValues(JSONArray parameters, int parameter, int value) {
+    int index = 0;
+    while (index >= 0) {
+      if (index == parameter) {
+        JSONObject object = parameters.optJSONObject(index);
+        if (object != null) {
+          JSONArray values = object.optJSONArray("values");
+          if (values != null && values.optJSONObject(value) != null) {
+            return values.optJSONObject(value).getString("description");
           }
-          index++;
         }
       }
+      index++;
     }
     return "";
   }
