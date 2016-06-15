@@ -210,6 +210,43 @@ public final class EventReader {
   }
 
   /**
+   * Retrieves the string description of the value of a certain parameter.
+   * 
+   * @param type
+   *          , the type the parameter belongs to.
+   * @param parameter
+   *          , the parameter of which a value must be represented.
+   * @param value
+   *          , the value of the parameter. Can be different kind of values. I represented as
+   *          integer and has a string description.
+   * @return the String description of the value.
+   */
+  public String getParameterValue(int type, int parameter, int value) {
+    JSONObject obj = getByType(type);
+    if (obj != null) {
+      JSONArray parameters = obj.optJSONArray("parameters");
+      if (parameters != null) {
+        int index = 0;
+        while (index >= 0) {
+          if (index == parameter) {
+            JSONObject object = parameters.optJSONObject(index);
+            if (object != null) {
+              JSONArray values = object.optJSONArray("values");
+              if (values.optJSONObject(value) != null) {
+                return values.optJSONObject(value).getString("description");
+              }
+            } else {
+              return "";
+            }
+          }
+          index++;
+        }
+      }
+    }
+    return "";
+  }
+
+  /**
    * Since this is a Singleton, it is the perfect place to keep track of the unique numeric
    * identifier for Events.
    * 
