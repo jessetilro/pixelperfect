@@ -10,6 +10,7 @@ import com.jme3.network.Message;
 import com.jme3.network.MessageListener;
 import com.jme3.network.Server;
 
+import nl.tudelft.pixelperfect.client.message.DisconnectMessage;
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.message.RepairMessage;
 import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
@@ -75,19 +76,26 @@ public class ServerListener implements MessageListener<HostedConnection> {
       EventCompletedMessage completedMessage = (EventCompletedMessage) message;
       processEventCompletedMessage(completedMessage);
     } else if (message instanceof RoleChosenMessage) {
-      RoleChosenMessage retrieved = (RoleChosenMessage) message;
-      Roles roleChosen = retrieved.getRole();
-      if (roles.contains(roleChosen)) {
-        server.broadcast(Filters.equalTo(source), new RoleChosenMessage(roleChosen, false));
-        System.out.println("Role " + roleChosen.toString() + " requested, denied.");
-      } else {
-        roles.add(roleChosen);
-        server.broadcast(Filters.equalTo(source), new RoleChosenMessage(roleChosen, true));
-        System.out.println("Role " + roleChosen.toString() + " requested, granted.");
-      }
+      RoleChosenMessage roleChosen = (RoleChosenMessage) message;
+      processRoleChosen(source, roleChosen);
     } else if (message instanceof RepairMessage) {
       RepairMessage repairMessage = (RepairMessage) message;
       processRepairs(repairMessage);
+    }
+  }
+  
+  /**
+   * Process a role chosen message.
+   */
+  public synchronized void processRoleChosen(HostedConnection source, RoleChosenMessage message) {
+    Roles roleChosen = message.getRole();
+    if (roles.contains(roleChosen)) {
+      server.broadcast(Filters.equalTo(source), new RoleChosenMessage(roleChosen, false));
+      System.out.println("Role " + roleChosen.toString() + " requested, denied.");
+    } else {
+      roles.add(roleChosen);
+      server.broadcast(Filters.equalTo(source), new RoleChosenMessage(roleChosen, true));
+      System.out.println("Role " + roleChosen.toString() + " requested, granted.");
     }
   }
   

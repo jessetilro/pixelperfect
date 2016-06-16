@@ -18,6 +18,7 @@ import jmevr.util.VRGuiManager;
 import nl.tudelft.pixelperfect.audio.AudioPlayer;
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.ServerListener;
+import nl.tudelft.pixelperfect.client.message.DisconnectMessage;
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.message.RepairMessage;
 import nl.tudelft.pixelperfect.client.message.NewGameMessage;
@@ -142,6 +143,7 @@ public class Game extends VRApplication {
       Serializer.registerClass(RoleChosenMessage.class);
       Serializer.registerClass(RepairMessage.class);
       Serializer.registerClass(NewGameMessage.class);
+      Serializer.registerClass(DisconnectMessage.class);
       server.start();
       ServerListener listen = new ServerListener();
       listen.setGame(this);
@@ -150,6 +152,7 @@ public class Game extends VRApplication {
       server.addMessageListener(listen, RoleChosenMessage.class);
       server.addMessageListener(listen, RepairMessage.class);
       server.addMessageListener(listen, NewGameMessage.class);
+      server.addMessageListener(listen, DisconnectMessage.class);
       ConnectListener connect = new ConnectListener();
       connect.setGame(this);
       server.addConnectionListener(connect);
