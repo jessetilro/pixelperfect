@@ -16,10 +16,10 @@ public final class Constants {
   }
 
   // Audio path information and events.
-  public static final String[] AUDIO_EVENTS = { "CoffeeEvent", "AsteroidEvent", "FireEvent",
+  protected static final String[] AUDIO_EVENTS = { "CoffeeEvent", "AsteroidEvent", "FireEvent",
       "HostileEvent", "PlasmaEvent", "CompleteAsteroidEvent", "CompleteCoffeeEvent",
       "CompleteFireEvent", "CompleteHostileEvent", "CompletePlasmaEvent" };
-  public static final String[] AUDIO_PATH_NAMES = { "yawn.wav", "impact.wav", "fire_alarm.wav",
+  protected static final String[] AUDIO_PATH_NAMES = { "yawn.wav", "impact.wav", "fire_alarm.wav",
       "sonar_x.wav", "bubbling1.wav", "cannon_x.wav", "drink.wav", "fire_ext.wav",
       "explosion_x.wav", "hammer.wav" };
 

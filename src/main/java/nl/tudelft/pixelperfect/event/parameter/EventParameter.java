@@ -73,6 +73,8 @@ public class EventParameter {
 
   /**
    * Get a string representation of this parameter's value.
+   * 
+   * @return a value desciption if the parameter is not a value.
    */
   public String getValueDescription() {
     if (valueDescription == null || valueDescription.equals("")) {
@@ -89,9 +91,7 @@ public class EventParameter {
    */
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append(summary).append(" is ");
-    sb.append(getValueDescription());
-    return sb.toString();
+    return sb.append(summary).append(" is ").append(getValueDescription()).toString();
   }
 
   /**

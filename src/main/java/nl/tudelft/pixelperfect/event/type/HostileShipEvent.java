@@ -43,14 +43,16 @@ public class HostileShipEvent extends Event {
   }
 
   @Override
+  @SuppressWarnings("PMD") 
   public void notification(Game game, Scene scene) {
     if (!getNotifiedFlag()) {
       String xParam = getParameters().get("positionX").getValueDescription();
       String yParam = getParameters().get("positionY").getValueDescription();
       String armorParam = getParameters().get("armor").getValueDescription();
       BitmapText textfield = game.getScene().getHostileEventText();
-
+      
       StringBuilder sb = new StringBuilder();
+      
       sb.append("x: ").append(xParam).append("\ny: ").append(yParam).append("\n")
           .append(armorParam);
       textfield.setText(sb.toString());

@@ -1,6 +1,5 @@
 package nl.tudelft.pixelperfect.client;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.mock;
@@ -55,16 +54,7 @@ public class ServerListenerTest {
     object.setGame(mockedGame);
     object.setServer(mockServer);
     mockedSource = mock(HostedConnection.class);
-  }
-
-  /**
-   * When calling getGame we expect the Game that we have set earlier using setGame.
-   */
-  @Test
-  public void testGetGame() {
-    assertEquals(mockedGame, object.getGame());
-  }
-  
+  }  
 
   /**
    * When the ServerListener receives a Message, it should do something with its contents.
