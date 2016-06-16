@@ -42,12 +42,13 @@ public class HostileShipEvent extends Event {
   }
 
   private boolean notifiedFlag = false;
+
   @Override
   public void notification(Game game, Scene scene) {
     int xParam = getParameters().get("positionX").getNumberValue();
     int yParam = getParameters().get("positionY").getNumberValue();
-    int armorParam = getParameters().get("armor").getNumberValue();
-    BitmapText textfield = scene.getHostileEventText();
+    String armorParam = getParameters().get("armor").getValue();
+    BitmapText textfield = game.getScene().getHostileEventText();
     textfield.setText("x: " + xParam + "\ny: " + yParam + "\n" + armorParam);
 
 
@@ -56,4 +57,5 @@ public class HostileShipEvent extends Event {
       game.getAudioPlayer().playSound("HostileEvent", false);
     }
   }
+
 }

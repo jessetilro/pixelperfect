@@ -1,8 +1,5 @@
 package nl.tudelft.pixelperfect.event.type;
 
-import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
-import com.jme3.scene.Geometry;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Scene;
@@ -53,22 +50,13 @@ public class AsteroidImpactEvent extends Event {
    */
   @Override
   public void notification(Game game, Scene scene) {
-    Material buttonMat = new Material(game.getAssetManager(), "jmevr/shaders/Unshaded.j3md");
-    Geometry button = scene.getAstroidEventObjects().get(
-        getParameters().get("locationDamageImpact").getNumberValue());
-
-    if ((((int) game.getSpaceship().getTimer() % 2) == 0)
-        && !isExpired(System.currentTimeMillis() + 2000)) {
-      buttonMat.setColor("Color", ColorRGBA.Black);
-    } else {
-      buttonMat.setColor("Color", ColorRGBA.Red);
-
-    }
-    button.setMaterial(buttonMat);
+    scene.getAsteroidEventLabel().setText("ASTEROID DAMAGE: "
+        + getParameters().get("locationDamageImpact").getValue());
 
     if (!notifiedFlag) {
       notifiedFlag = true;
       game.getAudioPlayer().playSound("AsteroidEvent", false);
     }
   }
+
 }

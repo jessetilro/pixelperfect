@@ -1,6 +1,7 @@
 package nl.tudelft.pixelperfect.gamestates;
 
 import static org.junit.Assert.assertSame;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyFloat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -10,8 +11,10 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import com.jme3.scene.Spatial;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventLog;
 import nl.tudelft.pixelperfect.event.EventScheduler;
+import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Settings;
 import nl.tudelft.pixelperfect.game.Spaceship;
@@ -67,9 +70,11 @@ public class PlayStateTest extends GameStateTest {
   @Test
   public void testUpdate() {
     testSettings.setIsDebug(true);
-    when(mockSpaceship.getLog()).thenReturn(new EventLog(mockSpaceship));
-
+    EventLog mockLog = mock(EventLog.class);
+    when(mockSpaceship.getLog()).thenReturn(mockLog);
+    when(mockLog.getFirst(any(EventTypes.class))).thenReturn(mock(Event.class));
     testState.update(1f);
+
     verify(mockScheduler).update(1f);
     verify(mockSpaceship).update(anyFloat());
     verify(mockHeadsUp).updateHud();
@@ -82,7 +87,9 @@ public class PlayStateTest extends GameStateTest {
   @Test
   public void testUpdateWithoutDebug() {
     testSettings.setIsDebug(false);
-    when(mockSpaceship.getLog()).thenReturn(new EventLog(mockSpaceship));
+    EventLog mockLog = mock(EventLog.class);
+    when(mockSpaceship.getLog()).thenReturn(mockLog);
+    when(mockLog.getFirst(any(EventTypes.class))).thenReturn(mock(Event.class));
 
     testState.update(1f);
     verify(mockScheduler).update(1f);

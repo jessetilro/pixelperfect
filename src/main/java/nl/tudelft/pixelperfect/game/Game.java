@@ -89,11 +89,11 @@ public class Game extends VRApplication {
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_OVERDRAW, true);
 
     // Faster VR rendering, requires some vertex shader changes.
-    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.INSTANCE_VR_RENDERING, true);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.INSTANCE_VR_RENDERING, false);
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.NO_GUI, false);
 
     // Set frustum distances here before app starts.
-    appGame.preconfigureFrustrumNearFar(0.1f, 512f);
+//    appGame.preconfigureFrustrumNearFar(0.1f, 512f);
 
     appGame.start();
   }
@@ -104,7 +104,7 @@ public class Game extends VRApplication {
   @Override
   public void simpleInitApp() {
     observer = new Node("observer");
-    observer.setLocalTranslation(new Vector3f(0.0f, 5.0f, 4.0f));
+    observer.setLocalTranslation(new Vector3f(0.0f, 2.0f, 0.0f));
     VRApplication.setObserver(observer);
     rootNode.attachChild(observer);
 

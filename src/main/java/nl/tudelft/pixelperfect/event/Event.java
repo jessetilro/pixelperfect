@@ -218,4 +218,5 @@ public abstract class Event {
   public EventParameterCollection getParameters() {
     return parameters;
   }
+
 }

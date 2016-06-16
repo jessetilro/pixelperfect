@@ -63,7 +63,7 @@ public class EventParameter {
    * @return A boolean.
    */
   public boolean isGeneric() {
-    return (value == "Generic");
+    return (value.equals("Generic"));
   }
 
   /**
@@ -80,7 +80,7 @@ public class EventParameter {
    * 
    * @return A specific value.
    */
-  protected String getValue() {
+  public String getValue() {
     return value;
   }
   

@@ -1,0 +1,10 @@
+Material My Material : Common/MatDefs/Light/Lighting.j3md {
+     MaterialParameters {
+        Ambient : 0 0 0 1
+        Diffuse : 0.15 0.15 0.15 1
+        Specular : 0.7 0.7 0.7 1
+        UseMaterialColors : true
+     }
+    AdditionalRenderState {
+    }
+}

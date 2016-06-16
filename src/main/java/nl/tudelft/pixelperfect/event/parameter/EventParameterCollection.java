@@ -90,7 +90,7 @@ public class EventParameterCollection {
           if (sb.length() == 0) {
             sb.append(param.getValue());
           } else {
-            sb.append(",").append(" ").append(param.getValue());
+            sb.append(", ").append(param.getValue());
           }
         }
       }

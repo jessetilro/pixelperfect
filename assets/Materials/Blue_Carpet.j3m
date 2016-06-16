@@ -1,0 +1,11 @@
+Material Blue Carpet : Common/MatDefs/Light/Lighting.j3md {
+     MaterialParameters {
+        Ambient : 1.0 0.4 0.6 1.0
+        Diffuse : 0.1 0.3 0.5 1
+        Specular : 1.0 0.2 0.2 1.0
+        Shininess : 0.0
+        UseMaterialColors : true
+     }
+    AdditionalRenderState {
+    }
+}
