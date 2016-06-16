@@ -13,9 +13,9 @@ import com.jme3.network.serializing.Serializable;
 public class EventParameter {
 
   private String key;
+  private int value;
   private String summary;
-  private String value;
-  private int numberValue;
+  private String valueDescription;
 
   /**
    * Construct an EventParameter with a specific value (part of the EventParameterValue
@@ -26,26 +26,11 @@ public class EventParameter {
    * @param value
    *          The specific value of the parameter.
    */
-  public EventParameter(String key, String value) {
+  public EventParameter(String key, int value) {
     this.key = key;
     this.value = value;
-    this.numberValue = 0;
     this.summary = "";
-  }
-
-  /**
-   * Construct an EventParameter with a generic value (a number).
-   * 
-   * @param key
-   *          The key of the parameter.
-   * @param numberValue
-   *          The number value of the parameter.
-   */
-  public EventParameter(String key, int numberValue) {
-    this.key = key;
-    this.value = "Generic";
-    this.numberValue = numberValue;
-    this.summary = "";
+    this.valueDescription = "";
   }
 
   /**
@@ -58,39 +43,12 @@ public class EventParameter {
   }
 
   /**
-   * Check whether this parameter has a continuous value.
-   * 
-   * @return A boolean.
-   */
-  public boolean isGeneric() {
-    return (value.equals("Generic"));
-  }
-
-  /**
-   * Get this parameter's number value.
-   * 
-   * @return A number value.
-   */
-  public int getNumberValue() {
-    return numberValue;
-  }
-
-  /**
    * Get this parameter's specific value.
    * 
    * @return A specific value.
    */
-  public String getValue() {
+  public int getValue() {
     return value;
-  }
-  
-  /**
-   * Sets the value of the parameter.
-   * 
-   * @param value the value to be set.
-   */
-  public void setValue(String value) {
-    this.value = value;
   }
 
   /**
@@ -104,6 +62,27 @@ public class EventParameter {
   }
 
   /**
+   * Set the summary for this parameter.
+   * 
+   * @param description
+   *          The description that should be associated with the value of this parameter.
+   */
+  public void setValueDescription(String description) {
+    this.valueDescription = description;
+  }
+
+  /**
+   * Get a string representation of this parameter's value.
+   */
+  public String getValueDescription() {
+    if (valueDescription == null || valueDescription.equals("")) {
+      return Integer.toString(value);
+    } else {
+      return valueDescription;
+    }
+  }
+
+  /**
    * Generate a String representation of this EventParameter.
    * 
    * @return A String representation.
@@ -111,11 +90,7 @@ public class EventParameter {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append(summary).append(" is ");
-    if (isGeneric()) {
-      sb.append(numberValue);
-    } else {
-      sb.append(value);
-    }
+    sb.append(getValueDescription());
     return sb.toString();
   }
 
@@ -134,11 +109,7 @@ public class EventParameter {
       if (!key.equals(other.getKey())) {
         return false;
       }
-      if (isGeneric() && other.isGeneric()) {
-        return numberValue == other.getNumberValue();
-      } else {
-        return value.equals(other.getValue());
-      }
+      return value == other.getValue();
     }
     return false;
   }
@@ -156,7 +127,7 @@ public class EventParameter {
       result = prime * result + (int) ch;
     }
     result = prime * result + summary.length();
-    result = prime * result + numberValue;
+    result = prime * result + value;
     return result;
   }
 

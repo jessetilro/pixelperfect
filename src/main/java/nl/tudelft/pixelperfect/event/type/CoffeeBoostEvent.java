@@ -1,6 +1,7 @@
 package nl.tudelft.pixelperfect.event.type;
 
 import com.jme3.math.ColorRGBA;
+
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Scene;
@@ -15,44 +16,44 @@ import nl.tudelft.pixelperfect.game.Scene;
 
 public class CoffeeBoostEvent extends Event {
 
-	/**
-	 * Constructor for PlasmaLeakEvent event.
-	 *
-	 * @param id
-	 *            The desired id.
-	 * @param summary
-	 *            Summary/name of the event.
-	 * @param description
-	 *            A description of the event.
-	 * @param timestamp
-	 *            The timestamp of start of the event.
-	 * @param duration
-	 *            The time to live milliseconds until the event expires.
-	 * @param damage
-	 *            The damage done to the ship on even failure.
-	 */
-	public CoffeeBoostEvent(int id, String summary, String description, long timestamp, long duration, double damage) {
-		super(id, summary, description, timestamp, duration, damage);
-	}
+  /**
+   * Constructor for PlasmaLeakEvent event.
+   *
+   * @param id
+   *          The desired id.
+   * @param summary
+   *          Summary/name of the event.
+   * @param description
+   *          A description of the event.
+   * @param timestamp
+   *          The timestamp of start of the event.
+   * @param duration
+   *          The time to live milliseconds until the event expires.
+   * @param damage
+   *          The damage done to the ship on even failure.
+   */
+  public CoffeeBoostEvent(int id, String summary, String description, long timestamp, long duration,
+      double damage) {
+    super(id, summary, description, timestamp, duration, damage);
+  }
 
-	@Override
-	public EventTypes getType() {
-		return EventTypes.COFFEE_BOOST;
-	}
+  @Override
+  public EventTypes getType() {
+    return EventTypes.COFFEE_BOOST;
+  }
 
-	/**
-	 * Plays an explosion sound when a ship is successfully destroyed.
-	 */
-	@Override
-	public void onComplete(Game game) {
-		game.getAudioPlayer().playSound("CompleteCoffeeEvent", false);
-	}
-	
+  /**
+   * Plays an explosion sound when a ship is successfully destroyed.
+   */
+  @Override
+  public void onComplete(Game game) {
+    game.getAudioPlayer().playSound("CompleteCoffeeEvent", false);
+  }
+
   @Override
   public void notification(Game game, Scene scene) {
     if (!getNotifiedFlag()) {
       setNotifiedFlag(true);
-      game.getAudioPlayer().playSound("CoffeeEvent", false);
     }
     if ((((int) game.getSpaceship().getTimer() % 2) == 0)
         && !isExpired(System.currentTimeMillis() + 2000)) {
