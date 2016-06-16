@@ -81,5 +81,11 @@ public enum EventTypes {
    */
   public abstract EventFactory getFactory();
 
+  /**
+   * Method to reset the notification.
+   *
+   * @param scene
+   *            Scene in which to reset the notification.
+   */
   public abstract void resetNotification(Scene scene);
 }

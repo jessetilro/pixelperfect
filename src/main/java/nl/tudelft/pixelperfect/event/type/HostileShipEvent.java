@@ -41,7 +41,7 @@ public class HostileShipEvent extends Event {
     return EventTypes.HOSTILE_SHIP;
   }
 
-  protected boolean notifiedFlag = false;
+  private boolean notifiedFlag = false;
 
   @Override
   public void notification(Game game, Scene scene) {
