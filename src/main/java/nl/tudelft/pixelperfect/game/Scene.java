@@ -12,10 +12,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
-import com.jme3.scene.shape.Cylinder;
 import com.jme3.texture.Texture;
-
-import java.util.ArrayList;
 
 /**
  * Class for drawing objects in the game.
@@ -27,8 +24,12 @@ public class Scene {
 
   private static final Vector3f XAXIS = new Vector3f(1, 0, 0);
   private static final Vector3f YAXIS = new Vector3f(0, 1, 0);
-  private static final Vector3f ZAXIS = new Vector3f(0, 0, 1);
+//  private static final Vector3f ZAXIS = new Vector3f(0, 0, 1);
 
+  /**
+   * Get the light object.
+   * @return Light object.
+   */
   public Light getLight() {
     return light;
   }
@@ -40,22 +41,34 @@ public class Scene {
   private BitmapFont font;
   private BitmapText hostileEventText;
   private BitmapText asteroidEventLabel;
-
+  private BitmapText fireEventLabel;
+  private BitmapText plasmaEventlabel;
+  /**
+   * Get the label used for asteroid events.
+   * @return BitmapText
+   */
   public BitmapText getAsteroidEventLabel() {
     return asteroidEventLabel;
   }
 
+  /**
+   * Get the label used for fire events.
+   * @return BitmapText
+   */
   public BitmapText getFireEventLabel() {
     return fireEventLabel;
   }
 
-  private BitmapText fireEventLabel;
 
+  /**
+   * Get the label used for plasma events.
+   * @return BitmapText
+   */
   public BitmapText getPlasmaEventlabel() {
     return plasmaEventlabel;
   }
 
-  private BitmapText plasmaEventlabel;
+
 
   /**
    * Constructor for Scene.
@@ -73,31 +86,27 @@ public class Scene {
    * Method that contains all objects for the scene.
    */
   public void createMap() {
-    asteroidEventLabel = createLabel(new Vector3f(7, 0.65f, -3.5f), "ASTEROID WARNING", .2f, ColorRGBA.Blue,
-            new Quaternion().fromAngleAxis(-FastMath.HALF_PI, YAXIS));
-    fireEventLabel = createLabel(new Vector3f(-7, 0.6f, -1f), "FIRE WARNING", .2f, ColorRGBA.Red,
-            new Quaternion().fromAngleAxis(FastMath.HALF_PI, YAXIS));
-
-    plasmaEventlabel = createLabel(new Vector3f(-8, 2.5f, -20), "PLASMA LEAK", .4f, ColorRGBA.Black,
-        new Quaternion());
-
-
-
-    hostileEventText = createLabel(new Vector3f(-1, 0.7f, 12f), "x: \ny: \n", .15f, ColorRGBA.Green,
-            new Quaternion().fromAngleAxis(FastMath.PI, new Vector3f(0, 1, 0)));
-    Geometry radar = createBoxObject(new Box(0.6f, 0.4f, 0.01f), new Vector3f(-1.3f, 0.4f, 12.5f), "Textures/radar.jpg");
+    asteroidEventLabel = createLabel(new Vector3f(7, 0.65f, -3.5f), "ASTEROID WARNING",
+        .2f, ColorRGBA.Blue, new Quaternion().fromAngleAxis(-FastMath.HALF_PI, YAXIS));
+    fireEventLabel = createLabel(new Vector3f(-7, 0.6f, -1f), "FIRE WARNING",
+        .2f, ColorRGBA.Red, new Quaternion().fromAngleAxis(FastMath.HALF_PI, YAXIS));
+    plasmaEventlabel = createLabel(new Vector3f(-8, 2.5f, -20), "PLASMA LEAK", .4f, ColorRGBA.Black, new Quaternion());
+    hostileEventText = createLabel(new Vector3f(-1, 0.7f, 12f), "x: \ny: \n",
+        .15f, ColorRGBA.Green, new Quaternion().fromAngleAxis(FastMath.PI, new Vector3f(0, 1, 0)));
+    Geometry radar = createBoxObject(new Box(0.6f, 0.4f, 0.01f),
+        new Vector3f(-1.3f, 0.4f, 12.5f), "Textures/radar.jpg");
     radar.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.PI / 4, XAXIS));
 
 
     Spatial spaceship = app.getAssetManager().loadModel("Models/spaceship/spaceship_no_light.j3o");
     spaceship.scale(2f);
+    app.getRootNode().attachChild(spaceship);
+    app.getRootNode().addLight(light);
     Spatial pipes = app.getAssetManager().loadModel("Models/Pipe/Pipe.j3o");
     pipes.scale(0.04f);
     pipes.setLocalTranslation(-8, 5, -22);
     pipes.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.PI * 0.3f, YAXIS));
     app.getRootNode().attachChild(pipes);
-    app.getRootNode().addLight(light);
-    app.getRootNode().attachChild(spaceship);
   }
 
   /**
@@ -124,6 +133,20 @@ public class Scene {
     return geometry;
   }
 
+  /**
+   * Create a BitmapText and return it.
+   * @param location
+   *              Location of the BitmapText.
+   * @param text
+   *              Text to be set on the BitmapText.
+   * @param size
+   *              Size of the BitmapText.
+   * @param color
+   *              Color of the text.
+   * @param rotation
+   *              Rotation of the BitmapText.
+   * @return The new BitmapText.
+   */
   private BitmapText createLabel(Vector3f location, String text, float size,
                                  ColorRGBA color, Quaternion rotation) {
     BitmapText label = new BitmapText(font, false);

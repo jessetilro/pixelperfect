@@ -164,7 +164,7 @@ public class EventLogTest extends EventListenerTest {
   }
 
   /**
-   * Test that the method actually gets the first object
+   * Test that the method actually gets the first object.
    */
   @Test
   public void testGetFirst() {
