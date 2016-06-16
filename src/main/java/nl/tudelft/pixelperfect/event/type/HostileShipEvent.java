@@ -41,19 +41,19 @@ public class HostileShipEvent extends Event {
     return EventTypes.HOSTILE_SHIP;
   }
 
-  private boolean notifiedFlag = false;
 
   @Override
   public void notification(Game game, Scene scene) {
-    int xParam = getParameters().get("positionX").getNumberValue();
-    int yParam = getParameters().get("positionY").getNumberValue();
-    String armorParam = getParameters().get("armor").getValue();
-    BitmapText textfield = game.getScene().getHostileEventText();
-    textfield.setText("x: " + xParam + "\ny: " + yParam + "\n" + armorParam);
+    if (!getNotifiedFlag()) {
+      int xParam = getParameters().get("positionX").getNumberValue();
+      int yParam = getParameters().get("positionY").getNumberValue();
+      String armorParam = getParameters().get("armor").getValue();
+      BitmapText textfield = game.getScene().getHostileEventText();
+      textfield.setText("x: " + xParam + "\ny: " + yParam + "\n" + armorParam);
 
 
-    if (!notifiedFlag) {
-      notifiedFlag = true;
+
+      setNotifiedFlag(true);
       game.getAudioPlayer().playSound("HostileEvent", false);
     }
   }

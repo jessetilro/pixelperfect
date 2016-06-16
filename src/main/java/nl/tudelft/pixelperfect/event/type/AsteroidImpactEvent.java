@@ -39,7 +39,6 @@ public class AsteroidImpactEvent extends Event {
     return EventTypes.ASTEROID_IMPACT;
   }
 
-  private boolean notifiedFlag = false;
   /**
    * Allow events to render notifications to the players.
    *
@@ -50,11 +49,11 @@ public class AsteroidImpactEvent extends Event {
    */
   @Override
   public void notification(Game game, Scene scene) {
-    scene.getAsteroidEventLabel().setText("ASTEROID DAMAGE: "
-        + getParameters().get("locationDamageImpact").getValue());
+    if (!getNotifiedFlag()) {
+      scene.getAsteroidEventLabel().setText("ASTEROID DAMAGE: "
+              + getParameters().get("locationDamageImpact").getValue());
 
-    if (!notifiedFlag) {
-      notifiedFlag = true;
+      setNotifiedFlag(true);
       game.getAudioPlayer().playSound("AsteroidEvent", false);
     }
   }
