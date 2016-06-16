@@ -1,6 +1,8 @@
 package nl.tudelft.pixelperfect.event.type;
 
 import nl.tudelft.pixelperfect.event.Event;
+import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.game.Scene;
 
 /**
  * A type of Event, imposing the problem of a fire outbreak.
@@ -35,4 +37,16 @@ public class FireOutbreakEvent extends Event {
   public EventTypes getType() {
     return EventTypes.FIRE_OUTBREAK;
   }
+
+  private boolean notifiedFlag = false;
+  @Override
+  public void notification(Game game, Scene scene) {
+    scene.getFireEventLabel().setText("FIRE WARNING: "
+        + (getParameters().get("location").getValue()));
+    if (!notifiedFlag) {
+      notifiedFlag = true;
+      game.getAudioPlayer().playSound("FireEvent", false);
+    }
+  }
+
 }

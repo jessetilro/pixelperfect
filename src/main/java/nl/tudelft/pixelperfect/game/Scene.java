@@ -1,15 +1,17 @@
 package nl.tudelft.pixelperfect.game;
 
+import com.jme3.font.BitmapFont;
+import com.jme3.font.BitmapText;
+import com.jme3.light.Light;
+import com.jme3.light.PointLight;
 import com.jme3.material.Material;
-import com.jme3.material.RenderState;
+import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
-import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
-import com.jme3.scene.shape.Dome;
-import com.jme3.scene.shape.Torus;
 import com.jme3.texture.Texture;
 
 /**
@@ -20,8 +22,53 @@ import com.jme3.texture.Texture;
  */
 public class Scene {
 
+  private static final Vector3f XAXIS = new Vector3f(1, 0, 0);
+  private static final Vector3f YAXIS = new Vector3f(0, 1, 0);
+//  private static final Vector3f ZAXIS = new Vector3f(0, 0, 1);
+
+  /**
+   * Get the light object.
+   * @return Light object.
+   */
+  public Light getLight() {
+    return light;
+  }
+
+  private Light light = new PointLight(new Vector3f(0, 1, 0));
+
   private Game app;
   private String basicMat;
+  private BitmapFont font;
+  private BitmapText hostileEventText;
+  private BitmapText asteroidEventLabel;
+  private BitmapText fireEventLabel;
+  private BitmapText plasmaEventlabel;
+  /**
+   * Get the label used for asteroid events.
+   * @return BitmapText
+   */
+  public BitmapText getAsteroidEventLabel() {
+    return asteroidEventLabel;
+  }
+
+  /**
+   * Get the label used for fire events.
+   * @return BitmapText
+   */
+  public BitmapText getFireEventLabel() {
+    return fireEventLabel;
+  }
+
+
+  /**
+   * Get the label used for plasma events.
+   * @return BitmapText
+   */
+  public BitmapText getPlasmaEventlabel() {
+    return plasmaEventlabel;
+  }
+
+
 
   /**
    * Constructor for Scene.
@@ -32,20 +79,35 @@ public class Scene {
   public Scene(Game game) {
     app = game;
     basicMat = "Common/MatDefs/Misc/Unshaded.j3md";
+    font = app.getAssetManager().loadFont("Interface/Fonts/Default.fnt");
   }
 
   /**
    * Method that contains all objects for the scene.
    */
   public void createMap() {
-    createDashboard();
-    createWindow();
-    createBoxObject(new Box(10, 10, 0.01f), new Vector3f(0, 0, 0),
-            "Textures/rusting_metal.JPG");
-    createBoxObject(new Box(2, 4, 0.01f), new Vector3f(0, 4, 0),
-             "Textures/metal_door.JPG");
-    createBoxObject(new Box(10, 0.01f, 10), new Vector3f(0, 0, 0),
-            "Textures/wood.JPG");
+    asteroidEventLabel = createLabel(new Vector3f(7, 0.65f, -3.5f), "ASTEROID WARNING",
+        .2f, ColorRGBA.Blue, new Quaternion().fromAngleAxis(-FastMath.HALF_PI, YAXIS));
+    fireEventLabel = createLabel(new Vector3f(-7, 0.6f, -1f), "FIRE WARNING",
+        .2f, ColorRGBA.Red, new Quaternion().fromAngleAxis(FastMath.HALF_PI, YAXIS));
+    plasmaEventlabel = createLabel(new Vector3f(-8, 2.5f, -20), "PLASMA LEAK",
+        .4f, ColorRGBA.Black, new Quaternion());
+    hostileEventText = createLabel(new Vector3f(-1, 0.7f, 12f), "x: \ny: \n",
+        .15f, ColorRGBA.Green, new Quaternion().fromAngleAxis(FastMath.PI, new Vector3f(0, 1, 0)));
+    Geometry radar = createBoxObject(new Box(0.6f, 0.4f, 0.01f),
+        new Vector3f(-1.3f, 0.4f, 12.5f), "Textures/radar.jpg");
+    radar.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.PI / 4, XAXIS));
+
+
+    Spatial spaceship = app.getAssetManager().loadModel("Models/spaceship/spaceship_no_light.j3o");
+    spaceship.scale(2f);
+    app.getRootNode().attachChild(spaceship);
+    app.getRootNode().addLight(light);
+    Spatial pipes = app.getAssetManager().loadModel("Models/Pipe/Pipe.j3o");
+    pipes.scale(0.04f);
+    pipes.setLocalTranslation(-8, 5, -22);
+    pipes.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.PI * 0.3f, YAXIS));
+    app.getRootNode().attachChild(pipes);
   }
 
   /**
@@ -57,56 +119,53 @@ public class Scene {
    *          Translation of the box.
    * @param textureLocation
    *          Texture of the box.
-     */
-  private void createBoxObject(Box box, Vector3f translation,
-                               String textureLocation) {
+   */
+  private Geometry createBoxObject(Box box, Vector3f translation, String textureLocation) {
     Box newBox = box;
     Geometry geometry = new Geometry("Box", newBox);
     Material material = new Material(app.getAssetManager(), basicMat);
     Texture texture = app.getAssetManager().loadTexture(textureLocation);
-
     material.setTexture("ColorMap", texture);
     geometry.setMaterial(material);
-
     geometry.setLocalTranslation(translation);
 
     app.getRootNode().attachChild(geometry);
+
+    return geometry;
   }
 
   /**
-   * Create the windows of the spaceship.
+   * Create a BitmapText and return it.
+   * @param location
+   *              Location of the BitmapText.
+   * @param text
+   *              Text to be set on the BitmapText.
+   * @param size
+   *              Size of the BitmapText.
+   * @param color
+   *              Color of the text.
+   * @param rotation
+   *              Rotation of the BitmapText.
+   * @return The new BitmapText.
    */
-  private void createWindow() {
-    Dome dome = new Dome(new Vector3f(0, 0, 0), 10, 10, 10, true);
-    Geometry domeGeo = new Geometry("Dome", dome);
-    Material domeMat = new Material(app.getAssetManager(), basicMat);
-    Texture window = app.getAssetManager().loadTexture("Textures/Sky/Bright/spheremap.png");
-
-    domeMat.setTexture("ColorMap", window);
-    domeGeo.setMaterial(domeMat);
-
-    domeMat.getAdditionalRenderState().setBlendMode(
-            RenderState.BlendMode.Alpha);
-    domeGeo.setQueueBucket(RenderQueue.Bucket.Transparent);
-    domeGeo.setLocalRotation(new Quaternion().fromAngleAxis(
-            FastMath.HALF_PI, new Vector3f(1, 0, 0)));
-    app.getRootNode().attachChild(domeGeo);
+  private BitmapText createLabel(Vector3f location, String text, float size,
+                                 ColorRGBA color, Quaternion rotation) {
+    BitmapText label = new BitmapText(font, false);
+    label.setText(text);
+    label.setColor(color);
+    label.setSize(size);
+    label.setLocalTranslation(location);
+    label.setLocalRotation(rotation);
+    app.getRootNode().attachChild(label);
+    return label;
   }
 
   /**
-   * Create the dashboard of the cockpit.
+   * Get the BitmapText for the Hostile events.
+   * @return BitmapText
    */
-  private void createDashboard() {
-    Torus torus = new Torus(10, 10, 2, 10);
-    Geometry torusGeo = new Geometry("Torus", torus);
-    Material torusMat = new Material(app.getAssetManager(), basicMat);
-    Texture metal2 = app.getAssetManager().loadTexture("Textures/metal.JPG");
-
-    torusMat.setTexture("ColorMap", metal2);
-    torusGeo.setMaterial(torusMat);
-
-    torusGeo.setLocalRotation(new Quaternion().fromAngleAxis(
-            FastMath.HALF_PI, new Vector3f(1, 0, 0)));
-    app.getRootNode().attachChild(torusGeo);
+  public BitmapText getHostileEventText() {
+    return hostileEventText;
   }
+
 }

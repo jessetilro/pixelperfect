@@ -48,6 +48,7 @@ public class Game extends VRApplication {
   private static Server server;
   private AudioPlayer audioPlayer;
   private Spatial observer;
+
   private boolean moveForward;
   private boolean moveBackwards;
   private boolean rotateLeft;
@@ -88,11 +89,11 @@ public class Game extends VRApplication {
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_OVERDRAW, true);
 
     // Faster VR rendering, requires some vertex shader changes.
-    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.INSTANCE_VR_RENDERING, true);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.INSTANCE_VR_RENDERING, false);
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.NO_GUI, false);
 
     // Set frustum distances here before app starts.
-    appGame.preconfigureFrustrumNearFar(0.1f, 512f);
+//    appGame.preconfigureFrustrumNearFar(0.1f, 512f);
 
     appGame.start();
   }
@@ -112,8 +113,9 @@ public class Game extends VRApplication {
     scene = new Scene(this);
     scene.createMap();
     audioPlayer = new AudioPlayer(this);
-    String[] names = {};
-    String[] locations = {};
+    String[] names = {"CoffeeEvent", "AsteroidEvent", "FireEvent", "HostileEvent", "PlasmaEvent"};
+    String[] locations = {"yawn.wav", "impact.wav", "fire_alarm.wav", "sonar_x.wav",
+        "bubbling1.wav"};
     audioPlayer.loadSounds(names, locations);
 
     initNetwork();
@@ -366,6 +368,25 @@ public class Game extends VRApplication {
   public void setSpaceship(Spaceship spaceship) {
     this.spaceship = spaceship;
   }
+
+  /**
+   * Getter for the audio player.
+   *
+   * @return audio player
+   */
+  public AudioPlayer getAudioPlayer() {
+    return audioPlayer;
+  }
+
+  /**
+   * Getter for the scene.
+   *
+   * @return scene
+   */
+  public Scene getScene() {
+    return scene;
+  }
+
 
   /**
    * Returns the size of the x viewport for VR.

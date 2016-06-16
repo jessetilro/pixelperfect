@@ -1,12 +1,14 @@
 package nl.tudelft.pixelperfect.event.type;
 
 import nl.tudelft.pixelperfect.event.Event;
+import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.game.Scene;
 
 /**
  * A type of Event, imposing a dangerous Asteroid Field.
- * 
+ *
  * @author Wouter Zirkzee
- * 
+ *
  */
 
 public class AsteroidImpactEvent extends Event {
@@ -36,4 +38,25 @@ public class AsteroidImpactEvent extends Event {
   public EventTypes getType() {
     return EventTypes.ASTEROID_IMPACT;
   }
+
+  private boolean notifiedFlag = false;
+  /**
+   * Allow events to render notifications to the players.
+   *
+   * @param game
+   *            The current game.
+   * @param scene
+   *          The scene in which the notification must appear.
+   */
+  @Override
+  public void notification(Game game, Scene scene) {
+    scene.getAsteroidEventLabel().setText("ASTEROID DAMAGE: "
+        + getParameters().get("locationDamageImpact").getValue());
+
+    if (!notifiedFlag) {
+      notifiedFlag = true;
+      game.getAudioPlayer().playSound("AsteroidEvent", false);
+    }
+  }
+
 }
