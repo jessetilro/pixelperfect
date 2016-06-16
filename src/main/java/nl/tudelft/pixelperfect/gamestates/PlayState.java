@@ -70,6 +70,9 @@ public class PlayState extends GameState {
       if (event != null) {
         event.notification(game, game.getScene());
       }
+      else {
+        eventType.resetNotification(game.getScene());
+      }
     }
   }
 

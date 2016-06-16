@@ -1,6 +1,7 @@
 package nl.tudelft.pixelperfect.event.type;
 
 import nl.tudelft.pixelperfect.event.Event;
+import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Scene;
 
@@ -41,11 +42,13 @@ public class FireOutbreakEvent extends Event {
   private boolean notifiedFlag = false;
   @Override
   public void notification(Game game, Scene scene) {
-    //TODO use parameterized version when fire actually has parameters
-      scene.getFireEventLabel().setText("FIRE WARNING: ACTIVE");
+    scene.getFireEventLabel().setText("FIRE WARNING: ");
+//    EventParameter param = getParameters().get("approach");
+//        + (getParameters().get("approach").getValue()));
     if (!notifiedFlag) {
       notifiedFlag = true;
       game.getAudioPlayer().playSound("FireEvent", false);
     }
   }
+
 }

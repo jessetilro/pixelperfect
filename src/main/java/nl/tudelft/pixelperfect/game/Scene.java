@@ -57,7 +57,6 @@ public class Scene {
 
   private BitmapText plasmaEventlabel;
 
-
   /**
    * Constructor for Scene.
    *
@@ -79,7 +78,7 @@ public class Scene {
     fireEventLabel = createLabel(new Vector3f(-7, 0.6f, -1f), "FIRE WARNING", .2f, ColorRGBA.Red,
             new Quaternion().fromAngleAxis(FastMath.HALF_PI, YAXIS));
 
-    plasmaEventlabel = createLabel(new Vector3f(-8, 2.5f, -20), "PLASMA LEAK", .3f, ColorRGBA.Black,
+    plasmaEventlabel = createLabel(new Vector3f(-8, 2.5f, -20), "PLASMA LEAK", .4f, ColorRGBA.Black,
         new Quaternion());
 
 

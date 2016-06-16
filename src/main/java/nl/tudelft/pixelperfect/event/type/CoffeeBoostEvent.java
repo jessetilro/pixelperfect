@@ -56,4 +56,5 @@ public class CoffeeBoostEvent extends Event {
       scene.getLight().setColor(ColorRGBA.White);
     }
   }
+
 }

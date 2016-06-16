@@ -54,12 +54,13 @@ public class PlasmaLeakEvent extends Event {
    */
   @Override
   public void notification(Game game, Scene scene) {
-    scene.getPlasmaEventlabel().setText("Plasma leak in "
-        + getParameters().get("sector").getNumberValue());
+    scene.getPlasmaEventlabel().setText("Plasma leak at \n "
+        + getParameters().get("sector").getValue());
 
     if (!notifiedFlag) {
       notifiedFlag = true;
       game.getAudioPlayer().playSound("PlasmaEvent", false);
     }
   }
+
 }
