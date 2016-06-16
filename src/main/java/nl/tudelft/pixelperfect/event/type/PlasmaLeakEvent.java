@@ -64,7 +64,7 @@ public class PlasmaLeakEvent extends Event {
 	 */
 	@Override
 	public void onComplete(Game game) {
-		game.getAudioPlayer().playSound("CompleteHostileEvent", false);
+		game.getAudioPlayer().playSound("CompletePlasmaEvent", false);
 	}
 
 }

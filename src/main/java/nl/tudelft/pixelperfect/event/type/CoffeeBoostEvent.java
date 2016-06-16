@@ -60,7 +60,7 @@ public class CoffeeBoostEvent extends Event {
 	 */
 	@Override
 	public void onComplete(Game game) {
-		game.getAudioPlayer().playSound("CompleteHostileEvent", false);
+		game.getAudioPlayer().playSound("CompleteCoffeeEvent", false);
 	}
 
 }

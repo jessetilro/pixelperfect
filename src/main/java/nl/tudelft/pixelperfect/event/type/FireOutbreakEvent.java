@@ -54,7 +54,7 @@ public class FireOutbreakEvent extends Event {
 	 */
 	@Override
 	public void onComplete(Game game) {
-		game.getAudioPlayer().playSound("CompleteHostileEvent", false);
+		game.getAudioPlayer().playSound("CompleteFireEvent", false);
 	}
 
 }
