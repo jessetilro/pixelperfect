@@ -37,7 +37,7 @@ import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
  * @author Dmitry Malarev
  * @author Jesse Tilro
  * @author Wouter Zirkzee
- *
+ *0
  */
 @SuppressWarnings("PMD.TooManyFields")
 public class Game extends VRApplication {
@@ -82,7 +82,7 @@ public class Game extends VRApplication {
 
     // Render two eyes, regardless of SteamVR.
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.FORCE_VR_MODE, false);
-    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_CURVED_SURFACE, true);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_CURVED_SURFACE, false);
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.FLIP_EYES, false);
 
     // Show gui even if it is behind the current timing.
