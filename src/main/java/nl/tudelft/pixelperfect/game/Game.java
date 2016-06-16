@@ -176,28 +176,20 @@ public class Game extends VRApplication {
 		InputManager inputManager = getInputManager();
 		int[] keyTriggers = { KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A, KeyInput.KEY_D, KeyInput.KEY_P,
 				KeyInput.KEY_0, KeyInput.KEY_1 };
-		String[] mappings = { "forward", "back", "left", "right", "start", "debugOn", "debugOff" };
+    final String[] mappings = { "forward", "back", "left", "right", "start", "debugOn", "debugOff" };
 		for (int i = 0; i < keyTriggers.length; i++) {
 			inputManager.addMapping(mappings[i], new KeyTrigger(keyTriggers[i]));
 		}
+    final Boolean[] moves = { moveForward, moveBackwards, rotateLeft, rotateRight, startKey,
+        debugKeyOn, debugKeyOff };
 		ActionListener acl = new ActionListener() {
 
 			public void onAction(String name, boolean keyPressed, float tpf) {
-				if (name.equals("forward")) {
-					moveForward = keyPressed;
-				} else if (name.equals("back")) {
-					moveBackwards = keyPressed;
-				} else if (name.equals("left")) {
-					rotateLeft = keyPressed;
-				} else if (name.equals("right")) {
-					rotateRight = keyPressed;
-				} else if (name.equals("start")) {
-					startKey = keyPressed;
-				} else if (name.equals("debugOn")) {
-					debugKeyOn = keyPressed;
-				} else if (name.equals("debugOff")) {
-					debugKeyOff = keyPressed;
-				}
+        for (int j = 0; j < moves.length; j++) {
+          if (name.equals(mappings[j])) {
+            moves[j] = keyPressed;
+          }
+        }
 			}
 		};
 		for (String mapping : mappings) {
