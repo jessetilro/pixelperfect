@@ -104,7 +104,7 @@ public class GameHeadsUpDisplay {
 	 */
 	public void updateHud() {
 		// Update the ship's health and team score indicators.
-		shipHealth.setText("" + spaceship.getHealth());
+		shipHealth.setText("" + (int)spaceship.getHealth());
 		teamScore.setText("" + spaceship.getScore());
 	}
 
