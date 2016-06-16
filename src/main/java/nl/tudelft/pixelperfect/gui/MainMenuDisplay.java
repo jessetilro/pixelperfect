@@ -72,7 +72,7 @@ public class MainMenuDisplay {
     startGameText.setText(Constants.MAIN_MENU_START_BUTTON_TEXT);
     exitGameText.setText(Constants.MAIN_MENU_EXIT_BUTTON_TEXT);
 
-    // Add the generated bitmaps to the gui node view.
+    // Add the generated bitmaps to the GUI node view.
     guiNodes.attachChild(startGameText);
     guiNodes.attachChild(exitGameText);
   }
