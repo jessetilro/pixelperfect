@@ -26,14 +26,14 @@ public final class Constants {
   public static final String MAIN_MENU_EXIT_BUTTON_TEXT = "Exit Game";
 
   // Positioning related constants for the in-game debug HUD.
-  public static final int DEBUG_LOG_HEIGHT_OFFSET = 300;
-  public static final int DEBUG_HEALTH_HEIGHT_OFFSET = 350;
-  public static final int DEBUG_SCORE_HEIGHT_OFFSET = 400;
-  public static final int DEBUG_TIME_HEIGHT_OFFSET = 450;
-  public static final int DEBUG_CONNECTED_HEIGHT_OFFSET = 500;
-  public static final int DEBUG_IP_HEIGHT_OFFSET = 550;
+  public static final int DEBUG_HEALTH_HEIGHT_OFFSET = 500;
+  public static final int DEBUG_SCORE_HEIGHT_OFFSET = 550;
+  public static final int DEBUG_TIME_HEIGHT_OFFSET = 600;
+  public static final int DEBUG_CONNECTED_HEIGHT_OFFSET = 650;
+  public static final int DEBUG_IP_HEIGHT_OFFSET = 700;
+  public static final int DEBUG_LOG_HEIGHT_OFFSET = 750;
 
-  public static final int DEBUG_ELEMENTS_WIDTH_OFFSET = 100;
+  public static final int DEBUG_ELEMENTS_WIDTH_OFFSET = 300;
 
   // Text constants for the in-game debug HUD.
   public static final String DEBUG_NO_EVENTS_LOG_TEXT = "No events currently active";
