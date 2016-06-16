@@ -68,7 +68,8 @@ public abstract class EventFactory {
     int index = 0;
     for (EventParameter param : parameters) {
       param.setSummary(summaries.get(param.getKey()));
-      param.setValue(reader.getParameterValue(getType().ordinal(), index, param.getNumberValue()));
+      param.setValueDescription(
+          reader.getParameterValue(getType().ordinal(), index, param.getValue()));
       index++;
     }
     return parameters;

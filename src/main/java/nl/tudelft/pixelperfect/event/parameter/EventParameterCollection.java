@@ -1,10 +1,10 @@
 package nl.tudelft.pixelperfect.event.parameter;
 
-import com.jme3.network.serializing.Serializable;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.jme3.network.serializing.Serializable;
 
 /**
  * Class aggregating the parameters (key / value pairs) for an Event.
@@ -86,13 +86,7 @@ public class EventParameterCollection {
       sb.append("None");
     } else {
       for (EventParameter param : map.values()) {
-        if (!param.getValue().equals("") && !param.getValue().equals("Generic")) {
-          if (sb.length() == 0) {
-            sb.append(param.getValue());
-          } else {
-            sb.append(", ").append(param.getValue());
-          }
-        }
+        sb.append(", ").append(param.getValueDescription());
       }
     }
     return sb.toString();
