@@ -225,6 +225,6 @@ public abstract class Event {
 	 * Method responsible for handling event completion actions that are not
 	 * related to game logic.
 	 */
-	public abstract void onComplete();
+	public abstract void onComplete(Game game);
 
 }
