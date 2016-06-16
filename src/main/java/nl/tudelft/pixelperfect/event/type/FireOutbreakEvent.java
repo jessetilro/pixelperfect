@@ -42,9 +42,8 @@ public class FireOutbreakEvent extends Event {
   private boolean notifiedFlag = false;
   @Override
   public void notification(Game game, Scene scene) {
-    scene.getFireEventLabel().setText("FIRE WARNING: ");
-//    EventParameter param = getParameters().get("approach");
-//        + (getParameters().get("approach").getValue()));
+    scene.getFireEventLabel().setText("FIRE WARNING: "
+        + (getParameters().get("location").getValue()));
     if (!notifiedFlag) {
       notifiedFlag = true;
       game.getAudioPlayer().playSound("FireEvent", false);

@@ -7,8 +7,8 @@
     "damage": 10,
     "parameters" : [
       {
-      	"key": "approach",
-      	"summary": "The approach required for fighting the fire",
+      	"key": "location",
+      	"summary": "The location of the fire.",
       	"values": [
       		{
       			"value": 0,
