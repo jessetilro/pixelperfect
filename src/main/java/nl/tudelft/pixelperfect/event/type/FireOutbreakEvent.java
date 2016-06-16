@@ -38,16 +38,6 @@ public class FireOutbreakEvent extends Event {
 		return EventTypes.FIRE_OUTBREAK;
 	}
 
-	private boolean notifiedFlag = false;
-
-	@Override
-	public void notification(Game game, Scene scene) {
-		scene.getFireEventLabel().setText("FIRE WARNING: " + (getParameters().get("location").getValue()));
-		if (!notifiedFlag) {
-			notifiedFlag = true;
-			game.getAudioPlayer().playSound("FireEvent", false);
-		}
-	}
 
 	/**
 	 * Plays an explosion sound when a ship is successfully destroyed.
@@ -56,5 +46,15 @@ public class FireOutbreakEvent extends Event {
 	public void onComplete(Game game) {
 		game.getAudioPlayer().playSound("CompleteFireEvent", false);
 	}
+  @Override
+  public void notification(Game game, Scene scene) {
+    if (!getNotifiedFlag()) {
+      scene.getFireEventLabel().setText("FIRE WARNING: "
+              + (getParameters().get("location").getValue()));
+
+      setNotifiedFlag(true);
+      game.getAudioPlayer().playSound("FireEvent", false);
+    }
+  }
 
 }

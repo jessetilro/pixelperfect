@@ -40,21 +40,6 @@ public class CoffeeBoostEvent extends Event {
 		return EventTypes.COFFEE_BOOST;
 	}
 
-	private boolean notifiedFlag = false;
-
-	@Override
-	public void notification(Game game, Scene scene) {
-		if (!notifiedFlag) {
-			notifiedFlag = true;
-			game.getAudioPlayer().playSound("CoffeeEvent", false);
-		}
-		if ((((int) game.getSpaceship().getTimer() % 2) == 0) && !isExpired(System.currentTimeMillis() + 2000)) {
-			scene.getLight().setColor(ColorRGBA.Brown);
-		} else {
-			scene.getLight().setColor(ColorRGBA.White);
-		}
-	}
-
 	/**
 	 * Plays an explosion sound when a ship is successfully destroyed.
 	 */
@@ -62,5 +47,19 @@ public class CoffeeBoostEvent extends Event {
 	public void onComplete(Game game) {
 		game.getAudioPlayer().playSound("CompleteCoffeeEvent", false);
 	}
+	
+  @Override
+  public void notification(Game game, Scene scene) {
+    if (!getNotifiedFlag()) {
+      setNotifiedFlag(true);
+      game.getAudioPlayer().playSound("CoffeeEvent", false);
+    }
+    if ((((int) game.getSpaceship().getTimer() % 2) == 0)
+        && !isExpired(System.currentTimeMillis() + 2000)) {
+      scene.getLight().setColor(ColorRGBA.Brown);
+    } else {
+      scene.getLight().setColor(ColorRGBA.White);
+    }
+  }
 
 }

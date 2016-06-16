@@ -25,7 +25,8 @@ public abstract class Event {
 	private long duration;
 	private double damage;
 	private EventParameterCollection parameters;
-
+	private boolean notifiedFlag = false;
+	
 	/**
 	 * Constructor for the event class, taking parameters for the type of event,
 	 * a summary of the event/name, a description of the event, a timestamp to
@@ -53,6 +54,25 @@ public abstract class Event {
 		this.damage = damage;
 		this.parameters = new EventParameterCollection();
 	}
+
+  /**
+   * Get notifiedFlag.
+   * @return
+   *        True if event has already been notified to captain, false otherwise.
+     */
+  protected boolean getNotifiedFlag() {
+    return notifiedFlag;
+  }
+
+  /**
+   * Set the notified flag.
+   *
+   * @param notifiedFlag
+   *                Field that contains if the event has been notified.
+     */
+  protected void setNotifiedFlag(boolean notifiedFlag) {
+    this.notifiedFlag = notifiedFlag;
+  }
 
 	/**
 	 * Get the type of this Event.
