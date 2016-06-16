@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
+import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
@@ -112,12 +113,12 @@ public class EventLog implements EventListener {
 	 * 
 	 * 
 	 */
-	public synchronized void complete(EventTypes type, Collection<EventParameter> parameters) {
+	public synchronized void complete(EventTypes type, Collection<EventParameter> parameters, Game game) {
 		Collection<Event> candidates = getByType(type);
 
 		for (Event event : candidates) {
 			if (event.validateParameters(parameters)) {
-				
+				event.onComplete(game);
 				
 				discard(event);
 				spaceship.updateScore(10);
