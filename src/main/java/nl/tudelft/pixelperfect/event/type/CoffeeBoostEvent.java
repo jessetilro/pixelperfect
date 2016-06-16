@@ -40,11 +40,10 @@ public class CoffeeBoostEvent extends Event {
     return EventTypes.COFFEE_BOOST;
   }
 
-  private boolean notifiedFlag = false;
   @Override
   public void notification(Game game, Scene scene) {
-    if (!notifiedFlag) {
-      notifiedFlag = true;
+    if (!getNotifiedFlag()) {
+      setNotifiedFlag(true);
       game.getAudioPlayer().playSound("CoffeeEvent", false);
     }
     if ((((int) game.getSpaceship().getTimer() % 2) == 0)

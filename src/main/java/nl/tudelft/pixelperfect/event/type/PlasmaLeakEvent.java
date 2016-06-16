@@ -40,7 +40,6 @@ public class PlasmaLeakEvent extends Event {
   }
 
 
-  private boolean notifiedFlag = false;
   /**
    * Allow events to render notifications to the players.
    *
@@ -51,11 +50,12 @@ public class PlasmaLeakEvent extends Event {
    */
   @Override
   public void notification(Game game, Scene scene) {
-    scene.getPlasmaEventlabel().setText("Plasma leak at \n "
-        + getParameters().get("sector").getValue());
+    if (!getNotifiedFlag()) {
+      scene.getPlasmaEventlabel().setText("Plasma leak at \n "
+              + getParameters().get("sector").getValue());
 
-    if (!notifiedFlag) {
-      notifiedFlag = true;
+
+      setNotifiedFlag(true);
       game.getAudioPlayer().playSound("PlasmaEvent", false);
     }
   }

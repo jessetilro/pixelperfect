@@ -38,13 +38,13 @@ public class FireOutbreakEvent extends Event {
     return EventTypes.FIRE_OUTBREAK;
   }
 
-  private boolean notifiedFlag = false;
   @Override
   public void notification(Game game, Scene scene) {
-    scene.getFireEventLabel().setText("FIRE WARNING: "
-        + (getParameters().get("location").getValue()));
-    if (!notifiedFlag) {
-      notifiedFlag = true;
+    if (!getNotifiedFlag()) {
+      scene.getFireEventLabel().setText("FIRE WARNING: "
+              + (getParameters().get("location").getValue()));
+
+      setNotifiedFlag(true);
       game.getAudioPlayer().playSound("FireEvent", false);
     }
   }
