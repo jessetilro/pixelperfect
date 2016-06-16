@@ -51,7 +51,7 @@ public class FireOutbreakEvent extends Event {
   public void notification(Game game, Scene scene) {
     if (!getNotifiedFlag()) {
       scene.getFireEventLabel()
-          .setText("FIRE WARNING: " + (getParameters().get("location").getValue()));
+          .setText("FIRE WARNING: " + (getParameters().get("location").getValueDescription()));
 
       setNotifiedFlag(true);
     }

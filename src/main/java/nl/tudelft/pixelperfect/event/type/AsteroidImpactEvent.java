@@ -51,8 +51,8 @@ public class AsteroidImpactEvent extends Event {
   @Override
   public void notification(Game game, Scene scene) {
     if (!getNotifiedFlag()) {
-      scene.getAsteroidEventLabel()
-          .setText("ASTEROID DAMAGE: " + getParameters().get("locationDamageImpact").getValue());
+      scene.getAsteroidEventLabel().setText(
+          "ASTEROID DAMAGE: " + getParameters().get("locationDamageImpact").getValueDescription());
 
       setNotifiedFlag(true);
       game.getAudioPlayer().playSound("AsteroidEvent", false);
