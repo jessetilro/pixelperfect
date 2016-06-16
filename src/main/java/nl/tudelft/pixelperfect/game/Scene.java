@@ -90,7 +90,8 @@ public class Scene {
         .2f, ColorRGBA.Blue, new Quaternion().fromAngleAxis(-FastMath.HALF_PI, YAXIS));
     fireEventLabel = createLabel(new Vector3f(-7, 0.6f, -1f), "FIRE WARNING",
         .2f, ColorRGBA.Red, new Quaternion().fromAngleAxis(FastMath.HALF_PI, YAXIS));
-    plasmaEventlabel = createLabel(new Vector3f(-8, 2.5f, -20), "PLASMA LEAK", .4f, ColorRGBA.Black, new Quaternion());
+    plasmaEventlabel = createLabel(new Vector3f(-8, 2.5f, -20), "PLASMA LEAK",
+        .4f, ColorRGBA.Black, new Quaternion());
     hostileEventText = createLabel(new Vector3f(-1, 0.7f, 12f), "x: \ny: \n",
         .15f, ColorRGBA.Green, new Quaternion().fromAngleAxis(FastMath.PI, new Vector3f(0, 1, 0)));
     Geometry radar = createBoxObject(new Box(0.6f, 0.4f, 0.01f),
