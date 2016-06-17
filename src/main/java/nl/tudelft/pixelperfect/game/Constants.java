@@ -2,7 +2,7 @@ package nl.tudelft.pixelperfect.game;
 
 /**
  * A data class for storing game-wide items that can all be altered in a single sweep.
- * 
+ *
  * @author David Alderliesten
  * @author Jesse Tilro
  *
@@ -29,8 +29,10 @@ public final class Constants {
   public static final int MAIN_MENU_HEIGHT_SPACING = 100;
 
   // Text constants for the main menu.
-  public static final String MAIN_MENU_FIRST_ROW_TEXT = "Allow your crew members to select their roles.";
-  public static final String MAIN_MENU_SECOND_ROW_TEXT = "Once this is done, press the 'p' button to start.";
+  public static final String MAIN_MENU_FIRST_ROW_TEXT =
+    "Allow your crew members to select their roles.";
+  public static final String MAIN_MENU_SECOND_ROW_TEXT = 
+    "Once this is done, press the 'p' button to start.";
 
   // Positioning related constants for the in-game debug HUD.
   public static final int DEBUG_HEALTH_HEIGHT_OFFSET = 500;
