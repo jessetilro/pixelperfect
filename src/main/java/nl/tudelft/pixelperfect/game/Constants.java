@@ -7,6 +7,7 @@ package nl.tudelft.pixelperfect.game;
  * @author Jesse Tilro
  *
  */
+@edu.umd.cs.findbugs.annotations.SuppressWarnings
 public final class Constants {
 
   /**

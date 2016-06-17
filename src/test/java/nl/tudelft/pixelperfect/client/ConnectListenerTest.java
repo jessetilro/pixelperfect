@@ -25,6 +25,7 @@ import nl.tudelft.pixelperfect.player.PlayerCollection;
  *
  */
 @SuppressWarnings("PMD")
+@edu.umd.cs.findbugs.annotations.SuppressWarnings
 public class ConnectListenerTest {
 
   private Game mockedGame;
