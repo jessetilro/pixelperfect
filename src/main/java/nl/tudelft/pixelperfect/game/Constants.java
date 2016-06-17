@@ -15,6 +15,14 @@ public final class Constants {
   private Constants() {
   }
 
+  // Audio path information and events.
+  protected static final String[] AUDIO_EVENTS = { "CoffeeEvent", "AsteroidEvent", "FireEvent",
+      "HostileEvent", "PlasmaEvent", "CompleteAsteroidEvent", "CompleteCoffeeEvent",
+      "CompleteFireEvent", "CompleteHostileEvent", "CompletePlasmaEvent" };
+  protected static final String[] AUDIO_PATH_NAMES = { "yawn.wav", "impact.wav", "fire_alarm.wav",
+      "sonar_x.wav", "bubbling1.wav", "cannon_x.wav", "drink.wav", "fire_ext.wav",
+      "explosion_x.wav", "hammer.wav" };
+
   // Position related constants for the main menu.
   public static final int MAIN_MENU_START_HEIGHT_OFFSET = -150;
   public static final int MAIN_MENU_EXIT_HEIGHT_OFFSET = 150;
@@ -49,11 +57,19 @@ public final class Constants {
 
   public static final int GUI_HEALTH_TEXT_SIZE_SCALE = 2;
   public static final int GUI_SCORE_TEXT_SIZE_SCALE = 2;
+  
+  //Path to the Events data file on the file system.
+  public static final String EVENT_DATA_FILE = "src/main/resources/data/events.json";
 
+  /*
+   * Gameplay Variables
+   */
+  // Total game time
+  public static final long GAME_TIME = 60000;
+  
   // Target intensity for the Event Scheduler.
   public static final double EVENT_SCHEDULER_INTENSITY_MIN = 0.125;
   public static final double EVENT_SCHEDULER_INTENSITY_MAX = 0.5;
 
-  // Path to the Events data file on the file system.
-  public static final String EVENT_DATA_FILE = "src/main/resources/data/events.json";
+  
 }

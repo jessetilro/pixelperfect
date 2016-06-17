@@ -28,119 +28,110 @@ import nl.tudelft.pixelperfect.game.Roles;
  */
 public class ServerListener implements MessageListener<HostedConnection> {
 
-	private Game app;
-	private Server server;
-	private ArrayList<Roles> roles = new ArrayList<Roles>();
+  private Game app;
+  private Server server;
+  private ArrayList<Roles> roles = new ArrayList<Roles>();
 
-	/**
-	 * Sets the game whose server to listen for.
-	 * 
-	 * @param game
-	 *            The game.
-	 */
-	public void setGame(Game game) {
-		app = game;
-	}
+  /**
+   * Sets the game whose server to listen for.
+   * 
+   * @param game
+   *          The game.
+   */
+  public void setGame(Game game) {
+    app = game;
+  }
 
-	/**
-	 * Returns the game for reference purposes.
-	 * 
-	 * @return The game.
-	 */
-	public Game getGame() {
-		return app;
-	}
+  /**
+   * Uses the server of the game to broadcast messages that has come in here.
+   * 
+   * @param server
+   *          The server of the game.
+   */
+  public synchronized void setServer(Server server) {
+    this.server = server;
+  }
 
-	/**
-	 * Uses the server of the game to broadcast messages that has come in here.
-	 * 
-	 * @param server
-	 *            The server of the game.
-	 */
-	public synchronized void setServer(Server server) {
-		this.server = server;
-	}
+  /**
+   * Functionality for server behavior upon receiving a message.
+   * 
+   * @param source
+   *          The client that sent the message.
+   * @param message
+   *          The message sent.
+   * 
+   */
+  public synchronized void messageReceived(HostedConnection source, Message message) {
+    if (message instanceof EventCompletedMessage) {
+      EventCompletedMessage completedMessage = (EventCompletedMessage) message;
+      processEventCompletedMessage(completedMessage);
+    } else if (message instanceof RoleChosenMessage) {
+      RoleChosenMessage retrieved = (RoleChosenMessage) message;
+      if (retrieved.isEmpty()) {
+        for (Roles role : roles) {
+          server.broadcast(Filters.equalTo(source), new RoleChosenMessage("initial roles chosen",
+              role));
+        }
+      } else {
+        roles.add(retrieved.getRole());
+        server.broadcast(Filters.notEqualTo(source), message);
+      }
+    } else if (message instanceof RepairMessage) {
+      RepairMessage repairMessage = (RepairMessage) message;
+      processRepairs(repairMessage);
+    }
+  }
 
-	/**
-	 * Functionality for server behavior upon receiving a message.
-	 * 
-	 * @param source
-	 *            The client that sent the message.
-	 * @param message
-	 *            The message sent.
-	 * 
-	 */
-	public synchronized void messageReceived(HostedConnection source, Message message) {
-		if (message instanceof EventCompletedMessage) {
-			EventCompletedMessage completedMessage = (EventCompletedMessage) message;
-			processEventCompletedMessage(completedMessage);
-		} else if (message instanceof RoleChosenMessage) {
-			RoleChosenMessage retrieved = (RoleChosenMessage) message;
-			if (retrieved.isEmpty()) {
-				for (Roles role : roles) {
-					server.broadcast(Filters.equalTo(source), new RoleChosenMessage("initial roles chosen", role));
-				}
-			} else {
-				roles.add(retrieved.getRole());
-				server.broadcast(Filters.notEqualTo(source), message);
-			}
-		} else if (message instanceof RepairMessage) {
-			RepairMessage repairMessage = (RepairMessage) message;
-			processRepairs(repairMessage);
-		}
-	}
+  /**
+   * Process a recieved RepairMessage.
+   * 
+   * @param message
+   *          , The received RepairMessage.
+   */
+  public synchronized void processRepairs(RepairMessage message) {
+    System.out.println("Activating repairs.");
+    app.getSpaceship().updateHealth(message.getAmount());
+  }
 
-	/**
-	 * Process a recieved RepairMessage.
-	 * 
-	 * @param message
-	 *            , The received RepairMessage.
-	 */
-	public synchronized void processRepairs(RepairMessage message) {
-		System.out.println("Activating repairs.");
-		app.getSpaceship().updateHealth(message.getAmount());
-	}
+  /**
+   * Process a received EventCompletedMessage.
+   * 
+   * @param message
+   *          A received EventCompletedMessage.
+   */
+  public synchronized void processEventCompletedMessage(EventCompletedMessage message) {
+    EventTypes type = getType(message);
+    Collection<EventParameter> parameters = getParameters(message);
+    System.out.println("Received a completed event: " + type.toString());
+    app.getSpaceship().getLog().complete(type, parameters, app);
+  }
 
-	/**
-	 * Process a received EventCompletedMessage.
-	 * 
-	 * @param message
-	 *            A received EventCompletedMessage.
-	 */
-	public synchronized void processEventCompletedMessage(EventCompletedMessage message) {
-		EventTypes type = getType(message);
-		Collection<EventParameter> parameters = getParameters(message);
-		System.out.println("Received a completed event: " + type.toString());
-		app.getSpaceship().getLog().complete(type, parameters, app);
-	}
+  /**
+   * Convert type attribute of message from serializable to more abstract.
+   * 
+   * @param The
+   *          message to extract the attribute from.
+   * 
+   * @return An Event Type.
+   */
+  private EventTypes getType(EventCompletedMessage message) {
+    return EventTypes.values()[message.getType()];
+  }
 
-	/**
-	 * Convert type attribute of message from serializable to more abstract.
-	 * 
-	 * @param The
-	 *            message to extract the attribute from.
-	 * 
-	 * @return An Event Type.
-	 */
-	private EventTypes getType(EventCompletedMessage message) {
-		return EventTypes.values()[message.getType()];
-	}
-
-	/**
-	 * Convert parameters attribute of message from serializable to more
-	 * abstract.
-	 * 
-	 * @param message
-	 *            The message to extract the attribute from.
-	 * 
-	 * @return A collection of EventParameters.
-	 */
-	private Collection<EventParameter> getParameters(EventCompletedMessage message) {
-		Map<String, Integer> structureFrom = message.getParameters();
-		Collection<EventParameter> structureTo = new ArrayList<EventParameter>();
-		for (Map.Entry<String, Integer> param : structureFrom.entrySet()) {
-			structureTo.add(new EventParameter(param.getKey(), param.getValue()));
-		}
-		return structureTo;
-	}
+  /**
+   * Convert parameters attribute of message from serializable to more abstract.
+   * 
+   * @param message
+   *          The message to extract the attribute from.
+   * 
+   * @return A collection of EventParameters.
+   */
+  private Collection<EventParameter> getParameters(EventCompletedMessage message) {
+    Map<String, Integer> structureFrom = message.getParameters();
+    Collection<EventParameter> structureTo = new ArrayList<EventParameter>();
+    for (Map.Entry<String, Integer> param : structureFrom.entrySet()) {
+      structureTo.add(new EventParameter(param.getKey(), param.getValue()));
+    }
+    return structureTo;
+  }
 }
