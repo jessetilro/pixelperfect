@@ -23,10 +23,9 @@ public final class Constants {
       "sonar_x.wav", "bubbling1.wav", "cannon_x.wav", "drink.wav", "fire_ext.wav",
       "explosion_x.wav", "hammer.wav" };
 
-  // Position related constants for the main menu.
-  public static final int MAIN_MENU_START_HEIGHT_OFFSET = -150;
-  public static final int MAIN_MENU_EXIT_HEIGHT_OFFSET = 150;
-
+  // Positioning and scaling related constants for the in-game debug HUD.
+  public static final int MAIN_MENU_WIDTH_SPACING = 450;
+  public static final int MAIN_MENU_HEIGHT_SPACING = 100;
   public static final int MAIN_MENU_TEXT_SCALING = 3;
 
   // Text constants for the main menu.
@@ -54,7 +53,6 @@ public final class Constants {
   // Positioning and scaling related constants for the in-game HUD.
   public static final int GUI_ELEMENTS_WIDTH_OFFSET = 330;
   public static final int GUI_ELEMENTS_HEIGHT_OFFSET = 340;
-
   public static final int GUI_HEALTH_TEXT_SIZE_SCALE = 2;
   public static final int GUI_SCORE_TEXT_SIZE_SCALE = 2;
 

@@ -9,7 +9,7 @@ import com.jme3.scene.Node;
 import nl.tudelft.pixelperfect.game.Constants;
 
 /**
- * Class responsible for handling the creation and input/output for the main menu of the game.
+ * Class responsible for handling the creation and input/output for the main/start menu of the game.
  * 
  * @author David Alderliesten
  *
@@ -22,7 +22,8 @@ public class MainMenuDisplay {
   private float screenHeight;
 
   private BitmapFont menuFont;
-  private BitmapText instructionText;
+  private BitmapText rowOne;
+  private BitmapText rowTwo;
 
   /**
    * Constructor for the main menu display.
@@ -53,21 +54,34 @@ public class MainMenuDisplay {
     // Loading the font stored in the javamonkeyengine's default manager.
     menuFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
 
-    // Initializer for the start game button, including font loading, background, and text setting.
-    instructionText = new BitmapText(menuFont, true);
-    instructionText.setColor(ColorRGBA.White);
-    instructionText.setLocalScale(Constants.MAIN_MENU_TEXT_SCALING);
-    instructionText.setLocalTranslation(screenWidth / 2, (screenHeight / 2), 0);
+    // Initializer for the main menu elements.
+    rowOne = new BitmapText(menuFont, true);
+    rowOne.setColor(ColorRGBA.White);
+    rowOne.setLocalScale(Constants.MAIN_MENU_TEXT_SCALING);
+    rowOne.setLocalTranslation((screenWidth / 2) - Constants.MAIN_MENU_WIDTH_SPACING,
+        (screenHeight / 2) + Constants.MAIN_MENU_HEIGHT_SPACING, 0);
+
+    rowTwo = new BitmapText(menuFont, true);
+    rowTwo.setColor(ColorRGBA.White);
+    rowTwo.setLocalScale(Constants.MAIN_MENU_TEXT_SCALING);
+    rowTwo.setLocalTranslation((screenWidth / 2) - Constants.MAIN_MENU_WIDTH_SPACING,
+        (screenHeight / 2) - Constants.MAIN_MENU_HEIGHT_SPACING, 0);
+
+    // Setting the text to the element.
+    rowOne.setText(Constants.MAIN_MENU_FIRST_ROW_TEXT);
+    rowTwo.setText(Constants.MAIN_MENU_SECOND_ROW_TEXT);
 
     // Add the generated bitmaps to the GUI node view.
-    guiNodes.attachChild(instructionText);
+    guiNodes.attachChild(rowOne);
+    guiNodes.attachChild(rowTwo);
   }
 
   /**
    * Clears and removes the main menu elements.
    */
   public void clearMenu() {
-    guiNodes.detachChild(instructionText);
+    guiNodes.detachChild(rowOne);
+    guiNodes.detachChild(rowTwo);
   }
 
 }
