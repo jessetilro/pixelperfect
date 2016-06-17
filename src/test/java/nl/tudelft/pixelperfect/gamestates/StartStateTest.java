@@ -7,6 +7,7 @@ package nl.tudelft.pixelperfect.gamestates;
  * @author David Alderliesten
  *
  */
+@SuppressWarnings("PMD")
 public class StartStateTest extends GameStateTest {
 
   @Override

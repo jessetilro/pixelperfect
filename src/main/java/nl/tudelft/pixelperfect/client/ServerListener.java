@@ -38,7 +38,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
    * @param game
    *          The game.
    */
-  public void setGame(Game game) {
+  public synchronized void setGame(Game game) {
     app = game;
   }
 

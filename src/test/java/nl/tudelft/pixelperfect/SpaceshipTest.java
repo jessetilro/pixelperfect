@@ -50,6 +50,15 @@ public class SpaceshipTest {
   public void testGetScore() {
     assertEquals(0, ship.getScore());
   }
+  
+  /**
+   * Tests the UpdateHealth method if health is over 100.
+   */
+  @Test
+  public void testUpdateMax() {
+    ship.updateHealth(130);
+    assertEquals(100, ship.getHealth(), 0.0);
+  }
 
   /**
    * Updates the score to a positive value and verifies it.
