@@ -49,7 +49,7 @@ public class PlasmaLeakEventTest extends EventTest {
     AudioPlayer mockedAudio = mock(AudioPlayer.class);
     when(mockedGame.getScene()).thenReturn(mockedScene);
     when(mockedGame.getAudioPlayer()).thenReturn(mockedAudio);
-    when(mockedScene.getPlasmaEventlabel()).thenReturn(mockedBitMap);
+    when(mockedScene.getPlasmaEventLabel()).thenReturn(mockedBitMap);
     when(mockedGame.getAudioPlayer()).thenReturn(mockedAudio);
     PlasmaLeakEvent test = createEvent("summary", "description");
     test.getParameters().add(param);
