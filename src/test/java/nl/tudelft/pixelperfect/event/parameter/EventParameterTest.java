@@ -39,6 +39,15 @@ public class EventParameterTest {
   public void testGetKey() {
     assertEquals(key, object.getKey());
   }
+  
+  /**
+   * The getKey method should return the right key.
+   */
+  @Test
+  public void testSetValue() {
+    object.setValueDescription("hello");
+    assertEquals("hello", object.getValueDescription());
+  }
 
   /**
    * An instance should be considered equal to itself.

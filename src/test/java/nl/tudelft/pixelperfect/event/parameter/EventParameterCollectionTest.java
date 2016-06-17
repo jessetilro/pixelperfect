@@ -183,5 +183,14 @@ public class EventParameterCollectionTest {
   public void testDebugStringEmpty() {
     assertEquals("None", parametersEmpty.toDebugString());
   }
+  
+  /**
+   * Tests the Debug String method in the case there are parameters.
+   * 
+   */
+  @Test
+  public void testDebugStringParam() {
+    assertEquals(", 42", parameters.toDebugString());
+  }
 
 }

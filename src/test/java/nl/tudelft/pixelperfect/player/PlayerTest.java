@@ -5,10 +5,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
+import com.jme3.network.HostedConnection;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jme3.network.HostedConnection;
+
 
 /**
  * Class for the automated testing of the Player class.
@@ -18,7 +19,7 @@ import com.jme3.network.HostedConnection;
  *
  */
 public abstract class PlayerTest {
-
+  
   private Player testObject;
   private HostedConnection mockedConnection1;
 

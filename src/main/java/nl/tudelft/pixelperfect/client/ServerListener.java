@@ -38,7 +38,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
    * @param game
    *          The game.
    */
-  public void setGame(Game game) {
+  public synchronized void setGame(Game game) {
     app = game;
   }
 
@@ -76,11 +76,12 @@ public class ServerListener implements MessageListener<HostedConnection> {
 
   /**
    * Process a role chosen message.
-   *
+   * 
    * @param source
-   *          The client that sent the message.
+   *              The client that sent the message.
+   * 
    * @param message
-   *          The message sent.
+   *              The message received.
    */
   public synchronized void processRoleChosen(HostedConnection source, RoleChosenMessage message) {
     PlayerRoles role = message.getRole();
