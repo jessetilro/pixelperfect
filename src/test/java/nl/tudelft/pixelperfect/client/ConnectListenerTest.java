@@ -30,7 +30,7 @@ public class ConnectListenerTest {
   private Game mockedGame;
   private Spaceship mockedSpaceship;
   private PlayerCollection mockedPlayerCollection;
-  private NetworkConnectionListener object;
+  private ConnectListener object;
 
   /**
    * Set up mocked dependencies, stubs and the test object.
@@ -47,7 +47,7 @@ public class ConnectListenerTest {
     when(mockedSpaceship.getCrew()).thenReturn(mockedPlayerCollection);
 
     // Set up test object.
-    object = new NetworkConnectionListener();
+    object = new ConnectListener();
     object.setGame(mockedGame);
   }
 

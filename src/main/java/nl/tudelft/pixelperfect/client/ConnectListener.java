@@ -14,7 +14,7 @@ import nl.tudelft.pixelperfect.player.CrewPlayer;
  * @author Dmitry Maralev
  *
  */
-public class NetworkConnectionListener implements ConnectionListener {
+public class ConnectListener implements ConnectionListener {
 
   private Game app;
 

@@ -16,7 +16,7 @@ import com.jme3.scene.Spatial;
 import jmevr.app.VRApplication;
 import jmevr.util.VRGuiManager;
 import nl.tudelft.pixelperfect.audio.AudioPlayer;
-import nl.tudelft.pixelperfect.client.NetworkConnectionListener;
+import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.ServerListener;
 import nl.tudelft.pixelperfect.client.message.DisconnectMessage;
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
@@ -154,7 +154,7 @@ public class Game extends VRApplication {
       server.addMessageListener(listen, RepairMessage.class);
       server.addMessageListener(listen, NewGameMessage.class);
       server.addMessageListener(listen, DisconnectMessage.class);
-      NetworkConnectionListener connect = new NetworkConnectionListener();
+      ConnectListener connect = new ConnectListener();
       connect.setGame(this);
       server.addConnectionListener(connect);
     } catch (IOException except) {
