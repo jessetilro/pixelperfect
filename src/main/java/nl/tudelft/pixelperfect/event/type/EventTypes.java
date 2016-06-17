@@ -8,7 +8,6 @@ import nl.tudelft.pixelperfect.event.factory.FireOutbreakEventFactory;
 import nl.tudelft.pixelperfect.event.factory.HostileShipEventFactory;
 import nl.tudelft.pixelperfect.event.factory.PlasmaLeakEventFactory;
 import nl.tudelft.pixelperfect.game.Game;
-import nl.tudelft.pixelperfect.game.Scene;
 
 /**
  * Enumeration of the different types of Events in the game. The ordinals, i.e. the indices of the

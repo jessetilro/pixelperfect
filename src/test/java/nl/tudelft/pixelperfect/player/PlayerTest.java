@@ -37,8 +37,8 @@ public abstract class PlayerTest {
   /**
    * Factory method for testing.
    * 
-   * @param name
-   *          , the name of the Player.
+   * @param connection
+   *          Connection to the player.
    * @return The object to be tested.
    */
   public abstract Player createPlayer(HostedConnection connection);
