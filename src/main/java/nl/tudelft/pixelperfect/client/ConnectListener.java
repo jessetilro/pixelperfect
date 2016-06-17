@@ -5,6 +5,7 @@ import com.jme3.network.HostedConnection;
 import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.player.CrewPlayer;
 
 /**
  * The class listens to any ongoing connectivity between the server and client.
@@ -46,7 +47,7 @@ public class ConnectListener implements ConnectionListener {
    */
   public void connectionAdded(Server server, HostedConnection client) {
     System.out.println("Client " + client + " has connected to the game");
-    app.getSpaceship().updateCrew(server.getConnections());
+    app.getSpaceship().getCrew().addPlayer(new CrewPlayer(client));
   }
 
   /**
@@ -59,6 +60,6 @@ public class ConnectListener implements ConnectionListener {
    */
   public void connectionRemoved(Server server, HostedConnection client) {
     System.out.println("Client " + client + " has disconnected from the game");
-    app.getSpaceship().updateCrew(server.getConnections());
+    app.getSpaceship().getCrew().removePlayerByConnection(client);
   }
 }

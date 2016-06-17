@@ -16,6 +16,7 @@ import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Spaceship;
+import nl.tudelft.pixelperfect.player.PlayerCollection;
 
 /**
  * Test Suite for the ConnectListener class.
@@ -28,6 +29,7 @@ public class ConnectListenerTest {
 
   private Game mockedGame;
   private Spaceship mockedSpaceship;
+  private PlayerCollection mockedPlayerCollection;
   private ConnectListener object;
 
   /**
@@ -38,9 +40,11 @@ public class ConnectListenerTest {
     // Mock dependencies
     mockedGame = mock(Game.class);
     mockedSpaceship = mock(Spaceship.class);
+    mockedPlayerCollection = mock(PlayerCollection.class);
 
     // Stub dependencies
     when(mockedGame.getSpaceship()).thenReturn(mockedSpaceship);
+    when(mockedSpaceship.getCrew()).thenReturn(mockedPlayerCollection);
 
     // Set up test object.
     object = new ConnectListener();
@@ -73,8 +77,7 @@ public class ConnectListenerTest {
     object.connectionAdded(mockedServer, mockedClient);
 
     // Verification
-    verify(mockedSpaceship).updateCrew(connections);
-    verify(mockedServer).getConnections();
+    verify(mockedSpaceship).getCrew();
   }
 
   /**
@@ -95,8 +98,7 @@ public class ConnectListenerTest {
     object.connectionRemoved(mockedServer, mockedClient);
 
     // Verification
-    verify(mockedSpaceship).updateCrew(connections);
-    verify(mockedServer).getConnections();
+    verify(mockedSpaceship).getCrew();
   }
 
 }
