@@ -16,13 +16,17 @@
       		},
       		{
       			"value": 1,
-      			"description": "Engine Room"      		
+      			"description": "Engine Room"
       		},
       		{
       			"value": 2,
       			"description": "Air System"
       		}    	
       	]
+      },
+      {
+        "key": "water",
+        "summary": "The amount of water needed to fight the fire."
       }
     ]
   },

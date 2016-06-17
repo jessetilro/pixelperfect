@@ -18,15 +18,17 @@ import jmevr.util.VRGuiManager;
 import nl.tudelft.pixelperfect.audio.AudioPlayer;
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.ServerListener;
+import nl.tudelft.pixelperfect.client.message.DisconnectMessage;
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
-import nl.tudelft.pixelperfect.client.message.RepairMessage;
 import nl.tudelft.pixelperfect.client.message.NewGameMessage;
+import nl.tudelft.pixelperfect.client.message.RepairMessage;
 import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gamestates.GameState;
 import nl.tudelft.pixelperfect.gamestates.StartState;
 import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
+import nl.tudelft.pixelperfect.player.PlayerCollection;
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment. Suppressing
@@ -42,6 +44,7 @@ import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 public class Game extends VRApplication {
 
   private static Game appGame;
+  private PlayerCollection players;
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private static Server server;
@@ -53,6 +56,7 @@ public class Game extends VRApplication {
   private boolean rotateLeft;
   private boolean rotateRight;
   private boolean startKey;
+  private boolean resetKey;
   private boolean debugKeyOn;
   private boolean debugKeyOff;
 
@@ -112,9 +116,11 @@ public class Game extends VRApplication {
     scene = new Scene(this);
     scene.createMap();
     audioPlayer = new AudioPlayer(this);
+
     audioPlayer.loadSounds(Constants.AUDIO_EVENTS, Constants.AUDIO_PATH_NAMES);
 
     initNetwork();
+    players = new PlayerCollection();
     spaceship = new Spaceship();
     scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY_MIN,
         Constants.EVENT_SCHEDULER_INTENSITY_MAX);
@@ -122,8 +128,8 @@ public class Game extends VRApplication {
     scheduler.start();
     debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode,
         Constants.DEBUG_ELEMENTS_WIDTH_OFFSET, VRGuiManager.getCanvasSize().getY(), spaceship);
-    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode, VRGuiManager.getCanvasSize()
-        .getX(), VRGuiManager.getCanvasSize().getY(), spaceship);
+    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode,
+        VRGuiManager.getCanvasSize().getX(), VRGuiManager.getCanvasSize().getY(), spaceship);
 
     gameState = new StartState(this);
   }
@@ -138,6 +144,7 @@ public class Game extends VRApplication {
       Serializer.registerClass(RoleChosenMessage.class);
       Serializer.registerClass(RepairMessage.class);
       Serializer.registerClass(NewGameMessage.class);
+      Serializer.registerClass(DisconnectMessage.class);
       server.start();
       ServerListener listen = new ServerListener();
       listen.setGame(this);
@@ -146,6 +153,7 @@ public class Game extends VRApplication {
       server.addMessageListener(listen, RoleChosenMessage.class);
       server.addMessageListener(listen, RepairMessage.class);
       server.addMessageListener(listen, NewGameMessage.class);
+      server.addMessageListener(listen, DisconnectMessage.class);
       ConnectListener connect = new ConnectListener();
       connect.setGame(this);
       server.addConnectionListener(connect);
@@ -162,14 +170,24 @@ public class Game extends VRApplication {
   }
 
   /**
+   * Really bad way to implement this, will be refactored, but this method resets the game by
+   * sending all connected clients a message telling them to disconnect.
+   */
+  public static void resetGame() {
+    System.out.println("The game was reset, notifying clients.");
+    server.broadcast(new DisconnectMessage());
+  }
+
+  /**
    * Initiate input for the game.
    */
   @SuppressWarnings({ "checkstyle:methodlength", "PMD" })
   private void initInputs() {
     InputManager inputManager = getInputManager();
     int[] keyTriggers = { KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A, KeyInput.KEY_D,
-        KeyInput.KEY_P, KeyInput.KEY_0, KeyInput.KEY_1 };
-    String[] mappings = { "forward", "back", "left", "right", "start", "debugOn", "debugOff" };
+        KeyInput.KEY_P, KeyInput.KEY_R, KeyInput.KEY_0, KeyInput.KEY_1 };
+    String[] mappings = { "forward", "back", "left", "right", "start", "reset", "debugOn",
+        "debugOff" };
     for (int i = 0; i < keyTriggers.length; i++) {
       inputManager.addMapping(mappings[i], new KeyTrigger(keyTriggers[i]));
     }
@@ -185,6 +203,8 @@ public class Game extends VRApplication {
           rotateRight = keyPressed;
         } else if (name.equals("start")) {
           startKey = keyPressed;
+        } else if (name.equals("reset")) {
+          resetKey = keyPressed;
         } else if (name.equals("debugOn")) {
           debugKeyOn = keyPressed;
         } else if (name.equals("debugOff")) {
@@ -267,6 +287,15 @@ public class Game extends VRApplication {
    */
   public boolean isStartKey() {
     return startKey;
+  }
+
+  /**
+   * Check whether the game was reset.
+   * 
+   * @return Whether the game was reset.
+   */
+  public boolean isReset() {
+    return resetKey;
   }
 
   /**
