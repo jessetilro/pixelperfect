@@ -1,5 +1,7 @@
 package nl.tudelft.pixelperfect.player;
 
+import com.jme3.network.HostedConnection;
+
 /**
  * A player who is fulfilling of a crew member, interacting with the system remotely over a network
  * interface.
@@ -12,11 +14,11 @@ public class CrewPlayer extends Player {
   /**
    * Construct a new CrewPlayer instance.
    * 
-   * @param name
-   *          The player's name.
+   * @param connection
+   *          The connection to the player.
    */
-  public CrewPlayer(String name) {
-    super(name);
+  public CrewPlayer(HostedConnection connection) {
+    super(connection);
   }
 
   /**
@@ -31,7 +33,7 @@ public class CrewPlayer extends Player {
   public boolean equals(Object that) {
     if (that instanceof CrewPlayer) {
       CrewPlayer other = (CrewPlayer) that;
-      return (other.getName().equals(this.getName()));
+      return getConnection().equals(other.getConnection());
     }
     return false;
   }

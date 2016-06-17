@@ -5,23 +5,17 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jme3.network.HostedConnection;
-
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import nl.tudelft.pixelperfect.event.EventListener;
 import nl.tudelft.pixelperfect.event.EventLog;
+import nl.tudelft.pixelperfect.game.Route;
 import nl.tudelft.pixelperfect.game.Spaceship;
-import nl.tudelft.pixelperfect.player.Player;
-import nl.tudelft.pixelperfect.route.Route;
 
 /**
  * Test Suite for the Spaceship class.
@@ -50,6 +44,15 @@ public class SpaceshipTest {
   public void testGetScore() {
     assertEquals(0, ship.getScore());
   }
+  
+  /**
+   * Tests the UpdateHealth method if health is over 100.
+   */
+  @Test
+  public void testUpdateMax() {
+    ship.updateHealth(130);
+    assertEquals(100, ship.getHealth(), 0.0);
+  }
 
   /**
    * Updates the score to a positive value and verifies it.
@@ -60,7 +63,7 @@ public class SpaceshipTest {
 
     assertEquals(25, ship.getScore());
   }
-  
+
   /**
    * Updates the score to a negative value and verifies it.
    * 
@@ -68,7 +71,7 @@ public class SpaceshipTest {
   @Test
   public void testChangeScoreNegative() {
     ship.updateScore(-50);
-    
+
     assertEquals(-50, ship.getScore());
   }
 
@@ -182,47 +185,5 @@ public class SpaceshipTest {
 
     ship.update(1);
     verify(mockedLog).update();
-  }
-
-  /**
-   * When the crew is updated, the identifiers of the HostedConnections should be used for the
-   * players' names.
-   */
-  @Test
-  public void testUpdateCrewNewConnection() {
-    // Mock connections.
-    HostedConnection mockedHc = mock(HostedConnection.class);
-    when(mockedHc.getId()).thenReturn(42);
-    ArrayList<HostedConnection> clients = new ArrayList<HostedConnection>();
-    clients.add(mockedHc);
-
-    // Execute
-    ship.updateCrew(clients);
-
-    verify(mockedHc).getId();
-    assertEquals(1, ship.getCrew().size());
-  }
-
-  /**
-   * When the crew is already up-to-date with the connections, it is not altered.
-   */
-  @Test
-  public void testUpdateCrewNoChanges() {
-    // Mock connections.
-    HostedConnection mockedHc = mock(HostedConnection.class);
-    when(mockedHc.getId()).thenReturn(42);
-    ArrayList<HostedConnection> clients = new ArrayList<HostedConnection>();
-    clients.add(mockedHc);
-
-    // Execute first time
-    ship.updateCrew(clients);
-    ArrayList<Player> crewFirst = ship.getCrew();
-
-    // Execute second time
-    ship.updateCrew(clients);
-    ArrayList<Player> crewSecond = ship.getCrew();
-
-    verify(mockedHc, times(2)).getId();
-    assertEquals(crewFirst, crewSecond);
   }
 }

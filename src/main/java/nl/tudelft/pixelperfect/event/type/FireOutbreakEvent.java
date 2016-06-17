@@ -1,8 +1,5 @@
 package nl.tudelft.pixelperfect.event.type;
 
-import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
-import com.jme3.scene.Geometry;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Scene;
@@ -10,6 +7,7 @@ import nl.tudelft.pixelperfect.game.Scene;
 /**
  * A type of Event, imposing the problem of a fire outbreak.
  * 
+ * @author David Alderliesten
  * @author Wouter Zirkzee
  * 
  */
@@ -41,24 +39,24 @@ public class FireOutbreakEvent extends Event {
     return EventTypes.FIRE_OUTBREAK;
   }
 
-  private boolean notifiedFlag = false;
+  @Override
+  public void onComplete(Game game) {
+  }
+
   @Override
   public void notification(Game game, Scene scene) {
-    Material buttonMat = new Material(game.getAssetManager(), "jmevr/shaders/Unshaded.j3md");
-    //TODO use parameterized version when fire actually has parameters
-//    Geometry button = scene.getFireEventObjects().get(
-//        getParameters().get("approach").getNumberValue());
-    Geometry button = scene.getFireEventObjects().get(0);
-    if ((((int) game.getSpaceship().getTimer() % 2) == 0)
-        && !isExpired(System.currentTimeMillis() + 2000)) {
-      buttonMat.setColor("Color", ColorRGBA.Yellow);
-    } else {
-      buttonMat.setColor("Color", ColorRGBA.Red);
-    }
-    button.setMaterial(buttonMat);
-    if (!notifiedFlag) {
-      notifiedFlag = true;
+    if (!getNotifiedFlag()) {
+      String locParam = getParameters().get("location").getValueDescription();
+      String waterParam = getParameters().get("water").getValueDescription();
+
+      StringBuilder sb = new StringBuilder();
+      sb.append("FIRE WARNING: Location ").append(locParam).append("\nLiters Needed: ")
+          .append(waterParam);
+      scene.getFireEventLabel().setText(sb.toString());
+
       game.getAudioPlayer().playSound("FireEvent", false);
+      setNotifiedFlag(true);
     }
   }
+
 }

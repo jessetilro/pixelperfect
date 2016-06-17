@@ -11,12 +11,15 @@ import com.jme3.network.MessageListener;
 import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
+import nl.tudelft.pixelperfect.client.message.NewGameMessage;
 import nl.tudelft.pixelperfect.client.message.RepairMessage;
 import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.game.Game;
-import nl.tudelft.pixelperfect.game.Roles;
+import nl.tudelft.pixelperfect.player.Player;
+import nl.tudelft.pixelperfect.player.PlayerCollection;
+import nl.tudelft.pixelperfect.player.PlayerRoles;
 
 /**
  * Listener for the Game's server, which handles incoming messages.
@@ -30,7 +33,6 @@ public class ServerListener implements MessageListener<HostedConnection> {
 
   private Game app;
   private Server server;
-  private ArrayList<Roles> roles = new ArrayList<Roles>();
 
   /**
    * Sets the game whose server to listen for.
@@ -38,17 +40,8 @@ public class ServerListener implements MessageListener<HostedConnection> {
    * @param game
    *          The game.
    */
-  public void setGame(Game game) {
+  public synchronized void setGame(Game game) {
     app = game;
-  }
-
-  /**
-   * Returns the game for reference purposes.
-   * 
-   * @return The game.
-   */
-  public Game getGame() {
-    return app;
   }
 
   /**
@@ -75,26 +68,95 @@ public class ServerListener implements MessageListener<HostedConnection> {
       EventCompletedMessage completedMessage = (EventCompletedMessage) message;
       processEventCompletedMessage(completedMessage);
     } else if (message instanceof RoleChosenMessage) {
-      RoleChosenMessage retrieved = (RoleChosenMessage) message;
-      if (retrieved.isEmpty()) {
-        for (Roles role : roles) {
-          server.broadcast(Filters.equalTo(source), new RoleChosenMessage("initial roles chosen",
-              role));
-        }
-      } else {
-        roles.add(retrieved.getRole());
-        server.broadcast(Filters.notEqualTo(source), message);
-      }
+      RoleChosenMessage roleChosen = (RoleChosenMessage) message;
+      processRoleChosen(source, roleChosen);
     } else if (message instanceof RepairMessage) {
       RepairMessage repairMessage = (RepairMessage) message;
       processRepairs(repairMessage);
+    } else if (message instanceof NewGameMessage) {
+      NewGameMessage newGameMessage = (NewGameMessage) message;
+      processNewGame(source, newGameMessage);
     }
   }
-  
+
   /**
-   * Process a recieved RepairMessage.
+   * Process a role chosen message.
    * 
-   * @param message , The received RepairMessage.
+   * @param source
+   *              The client that sent the message.
+   * 
+   * @param message
+   *              The message received.
+   */
+  public synchronized void processRoleChosen(HostedConnection source, RoleChosenMessage message) {
+    if (message.isAllocated()) {
+      processRoleChosenFree(source, message);
+    } else {
+      processRoleChosenAssign(source, message);
+    }
+  }
+
+  /**
+   * The received RoleChosenMessage has as purpose to communicate the intent of claiming a player
+   * role.
+   * 
+   * @param source
+   *          The connection source.
+   * @param message
+   *          The RoleChosenMessage.
+   */
+  public synchronized void processRoleChosenAssign(HostedConnection source,
+      RoleChosenMessage message) {
+    PlayerRoles role = message.getRole();
+    PlayerCollection crew = app.getSpaceship().getCrew();
+    if (crew.hasPlayerWithRole(role)) {
+      server.broadcast(Filters.equalTo(source), new RoleChosenMessage(role, false));
+      System.out.println("Role " + role.toString() + " requested, denied.");
+    } else {
+      crew.getPlayerByConnection(source).assignRole(role);
+      server.broadcast(Filters.equalTo(source), new RoleChosenMessage(role, true));
+      System.out.println("Role " + role.toString() + " requested, granted.");
+    }
+  }
+
+  /**
+   * The received RoleChosenMessage has as purpose to communicate the act of freeing a role, making
+   * it available to other players again.
+   * 
+   * @param source
+   *          The connection source.
+   * @param message
+   *          The RoleChosenMessage.
+   */
+  public synchronized void processRoleChosenFree(HostedConnection source,
+      RoleChosenMessage message) {
+    Player player = app.getSpaceship().getCrew().getPlayerByConnection(source);
+    PlayerRoles role = player.getRole();
+    if (role != null) {
+      player.assignRole(null);
+      System.out.println("Role " + role.toString() + " was made available again.");
+    }
+  }
+
+  /**
+   * Process the request for an update on whether the game is already in progress.
+   * 
+   * @param source
+   *          The connection requesting the update.
+   * @param message
+   *          The message send as request.
+   */
+  public synchronized void processNewGame(HostedConnection source, NewGameMessage message) {
+    if (app.getState().isRunning()) {
+      server.broadcast(Filters.equalTo(source), new NewGameMessage());
+    }
+  }
+
+  /**
+   * Process a received RepairMessage.
+   * 
+   * @param message
+   *          The received RepairMessage.
    */
   public synchronized void processRepairs(RepairMessage message) {
     System.out.println("Activating repairs.");
@@ -111,13 +173,13 @@ public class ServerListener implements MessageListener<HostedConnection> {
     EventTypes type = getType(message);
     Collection<EventParameter> parameters = getParameters(message);
     System.out.println("Received a completed event: " + type.toString());
-    app.getSpaceship().getLog().complete(type, parameters);
+    app.getSpaceship().getLog().complete(type, parameters, app);
   }
 
   /**
    * Convert type attribute of message from serializable to more abstract.
    * 
-   * @param The
+   * @param message
    *          message to extract the attribute from.
    * 
    * @return An Event Type.

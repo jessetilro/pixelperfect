@@ -1,23 +1,13 @@
 package nl.tudelft.pixelperfect.client;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import java.util.HashMap;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import com.jme3.network.AbstractMessage;
-import com.jme3.network.Filter;
 import com.jme3.network.HostedConnection;
-import com.jme3.network.Message;
 import com.jme3.network.Server;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -27,6 +17,14 @@ import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.EventLog;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Spaceship;
+import nl.tudelft.pixelperfect.player.PlayerCollection;
+import nl.tudelft.pixelperfect.player.PlayerRoles;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.HashMap;
+
+
 
 /**
  * Test Suite for the ServerListener class.
@@ -41,6 +39,7 @@ public class ServerListenerTest {
   private ServerListener object;
   private HostedConnection mockedSource;
   private Server mockServer;
+  private ConnectListener listen;
 
   /**
    * Set up mocked dependencies, stubs and the test object.
@@ -55,16 +54,9 @@ public class ServerListenerTest {
     object.setGame(mockedGame);
     object.setServer(mockServer);
     mockedSource = mock(HostedConnection.class);
+    listen = new ConnectListener();
+    listen.setGame(mockedGame);
   }
-
-  /**
-   * When calling getGame we expect the Game that we have set earlier using setGame.
-   */
-  @Test
-  public void testGetGame() {
-    assertEquals(mockedGame, object.getGame());
-  }
-  
 
   /**
    * When the ServerListener receives a Message, it should do something with its contents.
@@ -103,6 +95,43 @@ public class ServerListenerTest {
   }
   
   /**
+   * Tests what the listenert does if it receives a RoleChosenMessage.
+   * The crew does not have the requested role.
+   * 
+   */
+  @Test
+  public void testRoleChosenNoParam() {
+    RoleChosenMessage mockedMessage = mock(RoleChosenMessage.class);
+    Spaceship mockedShip = mock(Spaceship.class);
+    PlayerCollection crew = new PlayerCollection();
+    when(mockedMessage.getRole()).thenReturn(PlayerRoles.ENGINEER);
+    when(mockedGame.getSpaceship()).thenReturn(mockedShip);
+    when(mockedShip.getCrew()).thenReturn(crew);
+    listen.connectionAdded(mockServer, mockedSource);
+    object.messageReceived(mockedSource, mockedMessage);
+  }
+  
+  /**
+   * Tests what the listenert does if it receives a RoleChosenMessage.
+   * The crew has already the requested role.
+   * 
+   */
+  @Test
+  public void testRoleChosen() {
+    RoleChosenMessage mockedMessage = mock(RoleChosenMessage.class);
+    Spaceship mockedShip = mock(Spaceship.class);
+    PlayerCollection crew = new PlayerCollection();
+    when(mockedMessage.getRole()).thenReturn(PlayerRoles.ENGINEER);
+    when(mockedGame.getSpaceship()).thenReturn(mockedShip);
+    when(mockedShip.getCrew()).thenReturn(crew);
+    listen.connectionAdded(mockServer, mockedSource);
+    HostedConnection mockHost2 = mock(HostedConnection.class);
+    listen.connectionAdded(mockServer, mockHost2);
+    crew.getPlayerByConnection(mockHost2).assignRole(PlayerRoles.ENGINEER);
+    object.messageReceived(mockedSource, mockedMessage);
+  }
+
+  /**
    * Tests what the Listener does if an event with parameters is sent.
    * 
    */
@@ -111,62 +140,22 @@ public class ServerListenerTest {
   public void testEventCompletedParameters() {
     Spaceship mockedShip = mock(Spaceship.class);
     final EventLog mockedLog = mock(EventLog.class);
-    
+
     final HostedConnection mockedSource = mock(HostedConnection.class);
     EventCompletedMessage message = new EventCompletedMessage(2);
     HashMap<String, Integer> map = new HashMap<String, Integer>();
     map.put("test", 42);
     message.setParameters(map);
-    
+
     when(mockedGame.getSpaceship()).thenReturn(mockedShip);
     when(mockedShip.getLog()).thenReturn(mockedLog);
-    
+
     object.messageReceived(mockedSource, message);
-    
+
   }
 
   /**
-   * When the Server recieves a RoleChosenMessage, it should send it to other clients.
-   * 
-   */
-  @SuppressWarnings("unchecked")
-  @Test
-  public void testRoleChosenMessage() {
-    RoleChosenMessage message = mock(RoleChosenMessage.class);
-    object.messageReceived(mockedSource, message);
-    verify(mockServer).broadcast((Filter<? super HostedConnection>) anyObject(),
-        (Message) anyObject());
-  }
-  
-  /**
-   * Tests what would happen if an empty RoleChosenMessage is recieved.
-   * 
-   */
-  @SuppressWarnings("unchecked")
-  @Test
-  public void testRoleChosenMessageEmpty() {
-    RoleChosenMessage message = new RoleChosenMessage();
-    object.messageReceived(mockedSource, message);
-    verifyNoMoreInteractions(mockServer);
-  }
-  
-  /**
-   * Testing what would happen if there is an empty RoleChosenMessage following a filled one.
-   * 
-   */
-  @SuppressWarnings("unchecked")
-  @Test
-  public void testTwoRoleChosenMessages() {
-    RoleChosenMessage message = new RoleChosenMessage();
-    RoleChosenMessage first = mock(RoleChosenMessage.class);
-    object.messageReceived(mockedSource, first);
-    object.messageReceived(mockedSource, message);
-    verify(mockServer, times(2)).broadcast((Filter<? super HostedConnection>) anyObject(),
-        (Message) anyObject());
-  }
-  
-  /**
-   * When the Server recieves a RepairMessage, it should update the ship's health.
+   * When the Server receives a RepairMessage, it should update the ship's health.
    * 
    */
   @Test

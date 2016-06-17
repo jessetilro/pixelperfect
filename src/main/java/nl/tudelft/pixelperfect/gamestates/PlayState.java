@@ -1,10 +1,11 @@
 package nl.tudelft.pixelperfect.gamestates;
 
 import com.jme3.scene.Spatial;
-import jmevr.app.VRApplication;
 
+import jmevr.app.VRApplication;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventScheduler;
+import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Settings;
 import nl.tudelft.pixelperfect.game.Spaceship;
@@ -53,7 +54,7 @@ public class PlayState extends GameState {
 
     scheduler.update(tpf);
     spaceship.update(tpf);
-    
+
     // Refresh the game HUD.
     gameDisplay.updateHud();
 
@@ -64,8 +65,13 @@ public class PlayState extends GameState {
       debugDisplay.clearHud();
     }
 
-    for (Event event: spaceship.getLog().getEvents()) {
-      event.notification(game, game.getScene());
+    for (EventTypes eventType : EventTypes.values()) {
+      Event event = spaceship.getLog().getFirst(eventType);
+      if (event != null) {
+        event.notification(game, game.getScene());
+      } else {
+        eventType.resetNotification(game);
+      }
     }
   }
 
@@ -101,11 +107,20 @@ public class PlayState extends GameState {
    * @return new state.
    */
   public GameState handleState() {
+    if (game.isReset()) {
+      Game.resetGame();
+      return new StartState(game);
+    }
     if (spaceship.isVictorious()) {
       return new WonState(game);
     } else if (spaceship.isDead()) {
       return new LostState(game);
     }
     return this;
+  }
+
+  @Override
+  public boolean isRunning() {
+    return true;
   }
 }

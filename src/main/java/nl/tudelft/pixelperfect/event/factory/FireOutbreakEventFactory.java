@@ -2,6 +2,7 @@ package nl.tudelft.pixelperfect.event.factory;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventReader;
@@ -12,11 +13,12 @@ import nl.tudelft.pixelperfect.event.type.FireOutbreakEvent;
 /**
  * Factory for FireOutbreakEvents.
  * 
+ * @author David Alderliesten
  * @author Jesse Tilro
  *
  */
 public class FireOutbreakEventFactory extends EventFactory {
-  
+
   @Override
   public EventTypes getType() {
     return EventTypes.FIRE_OUTBREAK;
@@ -33,7 +35,10 @@ public class FireOutbreakEventFactory extends EventFactory {
 
   @Override
   public Collection<EventParameter> createParameters() {
+    Random random = new Random();
     Collection<EventParameter> collection = new ArrayList<EventParameter>();
+    collection.add(new EventParameter("location", random.nextInt(3)));
+    collection.add(new EventParameter("water", 1 + random.nextInt(99)));
     return collection;
   }
 

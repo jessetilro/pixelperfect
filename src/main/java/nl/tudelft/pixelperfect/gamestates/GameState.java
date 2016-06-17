@@ -9,14 +9,14 @@ import nl.tudelft.pixelperfect.game.Game;
  */
 public abstract class GameState {
 
-  @SuppressWarnings({"visibilitymodifier"})
+  @SuppressWarnings({ "visibilitymodifier" })
   protected Game game;
 
   /**
    * Constructor for GameState.
    *
    * @param game
-   *            Game for which it controlls the state.
+   *          Game for which it controlls the state.
    */
   public GameState(Game game) {
     this.game = game;
@@ -36,4 +36,11 @@ public abstract class GameState {
    * @return the new gamestate.
    */
   public abstract GameState handleState();
+
+  /**
+   * Tells whether an active game session is in process based on which state the game is in.
+   * 
+   * @return Whether an active game session is in progress.
+   */
+  public abstract boolean isRunning();
 }

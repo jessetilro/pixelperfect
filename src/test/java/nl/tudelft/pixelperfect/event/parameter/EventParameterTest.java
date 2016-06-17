@@ -5,7 +5,6 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +21,6 @@ import org.junit.Test;
 public class EventParameterTest {
 
   private EventParameter object;
-  private EventParameter objectGeneric;
   private String key;
 
   /**
@@ -31,18 +29,7 @@ public class EventParameterTest {
   @Before
   public void setUp() {
     key = "test";
-    object = new EventParameter(key, EventParameterValues.HOSTILE_SHIP_ARMOR_ENERGY_SHIELD);
-    objectGeneric = new EventParameter(key, 42);
-  }
-
-  /**
-   * The isGeneric method should tell the truth, i.e. whether the parameter has a discrete value
-   * assigned.
-   */
-  @Test
-  public void testIsGeneric() {
-    assertTrue(objectGeneric.isGeneric());
-    assertFalse(object.isGeneric());
+    object = new EventParameter(key, 42);
   }
 
   /**
@@ -51,7 +38,15 @@ public class EventParameterTest {
   @Test
   public void testGetKey() {
     assertEquals(key, object.getKey());
-    assertEquals(key, objectGeneric.getKey());
+  }
+  
+  /**
+   * The getKey method should return the right key.
+   */
+  @Test
+  public void testSetValue() {
+    object.setValueDescription("hello");
+    assertEquals("hello", object.getValueDescription());
   }
 
   /**
@@ -68,25 +63,7 @@ public class EventParameterTest {
   @Test
   public void testEqualsSameNumber() {
     EventParameter other = new EventParameter(key, 42);
-    assertEquals(objectGeneric, other);
-  }
-
-  /**
-   * Two parameters with the same key and value should be considered equal.
-   */
-  @Test
-  public void testEqualsSameValue() {
-    EventParameter other = new EventParameter(key,
-        EventParameterValues.HOSTILE_SHIP_ARMOR_ENERGY_SHIELD);
     assertEquals(object, other);
-  }
-
-  /**
-   * A generic and a not generic instance with the same key should not be considered equal.
-   */
-  @Test
-  public void testEqualsGenericAndNotGeneric() {
-    assertThat(object, not(equalTo(objectGeneric)));
   }
 
   /**
@@ -94,8 +71,7 @@ public class EventParameterTest {
    */
   @Test
   public void testEqualsDifferentKeys() {
-    EventParameter other = new EventParameter("different",
-        EventParameterValues.HOSTILE_SHIP_ARMOR_ENERGY_SHIELD);
+    EventParameter other = new EventParameter("different", 42);
     assertThat(object, not(equalTo(other)));
   }
 
@@ -104,17 +80,7 @@ public class EventParameterTest {
    */
   @Test
   public void testEqualsDifferentValues() {
-    EventParameter other = new EventParameter(key,
-        EventParameterValues.HOSTILE_SHIP_ARMOR_TITANIUM);
-    assertThat(object, not(equalTo(other)));
-  }
-
-  /**
-   * Two parameters with different numbers should not be considered equal.
-   */
-  @Test
-  public void testEqualsDifferentNumbers() {
-    EventParameter other = new EventParameter(key, 41);
+    EventParameter other = new EventParameter(key, 43);
     assertThat(object, not(equalTo(other)));
   }
 
@@ -139,7 +105,8 @@ public class EventParameterTest {
    */
   @Test
   public void testHashCodeDifferent() {
-    assertThat(object.hashCode(), not(equalTo(objectGeneric.hashCode())));
+    EventParameter other = new EventParameter(key, 43);
+    assertThat(object.hashCode(), not(equalTo(other.hashCode())));
   }
 
   /**
@@ -147,22 +114,17 @@ public class EventParameterTest {
    */
   @Test
   public void testHashCodeSame() {
-    EventParameter other = new EventParameter(key,
-        EventParameterValues.HOSTILE_SHIP_ARMOR_ENERGY_SHIELD);
+    EventParameter other = new EventParameter(key, 42);
     assertThat(object.hashCode(), equalTo(other.hashCode()));
   }
 
   /**
-   * The toString method should generate a correct String representation of a generic
-   * EventParameter.
+   * A generic parameter and a normal cannot have the same values.
    */
   @Test
-  public void testToStringGeneric() {
-    objectGeneric
-        .setSummary("The Answer to the Ultimate Question of Life, the Universe, and Everything");
-    String expected = "The Answer to the Ultimate Question of Life,"
-        + " the Universe, and Everything is Number 42";
-    assertEquals(expected, objectGeneric.toString());
+  public void testDifferentValues() {
+    EventParameter other = new EventParameter(key, 43);
+    assertThat(object.getValue(), not(equalTo(other.getValue())));
   }
 
   /**
@@ -170,9 +132,9 @@ public class EventParameterTest {
    * EventParameter.
    */
   @Test
-  public void testToStringSpecific() {
+  public void testToString() {
     object.setSummary("The thing that keeps you safe");
-    String expected = "The thing that keeps you safe is Energy Shield";
+    String expected = "The thing that keeps you safe is 42";
     assertEquals(expected, object.toString());
   }
 

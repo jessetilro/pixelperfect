@@ -86,13 +86,13 @@ public class DebugHeadsUpDisplay {
 
     // Init for the log text, including font loading and text setting.
     captainLog = new BitmapText(hudFont, true);
-    captainLog.setLocalTranslation(screenWidth, screenHeight - Constants.DEBUG_LOG_HEIGHT_OFFSET,
-        0);
+    captainLog
+        .setLocalTranslation(screenWidth, screenHeight - Constants.DEBUG_LOG_HEIGHT_OFFSET, 0);
 
     // Init for the HUD text, including font loading and text setting.
     shipHealth = new BitmapText(hudFont, true);
-    shipHealth.setLocalTranslation(screenWidth, screenHeight - Constants.DEBUG_HEALTH_HEIGHT_OFFSET,
-        0);
+    shipHealth.setLocalTranslation(screenWidth,
+        screenHeight - Constants.DEBUG_HEALTH_HEIGHT_OFFSET, 0);
 
     teamScore = new BitmapText(hudFont, true);
     teamScore.setLocalTranslation(screenWidth, screenHeight - Constants.DEBUG_SCORE_HEIGHT_OFFSET,
@@ -102,8 +102,8 @@ public class DebugHeadsUpDisplay {
     timeLeft.setLocalTranslation(screenWidth, screenHeight - Constants.DEBUG_TIME_HEIGHT_OFFSET, 0);
 
     playersConnected = new BitmapText(hudFont, true);
-    playersConnected.setLocalTranslation(screenWidth,
-        screenHeight - Constants.DEBUG_CONNECTED_HEIGHT_OFFSET, 0);
+    playersConnected.setLocalTranslation(screenWidth, screenHeight
+        - Constants.DEBUG_CONNECTED_HEIGHT_OFFSET, 0);
 
     localAddress = new BitmapText(hudFont, true);
     localAddress.setLocalTranslation(screenWidth, screenHeight - Constants.DEBUG_IP_HEIGHT_OFFSET,
@@ -114,28 +114,29 @@ public class DebugHeadsUpDisplay {
    * Method responsible for the updating of the debug hud text and displaying the events, along with
    * their remaining time and health, and other HUD elements.
    */
+  @SuppressWarnings("PMD")
   public void updateHud() {
     ArrayList<Event> currentEvents = spaceship.getLog().getEvents();
     ArrayList<String> currentEventsToDisplay = new ArrayList<String>();
-
+    
     // Fetch all event times for updates and display.
     for (Event current : currentEvents) {
       currentEventsToDisplay.add(current.toDebugString());
     }
-
+    
     // Update the captain's log.
     if (currentEventsToDisplay.isEmpty()) {
       captainLog.setText(Constants.DEBUG_NO_EVENTS_LOG_TEXT);
     } else {
-      captainLog.setText(currentEventsToDisplay.toString());
+      @SuppressWarnings("PMD")
+      StringBuilder toShow = new StringBuilder();
+      // Adding spacing between the lines.
+      for (String current : currentEventsToDisplay) {
+        toShow.append(current).append("\n");
+      }
+      captainLog.setText(toShow.toString());
     }
-
-    // Update the ship's health, team score, connected players, and time left indicators.
-    shipHealth.setText(Constants.DEBUG_SHIP_HEALTH_LABEL + spaceship.getHealth());
-    teamScore.setText(Constants.DEBUG_SHIP_SCORE_LABEL + spaceship.getScore());
-    timeLeft.setText(Constants.DEBUG_SHIP_TIME_LABEL + spaceship.getTimer());
-    playersConnected.setText(Constants.DEBUG_CONNECTED_LABEL + spaceship.getCrew().size());
-
+    setTextHud();
     // Printing the server local IP address.
     try {
       localAddress.setText(Constants.DEBUG_IP_LABEL + InetAddress.getLocalHost());
@@ -143,6 +144,18 @@ public class DebugHeadsUpDisplay {
       // Printing the IP error if it occurs.
       System.out.println(error);
     }
+  }
+
+  /**
+   * A sub method for the updateHud method, which sets the debug text.
+   */
+  public void setTextHud() {
+    // Update the ship's health, team score, connected players, and time
+    // left indicators.
+    shipHealth.setText(Constants.DEBUG_SHIP_HEALTH_LABEL + spaceship.getHealth());
+    teamScore.setText(Constants.DEBUG_SHIP_SCORE_LABEL + spaceship.getScore());
+    timeLeft.setText(Constants.DEBUG_SHIP_TIME_LABEL + spaceship.getTimer());
+    playersConnected.setText(Constants.DEBUG_CONNECTED_LABEL + spaceship.getCrew().size());
   }
 
   /**

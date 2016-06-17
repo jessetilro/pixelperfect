@@ -25,6 +25,7 @@ public abstract class Event {
   private long duration;
   private double damage;
   private EventParameterCollection parameters;
+  private boolean notifiedFlag = false;
 
   /**
    * Constructor for the event class, taking parameters for the type of event, a summary of the
@@ -45,7 +46,7 @@ public abstract class Event {
    *          The damage done to the ship on even failure.
    */
   public Event(int id, String summary, String description, long timestamp, long duration,
-               double damage) {
+      double damage) {
     this.id = id;
     this.summary = summary;
     this.description = description;
@@ -53,6 +54,25 @@ public abstract class Event {
     this.duration = duration;
     this.damage = damage;
     this.parameters = new EventParameterCollection();
+  }
+
+  /**
+   * Get notifiedFlag.
+   * 
+   * @return True if event has already been notified to captain, false otherwise.
+   */
+  protected boolean getNotifiedFlag() {
+    return notifiedFlag;
+  }
+
+  /**
+   * Set the notified flag.
+   *
+   * @param notifiedFlag
+   *          Field that contains if the event has been notified.
+   */
+  protected void setNotifiedFlag(boolean notifiedFlag) {
+    this.notifiedFlag = notifiedFlag;
   }
 
   /**
@@ -204,7 +224,7 @@ public abstract class Event {
    * Allow events to render notifications to the players.
    *
    * @param game
-   *            The current game.
+   *          The current game.
    * @param scene
    *          The scene in which the notification must appear.
    */
@@ -218,4 +238,13 @@ public abstract class Event {
   public EventParameterCollection getParameters() {
     return parameters;
   }
+
+  /**
+   * Method responsible for handling event completion actions that are not related to game logic.
+   * 
+   * @param game
+   *          The current game.
+   */
+  public abstract void onComplete(Game game);
+
 }

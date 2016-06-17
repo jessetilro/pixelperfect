@@ -18,9 +18,10 @@ import jmevr.util.VRGuiManager;
 import nl.tudelft.pixelperfect.audio.AudioPlayer;
 import nl.tudelft.pixelperfect.client.ConnectListener;
 import nl.tudelft.pixelperfect.client.ServerListener;
+import nl.tudelft.pixelperfect.client.message.DisconnectMessage;
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
-import nl.tudelft.pixelperfect.client.message.RepairMessage;
 import nl.tudelft.pixelperfect.client.message.NewGameMessage;
+import nl.tudelft.pixelperfect.client.message.RepairMessage;
 import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gamestates.GameState;
@@ -37,7 +38,6 @@ import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
  * @author Dmitry Malarev
  * @author Jesse Tilro
  * @author Wouter Zirkzee
- *
  */
 @SuppressWarnings("PMD.TooManyFields")
 public class Game extends VRApplication {
@@ -54,6 +54,7 @@ public class Game extends VRApplication {
   private boolean rotateLeft;
   private boolean rotateRight;
   private boolean startKey;
+  private boolean resetKey;
   private boolean debugKeyOn;
   private boolean debugKeyOff;
 
@@ -82,18 +83,18 @@ public class Game extends VRApplication {
 
     // Render two eyes, regardless of SteamVR.
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.FORCE_VR_MODE, false);
-    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_CURVED_SURFACE, true);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_CURVED_SURFACE, false);
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.FLIP_EYES, false);
 
     // Show gui even if it is behind the current timing.
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_OVERDRAW, true);
 
     // Faster VR rendering, requires some vertex shader changes.
-    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.INSTANCE_VR_RENDERING, true);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.INSTANCE_VR_RENDERING, false);
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.NO_GUI, false);
 
     // Set frustum distances here before app starts.
-    appGame.preconfigureFrustrumNearFar(0.1f, 512f);
+    // appGame.preconfigureFrustrumNearFar(0.1f, 512f);
 
     appGame.start();
   }
@@ -104,7 +105,7 @@ public class Game extends VRApplication {
   @Override
   public void simpleInitApp() {
     observer = new Node("observer");
-    observer.setLocalTranslation(new Vector3f(0.0f, 5.0f, 4.0f));
+    observer.setLocalTranslation(new Vector3f(0.0f, 2.0f, 0.0f));
     VRApplication.setObserver(observer);
     rootNode.attachChild(observer);
 
@@ -113,10 +114,8 @@ public class Game extends VRApplication {
     scene = new Scene(this);
     scene.createMap();
     audioPlayer = new AudioPlayer(this);
-    String[] names = {"CoffeeEvent", "AsteroidEvent", "FireEvent", "HostileEvent", "PlasmaEvent"};
-    String[] locations = {"yawn.wav", "impact.wav", "fire_alarm.wav", "sonar_x.wav",
-        "bubbling1.wav"};
-    audioPlayer.loadSounds(names, locations);
+
+    audioPlayer.loadSounds(Constants.AUDIO_EVENTS, Constants.AUDIO_PATH_NAMES);
 
     initNetwork();
     spaceship = new Spaceship();
@@ -142,6 +141,7 @@ public class Game extends VRApplication {
       Serializer.registerClass(RoleChosenMessage.class);
       Serializer.registerClass(RepairMessage.class);
       Serializer.registerClass(NewGameMessage.class);
+      Serializer.registerClass(DisconnectMessage.class);
       server.start();
       ServerListener listen = new ServerListener();
       listen.setGame(this);
@@ -150,12 +150,22 @@ public class Game extends VRApplication {
       server.addMessageListener(listen, RoleChosenMessage.class);
       server.addMessageListener(listen, RepairMessage.class);
       server.addMessageListener(listen, NewGameMessage.class);
+      server.addMessageListener(listen, DisconnectMessage.class);
       ConnectListener connect = new ConnectListener();
       connect.setGame(this);
       server.addConnectionListener(connect);
     } catch (IOException except) {
       except.printStackTrace();
     }
+  }
+
+  /**
+   * Get the current game state.
+   * 
+   * @return The current game state.
+   */
+  public GameState getState() {
+    return gameState;
   }
 
   /**
@@ -166,19 +176,28 @@ public class Game extends VRApplication {
   }
 
   /**
+   * Really bad way to implement this, will be refactored, but this method resets the game by
+   * sending all connected clients a message telling them to disconnect.
+   */
+  public static void resetGame() {
+    System.out.println("The game was reset, notifying clients.");
+    server.broadcast(new DisconnectMessage());
+  }
+
+  /**
    * Initiate input for the game.
    */
   @SuppressWarnings({ "checkstyle:methodlength", "PMD" })
   private void initInputs() {
     InputManager inputManager = getInputManager();
     int[] keyTriggers = { KeyInput.KEY_W, KeyInput.KEY_S, KeyInput.KEY_A, KeyInput.KEY_D,
-        KeyInput.KEY_P, KeyInput.KEY_0, KeyInput.KEY_1 };
-    String[] mappings = { "forward", "back", "left", "right", "start", "debugOn", "debugOff" };
+        KeyInput.KEY_P, KeyInput.KEY_R, KeyInput.KEY_0, KeyInput.KEY_1 };
+    String[] mappings = { "forward", "back", "left", "right", "start", "reset", "debugOn",
+        "debugOff" };
     for (int i = 0; i < keyTriggers.length; i++) {
       inputManager.addMapping(mappings[i], new KeyTrigger(keyTriggers[i]));
     }
     ActionListener acl = new ActionListener() {
-
       public void onAction(String name, boolean keyPressed, float tpf) {
         if (name.equals("forward")) {
           moveForward = keyPressed;
@@ -190,6 +209,8 @@ public class Game extends VRApplication {
           rotateRight = keyPressed;
         } else if (name.equals("start")) {
           startKey = keyPressed;
+        } else if (name.equals("reset")) {
+          resetKey = keyPressed;
         } else if (name.equals("debugOn")) {
           debugKeyOn = keyPressed;
         } else if (name.equals("debugOff")) {
@@ -272,6 +293,15 @@ public class Game extends VRApplication {
    */
   public boolean isStartKey() {
     return startKey;
+  }
+
+  /**
+   * Check whether the game was reset.
+   * 
+   * @return Whether the game was reset.
+   */
+  public boolean isReset() {
+    return resetKey;
   }
 
   /**
@@ -386,7 +416,6 @@ public class Game extends VRApplication {
   public Scene getScene() {
     return scene;
   }
-
 
   /**
    * Returns the size of the x viewport for VR.

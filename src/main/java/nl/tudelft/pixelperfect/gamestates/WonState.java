@@ -36,9 +36,18 @@ public class WonState extends GameState {
    * @return new state.
    */
   public GameState handleState() {
+    if (game.isReset()) {
+      Game.resetGame();
+      return new StartState(game);
+    }
     if (game.isStartKey()) {
       return new StartState(game);
     }
     return this;
+  }
+
+  @Override
+  public boolean isRunning() {
+    return false;
   }
 }

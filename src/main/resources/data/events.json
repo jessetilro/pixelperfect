@@ -7,8 +7,26 @@
     "damage": 10,
     "parameters" : [
       {
-      "key": "approach",
-      "summary": "The approach required for fighting the fire"
+      	"key": "location",
+      	"summary": "The location of the fire.",
+      	"values": [
+      		{
+      			"value": 0,
+      			"description": "Deck"
+      		},
+      		{
+      			"value": 1,
+      			"description": "Engine Room"
+      		},
+      		{
+      			"value": 2,
+      			"description": "Air System"
+      		}    	
+      	]
+      },
+      {
+        "key": "water",
+        "summary": "The amount of water needed to fight the fire."
       }
     ]
   },
@@ -20,8 +38,26 @@
     "damage": 10,
     "parameters" : [
       {
-      "key": "sector",
-      "summary": "The sector of the ship that needs repairs"
+      	"key": "sector",
+      	"summary": "The sector of the ship that needs repairs",
+      	"values": [
+      		{
+      			"value": 0,
+      			"description": "Lab"
+      		},
+      		{
+      			"value": 1,
+      			"description": "Armory"      		
+      		},
+      		{
+      			"value": 2,
+      			"description": "Engine Room"
+      		},
+      		{
+      			"value": 3,
+      			"description": "Deck"      		
+      		}      	
+      	]
       }
     ]
   },
@@ -34,7 +70,17 @@
     "parameters": [
       {
       	"key": "locationDamageImpact",
-      	"summary": "The location where asteroids hit the ship."
+      	"summary": "The location where asteroids hit the ship.",
+      	"values": [
+            {
+                "value": 0,
+                "description": "Energy Shield"
+            },
+            {
+                "value": 1,
+                "description": "Hyperdrive Generator"
+            }
+        ]
       }
     ]
   },
@@ -55,7 +101,21 @@
       },
       {
         "key": "armor",
-        "summary": "Armor"
+        "summary": "Armor",
+        "values": [
+        	{
+        		"value": 0,
+        		"description": "Purple Energy Shield"
+        	},
+        	{
+        		"value": 1,
+        		"description": "Red Titanium Armor"
+        	},
+        	{
+        		"value": 2,
+        		"description": "Green Graphene Armor"
+        	}
+        ]
       }
 
     ]
