@@ -22,8 +22,7 @@ public class MainMenuDisplay {
   private float screenHeight;
 
   private BitmapFont menuFont;
-  private BitmapText startGameText;
-  private BitmapText exitGameText;
+  private BitmapText instructionText;
 
   /**
    * Constructor for the main menu display.
@@ -55,34 +54,20 @@ public class MainMenuDisplay {
     menuFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
 
     // Initializer for the start game button, including font loading, background, and text setting.
-    startGameText = new BitmapText(menuFont, true);
-    startGameText.setColor(ColorRGBA.White);
-    startGameText.setLocalScale(Constants.MAIN_MENU_TEXT_SCALING);
-    startGameText.setLocalTranslation(screenWidth / 2,
-        (screenHeight / 2) - Constants.MAIN_MENU_START_HEIGHT_OFFSET, 0);
-
-    // Initializer for the exit game button, including font loading, background, and text setting.
-    exitGameText = new BitmapText(menuFont, true);
-    exitGameText.setColor(ColorRGBA.White);
-    exitGameText.setLocalScale(Constants.MAIN_MENU_TEXT_SCALING);
-    exitGameText.setLocalTranslation(screenWidth / 2,
-        (screenHeight / 2) - Constants.MAIN_MENU_EXIT_HEIGHT_OFFSET, 0);
-
-    // Append the text required for the menu.
-    startGameText.setText(Constants.MAIN_MENU_START_BUTTON_TEXT);
-    exitGameText.setText(Constants.MAIN_MENU_EXIT_BUTTON_TEXT);
+    instructionText = new BitmapText(menuFont, true);
+    instructionText.setColor(ColorRGBA.White);
+    instructionText.setLocalScale(Constants.MAIN_MENU_TEXT_SCALING);
+    instructionText.setLocalTranslation(screenWidth / 2, (screenHeight / 2), 0);
 
     // Add the generated bitmaps to the GUI node view.
-    guiNodes.attachChild(startGameText);
-    guiNodes.attachChild(exitGameText);
+    guiNodes.attachChild(instructionText);
   }
 
   /**
    * Clears and removes the main menu elements.
    */
   public void clearMenu() {
-    guiNodes.detachChild(startGameText);
-    guiNodes.detachChild(exitGameText);
+    guiNodes.detachChild(instructionText);
   }
 
 }
