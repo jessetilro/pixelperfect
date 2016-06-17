@@ -1,11 +1,11 @@
 package nl.tudelft.pixelperfect.client;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyDouble;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
@@ -64,7 +64,6 @@ public class ServerListenerTest {
   public void testGetGame() {
     assertEquals(mockedGame, object.getGame());
   }
-  
 
   /**
    * When the ServerListener receives a Message, it should do something with its contents.
@@ -101,7 +100,7 @@ public class ServerListenerTest {
     // Verification
     verifyNoMoreInteractions(mockedMessage);
   }
-  
+
   /**
    * Tests what the Listener does if an event with parameters is sent.
    * 
@@ -111,18 +110,18 @@ public class ServerListenerTest {
   public void testEventCompletedParameters() {
     Spaceship mockedShip = mock(Spaceship.class);
     final EventLog mockedLog = mock(EventLog.class);
-    
+
     final HostedConnection mockedSource = mock(HostedConnection.class);
     EventCompletedMessage message = new EventCompletedMessage(2);
     HashMap<String, Integer> map = new HashMap<String, Integer>();
     map.put("test", 42);
     message.setParameters(map);
-    
+
     when(mockedGame.getSpaceship()).thenReturn(mockedShip);
     when(mockedShip.getLog()).thenReturn(mockedLog);
-    
+
     object.messageReceived(mockedSource, message);
-    
+
   }
 
   /**
@@ -135,9 +134,9 @@ public class ServerListenerTest {
     RoleChosenMessage message = mock(RoleChosenMessage.class);
     object.messageReceived(mockedSource, message);
     verify(mockServer).broadcast((Filter<? super HostedConnection>) anyObject(),
-        (Message) anyObject());
+        (AbstractMessage) anyObject());
   }
-  
+
   /**
    * Tests what would happen if an empty RoleChosenMessage is recieved.
    * 
@@ -149,7 +148,7 @@ public class ServerListenerTest {
     object.messageReceived(mockedSource, message);
     verifyNoMoreInteractions(mockServer);
   }
-  
+
   /**
    * Testing what would happen if there is an empty RoleChosenMessage following a filled one.
    * 
@@ -164,7 +163,7 @@ public class ServerListenerTest {
     verify(mockServer, times(2)).broadcast((Filter<? super HostedConnection>) anyObject(),
         (Message) anyObject());
   }
-  
+
   /**
    * When the Server recieves a RepairMessage, it should update the ship's health.
    * 
@@ -176,6 +175,6 @@ public class ServerListenerTest {
     RepairMessage message = mock(RepairMessage.class);
     object.messageReceived(mockedSource, message);
     verify(mockedShip).updateHealth(anyDouble());
-    
+
   }
 }

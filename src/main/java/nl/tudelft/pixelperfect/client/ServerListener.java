@@ -10,14 +10,14 @@ import com.jme3.network.Message;
 import com.jme3.network.MessageListener;
 import com.jme3.network.Server;
 
-import nl.tudelft.pixelperfect.client.message.DisconnectMessage;
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.message.RepairMessage;
 import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.game.Game;
-import nl.tudelft.pixelperfect.game.Roles;
+import nl.tudelft.pixelperfect.player.PlayerCollection;
+import nl.tudelft.pixelperfect.player.PlayerRoles;
 
 /**
  * Listener for the Game's server, which handles incoming messages.
@@ -31,7 +31,6 @@ public class ServerListener implements MessageListener<HostedConnection> {
 
   private Game app;
   private Server server;
-  private ArrayList<Roles> roles = new ArrayList<Roles>();
 
   /**
    * Sets the game whose server to listen for.
@@ -83,26 +82,28 @@ public class ServerListener implements MessageListener<HostedConnection> {
       processRepairs(repairMessage);
     }
   }
-  
+
   /**
    * Process a role chosen message.
    */
   public synchronized void processRoleChosen(HostedConnection source, RoleChosenMessage message) {
-    Roles roleChosen = message.getRole();
-    if (roles.contains(roleChosen)) {
-      server.broadcast(Filters.equalTo(source), new RoleChosenMessage(roleChosen, false));
-      System.out.println("Role " + roleChosen.toString() + " requested, denied.");
+    PlayerRoles role = message.getRole();
+    PlayerCollection crew = app.getSpaceship().getCrew();
+    if (crew.hasPlayerWithRole(role)) {
+      server.broadcast(Filters.equalTo(source), new RoleChosenMessage(role, false));
+      System.out.println("Role " + role.toString() + " requested, denied.");
     } else {
-      roles.add(roleChosen);
-      server.broadcast(Filters.equalTo(source), new RoleChosenMessage(roleChosen, true));
-      System.out.println("Role " + roleChosen.toString() + " requested, granted.");
+      crew.getPlayerByConnection(source).assignRole(role);
+      server.broadcast(Filters.equalTo(source), new RoleChosenMessage(role, true));
+      System.out.println("Role " + role.toString() + " requested, granted.");
     }
   }
-  
+
   /**
    * Process a recieved RepairMessage.
    * 
-   * @param message , The received RepairMessage.
+   * @param message
+   *          , The received RepairMessage.
    */
   public synchronized void processRepairs(RepairMessage message) {
     System.out.println("Activating repairs.");

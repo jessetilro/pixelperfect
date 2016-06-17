@@ -2,13 +2,13 @@ package nl.tudelft.pixelperfect.player;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
-
-import java.util.ArrayList;
+import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.jme3.network.HostedConnection;
 
 /**
  * Class for the automated testing of the Player class.
@@ -20,13 +20,18 @@ import org.junit.Test;
 public abstract class PlayerTest {
 
   private Player testObject;
+  private HostedConnection mockedConnection1;
+  private HostedConnection mockedConnection2;
 
   /**
    * Setting up the Player class as a test object.
    */
   @Before
   public void initialize() {
-    testObject = createPlayer("Lorem Ipsum");
+    mockedConnection1 = mock(HostedConnection.class);
+    mockedConnection2 = mock(HostedConnection.class);
+    testObject = createPlayer(mockedConnection1);
+    testObject.setName("Lorem Ipsum");
   }
 
   /**
@@ -36,7 +41,7 @@ public abstract class PlayerTest {
    *          , the name of the Player.
    * @return The object to be tested.
    */
-  public abstract Player createPlayer(String name);
+  public abstract Player createPlayer(HostedConnection connection);
 
   /**
    * When calling getName the correct player name must be returned.
@@ -47,30 +52,12 @@ public abstract class PlayerTest {
   }
 
   /**
-   * Two players with the same name should be considered equal.
+   * After assigning a role to a player, getting the role should yield that same role.
    */
   @Test
-  public void testEqualsTrue() {
-    Player otherTest = createPlayer("Lorem Ipsum");
-    assertEquals(testObject, otherTest);
-  }
-
-  /**
-   * Two players with a different name should not be considered equal.
-   */
-  @Test
-  public void testEqualsFalseName() {
-    Player otherTest = createPlayer("Foo Bar");
-    assertFalse(testObject.equals(otherTest));
-  }
-
-  /**
-   * An object that is not of the type Player cannot be considered equal to a player.
-   */
-  @Test
-  public void testEqualsFalseType() {
-    ArrayList<Player> otherTest = new ArrayList<Player>();
-    assertFalse(testObject.equals(otherTest));
+  public void testAssignRole() {
+    testObject.assignRole(PlayerRoles.ENGINEER);
+    assertEquals(PlayerRoles.ENGINEER, testObject.getRole());
   }
 
   /**

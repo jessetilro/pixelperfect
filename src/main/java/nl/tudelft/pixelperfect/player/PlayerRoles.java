@@ -1,10 +1,10 @@
-package nl.tudelft.pixelperfect.game;
+package nl.tudelft.pixelperfect.player;
 
 /**
  * Enums representing the roles in the game.
  * 
  * @author Floris Doolaard
  */
-public enum Roles {
+public enum PlayerRoles {
   GUNNER, ENGINEER, SCIENTIST, JANITOR
 }
