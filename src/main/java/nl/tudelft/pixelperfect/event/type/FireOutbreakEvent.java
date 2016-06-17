@@ -39,19 +39,20 @@ public class FireOutbreakEvent extends Event {
     return EventTypes.FIRE_OUTBREAK;
   }
 
-  /**
-   * Plays an explosion sound when a ship is successfully destroyed.
-   */
   @Override
   public void onComplete(Game game) {
-    game.getAudioPlayer().playSound("CompleteFireEvent", false);
   }
 
   @Override
   public void notification(Game game, Scene scene) {
     if (!getNotifiedFlag()) {
-      scene.getFireEventLabel()
-          .setText("FIRE WARNING: " + (getParameters().get("location").getValueDescription()));
+      String locParam = getParameters().get("location").getValueDescription();
+      String waterParam = getParameters().get("water").getValueDescription();
+
+      StringBuilder sb = new StringBuilder();
+      sb.append("FIRE WARNING: ").append("Location ").append(locParam).append("\nLiters Needed: ")
+          .append(waterParam);
+      scene.getFireEventLabel().setText(sb.toString());
 
       setNotifiedFlag(true);
     }

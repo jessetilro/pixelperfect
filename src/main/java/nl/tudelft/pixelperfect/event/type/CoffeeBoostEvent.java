@@ -42,12 +42,8 @@ public class CoffeeBoostEvent extends Event {
     return EventTypes.COFFEE_BOOST;
   }
 
-  /**
-   * Plays an explosion sound when a ship is successfully destroyed.
-   */
   @Override
   public void onComplete(Game game) {
-    game.getAudioPlayer().playSound("CompleteCoffeeEvent", false);
   }
 
   @Override

@@ -64,9 +64,6 @@ public class HostileShipEvent extends Event {
     }
   }
 
-  /**
-   * Plays an explosion sound when a ship is successfully destroyed.
-   */
   @Override
   public void onComplete(Game game) {
   }
