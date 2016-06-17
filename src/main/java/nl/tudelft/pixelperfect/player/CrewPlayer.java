@@ -14,8 +14,8 @@ public class CrewPlayer extends Player {
   /**
    * Construct a new CrewPlayer instance.
    * 
-   * @param name
-   *          The player's name.
+   * @param connection
+   *          The player's client.
    */
   public CrewPlayer(HostedConnection connection) {
     super(connection);

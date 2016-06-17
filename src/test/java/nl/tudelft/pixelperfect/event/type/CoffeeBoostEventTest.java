@@ -2,15 +2,12 @@ package nl.tudelft.pixelperfect.event.type;
 
 import static org.junit.Assert.assertEquals;
 
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.jme3.light.Light;
 import com.jme3.math.ColorRGBA;
-import nl.tudelft.pixelperfect.audio.AudioPlayer;
 import nl.tudelft.pixelperfect.event.EventTest;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Scene;
@@ -71,12 +68,6 @@ public class CoffeeBoostEventTest extends EventTest {
    */
   @Test
   public void testOnComplete() {
-    CoffeeBoostEvent coffee = new CoffeeBoostEvent(1, "summary", "description", 42, 42, 99.42);
-    Game mockedGame = mock(Game.class);
-    AudioPlayer mockedAudio = mock(AudioPlayer.class);
-    when(mockedGame.getAudioPlayer()).thenReturn(mockedAudio);
-    coffee.onComplete(mockedGame);
-    verify(mockedAudio).playSound(anyString(), anyBoolean());
   }
   
   /**

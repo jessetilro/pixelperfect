@@ -5,10 +5,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
+import com.jme3.network.HostedConnection;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jme3.network.HostedConnection;
+
 
 /**
  * Class for the automated testing of the Player class.
@@ -18,10 +19,9 @@ import com.jme3.network.HostedConnection;
  *
  */
 public abstract class PlayerTest {
-
+  
   private Player testObject;
   private HostedConnection mockedConnection1;
-  private HostedConnection mockedConnection2;
 
   /**
    * Setting up the Player class as a test object.
@@ -29,7 +29,6 @@ public abstract class PlayerTest {
   @Before
   public void initialize() {
     mockedConnection1 = mock(HostedConnection.class);
-    mockedConnection2 = mock(HostedConnection.class);
     testObject = createPlayer(mockedConnection1);
     testObject.setName("Lorem Ipsum");
   }
@@ -37,8 +36,8 @@ public abstract class PlayerTest {
   /**
    * Factory method for testing.
    * 
-   * @param name
-   *          , the name of the Player.
+   * @param connection
+   *          , the client of the Player.
    * @return The object to be tested.
    */
   public abstract Player createPlayer(HostedConnection connection);

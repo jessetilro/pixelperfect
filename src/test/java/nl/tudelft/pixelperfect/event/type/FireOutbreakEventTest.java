@@ -1,14 +1,12 @@
 package nl.tudelft.pixelperfect.event.type;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.jme3.font.BitmapText;
-import nl.tudelft.pixelperfect.audio.AudioPlayer;
 import nl.tudelft.pixelperfect.event.EventTest;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.game.Game;
@@ -52,12 +50,14 @@ public class FireOutbreakEventTest extends EventTest {
   @Test
   public void testNotification() {
     Scene mockedScene = mock(Scene.class);
-    Game mockedGame = mock(Game.class);
     EventParameter param = new EventParameter("location", 1);
+    EventParameter water = new EventParameter("water", 1);
     BitmapText mockedBitMap = mock(BitmapText.class);
     when(mockedScene.getFireEventLabel()).thenReturn(mockedBitMap);
+    Game mockedGame = mock(Game.class);
     FireOutbreakEvent test = createEvent("summary", "description");
     test.getParameters().add(param);
+    test.getParameters().add(water);
     test.notification(mockedGame, mockedScene);
     verify(mockedBitMap).setText(anyString()); 
   }
@@ -68,11 +68,6 @@ public class FireOutbreakEventTest extends EventTest {
    */
   @Test
   public void testOnComplete() {
-    FireOutbreakEvent test = createEvent("summary", "description");
-    Game mockedGame = mock(Game.class);
-    AudioPlayer mockedAudio = mock(AudioPlayer.class);
-    when(mockedGame.getAudioPlayer()).thenReturn(mockedAudio);
-    test.onComplete(mockedGame);
-    verify(mockedAudio).playSound(anyString(), anyBoolean());
+    //left Empty
   }
 }
