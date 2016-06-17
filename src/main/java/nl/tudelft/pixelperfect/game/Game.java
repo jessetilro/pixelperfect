@@ -160,6 +160,15 @@ public class Game extends VRApplication {
   }
 
   /**
+   * Get the current game state.
+   * 
+   * @return The current game state.
+   */
+  public GameState getState() {
+    return gameState;
+  }
+
+  /**
    * Tells the clients to start the game.
    */
   public static void startGame() {

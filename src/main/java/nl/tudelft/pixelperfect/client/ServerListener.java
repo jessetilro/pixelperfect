@@ -11,11 +11,13 @@ import com.jme3.network.MessageListener;
 import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
+import nl.tudelft.pixelperfect.client.message.NewGameMessage;
 import nl.tudelft.pixelperfect.client.message.RepairMessage;
 import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.player.Player;
 import nl.tudelft.pixelperfect.player.PlayerCollection;
 import nl.tudelft.pixelperfect.player.PlayerRoles;
 
@@ -71,6 +73,9 @@ public class ServerListener implements MessageListener<HostedConnection> {
     } else if (message instanceof RepairMessage) {
       RepairMessage repairMessage = (RepairMessage) message;
       processRepairs(repairMessage);
+    } else if (message instanceof NewGameMessage) {
+      NewGameMessage newGameMessage = (NewGameMessage) message;
+      processNewGame(source, newGameMessage);
     }
   }
 
@@ -84,6 +89,24 @@ public class ServerListener implements MessageListener<HostedConnection> {
    *              The message received.
    */
   public synchronized void processRoleChosen(HostedConnection source, RoleChosenMessage message) {
+    if (message.isAllocated()) {
+      processRoleChosenFree(source, message);
+    } else {
+      processRoleChosenAssign(source, message);
+    }
+  }
+
+  /**
+   * The received RoleChosenMessage has as purpose to communicate the intent of claiming a player
+   * role.
+   * 
+   * @param source
+   *          The connection source.
+   * @param message
+   *          The RoleChosenMessage.
+   */
+  public synchronized void processRoleChosenAssign(HostedConnection source,
+      RoleChosenMessage message) {
     PlayerRoles role = message.getRole();
     PlayerCollection crew = app.getSpaceship().getCrew();
     if (crew.hasPlayerWithRole(role)) {
@@ -97,10 +120,43 @@ public class ServerListener implements MessageListener<HostedConnection> {
   }
 
   /**
-   * Process a recieved RepairMessage.
+   * The received RoleChosenMessage has as purpose to communicate the act of freeing a role, making
+   * it available to other players again.
+   * 
+   * @param source
+   *          The connection source.
+   * @param message
+   *          The RoleChosenMessage.
+   */
+  public synchronized void processRoleChosenFree(HostedConnection source,
+      RoleChosenMessage message) {
+    Player player = app.getSpaceship().getCrew().getPlayerByConnection(source);
+    PlayerRoles role = player.getRole();
+    if (role != null) {
+      player.assignRole(null);
+      System.out.println("Role " + role.toString() + " was made available again.");
+    }
+  }
+
+  /**
+   * Process the request for an update on whether the game is already in progress.
+   * 
+   * @param source
+   *          The connection requesting the update.
+   * @param message
+   *          The message send as request.
+   */
+  public synchronized void processNewGame(HostedConnection source, NewGameMessage message) {
+    if (app.getState().isRunning()) {
+      server.broadcast(Filters.equalTo(source), new NewGameMessage());
+    }
+  }
+
+  /**
+   * Process a received RepairMessage.
    * 
    * @param message
-   *          , The received RepairMessage.
+   *          The received RepairMessage.
    */
   public synchronized void processRepairs(RepairMessage message) {
     System.out.println("Activating repairs.");

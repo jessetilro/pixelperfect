@@ -44,4 +44,9 @@ public class LostState extends GameState {
     }
     return this;
   }
+
+  @Override
+  public boolean isRunning() {
+    return false;
+  }
 }

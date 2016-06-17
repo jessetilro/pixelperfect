@@ -45,4 +45,9 @@ public class WonState extends GameState {
     }
     return this;
   }
+
+  @Override
+  public boolean isRunning() {
+    return false;
+  }
 }
