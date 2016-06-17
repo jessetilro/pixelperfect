@@ -24,9 +24,9 @@ public final class Constants {
       "explosion_x.wav", "hammer.wav" };
 
   // Positioning and scaling related constants for the in-game debug HUD.
-  public static final int MAIN_MENU_WIDTH_SPACING = 450;
+  public static final int MAIN_MENU_WIDTH_SPACING = 350;
   public static final int MAIN_MENU_HEIGHT_SPACING = 100;
-  public static final int MAIN_MENU_TEXT_SCALING = 3;
+  public static final int MAIN_MENU_TEXT_SCALING = 2;
 
   // Text constants for the main menu.
   public static final String MAIN_MENU_FIRST_ROW_TEXT = "Allow your crew members to select their roles.";
