@@ -3,8 +3,6 @@ package nl.tudelft.pixelperfect.game;
 import nl.tudelft.pixelperfect.event.EventListener;
 import nl.tudelft.pixelperfect.event.EventLog;
 import nl.tudelft.pixelperfect.player.PlayerCollection;
-import nl.tudelft.pixelperfect.route.Route;
-import nl.tudelft.pixelperfect.route.RouteGenerator;
 
 /**
  * The spaceship the players are controlling and guiding along a given route through space.
@@ -32,11 +30,10 @@ public class Spaceship {
     this.score = 0;
     this.health = STARTING_HEALTH;
     this.victorious = false;
-    RouteGenerator rg = RouteGenerator.getInstance();
-    this.route = rg.generateRoute();
     this.log = new EventLog(this);
     this.timer = 0;
     this.crew = new PlayerCollection();
+    this.route = new Route(Constants.GAME_TIME);
   }
 
   /**

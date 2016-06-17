@@ -7,6 +7,7 @@ import nl.tudelft.pixelperfect.game.Scene;
 /**
  * A type of Event, imposing the problem of a fire outbreak.
  * 
+ * @author David Alderliesten
  * @author Wouter Zirkzee
  * 
  */
@@ -38,14 +39,21 @@ public class FireOutbreakEvent extends Event {
     return EventTypes.FIRE_OUTBREAK;
   }
 
-  private boolean notifiedFlag = false;
+  /**
+   * Plays an explosion sound when a ship is successfully destroyed.
+   */
+  @Override
+  public void onComplete(Game game) {
+    game.getAudioPlayer().playSound("CompleteFireEvent", false);
+  }
+
   @Override
   public void notification(Game game, Scene scene) {
-    scene.getFireEventLabel().setText("FIRE WARNING: "
-        + (getParameters().get("location").getValue()));
-    if (!notifiedFlag) {
-      notifiedFlag = true;
-      game.getAudioPlayer().playSound("FireEvent", false);
+    if (!getNotifiedFlag()) {
+      scene.getFireEventLabel()
+          .setText("FIRE WARNING: " + (getParameters().get("location").getValueDescription()));
+
+      setNotifiedFlag(true);
     }
   }
 

@@ -39,7 +39,6 @@ import nl.tudelft.pixelperfect.player.PlayerCollection;
  * @author Dmitry Malarev
  * @author Jesse Tilro
  * @author Wouter Zirkzee
- *
  */
 @SuppressWarnings("PMD.TooManyFields")
 public class Game extends VRApplication {
@@ -86,7 +85,7 @@ public class Game extends VRApplication {
 
     // Render two eyes, regardless of SteamVR.
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.FORCE_VR_MODE, false);
-    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_CURVED_SURFACE, true);
+    appGame.preconfigureVRApp(PRECONFIG_PARAMETER.SET_GUI_CURVED_SURFACE, false);
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.FLIP_EYES, false);
 
     // Show gui even if it is behind the current timing.
@@ -117,10 +116,8 @@ public class Game extends VRApplication {
     scene = new Scene(this);
     scene.createMap();
     audioPlayer = new AudioPlayer(this);
-    String[] names = { "CoffeeEvent", "AsteroidEvent", "FireEvent", "HostileEvent", "PlasmaEvent" };
-    String[] locations = { "yawn.wav", "impact.wav", "fire_alarm.wav", "sonar_x.wav",
-        "bubbling1.wav" };
-    audioPlayer.loadSounds(names, locations);
+
+    audioPlayer.loadSounds(Constants.AUDIO_EVENTS, Constants.AUDIO_PATH_NAMES);
 
     initNetwork();
     players = new PlayerCollection();
@@ -195,7 +192,6 @@ public class Game extends VRApplication {
       inputManager.addMapping(mappings[i], new KeyTrigger(keyTriggers[i]));
     }
     ActionListener acl = new ActionListener() {
-
       public void onAction(String name, boolean keyPressed, float tpf) {
         if (name.equals("forward")) {
           moveForward = keyPressed;

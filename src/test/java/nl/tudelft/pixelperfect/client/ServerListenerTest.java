@@ -1,6 +1,5 @@
 package nl.tudelft.pixelperfect.client;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -50,14 +49,6 @@ public class ServerListenerTest {
     object.setGame(mockedGame);
     object.setServer(mockServer);
     mockedSource = mock(HostedConnection.class);
-  }
-
-  /**
-   * When calling getGame we expect the Game that we have set earlier using setGame.
-   */
-  @Test
-  public void testGetGame() {
-    assertEquals(mockedGame, object.getGame());
   }
 
   /**
@@ -120,7 +111,7 @@ public class ServerListenerTest {
   }
 
   /**
-   * When the Server recieves a RepairMessage, it should update the ship's health.
+   * When the Server receives a RepairMessage, it should update the ship's health.
    * 
    */
   @Test

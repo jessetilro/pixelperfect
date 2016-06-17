@@ -7,6 +7,7 @@ import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,11 +15,13 @@ import java.util.Collection;
 import org.junit.Before;
 import org.junit.Test;
 
+import nl.tudelft.pixelperfect.audio.AudioPlayer;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.AsteroidImpactEvent;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.event.type.FireOutbreakEvent;
 import nl.tudelft.pixelperfect.event.type.PlasmaLeakEvent;
+import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
@@ -33,6 +36,8 @@ import nl.tudelft.pixelperfect.game.Spaceship;
 public class EventLogTest extends EventListenerTest {
   private EventLog object;
   private Spaceship mockedSpaceship;
+  private Game mockedGame;
+  private AudioPlayer mockedAudio;
 
   /**
    * Setting test object and mocked dependencies.
@@ -40,6 +45,11 @@ public class EventLogTest extends EventListenerTest {
   @Before
   public void initialise() {
     mockedSpaceship = mock(Spaceship.class);
+    mockedGame = mock(Game.class);
+    mockedAudio = mock(AudioPlayer.class);
+
+    when(mockedGame.getAudioPlayer()).thenReturn(mockedAudio);
+
     object = new EventLog(mockedSpaceship);
   }
 
@@ -77,7 +87,7 @@ public class EventLogTest extends EventListenerTest {
   public void testCompleteExisting() {
     Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
     object.getEvents().add(evt1);
-    object.complete(EventTypes.FIRE_OUTBREAK, new ArrayList<EventParameter>());
+    object.complete(EventTypes.FIRE_OUTBREAK, new ArrayList<EventParameter>(), mockedGame);
     assertEquals(0, object.getEvents().size());
   }
 
@@ -89,7 +99,7 @@ public class EventLogTest extends EventListenerTest {
   public void testCompleteMissing() {
     Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
     object.getEvents().add(evt1);
-    object.complete(EventTypes.ASTEROID_IMPACT, new ArrayList<EventParameter>());
+    object.complete(EventTypes.ASTEROID_IMPACT, new ArrayList<EventParameter>(), mockedGame);
     assertEquals(1, object.getEvents().size());
   }
 
@@ -105,7 +115,7 @@ public class EventLogTest extends EventListenerTest {
     assertFalse(object.getEvents().contains(evt1));
     verify(mockedSpaceship, never()).updateHealth(anyDouble());
   }
-  
+
   /**
    * Tests the complete method if the parameters don't match.
    * 
@@ -117,9 +127,9 @@ public class EventLogTest extends EventListenerTest {
     collection.add(new EventParameter("sector", 4));
     evt1.setParameters(collection);
     object.notify(evt1);
-    object.complete(EventTypes.PLASMA_LEAK, new ArrayList<EventParameter>());
+    object.complete(EventTypes.PLASMA_LEAK, new ArrayList<EventParameter>(), mockedGame);
     assertEquals(1, object.getEvents().size());
-    
+
   }
 
   /**
@@ -129,8 +139,8 @@ public class EventLogTest extends EventListenerTest {
   @Test
   public void testUpdate() {
     Event evt1 = new FireOutbreakEvent(0, "Whale", "Shark", 0, 0, 50);
-    Event evt2 = new AsteroidImpactEvent(1, "Pie", "Cake", System.currentTimeMillis(), 99999999,
-        50);
+    Event evt2 = new AsteroidImpactEvent(1, "Pie", "Cake", System.currentTimeMillis(), 
+        99999999, 50);
     object.notify(evt1);
     object.notify(evt2);
 

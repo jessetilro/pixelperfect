@@ -43,15 +43,6 @@ public class ServerListener implements MessageListener<HostedConnection> {
   }
 
   /**
-   * Returns the game for reference purposes.
-   * 
-   * @return The game.
-   */
-  public Game getGame() {
-    return app;
-  }
-
-  /**
    * Uses the server of the game to broadcast messages that has come in here.
    * 
    * @param server
@@ -120,7 +111,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
     EventTypes type = getType(message);
     Collection<EventParameter> parameters = getParameters(message);
     System.out.println("Received a completed event: " + type.toString());
-    app.getSpaceship().getLog().complete(type, parameters);
+    app.getSpaceship().getLog().complete(type, parameters, app);
   }
 
   /**

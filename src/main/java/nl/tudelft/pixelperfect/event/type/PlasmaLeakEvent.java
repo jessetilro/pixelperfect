@@ -7,6 +7,7 @@ import nl.tudelft.pixelperfect.game.Scene;
 /**
  * A type of event, imposing the problem of a plasma leak.
  *
+ * @author David Alderliesten
  * @author Wouter Zirkzee
  *
  */
@@ -39,25 +40,29 @@ public class PlasmaLeakEvent extends Event {
     return EventTypes.PLASMA_LEAK;
   }
 
-
-  private boolean notifiedFlag = false;
   /**
    * Allow events to render notifications to the players.
    *
    * @param game
-   *            The current game.
+   *          The current game.
    * @param scene
    *          The scene in which the notification must appear.
    */
   @Override
   public void notification(Game game, Scene scene) {
-    scene.getPlasmaEventlabel().setText("Plasma leak at \n "
-        + getParameters().get("sector").getValue());
-
-    if (!notifiedFlag) {
-      notifiedFlag = true;
+    if (!getNotifiedFlag()) {
+      scene.getPlasmaEventlabel()
+          .setText("Plasma leak at \n " + getParameters().get("sector").getValueDescription());
+      setNotifiedFlag(true);
       game.getAudioPlayer().playSound("PlasmaEvent", false);
     }
+  }
+
+  /**
+   * Plays an explosion sound when a ship is successfully destroyed.
+   */
+  @Override
+  public void onComplete(Game game) {
   }
 
 }

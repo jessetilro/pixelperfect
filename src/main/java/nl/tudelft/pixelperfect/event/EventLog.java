@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
+import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Spaceship;
 
 /**
@@ -106,13 +107,18 @@ public class EventLog implements EventListener {
    *          The type of the Event to be completed.
    * @param parameters
    *          The parameters the Event should have.
-   * 
+   * @param game
+   *          The current game session.
    * 
    */
-  public synchronized void complete(EventTypes type, Collection<EventParameter> parameters) {
+  public synchronized void complete(EventTypes type, Collection<EventParameter> parameters,
+      Game game) {
     Collection<Event> candidates = getByType(type);
+
     for (Event event : candidates) {
       if (event.validateParameters(parameters)) {
+        event.onComplete(game);
+
         discard(event);
         spaceship.updateScore(10);
         System.out.println("Event " + event.getId() + " solved!");
@@ -123,8 +129,8 @@ public class EventLog implements EventListener {
     if (candidates.size() > 0) {
       System.out.println("Wrong task performed: wrong parameters entered");
     } else {
-      System.out
-          .println("Wrong task performed: there is no active Event of type " + type.toString());
+      System.out.println("Wrong task performed: there is no active Event of type "
+          + type.toString());
     }
 
     spaceship.updateHealth(-10);
@@ -150,12 +156,13 @@ public class EventLog implements EventListener {
 
   /**
    * Get first event of specified type.
+   * 
    * @param type
-   *            type to find.
+   *          type to find.
    * @return event of given type
    */
   public Event getFirst(EventTypes type) {
-    for (Event event: events) {
+    for (Event event : events) {
       if (event.getType().equals(type)) {
         return event;
       }

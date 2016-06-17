@@ -14,8 +14,8 @@ import org.junit.Test;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import nl.tudelft.pixelperfect.event.EventListener;
 import nl.tudelft.pixelperfect.event.EventLog;
+import nl.tudelft.pixelperfect.game.Route;
 import nl.tudelft.pixelperfect.game.Spaceship;
-import nl.tudelft.pixelperfect.route.Route;
 
 /**
  * Test Suite for the Spaceship class.

@@ -1,6 +1,7 @@
 package nl.tudelft.pixelperfect.event.type;
 
 import com.jme3.math.ColorRGBA;
+
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Scene;
@@ -8,6 +9,7 @@ import nl.tudelft.pixelperfect.game.Scene;
 /**
  * A type of event, imposing the problem of a lack of caffeine.
  * 
+ * @author David Alderliesten
  * @author Jesse Tilro
  * 
  */
@@ -40,12 +42,18 @@ public class CoffeeBoostEvent extends Event {
     return EventTypes.COFFEE_BOOST;
   }
 
-  private boolean notifiedFlag = false;
+  /**
+   * Plays an explosion sound when a ship is successfully destroyed.
+   */
+  @Override
+  public void onComplete(Game game) {
+    game.getAudioPlayer().playSound("CompleteCoffeeEvent", false);
+  }
+
   @Override
   public void notification(Game game, Scene scene) {
-    if (!notifiedFlag) {
-      notifiedFlag = true;
-      game.getAudioPlayer().playSound("CoffeeEvent", false);
+    if (!getNotifiedFlag()) {
+      setNotifiedFlag(true);
     }
     if ((((int) game.getSpaceship().getTimer() % 2) == 0)
         && !isExpired(System.currentTimeMillis() + 2000)) {

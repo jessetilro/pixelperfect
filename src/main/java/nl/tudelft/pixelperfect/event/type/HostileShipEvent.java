@@ -1,14 +1,15 @@
 package nl.tudelft.pixelperfect.event.type;
 
 import com.jme3.font.BitmapText;
+
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Scene;
 
-
 /**
  * A type of event, imposing the problem of a hostile alien spaceship.
  * 
+ * @author David Alderliesten
  * @author Wouter Zirkzee
  * 
  */
@@ -41,21 +42,33 @@ public class HostileShipEvent extends Event {
     return EventTypes.HOSTILE_SHIP;
   }
 
-  private boolean notifiedFlag = false;
-
   @Override
+  @SuppressWarnings("PMD") 
   public void notification(Game game, Scene scene) {
-    int xParam = getParameters().get("positionX").getNumberValue();
-    int yParam = getParameters().get("positionY").getNumberValue();
-    String armorParam = getParameters().get("armor").getValue();
-    BitmapText textfield = game.getScene().getHostileEventText();
-    textfield.setText("x: " + xParam + "\ny: " + yParam + "\n" + armorParam);
+    if (!getNotifiedFlag()) {
+      String xParam = getParameters().get("positionX").getValueDescription();
+      String yParam = getParameters().get("positionY").getValueDescription();
+      String armorParam = getParameters().get("armor").getValueDescription();
+      BitmapText textfield = game.getScene().getHostileEventText();
+      
+      StringBuilder sb = new StringBuilder();
+      
+      sb.append("x: ").append(xParam).append("\ny: ").append(yParam).append("\n")
+          .append(armorParam);
+      textfield.setText(sb.toString());
 
-
-    if (!notifiedFlag) {
-      notifiedFlag = true;
-      game.getAudioPlayer().playSound("HostileEvent", false);
+      if (!getNotifiedFlag()) {
+        setNotifiedFlag(true);
+        game.getAudioPlayer().playSound("HostileEvent", false);
+      }
     }
+  }
+
+  /**
+   * Plays an explosion sound when a ship is successfully destroyed.
+   */
+  @Override
+  public void onComplete(Game game) {
   }
 
 }

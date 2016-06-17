@@ -75,8 +75,8 @@ public class GameHeadsUpDisplay {
     shipHealth = new BitmapText(hudFont, true);
     shipHealth.setLocalScale(Constants.GUI_HEALTH_TEXT_SIZE_SCALE);
     shipHealth.setColor(ColorRGBA.Red);
-    shipHealth.setLocalTranslation(Constants.GUI_ELEMENTS_WIDTH_OFFSET,
-        screenHeight - Constants.GUI_ELEMENTS_HEIGHT_OFFSET, 0);
+    shipHealth.setLocalTranslation(Constants.GUI_ELEMENTS_WIDTH_OFFSET - 40, screenHeight
+        - Constants.GUI_ELEMENTS_HEIGHT_OFFSET, 0);
 
     guiNodes.attachChild(shipHealth);
   }
@@ -88,8 +88,8 @@ public class GameHeadsUpDisplay {
     teamScore = new BitmapText(hudFont, true);
     teamScore.setLocalScale(Constants.GUI_SCORE_TEXT_SIZE_SCALE);
     teamScore.setColor(ColorRGBA.Green);
-    teamScore.setLocalTranslation(screenWidth - Constants.GUI_ELEMENTS_WIDTH_OFFSET,
-        screenHeight - Constants.GUI_ELEMENTS_HEIGHT_OFFSET, 0);
+    teamScore.setLocalTranslation(screenWidth - Constants.GUI_ELEMENTS_WIDTH_OFFSET, screenHeight
+        - Constants.GUI_ELEMENTS_HEIGHT_OFFSET, 0);
 
     guiNodes.attachChild(teamScore);
   }
@@ -100,7 +100,7 @@ public class GameHeadsUpDisplay {
    */
   public void updateHud() {
     // Update the ship's health and team score indicators.
-    shipHealth.setText("" + spaceship.getHealth());
+    shipHealth.setText("" + (int) spaceship.getHealth());
     teamScore.setText("" + spaceship.getScore());
   }
 
