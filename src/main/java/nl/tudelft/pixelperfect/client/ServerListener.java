@@ -123,7 +123,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
   /**
    * Convert type attribute of message from serializable to more abstract.
    * 
-   * @param The
+   * @param message
    *          message to extract the attribute from.
    * 
    * @return An Event Type.

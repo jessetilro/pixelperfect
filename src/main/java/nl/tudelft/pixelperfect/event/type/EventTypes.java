@@ -7,7 +7,7 @@ import nl.tudelft.pixelperfect.event.factory.EventFactory;
 import nl.tudelft.pixelperfect.event.factory.FireOutbreakEventFactory;
 import nl.tudelft.pixelperfect.event.factory.HostileShipEventFactory;
 import nl.tudelft.pixelperfect.event.factory.PlasmaLeakEventFactory;
-import nl.tudelft.pixelperfect.game.Scene;
+import nl.tudelft.pixelperfect.game.Game;
 
 /**
  * Enumeration of the different types of Events in the game. The ordinals, i.e. the indices of the
@@ -25,8 +25,9 @@ public enum EventTypes {
     }
 
     @Override
-    public void resetNotification(Scene scene) {
-      scene.getFireEventLabel().setText("");
+    public void resetNotification(Game game) {
+      game.getScene().getFireEventLabel().setText("");
+      game.getAudioPlayer().stopSound("FireEvent");
     }
   },
   PLASMA_LEAK {
@@ -36,8 +37,9 @@ public enum EventTypes {
     }
 
     @Override
-    public void resetNotification(Scene scene) {
-      scene.getPlasmaEventlabel().setText("");
+    public void resetNotification(Game game) {
+      game.getScene().getPlasmaEventLabel().setText("");
+      game.getAudioPlayer().stopSound("PlasmaEvent");
     }
   },
   ASTEROID_IMPACT {
@@ -47,8 +49,9 @@ public enum EventTypes {
     }
 
     @Override
-    public void resetNotification(Scene scene) {
-      scene.getAsteroidEventLabel().setText("");
+    public void resetNotification(Game game) {
+      game.getScene().getAsteroidEventLabel().setText("");
+      game.getAudioPlayer().stopSound("AsteroidEvent");
     }
   },
   HOSTILE_SHIP {
@@ -58,8 +61,9 @@ public enum EventTypes {
     }
 
     @Override
-    public void resetNotification(Scene scene) {
-      scene.getHostileEventText().setText("x: " + "\ny: " + "\n");
+    public void resetNotification(Game game) {
+      game.getScene().getHostileEventText().setText("x: " + "\ny: " + "\n");
+      game.getAudioPlayer().stopSound("HostileEvent");
     }
   },
   COFFEE_BOOST {
@@ -69,8 +73,9 @@ public enum EventTypes {
     }
 
     @Override
-    public void resetNotification(Scene scene) {
-      scene.getLight().setColor(ColorRGBA.White);
+    public void resetNotification(Game game) {
+      game.getScene().getLight().setColor(ColorRGBA.White);
+      game.getAudioPlayer().stopSound("CoffeeEvent");
     }
   };
 
@@ -84,8 +89,8 @@ public enum EventTypes {
   /**
    * Method to reset the notification.
    *
-   * @param scene
-   *            Scene in which to reset the notification.
+   * @param game
+   *            Game in which to reset the notification.
    */
-  public abstract void resetNotification(Scene scene);
+  public abstract void resetNotification(Game game);
 }

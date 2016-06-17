@@ -18,7 +18,7 @@ public abstract class Player {
    * Construct a new Player instance.
    * 
    * @param connection
-   *          The player's client.
+   *          Connection to the player.
    */
   public Player(HostedConnection connection) {
     this.connection = connection;

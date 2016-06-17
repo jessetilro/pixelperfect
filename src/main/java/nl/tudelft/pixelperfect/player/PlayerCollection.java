@@ -38,7 +38,7 @@ public class PlayerCollection {
    * @param connection
    *          The connection through which the player is connected to the game.
    *          
-   * @return The player.
+   * @return The Player with the given connection.
    */
   public synchronized Player getPlayerByConnection(HostedConnection connection) {
     return map.get(connection);
