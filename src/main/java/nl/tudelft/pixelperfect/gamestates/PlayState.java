@@ -118,4 +118,9 @@ public class PlayState extends GameState {
     }
     return this;
   }
+
+  @Override
+  public boolean isRunning() {
+    return true;
+  }
 }

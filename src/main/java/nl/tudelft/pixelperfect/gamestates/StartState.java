@@ -10,7 +10,6 @@ import nl.tudelft.pixelperfect.gui.MainMenuDisplay;
  * @author Wouter Zirkzee
  */
 public class StartState extends GameState {
-  
 
   private MainMenuDisplay menuInstance;
 
@@ -50,6 +49,11 @@ public class StartState extends GameState {
       return new PlayState(game);
     }
     return this;
+  }
+
+  @Override
+  public boolean isRunning() {
+    return false;
   }
 
 }
