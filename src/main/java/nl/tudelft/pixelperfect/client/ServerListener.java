@@ -16,6 +16,7 @@ import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.player.Player;
 import nl.tudelft.pixelperfect.player.PlayerCollection;
 import nl.tudelft.pixelperfect.player.PlayerRoles;
 
@@ -78,6 +79,24 @@ public class ServerListener implements MessageListener<HostedConnection> {
    * Process a role chosen message.
    */
   public synchronized void processRoleChosen(HostedConnection source, RoleChosenMessage message) {
+    if (message.isAllocated()) {
+      processRoleChosenFree(source, message);
+    } else {
+      processRoleChosenAssign(source, message);
+    }
+  }
+
+  /**
+   * The received RoleChosenMessage has as purpose to communicate the intent of claiming a player
+   * role.
+   * 
+   * @param source
+   *          The connection source.
+   * @param message
+   *          The RoleChosenMessage.
+   */
+  public synchronized void processRoleChosenAssign(HostedConnection source,
+      RoleChosenMessage message) {
     PlayerRoles role = message.getRole();
     PlayerCollection crew = app.getSpaceship().getCrew();
     if (crew.hasPlayerWithRole(role)) {
@@ -91,10 +110,26 @@ public class ServerListener implements MessageListener<HostedConnection> {
   }
 
   /**
-   * Process a recieved RepairMessage.
+   * The received RoleChosenMessage has as purpose to communicate the act of freeing a role, making
+   * it available to other players again.
+   * 
+   * @param source
+   *          The connection source.
+   * @param message
+   *          The RoleChosenMessage.
+   */
+  public synchronized void processRoleChosenFree(HostedConnection source,
+      RoleChosenMessage message) {
+    Player player = app.getSpaceship().getCrew().getPlayerByConnection(source);
+    player.assignRole(null);
+    System.out.println("Role " + role.toString() + " was made available again.");
+  }
+
+  /**
+   * Process a received RepairMessage.
    * 
    * @param message
-   *          , The received RepairMessage.
+   *          The received RepairMessage.
    */
   public synchronized void processRepairs(RepairMessage message) {
     System.out.println("Activating repairs.");
