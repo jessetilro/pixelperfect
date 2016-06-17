@@ -54,6 +54,7 @@ public class FireOutbreakEvent extends Event {
           .append(waterParam);
       scene.getFireEventLabel().setText(sb.toString());
 
+      game.getAudioPlayer().playSound("FireEvent", false);
       setNotifiedFlag(true);
     }
   }
