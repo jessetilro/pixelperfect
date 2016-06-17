@@ -50,7 +50,7 @@ public class FireOutbreakEvent extends Event {
       String waterParam = getParameters().get("water").getValueDescription();
 
       StringBuilder sb = new StringBuilder();
-      sb.append("FIRE WARNING: ").append("Location ").append(locParam).append("\nLiters Needed: ")
+      sb.append("FIRE WARNING: Location ").append(locParam).append("\nLiters Needed: ")
           .append(waterParam);
       scene.getFireEventLabel().setText(sb.toString());
 

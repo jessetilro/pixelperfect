@@ -44,7 +44,6 @@ import nl.tudelft.pixelperfect.player.PlayerCollection;
 public class Game extends VRApplication {
 
   private static Game appGame;
-  private PlayerCollection players;
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private static Server server;
@@ -120,7 +119,6 @@ public class Game extends VRApplication {
     audioPlayer.loadSounds(Constants.AUDIO_EVENTS, Constants.AUDIO_PATH_NAMES);
 
     initNetwork();
-    players = new PlayerCollection();
     spaceship = new Spaceship();
     scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY_MIN,
         Constants.EVENT_SCHEDULER_INTENSITY_MAX);
