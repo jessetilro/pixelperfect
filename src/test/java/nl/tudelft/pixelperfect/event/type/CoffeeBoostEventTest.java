@@ -8,6 +8,8 @@ import static org.mockito.Mockito.when;
 
 import com.jme3.light.Light;
 import com.jme3.math.ColorRGBA;
+
+import nl.tudelft.pixelperfect.audio.AudioPlayer;
 import nl.tudelft.pixelperfect.event.EventTest;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Scene;
@@ -27,6 +29,7 @@ public class CoffeeBoostEventTest extends EventTest {
   private Scene mockedScene;
   private Spaceship mockedShip;
   private Light mockedLight;
+  private AudioPlayer mockedAudio;
   
   /**
    * Factory method for testing.
@@ -50,6 +53,9 @@ public class CoffeeBoostEventTest extends EventTest {
     mockedLight = mock(Light.class);
     when(mockedGame.getSpaceship()).thenReturn(mockedShip);
     when(mockedScene.getLight()).thenReturn(mockedLight);
+    mockedAudio = mock(AudioPlayer.class);
+    when(mockedGame.getScene()).thenReturn(mockedScene);
+    when(mockedGame.getAudioPlayer()).thenReturn(mockedAudio);
   }
   
   /**

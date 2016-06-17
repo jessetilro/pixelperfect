@@ -7,6 +7,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.jme3.font.BitmapText;
+
+import nl.tudelft.pixelperfect.audio.AudioPlayer;
 import nl.tudelft.pixelperfect.event.EventTest;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.game.Game;
@@ -53,8 +55,12 @@ public class FireOutbreakEventTest extends EventTest {
     EventParameter param = new EventParameter("location", 1);
     EventParameter water = new EventParameter("water", 1);
     BitmapText mockedBitMap = mock(BitmapText.class);
-    when(mockedScene.getFireEventLabel()).thenReturn(mockedBitMap);
+    AudioPlayer mockedAudio = mock(AudioPlayer.class);
     Game mockedGame = mock(Game.class);
+    when(mockedGame.getScene()).thenReturn(mockedScene);
+    when(mockedGame.getAudioPlayer()).thenReturn(mockedAudio);
+    when(mockedScene.getPlasmaEventLabel()).thenReturn(mockedBitMap);
+    when(mockedScene.getFireEventLabel()).thenReturn(mockedBitMap);
     FireOutbreakEvent test = createEvent("summary", "description");
     test.getParameters().add(param);
     test.getParameters().add(water);
