@@ -58,10 +58,7 @@ public class AsteroidImpactEvent extends Event {
       game.getAudioPlayer().playSound("AsteroidEvent", false);
     }
   }
-
-  /**
-   * Plays an explosion sound when a ship is successfully destroyed.
-   */
+  
   @Override
   public void onComplete(Game game) {
   }

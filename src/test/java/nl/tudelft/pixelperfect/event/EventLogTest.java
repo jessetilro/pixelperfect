@@ -34,175 +34,176 @@ import nl.tudelft.pixelperfect.game.Spaceship;
  */
 @SuppressWarnings("PMD")
 public class EventLogTest extends EventListenerTest {
-	private EventLog object;
-	private Spaceship mockedSpaceship;
-	private Game mockedGame;
-	private AudioPlayer mockedAudio;
+  private EventLog object;
+  private Spaceship mockedSpaceship;
+  private Game mockedGame;
+  private AudioPlayer mockedAudio;
 
-	/**
-	 * Setting test object and mocked dependencies.
-	 */
-	@Before
-	public void initialise() {
-		mockedSpaceship = mock(Spaceship.class);
-		mockedGame = mock(Game.class);
-		mockedAudio = mock(AudioPlayer.class);
+  /**
+   * Setting test object and mocked dependencies.
+   */
+  @Before
+  public void initialise() {
+    mockedSpaceship = mock(Spaceship.class);
+    mockedGame = mock(Game.class);
+    mockedAudio = mock(AudioPlayer.class);
 
-		when(mockedGame.getAudioPlayer()).thenReturn(mockedAudio);
+    when(mockedGame.getAudioPlayer()).thenReturn(mockedAudio);
 
-		object = new EventLog(mockedSpaceship);
-	}
+    object = new EventLog(mockedSpaceship);
+  }
 
-	/**
-	 * Initially the log should be empty.
-	 */
-	@Test
-	public void testGetEventsEmpty() {
-		assertTrue(object.getEvents().isEmpty());
-	}
+  /**
+   * Initially the log should be empty.
+   */
+  @Test
+  public void testGetEventsEmpty() {
+    assertTrue(object.getEvents().isEmpty());
+  }
 
-	/**
-	 * Test the spaceship getter, that it is equal to the given spaceship at the
-	 * start.
-	 */
-	@Test
-	public void testGetSpaceship() {
-		assertEquals(mockedSpaceship, object.getSpaceship());
-	}
+  /**
+   * Test the spaceship getter, that it is equal to the given spaceship at the start.
+   */
+  @Test
+  public void testGetSpaceship() {
+    assertEquals(mockedSpaceship, object.getSpaceship());
+  }
 
-	/**
-	 * When the log is notified of an event, it should add it to its list of
-	 * events.
-	 */
-	@Test
-	public void testNotify() {
-		Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
-		object.notify(evt1);
-		assertTrue(object.getEvents().contains(evt1));
-	}
+  /**
+   * When the log is notified of an event, it should add it to its list of events.
+   */
+  @Test
+  public void testNotify() {
+    Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
+    object.notify(evt1);
+    assertTrue(object.getEvents().contains(evt1));
+  }
 
-	/**
-	 * Checks the complete method of an existing event in the log.
-	 * 
-	 */
-	@Test
-	public void testCompleteExisting() {
-		Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
-		object.getEvents().add(evt1);
-		object.complete(EventTypes.FIRE_OUTBREAK, new ArrayList<EventParameter>(), mockedGame);
-		assertEquals(0, object.getEvents().size());
-	}
+  /**
+   * Checks the complete method of an existing event in the log.
+   * 
+   */
+  @Test
+  public void testCompleteExisting() {
+    Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
+    object.getEvents().add(evt1);
+    object.complete(EventTypes.FIRE_OUTBREAK, new ArrayList<EventParameter>(), mockedGame);
+    assertEquals(0, object.getEvents().size());
+  }
 
-	/**
-	 * Checks the complete method of an non-existing event in the log.
-	 * 
-	 */
-	@Test
-	public void testCompleteMissing() {
-		Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
-		object.getEvents().add(evt1);
-		object.complete(EventTypes.ASTEROID_IMPACT, new ArrayList<EventParameter>(), mockedGame);
-		assertEquals(1, object.getEvents().size());
-	}
+  /**
+   * Checks the complete method of an non-existing event in the log.
+   * 
+   */
+  @Test
+  public void testCompleteMissing() {
+    Event evt1 = new FireOutbreakEvent(0, "Lorem", "Ipsum", 0, 0, 50);
+    object.getEvents().add(evt1);
+    object.complete(EventTypes.ASTEROID_IMPACT, new ArrayList<EventParameter>(), mockedGame);
+    assertEquals(1, object.getEvents().size());
+  }
 
-	/**
-	 * When an Event is discarded from the log, it should be removed from the
-	 * list of active events without damaging the ship.
-	 */
-	@Test
-	public void testDiscard() {
-		Event evt1 = new FireOutbreakEvent(0, "Apple", "Banana", 0, 0, 50);
-		object.notify(evt1);
-		object.discard(evt1);
-		assertFalse(object.getEvents().contains(evt1));
-		verify(mockedSpaceship, never()).updateHealth(anyDouble());
-	}
+  /**
+   * When an Event is discarded from the log, it should be removed from the list of active events
+   * without damaging the ship.
+   */
+  @Test
+  public void testDiscard() {
+    Event evt1 = new FireOutbreakEvent(0, "Apple", "Banana", 0, 0, 50);
+    object.notify(evt1);
+    object.discard(evt1);
+    assertFalse(object.getEvents().contains(evt1));
+    verify(mockedSpaceship, never()).updateHealth(anyDouble());
+  }
 
-	/**
-	 * Tests the complete method if the parameters don't match.
-	 * 
-	 */
-	@Test
-	public void testCompleteNoParam() {
-		PlasmaLeakEvent evt1 = new PlasmaLeakEvent(0, "Whale", "Shark", 0, 2323432, 50);
-		Collection<EventParameter> collection = new ArrayList<EventParameter>();
-		collection.add(new EventParameter("sector", 4));
-		evt1.setParameters(collection);
-		object.notify(evt1);
-		object.complete(EventTypes.PLASMA_LEAK, new ArrayList<EventParameter>(), mockedGame);
-		assertEquals(1, object.getEvents().size());
+  /**
+   * Tests the complete method if the parameters don't match.
+   * 
+   */
+  @Test
+  public void testCompleteNoParam() {
+    PlasmaLeakEvent evt1 = new PlasmaLeakEvent(0, "Whale", "Shark", 0, 2323432, 50);
+    Collection<EventParameter> collection = new ArrayList<EventParameter>();
+    collection.add(new EventParameter("sector", 4));
+    evt1.setParameters(collection);
+    object.notify(evt1);
+    object.complete(EventTypes.PLASMA_LEAK, new ArrayList<EventParameter>(), mockedGame);
+    assertEquals(1, object.getEvents().size());
 
-	}
+  }
 
-	/**
-	 * Expired events must be discarded from the log, whereas events that have
-	 * not expired yet must remain active.
-	 */
-	@Test
-	public void testUpdate() {
-		Event evt1 = new FireOutbreakEvent(0, "Whale", "Shark", 0, 0, 50);
-		Event evt2 = new AsteroidImpactEvent(1, "Pie", "Cake", System.currentTimeMillis(), 99999999, 50);
-		object.notify(evt1);
-		object.notify(evt2);
+  /**
+   * Expired events must be discarded from the log, whereas events that have not expired yet must
+   * remain active.
+   */
+  @Test
+  public void testUpdate() {
+    Event evt1 = new FireOutbreakEvent(0, "Whale", "Shark", 0, 0, 50);
+    Event evt2 = new AsteroidImpactEvent(1, "Pie", "Cake", System.currentTimeMillis(), 
+        99999999, 50);
+    object.notify(evt1);
+    object.notify(evt2);
 
-		object.update();
-		ArrayList<Event> log = object.getEvents();
+    object.update();
+    ArrayList<Event> log = object.getEvents();
 
-		assertFalse(log.contains(evt1));
-		assertTrue(log.contains(evt2));
-		verify(mockedSpaceship).updateHealth(-50);
-	}
+    assertFalse(log.contains(evt1));
+    assertTrue(log.contains(evt2));
+    verify(mockedSpaceship).updateHealth(-50);
+  }
 
-	/**
-	 * When the log's list of events is replaced, the list is updated and only
-	 * Events from the replacement that have not expired yet will be in the list
-	 * of active Events.
-	 */
-	@Test
-	public void testReplace() {
-		Event evt1 = new FireOutbreakEvent(0, "Mango", "Pineapple", 0, 0, 50);
-		Event evt2 = new AsteroidImpactEvent(1, "Pear", "Kiwi Fruit", System.currentTimeMillis(), 99999999, 50);
-		ArrayList<Event> events = new ArrayList<Event>();
-		events.add(evt1);
-		events.add(evt2);
+  /**
+   * When the log's list of events is replaced, the list is updated and only Events from the
+   * replacement that have not expired yet will be in the list of active Events.
+   */
+  @Test
+  public void testReplace() {
+    Event evt1 = new FireOutbreakEvent(0, "Mango", "Pineapple", 0, 0, 50);
+    Event evt2 = new AsteroidImpactEvent(1, "Pear", "Kiwi Fruit", System.currentTimeMillis(),
+        99999999, 50);
+    ArrayList<Event> events = new ArrayList<Event>();
+    events.add(evt1);
+    events.add(evt2);
 
-		object.replace(events);
-		ArrayList<Event> log = object.getEvents();
+    object.replace(events);
+    ArrayList<Event> log = object.getEvents();
 
-		assertFalse(log.contains(evt1));
-		assertTrue(log.contains(evt2));
-		verify(mockedSpaceship).updateHealth(-50);
-	}
+    assertFalse(log.contains(evt1));
+    assertTrue(log.contains(evt2));
+    verify(mockedSpaceship).updateHealth(-50);
+  }
 
-	/**
-	 * Test that the method actually gets the first object.
-	 */
-	@Test
-	public void testGetFirst() {
-		Event evt1 = new FireOutbreakEvent(0, "Mango", "Pineapple", 0, 0, 50);
-		Event evt2 = new FireOutbreakEvent(1, "Pear", "Kiwi Fruit", System.currentTimeMillis(), 99999999, 50);
-		ArrayList<Event> events = object.getEvents();
-		events.add(evt1);
-		events.add(evt2);
+  /**
+   * Test that the method actually gets the first object.
+   */
+  @Test
+  public void testGetFirst() {
+    Event evt1 = new FireOutbreakEvent(0, "Mango", "Pineapple", 0, 0, 50);
+    Event evt2 = new FireOutbreakEvent(1, "Pear", "Kiwi Fruit", System.currentTimeMillis(),
+        99999999, 50);
+    ArrayList<Event> events = object.getEvents();
+    events.add(evt1);
+    events.add(evt2);
 
-		Event testEvent = object.getFirst(EventTypes.FIRE_OUTBREAK);
+    Event testEvent = object.getFirst(EventTypes.FIRE_OUTBREAK);
 
-		assertEquals(testEvent, evt1);
-	}
+    assertEquals(testEvent, evt1);
+  }
 
-	/**
-	 * Test that the method returns null when the type is not in the log.
-	 */
-	@Test
-	public void testGetFirstNull() {
-		Event evt1 = new FireOutbreakEvent(0, "Mango", "Pineapple", 0, 0, 50);
-		Event evt2 = new FireOutbreakEvent(1, "Pear", "Kiwi Fruit", System.currentTimeMillis(), 99999999, 50);
-		ArrayList<Event> events = object.getEvents();
-		events.add(evt1);
-		events.add(evt2);
+  /**
+   * Test that the method returns null when the type is not in the log.
+   */
+  @Test
+  public void testGetFirstNull() {
+    Event evt1 = new FireOutbreakEvent(0, "Mango", "Pineapple", 0, 0, 50);
+    Event evt2 = new FireOutbreakEvent(1, "Pear", "Kiwi Fruit", System.currentTimeMillis(),
+        99999999, 50);
+    ArrayList<Event> events = object.getEvents();
+    events.add(evt1);
+    events.add(evt2);
 
-		Event testEvent = object.getFirst(EventTypes.ASTEROID_IMPACT);
+    Event testEvent = object.getFirst(EventTypes.ASTEROID_IMPACT);
 
-		assertEquals(testEvent, null);
-	}
+    assertEquals(testEvent, null);
+  }
 }

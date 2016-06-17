@@ -1,16 +1,8 @@
 package nl.tudelft.pixelperfect.game;
 
-import com.jme3.network.HostedConnection;
-
 import nl.tudelft.pixelperfect.event.EventListener;
 import nl.tudelft.pixelperfect.event.EventLog;
-import nl.tudelft.pixelperfect.player.CrewPlayer;
-import nl.tudelft.pixelperfect.player.Player;
-import nl.tudelft.pixelperfect.route.Route;
-import nl.tudelft.pixelperfect.route.RouteGenerator;
-
-import java.util.ArrayList;
-import java.util.Collection;
+import nl.tudelft.pixelperfect.player.PlayerCollection;
 
 /**
  * The spaceship the players are controlling and guiding along a given route through space.
@@ -29,7 +21,7 @@ public class Spaceship {
   private EventListener log;
   private float timer;
   private boolean victorious;
-  private ArrayList<Player> crew;
+  private PlayerCollection crew;
 
   /**
    * Construct a new Spaceship instance.
@@ -38,11 +30,10 @@ public class Spaceship {
     this.score = 0;
     this.health = STARTING_HEALTH;
     this.victorious = false;
-    RouteGenerator rg = RouteGenerator.getInstance();
-    this.route = rg.generateRoute();
     this.log = new EventLog(this);
     this.timer = 0;
-    this.crew = new ArrayList<Player>();
+    this.crew = new PlayerCollection();
+    this.route = new Route(Constants.GAME_TIME);
   }
 
   /**
@@ -69,7 +60,7 @@ public class Spaceship {
    * 
    * @return A list of Players.
    */
-  public ArrayList<Player> getCrew() {
+  public PlayerCollection getCrew() {
     return crew;
   }
 
@@ -167,23 +158,5 @@ public class Spaceship {
       this.victorious = true;
     }
     log.update();
-  }
-
-  /**
-   * Update the crew in the spaceship based on the people connected.
-   * 
-   * @param clients
-   *          The clients connected to the server.
-   */
-  public void updateCrew(Collection<HostedConnection> clients) {
-    ArrayList<Player> temp = new ArrayList<Player>();
-    for (HostedConnection hc : clients) {
-      Player play = new CrewPlayer(Integer.toString(hc.getId()));
-      temp.add(play);
-    }
-    if (!crew.equals(temp)) {
-      crew.clear();
-      crew.addAll(temp);
-    }
   }
 }
