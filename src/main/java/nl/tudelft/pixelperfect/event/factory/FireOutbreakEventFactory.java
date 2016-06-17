@@ -38,6 +38,7 @@ public class FireOutbreakEventFactory extends EventFactory {
     Random random = new Random();
     Collection<EventParameter> collection = new ArrayList<EventParameter>();
     collection.add(new EventParameter("location", random.nextInt(3)));
+    collection.add(new EventParameter("water", 1 + random.nextInt(99)));
     return collection;
   }
 
