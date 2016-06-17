@@ -6,8 +6,9 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import com.jme3.network.HostedConnection;
 import org.junit.Test;
+
+import com.jme3.network.HostedConnection;
 
 /**
  * The test class for the Player collection class.
@@ -15,10 +16,11 @@ import org.junit.Test;
  * @author Dmitry
  *
  */
+@SuppressWarnings("PMD.TooManyStaticImports")
 public class PlayerCollectionTest {
 
   private Player newPlayer;
-  
+
   /**
    * Tests the add method.
    * 
@@ -43,7 +45,7 @@ public class PlayerCollectionTest {
     test.addPlayer(newPlayer);
     assertEquals(newPlayer, test.getPlayerByConnection(mockedHost));
   }
-  
+
   /**
    * tests the remove by connection method.
    * 
@@ -58,7 +60,7 @@ public class PlayerCollectionTest {
     test.removePlayerByConnection(mockedHost);
     assertEquals(0, test.size());
   }
-  
+
   /**
    * tests the get by role method in the case that there is one.
    * 
@@ -72,7 +74,7 @@ public class PlayerCollectionTest {
     test.addPlayer(newPlayer);
     assertEquals(newPlayer, test.getPlayerByRole(PlayerRoles.GUNNER));
   }
-  
+
   /**
    * tests the get by role method in the case that there isn't one.
    * 
@@ -86,7 +88,7 @@ public class PlayerCollectionTest {
     test.addPlayer(newPlayer);
     assertNull(test.getPlayerByRole(PlayerRoles.JANITOR));
   }
-  
+
   /**
    * tests the has role method in the case that there isn't one.
    * 
@@ -100,8 +102,7 @@ public class PlayerCollectionTest {
     test.addPlayer(newPlayer);
     assertFalse(test.hasPlayerWithRole(PlayerRoles.JANITOR));
   }
-  
-  
+
   /**
    * tests the has role method in the case that there is one.
    * 
