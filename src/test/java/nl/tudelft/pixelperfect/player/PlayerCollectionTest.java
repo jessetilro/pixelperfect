@@ -17,7 +17,7 @@ import org.junit.Test;
  */
 public class PlayerCollectionTest {
 
-  private Player mockPlayer;
+  private Player newPlayer;
   
   /**
    * Tests the add method.
@@ -26,8 +26,8 @@ public class PlayerCollectionTest {
   @Test
   public void testAdd() {
     PlayerCollection test = new PlayerCollection();
-    mockPlayer = mock(Player.class);
-    test.addPlayer(mockPlayer);
+    newPlayer = mock(Player.class);
+    test.addPlayer(newPlayer);
     assertEquals(1, test.size());
   }
 
@@ -39,9 +39,9 @@ public class PlayerCollectionTest {
   public void testGet() {
     PlayerCollection test = new PlayerCollection();
     HostedConnection mockedHost = mock(HostedConnection.class);
-    mockPlayer = new CrewPlayer(mockedHost);
-    test.addPlayer(mockPlayer);
-    assertEquals(mockPlayer, test.getPlayerByConnection(mockedHost));
+    newPlayer = new CrewPlayer(mockedHost);
+    test.addPlayer(newPlayer);
+    assertEquals(newPlayer, test.getPlayerByConnection(mockedHost));
   }
   
   /**
@@ -52,8 +52,8 @@ public class PlayerCollectionTest {
   public void testRemove() {
     PlayerCollection test = new PlayerCollection();
     HostedConnection mockedHost = mock(HostedConnection.class);
-    mockPlayer = new CrewPlayer(mockedHost);
-    test.addPlayer(mockPlayer);
+    newPlayer = new CrewPlayer(mockedHost);
+    test.addPlayer(newPlayer);
     assertEquals(1, test.size());
     test.removePlayerByConnection(mockedHost);
     assertEquals(0, test.size());
@@ -67,10 +67,10 @@ public class PlayerCollectionTest {
   public void testGetByRoleTrue() {
     PlayerCollection test = new PlayerCollection();
     HostedConnection mockedHost = mock(HostedConnection.class);
-    mockPlayer = new CrewPlayer(mockedHost);
-    mockPlayer.assignRole(PlayerRoles.GUNNER);
-    test.addPlayer(mockPlayer);
-    assertEquals(mockPlayer, test.getPlayerByRole(PlayerRoles.GUNNER));
+    newPlayer = new CrewPlayer(mockedHost);
+    newPlayer.assignRole(PlayerRoles.GUNNER);
+    test.addPlayer(newPlayer);
+    assertEquals(newPlayer, test.getPlayerByRole(PlayerRoles.GUNNER));
   }
   
   /**
@@ -81,9 +81,9 @@ public class PlayerCollectionTest {
   public void testGetByRoleFalse() {
     PlayerCollection test = new PlayerCollection();
     HostedConnection mockedHost = mock(HostedConnection.class);
-    mockPlayer = new CrewPlayer(mockedHost);
-    mockPlayer.assignRole(PlayerRoles.GUNNER);
-    test.addPlayer(mockPlayer);
+    newPlayer = new CrewPlayer(mockedHost);
+    newPlayer.assignRole(PlayerRoles.GUNNER);
+    test.addPlayer(newPlayer);
     assertNull(test.getPlayerByRole(PlayerRoles.JANITOR));
   }
   
@@ -95,9 +95,9 @@ public class PlayerCollectionTest {
   public void testHasRoleFalse() {
     PlayerCollection test = new PlayerCollection();
     HostedConnection mockedHost = mock(HostedConnection.class);
-    mockPlayer = new CrewPlayer(mockedHost);
-    mockPlayer.assignRole(PlayerRoles.GUNNER);
-    test.addPlayer(mockPlayer);
+    newPlayer = new CrewPlayer(mockedHost);
+    newPlayer.assignRole(PlayerRoles.GUNNER);
+    test.addPlayer(newPlayer);
     assertFalse(test.hasPlayerWithRole(PlayerRoles.JANITOR));
   }
   
@@ -110,9 +110,9 @@ public class PlayerCollectionTest {
   public void testHasRoleTrue() {
     PlayerCollection test = new PlayerCollection();
     HostedConnection mockedHost = mock(HostedConnection.class);
-    mockPlayer = new CrewPlayer(mockedHost);
-    mockPlayer.assignRole(PlayerRoles.GUNNER);
-    test.addPlayer(mockPlayer);
+    newPlayer = new CrewPlayer(mockedHost);
+    newPlayer.assignRole(PlayerRoles.GUNNER);
+    test.addPlayer(newPlayer);
     assertTrue(test.hasPlayerWithRole(PlayerRoles.GUNNER));
   }
 }
