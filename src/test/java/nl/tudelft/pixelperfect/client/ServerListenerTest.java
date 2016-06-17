@@ -2,9 +2,7 @@ package nl.tudelft.pixelperfect.client;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyDouble;
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -15,15 +13,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.jme3.network.AbstractMessage;
-import com.jme3.network.Filter;
 import com.jme3.network.HostedConnection;
-import com.jme3.network.Message;
 import com.jme3.network.Server;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.message.RepairMessage;
-import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
 import nl.tudelft.pixelperfect.event.EventLog;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Spaceship;
@@ -122,46 +117,6 @@ public class ServerListenerTest {
 
     object.messageReceived(mockedSource, message);
 
-  }
-
-  /**
-   * When the Server recieves a RoleChosenMessage, it should send it to other clients.
-   * 
-   */
-  @SuppressWarnings("unchecked")
-  @Test
-  public void testRoleChosenMessage() {
-    RoleChosenMessage message = mock(RoleChosenMessage.class);
-    object.messageReceived(mockedSource, message);
-    verify(mockServer).broadcast((Filter<? super HostedConnection>) anyObject(),
-        (AbstractMessage) anyObject());
-  }
-
-  /**
-   * Tests what would happen if an empty RoleChosenMessage is recieved.
-   * 
-   */
-  @SuppressWarnings("unchecked")
-  @Test
-  public void testRoleChosenMessageEmpty() {
-    RoleChosenMessage message = new RoleChosenMessage();
-    object.messageReceived(mockedSource, message);
-    verifyNoMoreInteractions(mockServer);
-  }
-
-  /**
-   * Testing what would happen if there is an empty RoleChosenMessage following a filled one.
-   * 
-   */
-  @SuppressWarnings("unchecked")
-  @Test
-  public void testTwoRoleChosenMessages() {
-    RoleChosenMessage message = new RoleChosenMessage();
-    RoleChosenMessage first = mock(RoleChosenMessage.class);
-    object.messageReceived(mockedSource, first);
-    object.messageReceived(mockedSource, message);
-    verify(mockServer, times(2)).broadcast((Filter<? super HostedConnection>) anyObject(),
-        (Message) anyObject());
   }
 
   /**
