@@ -71,7 +71,7 @@ public class PlayState extends GameState {
         event.notification(game, game.getScene());
       }
       else {
-        eventType.resetNotification(game.getScene());
+        eventType.resetNotification(game);
       }
     }
   }

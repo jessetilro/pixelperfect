@@ -42,7 +42,7 @@ public class Scene {
   private BitmapText hostileEventText;
   private BitmapText asteroidEventLabel;
   private BitmapText fireEventLabel;
-  private BitmapText plasmaEventlabel;
+  private BitmapText plasmaEventLabel;
   /**
    * Get the label used for asteroid events.
    * @return BitmapText
@@ -64,8 +64,8 @@ public class Scene {
    * Get the label used for plasma events.
    * @return BitmapText
    */
-  public BitmapText getPlasmaEventlabel() {
-    return plasmaEventlabel;
+  public BitmapText getPlasmaEventLabel() {
+    return plasmaEventLabel;
   }
 
 
@@ -90,13 +90,13 @@ public class Scene {
         .2f, ColorRGBA.Blue, new Quaternion().fromAngleAxis(-FastMath.HALF_PI, YAXIS));
     fireEventLabel = createLabel(new Vector3f(-7, 0.6f, -1f), "FIRE WARNING",
         .2f, ColorRGBA.Red, new Quaternion().fromAngleAxis(FastMath.HALF_PI, YAXIS));
-    plasmaEventlabel = createLabel(new Vector3f(-9, 2.5f, -19), "PLASMA LEAK",
+    plasmaEventLabel = createLabel(new Vector3f(-9, 2.5f, -19), "PLASMA LEAK",
         .5f, ColorRGBA.Green, new Quaternion());
-    hostileEventText = createLabel(new Vector3f(-1, 2.5f, 12f), "x: \ny: \n",
-        .6f, ColorRGBA.Green, new Quaternion().fromAngleAxis(FastMath.PI, new Vector3f(0, 1, 0)));
-    Geometry radar = createBoxObject(new Box(0.6f, 0.4f, 0.01f),
-        new Vector3f(-1.3f, 0.4f, 12.5f), "Textures/radar.jpg");
-    radar.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.PI / 4, XAXIS));
+    hostileEventText = createLabel(new Vector3f(1, 4f, 19f), "x: \ny: \n",
+        .5f, ColorRGBA.Green, new Quaternion().fromAngleAxis(FastMath.PI, new Vector3f(0, 1, 0)));
+//    Geometry radar = createBoxObject(new Box(0.6f, 0.4f, 0.01f),
+//        new Vector3f(-1.3f, 0.4f, 12.5f), "Textures/radar.jpg");
+//    radar.setLocalRotation(new Quaternion().fromAngleAxis(FastMath.PI / 4, XAXIS));
 
 
     Spatial spaceship = app.getAssetManager().loadModel("Models/spaceship/spaceship_no_light.j3o");
