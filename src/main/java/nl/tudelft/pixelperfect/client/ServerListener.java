@@ -120,10 +120,12 @@ public class ServerListener implements MessageListener<HostedConnection> {
    */
   public synchronized void processRoleChosenFree(HostedConnection source,
       RoleChosenMessage message) {
-    PlayerRoles role = message.getRole();
     Player player = app.getSpaceship().getCrew().getPlayerByConnection(source);
-    player.assignRole(null);
-    System.out.println("Role " + role.toString() + " was made available again.");
+    PlayerRoles role = player.getRole();
+    if (role != null) {
+      player.assignRole(null);
+      System.out.println("Role " + role.toString() + " was made available again.");
+    }
   }
 
   /**
