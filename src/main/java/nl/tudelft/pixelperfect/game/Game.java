@@ -28,7 +28,6 @@ import nl.tudelft.pixelperfect.gamestates.GameState;
 import nl.tudelft.pixelperfect.gamestates.StartState;
 import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
-import nl.tudelft.pixelperfect.player.PlayerCollection;
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment. Suppressing
@@ -44,7 +43,6 @@ import nl.tudelft.pixelperfect.player.PlayerCollection;
 public class Game extends VRApplication {
 
   private static Game appGame;
-  private PlayerCollection players;
   private Spaceship spaceship;
   private EventScheduler scheduler;
   private static Server server;
@@ -120,7 +118,6 @@ public class Game extends VRApplication {
     audioPlayer.loadSounds(Constants.AUDIO_EVENTS, Constants.AUDIO_PATH_NAMES);
 
     initNetwork();
-    players = new PlayerCollection();
     spaceship = new Spaceship();
     scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY_MIN,
         Constants.EVENT_SCHEDULER_INTENSITY_MAX);

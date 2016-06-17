@@ -76,6 +76,11 @@ public class ServerListener implements MessageListener<HostedConnection> {
 
   /**
    * Process a role chosen message.
+   *
+   * @param source
+   *          The client that sent the message.
+   * @param message
+   *          The message sent.
    */
   public synchronized void processRoleChosen(HostedConnection source, RoleChosenMessage message) {
     PlayerRoles role = message.getRole();
@@ -117,7 +122,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
   /**
    * Convert type attribute of message from serializable to more abstract.
    * 
-   * @param The
+   * @param message
    *          message to extract the attribute from.
    * 
    * @return An Event Type.

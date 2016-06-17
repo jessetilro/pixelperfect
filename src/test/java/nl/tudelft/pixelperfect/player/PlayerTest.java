@@ -21,7 +21,6 @@ public abstract class PlayerTest {
 
   private Player testObject;
   private HostedConnection mockedConnection1;
-  private HostedConnection mockedConnection2;
 
   /**
    * Setting up the Player class as a test object.
@@ -29,7 +28,6 @@ public abstract class PlayerTest {
   @Before
   public void initialize() {
     mockedConnection1 = mock(HostedConnection.class);
-    mockedConnection2 = mock(HostedConnection.class);
     testObject = createPlayer(mockedConnection1);
     testObject.setName("Lorem Ipsum");
   }
@@ -37,8 +35,8 @@ public abstract class PlayerTest {
   /**
    * Factory method for testing.
    * 
-   * @param name
-   *          , the name of the Player.
+   * @param connection
+   *          Connection to the player.
    * @return The object to be tested.
    */
   public abstract Player createPlayer(HostedConnection connection);
