@@ -57,13 +57,11 @@ public class MainMenuDisplay {
     // Initializer for the main menu elements.
     rowOne = new BitmapText(menuFont, true);
     rowOne.setColor(ColorRGBA.White);
-    rowOne.setLocalScale(Constants.MAIN_MENU_TEXT_SCALING);
     rowOne.setLocalTranslation((screenWidth / 2) - Constants.MAIN_MENU_WIDTH_SPACING,
         (screenHeight / 2) + Constants.MAIN_MENU_HEIGHT_SPACING, 0);
 
     rowTwo = new BitmapText(menuFont, true);
     rowTwo.setColor(ColorRGBA.White);
-    rowTwo.setLocalScale(Constants.MAIN_MENU_TEXT_SCALING);
     rowTwo.setLocalTranslation((screenWidth / 2) - Constants.MAIN_MENU_WIDTH_SPACING,
         (screenHeight / 2) - Constants.MAIN_MENU_HEIGHT_SPACING, 0);
 
