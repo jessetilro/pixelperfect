@@ -69,14 +69,17 @@ public class EventLog implements EventListener {
   }
 
   /**
-   * Be notified of a new event by a scheduler.
+   * Be notified of a new event by a scheduler. The Event will only be added to the log is there is
+   * player in the crew who can solve this type of Event.
    * 
    * @param event
    *          The event that the scheduler introduces, to be listed in the log.
    */
   public synchronized void notify(Event event) {
-    events.add(event);
-    System.out.println("The ship received a new event: " + event.getSummary());
+    if (spaceship.getCrew().hasPlayerWhoCanSolveEvent(event)) {
+      events.add(event);
+      System.out.println("The ship received a new event: " + event.getSummary());
+    }
   }
 
   /**
@@ -129,8 +132,8 @@ public class EventLog implements EventListener {
     if (candidates.size() > 0) {
       System.out.println("Wrong task performed: wrong parameters entered");
     } else {
-      System.out.println("Wrong task performed: there is no active Event of type "
-          + type.toString());
+      System.out
+          .println("Wrong task performed: there is no active Event of type " + type.toString());
     }
 
     spaceship.updateHealth(-10);

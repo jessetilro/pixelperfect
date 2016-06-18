@@ -13,7 +13,7 @@ import nl.tudelft.pixelperfect.player.PlayerRoles;
  */
 @Serializable
 public class RoleChosenMessage extends AbstractMessage {
-  private PlayerRoles role;
+  private int role;
   private boolean allocated;
 
   /**
@@ -31,7 +31,7 @@ public class RoleChosenMessage extends AbstractMessage {
    *          Allocated.
    */
   public RoleChosenMessage(PlayerRoles role, boolean allocated) {
-    this.role = role;
+    this.role = role.ordinal();
     this.allocated = allocated;
   }
 
@@ -41,7 +41,7 @@ public class RoleChosenMessage extends AbstractMessage {
    * @return role as an Enum.
    */
   public PlayerRoles getRole() {
-    return role;
+    return PlayerRoles.values()[role];
   }
 
   /**
