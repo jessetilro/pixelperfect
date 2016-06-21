@@ -65,7 +65,7 @@ public final class Constants {
    * Gameplay Variables
    */
   // Total game time
-  public static final long GAME_TIME = 60000;
+  public static final long GAME_TIME = 240000;
 
   // Target intensity for the Event Scheduler.
   public static final double EVENT_SCHEDULER_INTENSITY_MIN = 0.125;
