@@ -40,9 +40,6 @@ public class WonState extends GameState {
       game.resetGame();
       return new StartState(game);
     }
-    if (game.isStartKey()) {
-      return new StartState(game);
-    }
     return this;
   }
 

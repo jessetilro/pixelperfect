@@ -147,7 +147,9 @@ public class ServerListener implements MessageListener<HostedConnection> {
    *          The message send as request.
    */
   public synchronized void processNewGame(HostedConnection source, NewGameMessage message) {
+    System.out.println("Received new game request.");
     if (app.getState().isRunning()) {
+      System.out.println("Notifying that game has started.");
       server.broadcast(Filters.equalTo(source), new NewGameMessage());
     }
   }

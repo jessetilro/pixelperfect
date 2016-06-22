@@ -119,17 +119,9 @@ public class Game extends VRApplication {
     audioPlayer.loadSounds(Constants.AUDIO_EVENTS, Constants.AUDIO_PATH_NAMES);
 
     initNetwork();
-    spaceship = new Spaceship();
-    scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY_MIN,
-        Constants.EVENT_SCHEDULER_INTENSITY_MAX);
-    scheduler.subscribe(spaceship.getLog());
-    scheduler.start();
-    debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode,
-        Constants.DEBUG_ELEMENTS_WIDTH_OFFSET, VRGuiManager.getCanvasSize().getY(), spaceship);
-    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode,
-        VRGuiManager.getCanvasSize().getX(), VRGuiManager.getCanvasSize().getY(), spaceship);
-
-    gameState = new StartState(this);
+    initLogic();
+    
+    initGUI();
   }
 
   /**
@@ -159,6 +151,29 @@ public class Game extends VRApplication {
       except.printStackTrace();
     }
   }
+  
+  /**
+   * Initialize the game logic.
+   */
+  public void initLogic() {
+    spaceship = new Spaceship();
+    scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY_MIN,
+        Constants.EVENT_SCHEDULER_INTENSITY_MAX);
+    scheduler.subscribe(spaceship.getLog());
+    scheduler.start();
+  }
+  
+  /**
+   * Initialize the graphical user interface.
+   */
+  public void initGUI() {
+    debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode,
+        Constants.DEBUG_ELEMENTS_WIDTH_OFFSET, VRGuiManager.getCanvasSize().getY(), spaceship);
+    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode,
+        VRGuiManager.getCanvasSize().getX(), VRGuiManager.getCanvasSize().getY(), spaceship);
+
+    gameState = new StartState(this);
+  }
 
   /**
    * Get the current game state.
@@ -182,6 +197,7 @@ public class Game extends VRApplication {
    */
   public void resetGame() {
     System.out.println("The game was reset, notifying clients.");
+    initLogic();
     server.broadcast(new DisconnectMessage());
   }
 
