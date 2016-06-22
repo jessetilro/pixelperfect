@@ -172,7 +172,7 @@ public class Game extends VRApplication {
   /**
    * Tells the clients to start the game.
    */
-  public static void startGame() {
+  public void startGame() {
     server.broadcast(new NewGameMessage());
   }
 
@@ -180,7 +180,7 @@ public class Game extends VRApplication {
    * Really bad way to implement this, will be refactored, but this method resets the game by
    * sending all connected clients a message telling them to disconnect.
    */
-  public static void resetGame() {
+  public void resetGame() {
     System.out.println("The game was reset, notifying clients.");
     server.broadcast(new DisconnectMessage());
   }

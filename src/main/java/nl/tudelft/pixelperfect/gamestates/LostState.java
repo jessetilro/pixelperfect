@@ -36,7 +36,7 @@ public class LostState extends GameState {
    */
   public GameState handleState() {
     if (game.isReset()) {
-      Game.resetGame();
+      game.resetGame();
       return new StartState(game);
     }
     if (game.isStartKey()) {
