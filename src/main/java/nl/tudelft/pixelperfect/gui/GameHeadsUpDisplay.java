@@ -17,7 +17,8 @@ import nl.tudelft.pixelperfect.player.Player;
 /**
  * Class responsible for the display, refreshing, and functionality of the heads-up display (HUD)
  * that is displayed during the active gameplay for the Client. Score and Ship health are displayed
- * constantly, and the current events are shown when they arise.
+ * constantly, and the current events are shown when they arise. Crew members are displayes as the
+ * join and leave.
  * 
  * @author David Alderliesten
  *
@@ -136,14 +137,5 @@ public class GameHeadsUpDisplay {
         crewList.get(i).setText("-");
       }
     }
-  }
-
-  /**
-   * Clears the heads-up display and detaches all the GUI elements. Should only be called when the
-   * game is done and reset.
-   */
-  public void clearHud() {
-    guiNodes.detachChild(shipHealth);
-    guiNodes.detachChild(teamScore);
   }
 }
