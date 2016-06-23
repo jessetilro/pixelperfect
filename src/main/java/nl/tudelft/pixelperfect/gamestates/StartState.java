@@ -22,7 +22,7 @@ public class StartState extends GameState {
   public StartState(Game game) {
     super(game);
 
-    // Creating the main menu buttons and text.
+    // Creating the main menu text.
     menuInstance = new MainMenuDisplay(game.getAssetManager(), game.getGuiNode(),
         game.getViewPortX(), game.getViewPortY());
   }
@@ -34,7 +34,6 @@ public class StartState extends GameState {
    *          Time since last frame.
    */
   public void update(float tpf) {
-    // Not required at this time.
   }
 
   /**
@@ -44,8 +43,10 @@ public class StartState extends GameState {
    */
   public GameState handleState() {
     if (game.isStartKey()) {
-      game.startGame();
       menuInstance.clearMenu();
+
+      game.startGame();
+
       return new PlayState(game);
     }
     return this;
@@ -55,5 +56,4 @@ public class StartState extends GameState {
   public boolean isRunning() {
     return false;
   }
-
 }
