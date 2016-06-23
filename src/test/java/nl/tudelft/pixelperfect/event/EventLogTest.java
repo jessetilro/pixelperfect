@@ -8,6 +8,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.any;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,6 +24,7 @@ import nl.tudelft.pixelperfect.event.type.FireOutbreakEvent;
 import nl.tudelft.pixelperfect.event.type.PlasmaLeakEvent;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Spaceship;
+import nl.tudelft.pixelperfect.player.PlayerCollection;
 
 /**
  * Test Suite for the EventLog class.
@@ -36,6 +38,7 @@ import nl.tudelft.pixelperfect.game.Spaceship;
 public class EventLogTest extends EventListenerTest {
   private EventLog object;
   private Spaceship mockedSpaceship;
+  private PlayerCollection mockedCrew;
   private Game mockedGame;
   private AudioPlayer mockedAudio;
 
@@ -45,10 +48,13 @@ public class EventLogTest extends EventListenerTest {
   @Before
   public void initialise() {
     mockedSpaceship = mock(Spaceship.class);
+    mockedCrew = mock(PlayerCollection.class);
     mockedGame = mock(Game.class);
     mockedAudio = mock(AudioPlayer.class);
 
     when(mockedGame.getAudioPlayer()).thenReturn(mockedAudio);
+    when(mockedSpaceship.getCrew()).thenReturn(mockedCrew);
+    when(mockedCrew.hasPlayerWhoCanSolveEvent(any(Event.class))).thenReturn(true);
 
     object = new EventLog(mockedSpaceship);
   }

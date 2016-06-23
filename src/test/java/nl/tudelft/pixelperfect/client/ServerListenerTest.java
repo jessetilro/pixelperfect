@@ -13,7 +13,7 @@ import com.jme3.network.Server;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.message.RepairMessage;
-import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
+import nl.tudelft.pixelperfect.client.message.RoleAllocationMessage;
 import nl.tudelft.pixelperfect.event.EventLog;
 import nl.tudelft.pixelperfect.game.Game;
 import nl.tudelft.pixelperfect.game.Spaceship;
@@ -36,10 +36,10 @@ import java.util.HashMap;
 public class ServerListenerTest {
 
   private Game mockedGame;
-  private ServerListener object;
+  private NetworkServerMessageListener object;
   private HostedConnection mockedSource;
   private Server mockServer;
-  private ConnectListener listen;
+  private NetworkServerConnectionListener listen;
 
   /**
    * Set up mocked dependencies, stubs and the test object.
@@ -50,11 +50,11 @@ public class ServerListenerTest {
     mockedGame = mock(Game.class);
     mockServer = mock(Server.class);
     // Set up test object.
-    object = new ServerListener();
+    object = new NetworkServerMessageListener();
     object.setGame(mockedGame);
     object.setServer(mockServer);
     mockedSource = mock(HostedConnection.class);
-    listen = new ConnectListener();
+    listen = new NetworkServerConnectionListener();
     listen.setGame(mockedGame);
   }
 
@@ -101,7 +101,7 @@ public class ServerListenerTest {
    */
   @Test
   public void testRoleChosenNoParam() {
-    RoleChosenMessage mockedMessage = mock(RoleChosenMessage.class);
+    RoleAllocationMessage mockedMessage = mock(RoleAllocationMessage.class);
     Spaceship mockedShip = mock(Spaceship.class);
     PlayerCollection crew = new PlayerCollection();
     when(mockedMessage.getRole()).thenReturn(PlayerRoles.ENGINEER);
@@ -118,7 +118,7 @@ public class ServerListenerTest {
    */
   @Test
   public void testRoleChosen() {
-    RoleChosenMessage mockedMessage = mock(RoleChosenMessage.class);
+    RoleAllocationMessage mockedMessage = mock(RoleAllocationMessage.class);
     Spaceship mockedShip = mock(Spaceship.class);
     PlayerCollection crew = new PlayerCollection();
     when(mockedMessage.getRole()).thenReturn(PlayerRoles.ENGINEER);

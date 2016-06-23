@@ -16,7 +16,7 @@ public abstract class GameState {
    * Constructor for GameState.
    *
    * @param game
-   *          Game for which it controlls the state.
+   *          Game for which it controls the state.
    */
   public GameState(Game game) {
     this.game = game;
