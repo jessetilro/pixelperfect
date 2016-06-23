@@ -1,13 +1,18 @@
 package nl.tudelft.pixelperfect.gamestates;
 
 import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.gui.LossHeadsUpDisplay;
+import nl.tudelft.pixelperfect.gui.WonHeadsUpDisplay;
 
 /**
  * State for when you have lost the game.
  *
+ * @author David Alderliesten
  * @author Wouter Zirkzee
  */
 public class LostState extends GameState {
+  
+  private LossHeadsUpDisplay menuInstance;
 
   /**
    * Constructor for LostState.
@@ -17,6 +22,9 @@ public class LostState extends GameState {
    */
   public LostState(Game game) {
     super(game);
+    
+    menuInstance = new LossHeadsUpDisplay(game.getAssetManager(), game.getGuiNode(),
+        game.getViewPortX(), game.getViewPortY());
   }
 
   /**
@@ -26,7 +34,6 @@ public class LostState extends GameState {
    *          Time since last frame.
    */
   public void update(float tpf) {
-    // render lost screen
   }
 
   /**
@@ -36,7 +43,10 @@ public class LostState extends GameState {
    */
   public GameState handleState() {
     if (game.isReset()) {
+      game.getGuiNode().detachAllChildren();
+      
       game.resetGame();
+      
       return new StartState(game);
     }
     return this;
