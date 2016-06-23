@@ -16,19 +16,18 @@ import com.jme3.scene.Spatial;
 import jmevr.app.VRApplication;
 import jmevr.util.VRGuiManager;
 import nl.tudelft.pixelperfect.audio.AudioPlayer;
-import nl.tudelft.pixelperfect.client.ConnectListener;
-import nl.tudelft.pixelperfect.client.ServerListener;
+import nl.tudelft.pixelperfect.client.NetworkServerConnectionListener;
+import nl.tudelft.pixelperfect.client.NetworkServerMessageListener;
 import nl.tudelft.pixelperfect.client.message.DisconnectMessage;
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.message.NewGameMessage;
+import nl.tudelft.pixelperfect.client.message.PlayerDetailsMessage;
 import nl.tudelft.pixelperfect.client.message.RepairMessage;
-import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
+import nl.tudelft.pixelperfect.client.message.RoleAllocationMessage;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gamestates.GameState;
 import nl.tudelft.pixelperfect.gamestates.StartState;
 import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
-import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
-import nl.tudelft.pixelperfect.player.PlayerRoles;
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment. Suppressing
@@ -62,7 +61,6 @@ public class Game extends VRApplication {
   private Scene scene;
 
   private DebugHeadsUpDisplay debugHud;
-  private GameHeadsUpDisplay gameHud;
 
   private GameState gameState;
 
@@ -94,9 +92,7 @@ public class Game extends VRApplication {
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.INSTANCE_VR_RENDERING, false);
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.NO_GUI, false);
 
-    // Set frustum distances here before app starts.
-    // appGame.preconfigureFrustrumNearFar(0.1f, 512f);
-
+    // Starting the game.
     appGame.start();
   }
 
@@ -119,17 +115,9 @@ public class Game extends VRApplication {
     audioPlayer.loadSounds(Constants.AUDIO_EVENTS, Constants.AUDIO_PATH_NAMES);
 
     initNetwork();
-    spaceship = new Spaceship();
-    scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY_MIN,
-        Constants.EVENT_SCHEDULER_INTENSITY_MAX);
-    scheduler.subscribe(spaceship.getLog());
-    scheduler.start();
-    debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode,
-        Constants.DEBUG_ELEMENTS_WIDTH_OFFSET, VRGuiManager.getCanvasSize().getY(), spaceship);
-    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode,
-        VRGuiManager.getCanvasSize().getX(), VRGuiManager.getCanvasSize().getY(), spaceship);
+    initLogic();
 
-    gameState = new StartState(this);
+    initGUI();
   }
 
   /**
@@ -139,25 +127,48 @@ public class Game extends VRApplication {
     try {
       server = Network.createServer(6143);
       Serializer.registerClass(EventCompletedMessage.class);
-      Serializer.registerClass(RoleChosenMessage.class);
+      Serializer.registerClass(RoleAllocationMessage.class);
+      Serializer.registerClass(PlayerDetailsMessage.class);
       Serializer.registerClass(RepairMessage.class);
       Serializer.registerClass(NewGameMessage.class);
       Serializer.registerClass(DisconnectMessage.class);
       server.start();
-      ServerListener listen = new ServerListener();
+      NetworkServerMessageListener listen = new NetworkServerMessageListener();
       listen.setGame(this);
       listen.setServer(server);
       server.addMessageListener(listen, EventCompletedMessage.class);
-      server.addMessageListener(listen, RoleChosenMessage.class);
+      server.addMessageListener(listen, RoleAllocationMessage.class);
+      server.addMessageListener(listen, PlayerDetailsMessage.class);
       server.addMessageListener(listen, RepairMessage.class);
       server.addMessageListener(listen, NewGameMessage.class);
       server.addMessageListener(listen, DisconnectMessage.class);
-      ConnectListener connect = new ConnectListener();
+      NetworkServerConnectionListener connect = new NetworkServerConnectionListener();
       connect.setGame(this);
       server.addConnectionListener(connect);
     } catch (IOException except) {
       except.printStackTrace();
     }
+  }
+
+  /**
+   * Initialize the game logic.
+   */
+  public void initLogic() {
+    spaceship = new Spaceship();
+    scheduler = new EventScheduler(Constants.EVENT_SCHEDULER_INTENSITY_MIN,
+        Constants.EVENT_SCHEDULER_INTENSITY_MAX);
+    scheduler.subscribe(spaceship.getLog());
+    scheduler.start();
+  }
+
+  /**
+   * Initialize the graphical user interface.
+   */
+  public void initGUI() {
+    debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode,
+        Constants.DEBUG_ELEMENTS_WIDTH_OFFSET, VRGuiManager.getCanvasSize().getY(), spaceship);
+
+    gameState = new StartState(this);
   }
 
   /**
@@ -172,7 +183,7 @@ public class Game extends VRApplication {
   /**
    * Tells the clients to start the game.
    */
-  public static void startGame() {
+  public void startGame() {
     server.broadcast(new NewGameMessage());
   }
 
@@ -180,8 +191,9 @@ public class Game extends VRApplication {
    * Really bad way to implement this, will be refactored, but this method resets the game by
    * sending all connected clients a message telling them to disconnect.
    */
-  public static void resetGame() {
+  public void resetGame() {
     System.out.println("The game was reset, notifying clients.");
+    initLogic();
     server.broadcast(new DisconnectMessage());
   }
 
@@ -333,15 +345,6 @@ public class Game extends VRApplication {
   }
 
   /**
-   * Getter for the gameHud.
-   *
-   * @return gameHud
-   */
-  public GameHeadsUpDisplay getGameHud() {
-    return gameHud;
-  }
-
-  /**
    * Getter for scheduler.
    *
    * @return scheduler
@@ -358,16 +361,6 @@ public class Game extends VRApplication {
    */
   public void setDebugDisplay(DebugHeadsUpDisplay debugDisplay) {
     this.debugHud = debugDisplay;
-  }
-
-  /**
-   * Setter for the gameDisplay.
-   *
-   * @param passedDisplay
-   *          gameDisplay to be set.
-   */
-  public void setHeadsUpDisplay(GameHeadsUpDisplay passedDisplay) {
-    this.gameHud = passedDisplay;
   }
 
   /**
