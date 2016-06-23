@@ -13,7 +13,7 @@ public class LostState extends GameState {
    * Constructor for LostState.
    *
    * @param game
-   *          Game for which it controlls the state.
+   *          Game for which it controls the state.
    */
   public LostState(Game game) {
     super(game);
