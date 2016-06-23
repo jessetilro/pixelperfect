@@ -150,8 +150,6 @@ public class DebugHeadsUpDisplay {
    * A sub method for the updateHud method, which sets the debug text.
    */
   public void setTextHud() {
-    // Update the ship's health, team score, connected players, and time
-    // left indicators.
     shipHealth.setText(Constants.DEBUG_SHIP_HEALTH_LABEL + spaceship.getHealth());
     teamScore.setText(Constants.DEBUG_SHIP_SCORE_LABEL + spaceship.getScore());
     timeLeft.setText(Constants.DEBUG_SHIP_TIME_LABEL + spaceship.getTimer());
@@ -171,5 +169,4 @@ public class DebugHeadsUpDisplay {
     playersConnected.setText("");
     localAddress.setText("");
   }
-
 }

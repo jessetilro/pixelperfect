@@ -1,6 +1,7 @@
 package nl.tudelft.pixelperfect.gamestates;
 
 import nl.tudelft.pixelperfect.game.Game;
+import nl.tudelft.pixelperfect.gui.WonHeadsUpDisplay;
 
 /**
  * State for when you have won the game.
@@ -10,6 +11,8 @@ import nl.tudelft.pixelperfect.game.Game;
  */
 public class WonState extends GameState {
 
+  private WonHeadsUpDisplay menuInstance;
+
   /**
    * Constructor for WonState.
    *
@@ -18,6 +21,9 @@ public class WonState extends GameState {
    */
   public WonState(Game game) {
     super(game);
+
+    menuInstance = new WonHeadsUpDisplay(game.getAssetManager(), game.getGuiNode(),
+        game.getViewPortX(), game.getViewPortY());
   }
 
   /**
@@ -27,7 +33,6 @@ public class WonState extends GameState {
    *          Time since last frame.
    */
   public void update(float tpf) {
-    // System.out.println("Well played, you have completed the game!");
   }
 
   /**
@@ -37,10 +42,10 @@ public class WonState extends GameState {
    */
   public GameState handleState() {
     if (game.isReset()) {
-      Game.resetGame();
-      return new StartState(game);
-    }
-    if (game.isStartKey()) {
+      game.getGuiNode().detachAllChildren();
+
+      game.resetGame();
+
       return new StartState(game);
     }
     return this;

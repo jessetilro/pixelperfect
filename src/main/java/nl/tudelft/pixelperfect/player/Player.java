@@ -2,6 +2,8 @@ package nl.tudelft.pixelperfect.player;
 
 import com.jme3.network.HostedConnection;
 
+import nl.tudelft.pixelperfect.event.Event;
+
 /**
  * A player fulfilling a role aboard of the spaceship while playing the game.
  * 
@@ -69,6 +71,53 @@ public abstract class Player {
    */
   public void assignRole(PlayerRoles role) {
     this.role = role;
+  }
+
+  /**
+   * Check whether this Player is able to solve a specific Event (based on whether the Player's role
+   * is able to solve the type of Event).
+   * 
+   * @return Whether this Player can solve an Event.
+   */
+  public boolean canSolveEvent(Event event) {
+    return (role != null && role.canSolveEventType(event.getType()));
+  }
+
+  /**
+   * Get a String representation of the name this Player has.
+   * 
+   * @return The name.
+   */
+  private String describeName() {
+    if (name != null && name != "") {
+      return name;
+    } else {
+      return "Anonymous Player";
+    }
+  }
+
+  /**
+   * Get a String representation of the role this Player has.
+   * 
+   * @return The role.
+   */
+  private String describeRole() {
+    if (role != null) {
+      return role.toString();
+    } else {
+      return "choosing a role";
+    }
+  }
+
+  /**
+   * Get a String representation of this player, describing his/her name and role.
+   * 
+   * @return A String representation of this Player.
+   */
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(describeName()).append(" is ").append(describeRole());
+    return sb.toString();
   }
 
   /**
