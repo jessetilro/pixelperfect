@@ -62,7 +62,6 @@ public class Game extends VRApplication {
   private Scene scene;
 
   private DebugHeadsUpDisplay debugHud;
-  private GameHeadsUpDisplay gameHud;
 
   private GameState gameState;
 
@@ -94,9 +93,7 @@ public class Game extends VRApplication {
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.INSTANCE_VR_RENDERING, false);
     appGame.preconfigureVRApp(PRECONFIG_PARAMETER.NO_GUI, false);
 
-    // Set frustum distances here before app starts.
-    // appGame.preconfigureFrustrumNearFar(0.1f, 512f);
-
+    // Starting the game.
     appGame.start();
   }
 
@@ -171,8 +168,6 @@ public class Game extends VRApplication {
   public void initGUI() {
     debugHud = new DebugHeadsUpDisplay(getAssetManager(), guiNode,
         Constants.DEBUG_ELEMENTS_WIDTH_OFFSET, VRGuiManager.getCanvasSize().getY(), spaceship);
-    gameHud = new GameHeadsUpDisplay(getAssetManager(), guiNode,
-        VRGuiManager.getCanvasSize().getX(), VRGuiManager.getCanvasSize().getY(), spaceship);
 
     gameState = new StartState(this);
   }
@@ -351,15 +346,6 @@ public class Game extends VRApplication {
   }
 
   /**
-   * Getter for the gameHud.
-   *
-   * @return gameHud
-   */
-  public GameHeadsUpDisplay getGameHud() {
-    return gameHud;
-  }
-
-  /**
    * Getter for scheduler.
    *
    * @return scheduler
@@ -376,16 +362,6 @@ public class Game extends VRApplication {
    */
   public void setDebugDisplay(DebugHeadsUpDisplay debugDisplay) {
     this.debugHud = debugDisplay;
-  }
-
-  /**
-   * Setter for the gameDisplay.
-   *
-   * @param passedDisplay
-   *          gameDisplay to be set.
-   */
-  public void setHeadsUpDisplay(GameHeadsUpDisplay passedDisplay) {
-    this.gameHud = passedDisplay;
   }
 
   /**

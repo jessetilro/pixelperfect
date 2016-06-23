@@ -58,7 +58,6 @@ public class PlayStateTest extends GameStateTest {
     mockGame.setGameObserver(mockObserver);
     mockGame.setScheduler(mockScheduler);
     mockGame.setSpaceship(mockSpaceship);
-    mockGame.setHeadsUpDisplay(mockHeadsUp);
     mockGame.setDebugDisplay(mockDebugUp);
     testSettings = Settings.getInstance();
     testState = new PlayState(mockGame);

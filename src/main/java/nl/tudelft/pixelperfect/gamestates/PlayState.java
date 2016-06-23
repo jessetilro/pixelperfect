@@ -3,6 +3,7 @@ package nl.tudelft.pixelperfect.gamestates;
 import com.jme3.scene.Spatial;
 
 import jmevr.app.VRApplication;
+import jmevr.util.VRGuiManager;
 import nl.tudelft.pixelperfect.event.Event;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
@@ -31,16 +32,19 @@ public class PlayState extends GameState {
    * Constructor for PlayState.
    *
    * @param game
-   *          Game for which it controlls the state.
+   *          Game for which it controls the state.
    */
   public PlayState(Game game) {
     super(game);
     this.game = game;
+
     observer = game.getGameObserver();
     spaceship = game.getSpaceship();
     debugDisplay = game.getDebugHud();
-    gameDisplay = game.getGameHud();
     scheduler = game.getScheduler();
+
+    gameDisplay = new GameHeadsUpDisplay(game.getAssetManager(), game.getGuiNode(),
+        game.getViewPortX(), game.getViewPortY(), spaceship);
   }
 
   /**
