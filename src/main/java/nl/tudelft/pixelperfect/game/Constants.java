@@ -29,10 +29,8 @@ public final class Constants {
   public static final int MAIN_MENU_HEIGHT_SPACING = 100;
 
   // Text constants for the main menu.
-  public static final String MAIN_MENU_FIRST_ROW_TEXT =
-    "Allow your crew members to select their roles.";
-  public static final String MAIN_MENU_SECOND_ROW_TEXT = 
-    "Once this is done, press the 'p' button to start.";
+  public static final String MAIN_MENU_FIRST_ROW_TEXT = "Allow your crew members to select their roles.";
+  public static final String MAIN_MENU_SECOND_ROW_TEXT = "Once this is done, press the 'p' button to start.";
 
   // Positioning related constants for the in-game debug HUD.
   public static final int DEBUG_HEALTH_HEIGHT_OFFSET = 500;
@@ -58,6 +56,15 @@ public final class Constants {
   public static final int GUI_HEALTH_TEXT_SIZE_SCALE = 2;
   public static final int GUI_SCORE_TEXT_SIZE_SCALE = 2;
 
+  // Text constants for the won and loss HUD display.
+  public static final String GUI_WON_TEXT = "Congratulations, you won!";
+  public static final String GUI_LOST_TEXT = "You lost, too bad!";
+  public static final String GUI_RESET_ON_TEXT = "Press 'R' to reset.";
+
+  // Positioning and scaling related constants for the won/lost HUD.
+  public static final int GUI_WON_LOSS_HEIGHT_OFFSET = 100;
+  public static final int GUI_WON_LOSS_WIDTH_OFFSET = 150;
+
   // Path to the Events data file on the file system.
   public static final String EVENT_DATA_FILE = "src/main/resources/data/events.json";
 
@@ -65,7 +72,7 @@ public final class Constants {
    * Gameplay Variables
    */
   // Total game time
-  public static final long GAME_TIME = 60000;
+  public static final long GAME_TIME = 240000;
 
   // Target intensity for the Event Scheduler.
   public static final double EVENT_SCHEDULER_INTENSITY_MIN = 0.125;

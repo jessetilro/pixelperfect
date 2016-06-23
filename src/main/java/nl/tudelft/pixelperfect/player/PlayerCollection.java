@@ -1,9 +1,12 @@
 package nl.tudelft.pixelperfect.player;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.jme3.network.HostedConnection;
+
+import nl.tudelft.pixelperfect.event.Event;
 
 /**
  * Aggregates the (crew) players currently playing the game.
@@ -33,11 +36,20 @@ public class PlayerCollection {
   }
 
   /**
+   * Get a generic collection of the Players in this PlayerCollection.
+   * 
+   * @return A collection of Players.
+   */
+  public synchronized Collection<Player> getAll() {
+    return map.values();
+  }
+
+  /**
    * Get the player from the collection that is connected with the game by the given connection.
    * 
    * @param connection
    *          The connection through which the player is connected to the game.
-   *          
+   * 
    * @return The Player with the given connection.
    */
   public synchronized Player getPlayerByConnection(HostedConnection connection) {
@@ -79,6 +91,22 @@ public class PlayerCollection {
    */
   public synchronized boolean hasPlayerWithRole(PlayerRoles role) {
     return (getPlayerByRole(role) != null);
+  }
+
+  /**
+   * Check whether this collection contains a Player who can solve a given Event.
+   * 
+   * @param event
+   *          The Event to be solved.
+   * @return Whether there is a Player who can solve the Event.
+   */
+  public synchronized boolean hasPlayerWhoCanSolveEvent(Event event) {
+    for (Player player : map.values()) {
+      if (player.canSolveEvent(event)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
