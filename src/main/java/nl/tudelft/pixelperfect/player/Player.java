@@ -84,6 +84,43 @@ public abstract class Player {
   }
 
   /**
+   * Get a String representation of the name this Player has.
+   * 
+   * @return The name.
+   */
+  private String describeName() {
+    if (name != null && name != "") {
+      return name;
+    } else {
+      return "Anonymous Player";
+    }
+  }
+
+  /**
+   * Get a String representation of the role this Player has.
+   * 
+   * @return The role.
+   */
+  private String describeRole() {
+    if (role != null) {
+      return role.toString();
+    } else {
+      return "choosing a role";
+    }
+  }
+
+  /**
+   * Get a String representation of this player, describing his/her name and role.
+   * 
+   * @return A String representation of this Player.
+   */
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(describeName()).append(" is ").append(describeRole());
+    return sb.toString();
+  }
+
+  /**
    * Compares two Players to see if they're the same.
    * 
    * @param that

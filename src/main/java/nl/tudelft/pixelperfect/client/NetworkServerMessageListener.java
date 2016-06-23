@@ -12,8 +12,9 @@ import com.jme3.network.Server;
 
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.message.NewGameMessage;
+import nl.tudelft.pixelperfect.client.message.PlayerDetailsMessage;
 import nl.tudelft.pixelperfect.client.message.RepairMessage;
-import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
+import nl.tudelft.pixelperfect.client.message.RoleAllocationMessage;
 import nl.tudelft.pixelperfect.event.parameter.EventParameter;
 import nl.tudelft.pixelperfect.event.type.EventTypes;
 import nl.tudelft.pixelperfect.game.Game;
@@ -29,7 +30,7 @@ import nl.tudelft.pixelperfect.player.PlayerRoles;
  * @author Jesse Tilro
  *
  */
-public class ServerListener implements MessageListener<HostedConnection> {
+public class NetworkServerMessageListener implements MessageListener<HostedConnection> {
 
   private Game app;
   private Server server;
@@ -67,9 +68,12 @@ public class ServerListener implements MessageListener<HostedConnection> {
     if (message instanceof EventCompletedMessage) {
       EventCompletedMessage completedMessage = (EventCompletedMessage) message;
       processEventCompletedMessage(completedMessage);
-    } else if (message instanceof RoleChosenMessage) {
-      RoleChosenMessage roleChosen = (RoleChosenMessage) message;
+    } else if (message instanceof RoleAllocationMessage) {
+      RoleAllocationMessage roleChosen = (RoleAllocationMessage) message;
       processRoleChosen(source, roleChosen);
+    } else if (message instanceof PlayerDetailsMessage) {
+      PlayerDetailsMessage details = (PlayerDetailsMessage) message;
+      processPlayerDetailsMessage(source, details);
     } else if (message instanceof RepairMessage) {
       RepairMessage repairMessage = (RepairMessage) message;
       processRepairs(repairMessage);
@@ -80,15 +84,28 @@ public class ServerListener implements MessageListener<HostedConnection> {
   }
 
   /**
+   * Process a received PlayerDetailsMessage.
+   * 
+   * @param message
+   *          A received PlayerDetailsMessage.
+   */
+  public synchronized void processPlayerDetailsMessage(HostedConnection connection,
+      PlayerDetailsMessage message) {
+    Player player = app.getSpaceship().getCrew().getPlayerByConnection(connection);
+    player.setName(message.getName());
+  }
+
+  /**
    * Process a role chosen message.
    * 
    * @param source
-   *              The client that sent the message.
+   *          The client that sent the message.
    * 
    * @param message
-   *              The message received.
+   *          The message received.
    */
-  public synchronized void processRoleChosen(HostedConnection source, RoleChosenMessage message) {
+  public synchronized void processRoleChosen(HostedConnection source,
+      RoleAllocationMessage message) {
     if (message.isAllocated()) {
       processRoleChosenFree(source, message);
     } else {
@@ -106,15 +123,15 @@ public class ServerListener implements MessageListener<HostedConnection> {
    *          The RoleChosenMessage.
    */
   public synchronized void processRoleChosenAssign(HostedConnection source,
-      RoleChosenMessage message) {
+      RoleAllocationMessage message) {
     PlayerRoles role = message.getRole();
     PlayerCollection crew = app.getSpaceship().getCrew();
     if (crew.hasPlayerWithRole(role)) {
-      server.broadcast(Filters.equalTo(source), new RoleChosenMessage(role, false));
+      server.broadcast(Filters.equalTo(source), new RoleAllocationMessage(role, false));
       System.out.println("Role " + role.toString() + " requested, denied.");
     } else {
       crew.getPlayerByConnection(source).assignRole(role);
-      server.broadcast(Filters.equalTo(source), new RoleChosenMessage(role, true));
+      server.broadcast(Filters.equalTo(source), new RoleAllocationMessage(role, true));
       System.out.println("Role " + role.toString() + " requested, granted.");
     }
   }
@@ -129,7 +146,7 @@ public class ServerListener implements MessageListener<HostedConnection> {
    *          The RoleChosenMessage.
    */
   public synchronized void processRoleChosenFree(HostedConnection source,
-      RoleChosenMessage message) {
+      RoleAllocationMessage message) {
     Player player = app.getSpaceship().getCrew().getPlayerByConnection(source);
     PlayerRoles role = player.getRole();
     if (role != null) {
@@ -147,7 +164,9 @@ public class ServerListener implements MessageListener<HostedConnection> {
    *          The message send as request.
    */
   public synchronized void processNewGame(HostedConnection source, NewGameMessage message) {
+    System.out.println("Received new game request.");
     if (app.getState().isRunning()) {
+      System.out.println("Notifying that game has started.");
       server.broadcast(Filters.equalTo(source), new NewGameMessage());
     }
   }

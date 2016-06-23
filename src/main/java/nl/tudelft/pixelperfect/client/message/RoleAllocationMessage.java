@@ -6,20 +6,21 @@ import com.jme3.network.serializing.Serializable;
 import nl.tudelft.pixelperfect.player.PlayerRoles;
 
 /**
- * Whenever a role is chosen, the other crew players cannot choose the role. Therefor this message
- * is needed to broadcast to everyone.
+ * Whenever a role is chosen, the other crew players cannot choose the role. This message is used
+ * for requesting and confirming / denying role allocation of a specific role to a specific player.
  *
  * @author Floris Doolaard
+ * @author Jesse Tilro
  */
 @Serializable
-public class RoleChosenMessage extends AbstractMessage {
+public class RoleAllocationMessage extends AbstractMessage {
   private int role;
   private boolean allocated;
 
   /**
    * The empty Constructor.
    */
-  public RoleChosenMessage() {
+  public RoleAllocationMessage() {
   }
 
   /**
@@ -30,7 +31,7 @@ public class RoleChosenMessage extends AbstractMessage {
    * @param allocated
    *          Allocated.
    */
-  public RoleChosenMessage(PlayerRoles role, boolean allocated) {
+  public RoleAllocationMessage(PlayerRoles role, boolean allocated) {
     this.role = role.ordinal();
     this.allocated = allocated;
   }
