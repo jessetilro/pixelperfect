@@ -1,5 +1,6 @@
 package nl.tudelft.pixelperfect.player;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,15 @@ public class PlayerCollection {
    */
   public synchronized void addPlayer(Player player) {
     map.put(player.getConnection(), player);
+  }
+
+  /**
+   * Get a generic collection of the Players in this PlayerCollection.
+   * 
+   * @return A collection of Players.
+   */
+  public synchronized Collection<Player> getAll() {
+    return map.values();
   }
 
   /**

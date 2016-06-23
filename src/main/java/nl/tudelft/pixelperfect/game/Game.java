@@ -16,19 +16,19 @@ import com.jme3.scene.Spatial;
 import jmevr.app.VRApplication;
 import jmevr.util.VRGuiManager;
 import nl.tudelft.pixelperfect.audio.AudioPlayer;
-import nl.tudelft.pixelperfect.client.ConnectListener;
-import nl.tudelft.pixelperfect.client.ServerListener;
+import nl.tudelft.pixelperfect.client.NetworkServerConnectionListener;
+import nl.tudelft.pixelperfect.client.NetworkServerMessageListener;
 import nl.tudelft.pixelperfect.client.message.DisconnectMessage;
 import nl.tudelft.pixelperfect.client.message.EventCompletedMessage;
 import nl.tudelft.pixelperfect.client.message.NewGameMessage;
+import nl.tudelft.pixelperfect.client.message.PlayerDetailsMessage;
 import nl.tudelft.pixelperfect.client.message.RepairMessage;
-import nl.tudelft.pixelperfect.client.message.RoleChosenMessage;
+import nl.tudelft.pixelperfect.client.message.RoleAllocationMessage;
 import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gamestates.GameState;
 import nl.tudelft.pixelperfect.gamestates.StartState;
 import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
 import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
-import nl.tudelft.pixelperfect.player.PlayerRoles;
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment. Suppressing
@@ -120,7 +120,7 @@ public class Game extends VRApplication {
 
     initNetwork();
     initLogic();
-    
+
     initGUI();
   }
 
@@ -131,27 +131,29 @@ public class Game extends VRApplication {
     try {
       server = Network.createServer(6143);
       Serializer.registerClass(EventCompletedMessage.class);
-      Serializer.registerClass(RoleChosenMessage.class);
+      Serializer.registerClass(RoleAllocationMessage.class);
+      Serializer.registerClass(PlayerDetailsMessage.class);
       Serializer.registerClass(RepairMessage.class);
       Serializer.registerClass(NewGameMessage.class);
       Serializer.registerClass(DisconnectMessage.class);
       server.start();
-      ServerListener listen = new ServerListener();
+      NetworkServerMessageListener listen = new NetworkServerMessageListener();
       listen.setGame(this);
       listen.setServer(server);
       server.addMessageListener(listen, EventCompletedMessage.class);
-      server.addMessageListener(listen, RoleChosenMessage.class);
+      server.addMessageListener(listen, RoleAllocationMessage.class);
+      server.addMessageListener(listen, PlayerDetailsMessage.class);
       server.addMessageListener(listen, RepairMessage.class);
       server.addMessageListener(listen, NewGameMessage.class);
       server.addMessageListener(listen, DisconnectMessage.class);
-      ConnectListener connect = new ConnectListener();
+      NetworkServerConnectionListener connect = new NetworkServerConnectionListener();
       connect.setGame(this);
       server.addConnectionListener(connect);
     } catch (IOException except) {
       except.printStackTrace();
     }
   }
-  
+
   /**
    * Initialize the game logic.
    */
@@ -162,7 +164,7 @@ public class Game extends VRApplication {
     scheduler.subscribe(spaceship.getLog());
     scheduler.start();
   }
-  
+
   /**
    * Initialize the graphical user interface.
    */

@@ -1,5 +1,9 @@
 package nl.tudelft.pixelperfect.gui;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import com.jme3.asset.AssetManager;
 import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
@@ -8,6 +12,7 @@ import com.jme3.scene.Node;
 
 import nl.tudelft.pixelperfect.game.Constants;
 import nl.tudelft.pixelperfect.game.Spaceship;
+import nl.tudelft.pixelperfect.player.Player;
 
 /**
  * Class responsible for the display, refreshing, and functionality of the heads-up display (HUD)
@@ -28,6 +33,7 @@ public class GameHeadsUpDisplay {
   private BitmapFont hudFont;
   private BitmapText shipHealth;
   private BitmapText teamScore;
+  private List<BitmapText> crewList;
 
   /**
    * Constructor for the heads-up display for in-game utilization and display.
@@ -51,6 +57,8 @@ public class GameHeadsUpDisplay {
     this.screenHeight = height;
     this.spaceship = passedShip;
 
+    crewList = new ArrayList<BitmapText>();
+
     // Setting-up the fonts required for the Bitmap display.
     setupElements();
   }
@@ -66,6 +74,23 @@ public class GameHeadsUpDisplay {
     // Attaching the elements and preparing them.
     attachHealth();
     attachScore();
+    attachCrewList();
+  }
+
+  /**
+   * Initializer for the crew list display, including font loading and text setting.
+   */
+  private void attachCrewList() {
+    for (int i = 0; i < 4; i++) {
+      BitmapText text = new BitmapText(hudFont, true);
+      text.setLocalScale(1.5f);
+      text.setColor(ColorRGBA.White);
+      text.setLocalTranslation(Constants.GUI_ELEMENTS_WIDTH_OFFSET - 40,
+          screenHeight - Constants.GUI_ELEMENTS_HEIGHT_OFFSET - 128 - (i * 48), 0);
+
+      crewList.add(text);
+      guiNodes.attachChild(text);
+    }
   }
 
   /**
@@ -75,8 +100,8 @@ public class GameHeadsUpDisplay {
     shipHealth = new BitmapText(hudFont, true);
     shipHealth.setLocalScale(Constants.GUI_HEALTH_TEXT_SIZE_SCALE);
     shipHealth.setColor(ColorRGBA.Red);
-    shipHealth.setLocalTranslation(Constants.GUI_ELEMENTS_WIDTH_OFFSET - 40, screenHeight
-        - Constants.GUI_ELEMENTS_HEIGHT_OFFSET, 0);
+    shipHealth.setLocalTranslation(Constants.GUI_ELEMENTS_WIDTH_OFFSET - 40,
+        screenHeight - Constants.GUI_ELEMENTS_HEIGHT_OFFSET, 0);
 
     guiNodes.attachChild(shipHealth);
   }
@@ -88,8 +113,8 @@ public class GameHeadsUpDisplay {
     teamScore = new BitmapText(hudFont, true);
     teamScore.setLocalScale(Constants.GUI_SCORE_TEXT_SIZE_SCALE);
     teamScore.setColor(ColorRGBA.Green);
-    teamScore.setLocalTranslation(screenWidth - Constants.GUI_ELEMENTS_WIDTH_OFFSET, screenHeight
-        - Constants.GUI_ELEMENTS_HEIGHT_OFFSET, 0);
+    teamScore.setLocalTranslation(screenWidth - Constants.GUI_ELEMENTS_WIDTH_OFFSET,
+        screenHeight - Constants.GUI_ELEMENTS_HEIGHT_OFFSET, 0);
 
     guiNodes.attachChild(teamScore);
   }
@@ -102,6 +127,15 @@ public class GameHeadsUpDisplay {
     // Update the ship's health and team score indicators.
     shipHealth.setText("" + (int) spaceship.getHealth());
     teamScore.setText("" + spaceship.getScore());
+    // Update Crew List
+    Iterator<Player> iterator = spaceship.getCrew().getAll().iterator();
+    for (int i = 0; i < 4; i++) {
+      if (iterator.hasNext()) {
+        crewList.get(i).setText(iterator.next().toString());
+      } else {
+        crewList.get(i).setText("-");
+      }
+    }
   }
 
   /**
