@@ -108,21 +108,19 @@ public class PlayState extends GameState {
    */
   public GameState handleState() {
     if (game.isReset()) {
-      gameDisplay.clearHud();
-      debugDisplay.clearHud();
-      
+      game.getGuiNode().detachAllChildren();
+
       game.resetGame();
+
       return new StartState(game);
     }
     if (spaceship.isVictorious()) {
-      gameDisplay.clearHud();
-      debugDisplay.clearHud();
-      
+      game.getGuiNode().detachAllChildren();
+
       return new WonState(game);
     } else if (spaceship.isDead()) {
-      gameDisplay.clearHud();
-      debugDisplay.clearHud();
-      
+      game.getGuiNode().detachAllChildren();
+
       return new LostState(game);
     }
     return this;

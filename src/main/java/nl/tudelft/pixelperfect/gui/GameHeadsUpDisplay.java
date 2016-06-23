@@ -138,13 +138,4 @@ public class GameHeadsUpDisplay {
       }
     }
   }
-
-  /**
-   * Clears the heads-up display and detaches all the GUI elements. Should only be called when the
-   * game is done and reset.
-   */
-  public void clearHud() {
-    guiNodes.detachChild(shipHealth);
-    guiNodes.detachChild(teamScore);
-  }
 }
