@@ -84,9 +84,9 @@ public class GameHeadsUpDisplay {
   private void attachCrewList() {
     for (int i = 0; i < 4; i++) {
       BitmapText text = new BitmapText(hudFont, true);
-      text.setLocalScale(1.5f);
+      text.setLocalScale(.8f);
       text.setColor(ColorRGBA.White);
-      text.setLocalTranslation(Constants.GUI_ELEMENTS_WIDTH_OFFSET - 40,
+      text.setLocalTranslation(Constants.GUI_ELEMENTS_WIDTH_OFFSET - 100,
           screenHeight - Constants.GUI_ELEMENTS_HEIGHT_OFFSET - 128 - (i * 48), 0);
 
       crewList.add(text);
