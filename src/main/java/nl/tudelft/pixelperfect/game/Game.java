@@ -28,7 +28,6 @@ import nl.tudelft.pixelperfect.event.EventScheduler;
 import nl.tudelft.pixelperfect.gamestates.GameState;
 import nl.tudelft.pixelperfect.gamestates.StartState;
 import nl.tudelft.pixelperfect.gui.DebugHeadsUpDisplay;
-import nl.tudelft.pixelperfect.gui.GameHeadsUpDisplay;
 
 /**
  * Main class representing an active Game process and creating the JMonkey Environment. Suppressing
