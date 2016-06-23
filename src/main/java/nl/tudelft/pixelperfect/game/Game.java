@@ -234,6 +234,7 @@ public class Game extends VRApplication {
     for (String mapping : mappings) {
       inputManager.addListener(acl, mapping);
     }
+    inputManager.setCursorVisible(false);
   }
 
   /**
