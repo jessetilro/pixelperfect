@@ -17,7 +17,8 @@ The deliverable documents for group PixelPerfect are included in the docs direct
 * [Product Vision (04-05-2016)](https://github.com/jessetilro/pixelperfect/blob/master/docs/product-vision.pdf)
 * [Product Planning (04-05-2016)](https://github.com/jessetilro/pixelperfect/blob/master/docs/product-planning.pdf)
 * [Game Design (04-05-2016)](https://github.com/jessetilro/pixelperfect/blob/master/docs/game-design.pdf)
-* [NEW! Emergent Architecture Design (03-06-2016)](https://github.com/jessetilro/pixelperfect/blob/master/docs/emergent-architecture-design.pdf)
+* [Emergent Architecture Design (03-06-2016)](https://github.com/jessetilro/pixelperfect/blob/master/docs/emergent-architecture-design.pdf)
+* [Final Report Draft (16-06-2016)](https://github.com/jessetilro/pixelperfect/blob/master/docs/final-report-draft.pdf)
 
 ## Scrum Documents
 
